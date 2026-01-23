@@ -35,14 +35,15 @@
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: transparent; transition: var(--transition); }
         .nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
         .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 90px; }
-        .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
-        .logo-icon { width: 200px; height: 70px; background: var(--white); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); padding: 10px 16px; }
-        .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
-        .logo-text { display: none; }
-        .logo-main { font-family: 'Noto Serif KR', serif; font-weight: 600; font-size: 20px; color: var(--primary); letter-spacing: -0.5px; }
+        .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+        .logo-icon { width: 52px; height: 52px; background: var(--white); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); padding: 8px; }
+        .logo-icon svg { width: 100%; height: 100%; }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main { font-family: 'Noto Serif KR', serif; font-weight: 700; font-size: 26px; color: var(--white); letter-spacing: -1px; display: flex; align-items: center; }
+        .logo-main .highlight-text { position: relative; }
+        .logo-main .highlight-text::after { content: ''; position: absolute; bottom: 2px; left: -2px; right: -2px; height: 12px; background: linear-gradient(135deg, var(--accent) 0%, #E8D5A3 50%, var(--accent) 100%); opacity: 0.6; z-index: -1; border-radius: 2px; transform: skewX(-5deg); }
         .nav.scrolled .logo-main { color: var(--primary); }
-        .logo-main:not(.nav.scrolled .logo-main) { color: var(--white); }
-        .logo-sub { font-size: 10px; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; margin-top: 2px; }
+        .logo-sub { font-size: 11px; color: var(--accent); letter-spacing: 0.5px; font-weight: 500; margin-top: 2px; }
         .nav-links { display: flex; align-items: center; gap: 40px; }
         .nav-link { text-decoration: none; color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 500; position: relative; padding: 8px 0; transition: var(--transition); }
         .nav.scrolled .nav-link { color: var(--text); }
@@ -254,6 +255,9 @@
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
             .nav-container { padding: 0 20px; height: 80px; }
+            .logo-icon { width: 44px; height: 44px; padding: 6px; }
+            .logo-main { font-size: 22px; }
+            .logo-sub { font-size: 9px; }
             section { padding: 80px 20px; }
             .hero-content { padding: 140px 20px 100px; }
             .hero-stats { flex-direction: column; gap: 32px; }
@@ -298,10 +302,18 @@
     <nav class="nav" id="nav">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Refined%20Original%20Logo.png" alt="서풍 로고"></div>
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="55" cy="50" r="38" fill="#0A2540"/>
+                        <circle cx="78" cy="18" r="8" fill="#0A2540"/>
+                        <path d="M25 50 Q35 35, 55 38 Q75 41, 85 50 Q75 59, 55 62 Q35 65, 25 50" fill="#fff"/>
+                        <circle cx="72" cy="50" r="4" fill="#0A2540"/>
+                        <path d="M30 50 Q38 44, 50 46" stroke="#0A2540" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
                 <div class="logo-text">
-                    <span class="logo-main"><span data-lang="ko" class="active">영어조합법인 서풍</span><span data-lang="en">Seopung Fishery</span><span data-lang="ja">西風水産</span></span>
-                    <span class="logo-sub"><span data-lang="ko" class="active">신뢰로써 공존하는 기업</span><span data-lang="en">Trust & Coexistence</span><span data-lang="ja">信頼で共存</span></span>
+                    <span class="logo-main"><span data-lang="ko" class="active">서<span class="highlight-text">풍</span></span><span data-lang="en">Seo<span class="highlight-text">pung</span></span><span data-lang="ja">西<span class="highlight-text">風</span></span></span>
+                    <span class="logo-sub"><span data-lang="ko" class="active">신뢰로써 공존하는 기업</span><span data-lang="en">Trust & Coexistence</span><span data-lang="ja">信頼で共存する企業</span></span>
                 </div>
             </a>
             <div class="nav-links">
@@ -339,7 +351,7 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="Background">
+            <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365.jpg" alt="서풍 공장 전경">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -421,13 +433,16 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item large animate">
-                    <video autoplay muted loop playsinline><source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610660.mp4" type="video/mp4"></video>
-                    <div class="gallery-caption"><span class="caption-number">01</span><span class="caption-text"><span data-lang="ko" class="active">수산물 가공 현장</span><span data-lang="en">Processing Site</span><span data-lang="ja">加工現場</span></span></div>
+                    <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_12.jpg" alt="가공시설 전경">
+                    <div class="gallery-caption"><span class="caption-number">01</span><span class="caption-text"><span data-lang="ko" class="active">HACCP 인증 가공시설</span><span data-lang="en">HACCP Certified Facility</span><span data-lang="ja">HACCP認証施設</span></span></div>
                 </div>
-                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="원물 선별"><div class="gallery-caption"><span class="caption-number">02</span><span class="caption-text"><span data-lang="ko" class="active">원물 선별</span><span data-lang="en">Selection</span><span data-lang="ja">選別</span></span></div></div>
-                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_02.jpg" alt="정밀 손질"><div class="gallery-caption"><span class="caption-number">03</span><span class="caption-text"><span data-lang="ko" class="active">정밀 손질</span><span data-lang="en">Processing</span><span data-lang="ja">加工</span></span></div></div>
-                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_03.jpg" alt="품질 관리"><div class="gallery-caption"><span class="caption-number">04</span><span class="caption-text"><span data-lang="ko" class="active">품질 관리</span><span data-lang="en">Quality Control</span><span data-lang="ja">品質管理</span></span></div></div>
-                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_04.jpg" alt="포장"><div class="gallery-caption"><span class="caption-number">05</span><span class="caption-text"><span data-lang="ko" class="active">포장 및 출하</span><span data-lang="en">Packaging</span><span data-lang="ja">包装</span></span></div></div>
+                <div class="gallery-item animate">
+                    <video autoplay muted loop playsinline><source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103621213.mp4" type="video/mp4"></video>
+                    <div class="gallery-caption"><span class="caption-number">02</span><span class="caption-text"><span data-lang="ko" class="active">가공 현장 영상</span><span data-lang="en">Processing Video</span><span data-lang="ja">加工映像</span></span></div>
+                </div>
+                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_14.jpg" alt="신선한 생선"><div class="gallery-caption"><span class="caption-number">03</span><span class="caption-text"><span data-lang="ko" class="active">신선도 유지</span><span data-lang="en">Fresh Quality</span><span data-lang="ja">鮮度維持</span></span></div></div>
+                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_11.jpg" alt="품질관리"><div class="gallery-caption"><span class="caption-number">04</span><span class="caption-text"><span data-lang="ko" class="active">철저한 품질관리</span><span data-lang="en">Quality Control</span><span data-lang="ja">品質管理</span></span></div></div>
+                <div class="gallery-item animate"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="원물 가공"><div class="gallery-caption"><span class="caption-number">05</span><span class="caption-text"><span data-lang="ko" class="active">정밀 가공</span><span data-lang="en">Precision Processing</span><span data-lang="ja">精密加工</span></span></div></div>
             </div>
         </div>
     </section>
@@ -501,8 +516,14 @@
         <div class="footer-main">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Refined%20Original%20Logo.png" alt="서풍">
-                    <span><span data-lang="ko" class="active">영어조합법인 서풍</span><span data-lang="en">Seopung Fishery</span><span data-lang="ja">西風水産</span></span>
+                    <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="55" cy="50" r="38" fill="rgba(255,255,255,0.1)"/>
+                        <circle cx="78" cy="18" r="8" fill="rgba(255,255,255,0.1)"/>
+                        <path d="M25 50 Q35 35, 55 38 Q75 41, 85 50 Q75 59, 55 62 Q35 65, 25 50" fill="var(--accent)"/>
+                        <circle cx="72" cy="50" r="4" fill="#0D1B2A"/>
+                        <path d="M30 50 Q38 44, 50 46" stroke="#0D1B2A" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span><span data-lang="ko" class="active">서풍</span><span data-lang="en">Seopung</span><span data-lang="ja">西風</span></span>
                 </div>
                 <div class="footer-tagline"><span data-lang="ko" class="active">신뢰로써 공존하는 기업</span><span data-lang="en">Trust & Coexistence</span><span data-lang="ja">信頼で共存</span></div>
                 <p class="footer-desc"><span data-lang="ko" class="active">2011년부터 전라남도 여수시에서 남해안 청정 해역의 최상급 수산물을 가공해 온 HACCP 인증 전문 기업입니다.</span><span data-lang="en">A HACCP-certified seafood specialist based in Yeosu since 2011.</span><span data-lang="ja">2011年から麗水市で最高級水産物を加工してきたHACCP認証企業です。</span></p>
