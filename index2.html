@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서풍 SEOPUNG | 프리미엄 수산물</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a25;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --accent-3: #06b6d4;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --gradient-text: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4, #6366f1);
+            --text: #ffffff;
+            --text-muted: #9ca3af;
+            --border: rgba(255,255,255,0.08);
+            --glow: 0 0 60px rgba(99, 102, 241, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans KR', 'Outfit', sans-serif; background: var(--bg-dark); color: var(--text); line-height: 1.6; }
+
+        /* Animated Background */
+        .bg-mesh { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .bg-mesh::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 50%); animation: meshMove 20s ease-in-out infinite; }
+        @keyframes meshMove { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-5%, -5%) rotate(5deg); } }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; transition: all 0.4s; }
+        .nav.scrolled { background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 48px; height: 48px; background: var(--gradient); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .logo-text { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; background: var(--gradient-text); background-size: 300% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 3s linear infinite; }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s; position: relative; }
+        .nav-link:hover { color: var(--text); }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient); transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+        .lang-toggle { display: flex; background: var(--bg-elevated); border-radius: 10px; padding: 4px; }
+        .lang-btn { background: none; border: none; color: var(--text-muted); padding: 8px 14px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.3s; font-family: inherit; }
+        .lang-btn.active { background: var(--gradient); color: var(--text); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding: 120px 40px; overflow: hidden; }
+        .hero-content { max-width: 1400px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+        .hero-text { }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 50px; font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+        .hero-badge .dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .hero-title { font-family: 'Outfit', sans-serif; font-size: clamp(48px, 6vw, 80px); font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero-title .gradient { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; max-width: 480px; }
+        .hero-buttons { display: flex; gap: 16px; }
+        .btn-primary { padding: 16px 32px; background: var(--gradient); border: none; border-radius: 12px; color: var(--text); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; box-shadow: var(--glow); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 80px rgba(99, 102, 241, 0.5); }
+        .btn-secondary { padding: 16px 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .btn-secondary:hover { border-color: var(--accent-1); }
+        .hero-visual { position: relative; }
+        .hero-image { width: 100%; aspect-ratio: 1; border-radius: 30px; overflow: hidden; position: relative; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-image::before { content: ''; position: absolute; inset: 0; background: var(--gradient); opacity: 0.3; mix-blend-mode: overlay; }
+        .hero-stats { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px 40px; backdrop-filter: blur(20px); }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Section */
+        section { padding: 120px 40px; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 64px; }
+        .section-tag { display: inline-block; padding: 8px 20px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 50px; font-size: 12px; font-weight: 600; color: var(--accent-1); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        .section-title { font-family: 'Outfit', sans-serif; font-size: clamp(36px, 4vw, 56px); font-weight: 700; margin-bottom: 16px; }
+        .section-title .gradient { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-desc { color: var(--text-muted); font-size: 17px; max-width: 600px; margin: 0 auto; }
+
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto; align-items: center; }
+        .about-visual { position: relative; }
+        .about-image { border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+        .about-card { position: absolute; bottom: -30px; right: -30px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; backdrop-filter: blur(20px); }
+        .about-card-icon { width: 48px; height: 48px; background: var(--gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+        .about-card-title { font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+        .about-card-text { font-size: 13px; color: var(--text-muted); }
+        .about-content { }
+        .about-quote { font-size: 28px; font-weight: 300; line-height: 1.5; margin-bottom: 24px; padding-left: 24px; border-left: 3px solid var(--accent-1); }
+        .about-quote .highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+        .about-text { color: var(--text-muted); font-size: 16px; line-height: 1.9; margin-bottom: 32px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .feature-item { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--bg-elevated); border-radius: 12px; border: 1px solid var(--border); }
+        .feature-icon { color: var(--accent-1); font-size: 20px; }
+        .feature-text { font-size: 14px; font-weight: 500; }
+
+        /* Gallery Bento */
+        .gallery-bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 16px; max-width: 1400px; margin: 0 auto; }
+        .bento-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; }
+        .bento-item.large { grid-column: span 2; grid-row: span 2; }
+        .bento-item img, .bento-item video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .bento-item:hover img, .bento-item:hover video { transform: scale(1.1); }
+        .bento-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 24px; }
+        .bento-item:hover .bento-overlay { opacity: 1; }
+        .bento-text { font-weight: 600; font-size: 16px; }
+        .bento-badge { position: absolute; top: 16px; left: 16px; padding: 8px 16px; background: var(--gradient); border-radius: 8px; font-size: 12px; font-weight: 600; }
+
+        /* Products */
+        .products-filter { display: flex; justify-content: center; gap: 12px; margin-bottom: 48px; }
+        .filter-btn { padding: 12px 28px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 50px; color: var(--text-muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .filter-btn.active, .filter-btn:hover { background: var(--gradient); border-color: transparent; color: var(--text); }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; }
+        .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: all 0.4s; }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--accent-1); box-shadow: var(--glow); }
+        .product-image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .product-card:hover .product-image img { transform: scale(1.1); }
+        .product-badge { position: absolute; top: 16px; left: 16px; padding: 8px 16px; background: var(--gradient); border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .product-info { padding: 28px; }
+        .product-category { font-size: 12px; color: var(--accent-1); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .product-name { font-size: 20px; font-weight: 700; margin: 12px 0; }
+        .product-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+        .product-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { padding: 6px 14px; background: var(--bg-elevated); border-radius: 8px; font-size: 12px; color: var(--text-muted); }
+
+        /* Board */
+        .board-wrapper { max-width: 1000px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
+        .board-tabs { display: flex; border-bottom: 1px solid var(--border); }
+        .board-tab { flex: 1; padding: 20px; background: none; border: none; color: var(--text-muted); font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.3s; font-family: inherit; position: relative; }
+        .board-tab.active { color: var(--text); }
+        .board-tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gradient); }
+        .board-content { padding: 32px; }
+        .board-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .board-actions { display: flex; gap: 12px; }
+        .board-list { }
+        .board-item { display: grid; grid-template-columns: auto 1fr auto auto; gap: 20px; align-items: center; padding: 20px; border-radius: 12px; cursor: pointer; transition: all 0.3s; border: 1px solid transparent; }
+        .board-item:hover { background: var(--bg-elevated); border-color: var(--border); }
+        .board-num { width: 36px; height: 36px; background: var(--bg-elevated); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--accent-1); }
+        .board-title { font-size: 15px; font-weight: 500; }
+        .board-cat { padding: 6px 14px; background: var(--bg-dark); border-radius: 20px; font-size: 12px; color: var(--text-muted); }
+        .board-date { font-size: 13px; color: var(--text-muted); }
+        .admin-btn, .write-btn { padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .admin-btn { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-muted); }
+        .write-btn { background: var(--gradient); border: none; color: var(--text); }
+
+        /* Contact */
+        #contact { background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f1a 100%); }
+        .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; }
+        .contact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; text-align: center; transition: all 0.4s; }
+        .contact-card:hover { border-color: var(--accent-1); transform: translateY(-4px); }
+        .contact-icon { width: 64px; height: 64px; background: var(--gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px; }
+        .contact-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .contact-value { font-size: 16px; font-weight: 600; }
+
+        /* Footer */
+        .footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 80px 40px 40px; position: relative; z-index: 1; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+        .footer-brand { }
+        .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .footer-logo-icon { width: 40px; height: 40px; background: var(--gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .footer-logo-text { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; }
+        .footer-desc { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+        .footer-badges { display: flex; gap: 10px; }
+        .footer-badge { padding: 8px 16px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--accent-1); }
+        .footer-links h5 { font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent-1); }
+        .footer-bottom { max-width: 1400px; margin: 60px auto 0; padding-top: 30px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+
+        /* Mobile */
+        .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 20px; z-index: 999; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 16px; color: var(--text); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--border); }
+
+        /* Modal */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 40px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 28px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-title { font-size: 20px; font-weight: 700; }
+        .modal-close { width: 40px; height: 40px; background: var(--bg-elevated); border: none; border-radius: 10px; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+        .modal-body { padding: 32px; }
+        .form-group { margin-bottom: 24px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+        .form-input, .form-select, .form-textarea { width: 100%; padding: 14px 18px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 15px; font-family: inherit; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent-1); }
+        .form-textarea { min-height: 160px; resize: vertical; }
+        .modal-footer { padding: 20px 32px 32px; display: flex; gap: 12px; justify-content: flex-end; }
+        .btn { padding: 14px 28px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.3s; }
+        .btn-cancel { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-muted); }
+        .btn-submit { background: var(--gradient); border: none; color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual { order: -1; max-width: 500px; margin: 0 auto; }
+            .hero-desc { margin: 0 auto 40px; }
+            .hero-buttons { justify-content: center; }
+            .about-grid { grid-template-columns: 1fr; }
+            .gallery-bento { grid-template-columns: repeat(2, 1fr); }
+            .bento-item.large { grid-column: span 2; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            section { padding: 80px 20px; }
+            .hero { padding: 120px 20px 80px; }
+            .hero-title { font-size: 36px; }
+            .hero-stats { position: relative; bottom: 0; left: 0; transform: none; margin-top: 40px; flex-direction: column; }
+            .gallery-bento { grid-template-columns: 1fr; }
+            .bento-item.large { grid-column: span 1; }
+            .products-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-badges { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .about-card { position: relative; bottom: 0; right: 0; margin-top: 20px; }
+            .board-item { grid-template-columns: 1fr; gap: 12px; }
+            .board-num { display: none; }
+        }
+
+        /* Lang */
+        [data-lang] { display: none; }
+        [data-lang].active { display: inline; }
+
+        /* Animation */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🐟</div>
+                <span class="logo-text">SEOPUNG</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link"><span data-lang="ko" class="active">소개</span><span data-lang="en">About</span><span data-lang="ja">紹介</span></a>
+                <a href="#gallery" class="nav-link"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span><span data-lang="ja">ギャラリー</span></a>
+                <a href="#products" class="nav-link"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a>
+                <a href="#board" class="nav-link"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></a>
+                <a href="#contact" class="nav-link"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></a>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang-btn="ko">KO</button>
+                    <button class="lang-btn" data-lang-btn="en">EN</button>
+                    <button class="lang-btn" data-lang-btn="ja">JA</button>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="closeMobileMenu()"><span data-lang="ko" class="active">소개</span><span data-lang="en">About</span><span data-lang="ja">紹介</span></a>
+        <a href="#gallery" onclick="closeMobileMenu()"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span><span data-lang="ja">ギャラリー</span></a>
+        <a href="#products" onclick="closeMobileMenu()"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a>
+        <a href="#board" onclick="closeMobileMenu()"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></a>
+        <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge"><span class="dot"></span> Since 2011 · HACCP Certified</div>
+                <h1 class="hero-title">
+                    <span data-lang="ko" class="active">여수 바다의<br><span class="gradient">프리미엄</span> 수산물</span>
+                    <span data-lang="en"><span class="gradient">Premium</span><br>Seafood from Yeosu</span>
+                    <span data-lang="ja">麗水の海から<br><span class="gradient">プレミアム</span>水産物</span>
+                </h1>
+                <p class="hero-desc">
+                    <span data-lang="ko" class="active">15년의 노하우와 HACCP 인증 시설에서 정성껏 가공한 최상급 수산물을 만나보세요.</span>
+                    <span data-lang="en">Discover premium seafood processed with 15 years of expertise in our HACCP-certified facility.</span>
+                    <span data-lang="ja">15年のノウハウとHACCP認証施設で丁寧に加工した最高級水産物。</span>
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="location.href='#products'"><span data-lang="ko" class="active">제품 보기</span><span data-lang="en">View Products</span><span data-lang="ja">製品を見る</span></button>
+                    <button class="btn-secondary" onclick="location.href='#contact'"><span data-lang="ko" class="active">문의하기</span><span data-lang="en">Contact</span><span data-lang="ja">お問合せ</span></button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_14.jpg" alt="Fresh Fish">
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item"><div class="stat-number">356<span style="font-size:18px">억</span></div><div class="stat-label"><span data-lang="ko" class="active">연 매출</span><span data-lang="en">Revenue</span><span data-lang="ja">年商</span></div></div>
+                    <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label"><span data-lang="ko" class="active">년 경력</span><span data-lang="en">Years</span><span data-lang="ja">年の経験</span></div></div>
+                    <div class="stat-item"><div class="stat-number">29</div><div class="stat-label"><span data-lang="ko" class="active">전문 인력</span><span data-lang="en">Experts</span><span data-lang="ja">専門家</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-header">
+            <span class="section-tag">About Us</span>
+            <h2 class="section-title"><span data-lang="ko" class="active">신뢰로써 <span class="gradient">공존</span>하는 기업</span><span data-lang="en">A Company of <span class="gradient">Trust</span></span><span data-lang="ja"><span class="gradient">信頼</span>で共存する企業</span></h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-visual fade-up">
+                <div class="about-image">
+                    <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Trusted%20Representative%20Update.png" alt="CEO">
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">🏆</div>
+                    <div class="about-card-title"><span data-lang="ko" class="active">여수시 우수기업</span><span data-lang="en">Excellence Award</span><span data-lang="ja">優秀企業賞</span></div>
+                    <div class="about-card-text"><span data-lang="ko" class="active">2023 표창 수상</span><span data-lang="en">2023 Award</span><span data-lang="ja">2023年表彰</span></div>
+                </div>
+            </div>
+            <div class="about-content fade-up">
+                <blockquote class="about-quote">
+                    <span data-lang="ko" class="active">"<span class="highlight">성공</span>은 방향이고,<br><span class="highlight">행복</span>은 과정이다."</span>
+                    <span data-lang="en">"<span class="highlight">Success</span> is direction,<br><span class="highlight">Happiness</span> is the journey."</span>
+                    <span data-lang="ja">"<span class="highlight">成功</span>は方向であり、<br><span class="highlight">幸福</span>は過程である。"</span>
+                </blockquote>
+                <p class="about-text">
+                    <span data-lang="ko" class="active">2011년 설립 이래, 남해안 청정 해역의 최상급 원물을 HACCP 인증 시설에서 정성껏 가공해왔습니다. 노르웨이 고등어, 러시아 명태, 여수산 전복까지 - 믿을 수 있는 품질을 약속합니다.</span>
+                    <span data-lang="en">Since 2011, we have been processing premium seafood from the pristine waters of the South Sea in our HACCP-certified facility.</span>
+                    <span data-lang="ja">2011年の設立以来、南海岸の清浄海域の最高級原物をHACCP認証施設で丁寧に加工してきました。</span>
+                </p>
+                <div class="about-features">
+                    <div class="feature-item"><span class="feature-icon">✓</span><span class="feature-text">HACCP <span data-lang="ko" class="active">인증</span><span data-lang="en">Certified</span><span data-lang="ja">認証</span></span></div>
+                    <div class="feature-item"><span class="feature-icon">✓</span><span class="feature-text"><span data-lang="ko" class="active">학교급식 납품</span><span data-lang="en">School Supply</span><span data-lang="ja">学校給食</span></span></div>
+                    <div class="feature-item"><span class="feature-icon">✓</span><span class="feature-text"><span data-lang="ko" class="active">콜드체인 시스템</span><span data-lang="en">Cold Chain</span><span data-lang="ja">コールドチェーン</span></span></div>
+                    <div class="feature-item"><span class="feature-icon">✓</span><span class="feature-text"><span data-lang="ko" class="active">일일 3톤 가공</span><span data-lang="en">3T Daily</span><span data-lang="ja">日産3トン</span></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="section-header">
+            <span class="section-tag">Gallery</span>
+            <h2 class="section-title"><span data-lang="ko" class="active">시설 & <span class="gradient">현장</span></span><span data-lang="en">Facility & <span class="gradient">Process</span></span><span data-lang="ja">施設と<span class="gradient">現場</span></span></h2>
+        </div>
+        <div class="gallery-bento">
+            <div class="bento-item large fade-up">
+                <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_12.jpg" alt="Processing">
+                <div class="bento-overlay"><span class="bento-text"><span data-lang="ko" class="active">HACCP 인증 가공시설</span><span data-lang="en">HACCP Facility</span><span data-lang="ja">HACCP施設</span></span></div>
+                <span class="bento-badge">HACCP</span>
+            </div>
+            <div class="bento-item fade-up">
+                <video autoplay muted loop playsinline><source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103621213.mp4" type="video/mp4"></video>
+                <div class="bento-overlay"><span class="bento-text"><span data-lang="ko" class="active">가공 현장</span><span data-lang="en">Processing</span><span data-lang="ja">加工現場</span></span></div>
+            </div>
+            <div class="bento-item fade-up">
+                <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_14.jpg" alt="Fresh">
+                <div class="bento-overlay"><span class="bento-text"><span data-lang="ko" class="active">신선도 유지</span><span data-lang="en">Fresh Quality</span><span data-lang="ja">鮮度維持</span></span></div>
+            </div>
+            <div class="bento-item fade-up">
+                <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_11.jpg" alt="Quality">
+                <div class="bento-overlay"><span class="bento-text"><span data-lang="ko" class="active">품질 관리</span><span data-lang="en">Quality Control</span><span data-lang="ja">品質管理</span></span></div>
+            </div>
+            <div class="bento-item fade-up">
+                <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365.jpg" alt="Factory">
+                <div class="bento-overlay"><span class="bento-text"><span data-lang="ko" class="active">공장 전경</span><span data-lang="en">Factory View</span><span data-lang="ja">工場全景</span></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products">
+        <div class="section-header">
+            <span class="section-tag">Products</span>
+            <h2 class="section-title"><span data-lang="ko" class="active"><span class="gradient">프리미엄</span> 제품</span><span data-lang="en"><span class="gradient">Premium</span> Products</span><span data-lang="ja"><span class="gradient">プレミアム</span>製品</span></h2>
+        </div>
+        <div class="products-filter">
+            <button class="filter-btn active" data-category="all"><span data-lang="ko" class="active">전체</span><span data-lang="en">All</span><span data-lang="ja">全て</span></button>
+            <button class="filter-btn" data-category="frozen"><span data-lang="ko" class="active">냉동 가공</span><span data-lang="en">Frozen</span><span data-lang="ja">冷凍</span></button>
+            <button class="filter-btn" data-category="badasopung"><span data-lang="ko" class="active">바다소풍</span><span data-lang="en">Bada Sopung</span><span data-lang="ja">海の遠足</span></button>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Board -->
+    <section id="board">
+        <div class="section-header">
+            <span class="section-tag">Board</span>
+            <h2 class="section-title"><span data-lang="ko" class="active">공지 & <span class="gradient">소식</span></span><span data-lang="en">News & <span class="gradient">Updates</span></span><span data-lang="ja">お知らせ</span></h2>
+        </div>
+        <div class="board-wrapper fade-up">
+            <div class="board-tabs">
+                <button class="board-tab active" data-tab="notice"><span data-lang="ko" class="active">공지사항</span><span data-lang="en">Notice</span><span data-lang="ja">お知らせ</span></button>
+                <button class="board-tab" data-tab="news"><span data-lang="ko" class="active">뉴스</span><span data-lang="en">News</span><span data-lang="ja">ニュース</span></button>
+                <button class="board-tab" data-tab="qna">Q&A</button>
+            </div>
+            <div class="board-content">
+                <div class="board-header">
+                    <span id="adminStatus" style="color:var(--accent-1);font-size:13px;font-weight:600;"></span>
+                    <div class="board-actions">
+                        <button class="admin-btn" id="adminLoginBtn" onclick="toggleAdminLogin()"><span data-lang="ko" class="active">관리자</span><span data-lang="en">Admin</span><span data-lang="ja">管理者</span></button>
+                        <button class="write-btn" onclick="openWriteModal()">✏️ <span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write</span><span data-lang="ja">投稿</span></button>
+                    </div>
+                </div>
+                <div class="board-list" id="board-list"></div>
+                <div id="board-pagination" style="display:flex;justify-content:center;gap:8px;margin-top:24px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="section-header">
+            <span class="section-tag">Contact</span>
+            <h2 class="section-title"><span data-lang="ko" class="active"><span class="gradient">연락처</span></span><span data-lang="en"><span class="gradient">Contact</span> Us</span><span data-lang="ja"><span class="gradient">お問合せ</span></span></h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card fade-up">
+                <div class="contact-icon">📍</div>
+                <div class="contact-label"><span data-lang="ko" class="active">주소</span><span data-lang="en">Address</span><span data-lang="ja">住所</span></div>
+                <div class="contact-value"><span data-lang="ko" class="active">전남 여수시 화양면<br>석교로 121</span><span data-lang="en">121 Seokgyo-ro<br>Yeosu, Korea</span><span data-lang="ja">全羅南道麗水市<br>華陽面石橋路121</span></div>
+            </div>
+            <div class="contact-card fade-up">
+                <div class="contact-icon">📞</div>
+                <div class="contact-label"><span data-lang="ko" class="active">전화</span><span data-lang="en">Phone</span><span data-lang="ja">電話</span></div>
+                <div class="contact-value">061-681-5171</div>
+            </div>
+            <div class="contact-card fade-up">
+                <div class="contact-icon">📠</div>
+                <div class="contact-label"><span data-lang="ko" class="active">팩스</span><span data-lang="en">Fax</span><span data-lang="ja">FAX</span></div>
+                <div class="contact-value">061-681-5173</div>
+            </div>
+            <div class="contact-card fade-up">
+                <div class="contact-icon">🕐</div>
+                <div class="contact-label"><span data-lang="ko" class="active">운영시간</span><span data-lang="en">Hours</span><span data-lang="ja">営業時間</span></div>
+                <div class="contact-value"><span data-lang="ko" class="active">평일 09:00-18:00</span><span data-lang="en">Mon-Fri 9AM-6PM</span><span data-lang="ja">月-金 9:00-18:00</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">🐟</div>
+                    <span class="footer-logo-text">SEOPUNG</span>
+                </div>
+                <p class="footer-desc"><span data-lang="ko" class="active">2011년부터 여수에서 프리미엄 수산물을 가공해 온 HACCP 인증 전문 기업입니다.</span><span data-lang="en">HACCP-certified seafood specialist based in Yeosu since 2011.</span><span data-lang="ja">2011年から麗水でプレミアム水産物を加工しているHACCP認証企業。</span></p>
+                <div class="footer-badges">
+                    <span class="footer-badge">HACCP</span>
+                    <span class="footer-badge"><span data-lang="ko" class="active">학교급식</span><span data-lang="en">School</span><span data-lang="ja">学校給食</span></span>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h5><span data-lang="ko" class="active">바로가기</span><span data-lang="en">Links</span><span data-lang="ja">リンク</span></h5>
+                <ul>
+                    <li><a href="#about"><span data-lang="ko" class="active">소개</span><span data-lang="en">About</span><span data-lang="ja">紹介</span></a></li>
+                    <li><a href="#gallery"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span><span data-lang="ja">ギャラリー</span></a></li>
+                    <li><a href="#products"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a></li>
+                    <li><a href="#contact"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></h5>
+                <ul>
+                    <li><a href="#products"><span data-lang="ko" class="active">노르웨이 고등어</span><span data-lang="en">Norwegian Mackerel</span><span data-lang="ja">ノルウェーサバ</span></a></li>
+                    <li><a href="#products"><span data-lang="ko" class="active">손질 오징어</span><span data-lang="en">Cleaned Squid</span><span data-lang="ja">下処理イカ</span></a></li>
+                    <li><a href="#products"><span data-lang="ko" class="active">바다소풍 전복</span><span data-lang="en">Abalone</span><span data-lang="ja">アワビ</span></a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></h5>
+                <ul>
+                    <li><span style="color:var(--text-muted);font-size:14px;">📞 061-681-5171</span></li>
+                    <li><span style="color:var(--text-muted);font-size:14px;">📠 061-681-5173</span></li>
+                    <li><span style="color:var(--text-muted);font-size:14px;"><span data-lang="ko" class="active">평일 09:00-18:00</span><span data-lang="en">Mon-Fri 9-6</span><span data-lang="ja">月-金 9-18</span></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span><span data-lang="ko" class="active">© 2024 영어조합법인 서풍 | 사업자등록번호: 417-81-41979 | 대표: 서순심</span><span data-lang="en">© 2024 Seopung Fishery Cooperative</span><span data-lang="ja">© 2024 西風水産</span></span>
+            <span><span data-lang="ko" class="active">통신판매업: 2011-전남여수-0128</span><span data-lang="en">Business License</span><span data-lang="ja">通信販売業</span></span>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="writeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title"><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write</span><span data-lang="ja">投稿</span></h3>
+                <button class="modal-close" onclick="closeWriteModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></label>
+                    <select class="form-select" id="write-board">
+                        <option value="notice">공지사항</option>
+                        <option value="news">뉴스</option>
+                        <option value="qna">Q&A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">카테고리</span><span data-lang="en">Category</span><span data-lang="ja">カテゴリ</span></label>
+                    <input type="text" class="form-input" id="write-category" placeholder="카테고리">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">제목</span><span data-lang="en">Title</span><span data-lang="ja">タイトル</span></label>
+                    <input type="text" class="form-input" id="write-title" placeholder="제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">내용</span><span data-lang="en">Content</span><span data-lang="ja">内容</span></label>
+                    <textarea class="form-textarea" id="write-content" placeholder="내용을 입력하세요"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeWriteModal()"><span data-lang="ko" class="active">취소</span><span data-lang="en">Cancel</span><span data-lang="ja">キャンセル</span></button>
+                <button class="btn btn-submit" onclick="submitPost()"><span data-lang="ko" class="active">등록</span><span data-lang="en">Submit</span><span data-lang="ja">登録</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="viewModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="view-title"></h3>
+                <button class="modal-close" onclick="closeViewModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex;gap:12px;margin-bottom:20px;">
+                    <span id="view-category" style="padding:6px 14px;background:var(--bg-elevated);border-radius:8px;font-size:12px;color:var(--accent-1);"></span>
+                    <span id="view-date" style="font-size:13px;color:var(--text-muted);"></span>
+                </div>
+                <div id="view-content" style="white-space:pre-wrap;line-height:1.8;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeViewModal()"><span data-lang="ko" class="active">닫기</span><span data-lang="en">Close</span><span data-lang="ja">閉じる</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <h3 class="modal-title"><span data-lang="ko" class="active">관리자 로그인</span><span data-lang="en">Admin Login</span><span data-lang="ja">管理者</span></h3>
+                <button class="modal-close" onclick="closeAdminModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">비밀번호</span><span data-lang="en">Password</span><span data-lang="ja">パスワード</span></label>
+                    <input type="password" class="form-input" id="admin-password" placeholder="비밀번호">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeAdminModal()"><span data-lang="ko" class="active">취소</span><span data-lang="en">Cancel</span><span data-lang="ja">キャンセル</span></button>
+                <button class="btn btn-submit" onclick="adminLogin()"><span data-lang="ko" class="active">로그인</span><span data-lang="en">Login</span><span data-lang="ja">ログイン</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title"><span data-lang="ko" class="active">글 수정</span><span data-lang="en">Edit</span><span data-lang="ja">編集</span></h3>
+                <button class="modal-close" onclick="closeEditModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-id">
+                <div class="form-group"><label class="form-label">카테고리</label><input type="text" class="form-input" id="edit-category"></div>
+                <div class="form-group"><label class="form-label">제목</label><input type="text" class="form-input" id="edit-title"></div>
+                <div class="form-group"><label class="form-label">내용</label><textarea class="form-textarea" id="edit-content"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeEditModal()">취소</button>
+                <button class="btn btn-submit" onclick="updatePost()">수정</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'ko';
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang-btn]').forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
+            document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
+            renderBoard();
+            renderProducts();
+        }
+        document.querySelectorAll('[data-lang-btn]').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
+
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('active'); }
+
+        const productsData = [
+            { id: 1, category: 'frozen', badge: 'best', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg', name: { ko: '노르웨이 간고등어살 1.3kg', en: 'Norwegian Mackerel 1.3kg', ja: 'ノルウェー塩サバ 1.3kg' }, desc: { ko: '노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질.', en: 'Norwegian mackerel fillet, ready to cook.', ja: 'ノルウェー産サバフィレ。' }, tags: { ko: ['노르웨이산', '뼈 제거'], en: ['Norwegian', 'Boneless'], ja: ['ノルウェー産', '骨なし'] } },
+            { id: 2, category: 'frozen', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg', name: { ko: '손질 오징어 1kg', en: 'Cleaned Squid 1kg', ja: '下処理イカ 1kg' }, desc: { ko: '태평양산 원양 오징어를 선상 급속 냉동.', en: 'Pacific squid, flash-frozen at sea.', ja: '太平洋産イカを船上急速冷凍。' }, tags: { ko: ['IQF', '타우린'], en: ['IQF', 'Taurine'], ja: ['IQF', 'タウリン'] } },
+            { id: 3, category: 'badasopung', badge: 'premium', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg', name: { ko: '참전복 1.4kg', en: 'Abalone 1.4kg', ja: 'アワビ 1.4kg' }, desc: { ko: '여수 청정 해역의 프리미엄 참전복.', en: 'Premium abalone from Yeosu.', ja: '麗水産プレミアムアワビ。' }, tags: { ko: ['여수산', '선물용'], en: ['Yeosu', 'Gift'], ja: ['麗水産', '贈答用'] } },
+            { id: 4, category: 'badasopung', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_14.jpg', name: { ko: '참전복 1.5kg', en: 'Abalone 1.5kg', ja: 'アワビ 1.5kg' }, desc: { ko: '명절 선물에 적합한 구성.', en: 'Perfect for holiday gifts.', ja: '名節の贈り物に最適。' }, tags: { ko: ['여수산', '명절'], en: ['Yeosu', 'Holiday'], ja: ['麗水産', '名節'] } },
+            { id: 5, category: 'badasopung', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_11.jpg', name: { ko: '참전복 1kg (5~7미)', en: 'Abalone 1kg', ja: 'アワビ 1kg' }, desc: { ko: '특대 전복 프리미엄 구성.', en: 'Premium XL abalone.', ja: '特大アワビプレミアム。' }, tags: { ko: ['특대'], en: ['XL'], ja: ['特大'] } },
+            { id: 6, category: 'badasopung', image: 'https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_12.jpg', name: { ko: '참전복 1kg (8~9미)', en: 'Abalone 1kg', ja: 'アワビ 1kg' }, desc: { ko: '실속형 구성.', en: 'Value pack.', ja: '実用構成。' }, tags: { ko: ['실속형'], en: ['Value'], ja: ['実用'] } }
+        ];
+        let currentCategory = 'all';
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const filtered = currentCategory === 'all' ? productsData : productsData.filter(p => p.category === currentCategory);
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card fade-up visible">
+                    ${p.badge ? `<div class="product-badge">${p.badge === 'best' ? 'BEST' : 'PREMIUM'}</div>` : ''}
+                    <div class="product-image"><img src="${p.image}" alt="${p.name[currentLang]}"></div>
+                    <div class="product-info">
+                        <span class="product-category">${p.category === 'frozen' ? (currentLang === 'ko' ? '냉동 가공' : currentLang === 'en' ? 'Frozen' : '冷凍') : (currentLang === 'ko' ? '바다소풍' : 'Bada Sopung')}</span>
+                        <h3 class="product-name">${p.name[currentLang]}</h3>
+                        <p class="product-desc">${p.desc[currentLang]}</p>
+                        <div class="product-tags">${p.tags[currentLang].map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
+                renderProducts();
+            });
+        });
+
+        const defaultBoardData = {
+            notice: { ko: [{ id: 1, title: '2024년 설 연휴 배송 안내', category: '배송', date: '2024.01.15', content: '설 연휴 기간 배송이 지연될 수 있습니다.' },{ id: 2, title: 'HACCP 재인증 완료', category: '인증', date: '2024.01.10', content: 'HACCP 재인증을 완료했습니다.' }], en: [{ id: 1, title: 'Lunar New Year Shipping', category: 'Shipping', date: '2024.01.15', content: 'Shipping may be delayed.' },{ id: 2, title: 'HACCP Recertified', category: 'Cert', date: '2024.01.10', content: 'HACCP recertification complete.' }], ja: [{ id: 1, title: '旧正月配送案内', category: '配送', date: '2024.01.15', content: '配送が遅れる場合があります。' },{ id: 2, title: 'HACCP再認証完了', category: '認証', date: '2024.01.10', content: 'HACCP再認証完了。' }] },
+            news: { ko: [{ id: 1, title: '2023년 매출 356억 달성', category: '실적', date: '2024.01.12', content: '356억 원 매출 달성.' }], en: [{ id: 1, title: '35.6B KRW Revenue', category: 'Results', date: '2024.01.12', content: 'Revenue achieved.' }], ja: [{ id: 1, title: '売上356億ウォン達成', category: '実績', date: '2024.01.12', content: '売上達成。' }] },
+            qna: { ko: [{ id: 1, title: '대량 주문 할인?', category: '주문', date: '2024.01.14', content: '수량 할인 가능합니다.' }], en: [{ id: 1, title: 'Bulk discount?', category: 'Order', date: '2024.01.14', content: 'Discounts available.' }], ja: [{ id: 1, title: '大量注文割引?', category: '注文', date: '2024.01.14', content: '割引可能。' }] }
+        };
+
+        function getBoardData() { const saved = localStorage.getItem('seopungBoardData'); return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultBoardData)); }
+        function saveBoardData(data) { localStorage.setItem('seopungBoardData', JSON.stringify(data)); }
+
+        let boardData = getBoardData();
+        let currentTab = 'notice';
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let isAdmin = false;
+        const ADMIN_PASSWORD = '1234';
+
+        function renderBoard() {
+            const boardList = document.getElementById('board-list');
+            const items = boardData[currentTab][currentLang] || [];
+            const start = (currentPage - 1) * itemsPerPage;
+            const paginatedItems = items.slice(start, start + itemsPerPage);
+            boardList.innerHTML = paginatedItems.map((item, index) => {
+                const adminHtml = isAdmin ? `<div style="display:flex;gap:8px;" onclick="event.stopPropagation();"><button onclick="openEditModal(${item.id})" style="padding:8px 12px;background:var(--bg-dark);border:1px solid var(--border);border-radius:6px;color:var(--accent-1);cursor:pointer;">✏️</button><button onclick="deletePost(${item.id})" style="padding:8px 12px;background:var(--bg-dark);border:1px solid var(--border);border-radius:6px;color:#ef4444;cursor:pointer;">🗑️</button></div>` : '';
+                return `<div class="board-item" onclick="viewPost(${item.id})"><div class="board-num">${String(start + index + 1).padStart(2, '0')}</div><div class="board-title">${item.title}</div><div class="board-cat">${item.category}</div><div class="board-date">${item.date}</div>${adminHtml}</div>`;
+            }).join('');
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            document.getElementById('board-pagination').innerHTML = Array.from({length: totalPages}, (_, i) => `<button onclick="goToPage(${i + 1})" style="width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:${i + 1 === currentPage ? 'var(--gradient)' : 'var(--bg-elevated)'};color:var(--text);cursor:pointer;">${i + 1}</button>`).join('');
+        }
+
+        function goToPage(page) { currentPage = page; renderBoard(); }
+
+        document.querySelectorAll('.board-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.board-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentTab = tab.dataset.tab;
+                currentPage = 1;
+                renderBoard();
+            });
+        });
+
+        function openWriteModal() { document.getElementById('writeModal').classList.add('active'); }
+        function closeWriteModal() { document.getElementById('writeModal').classList.remove('active'); document.getElementById('write-title').value = ''; document.getElementById('write-content').value = ''; document.getElementById('write-category').value = ''; }
+        function submitPost() {
+            const board = document.getElementById('write-board').value;
+            const title = document.getElementById('write-title').value.trim();
+            const content = document.getElementById('write-content').value.trim();
+            const category = document.getElementById('write-category').value.trim() || '일반';
+            if (!title || !content) { alert('제목과 내용을 입력해주세요.'); return; }
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+            const newId = Math.max(...boardData[board].ko.map(i => i.id), 0) + 1;
+            const newPost = { id: newId, title, category, date: dateStr, content };
+            ['ko', 'en', 'ja'].forEach(lang => boardData[board][lang].unshift(newPost));
+            saveBoardData(boardData);
+            currentTab = board;
+            currentPage = 1;
+            document.querySelectorAll('.board-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === board));
+            renderBoard();
+            closeWriteModal();
+            alert('등록되었습니다.');
+        }
+
+        function viewPost(id) {
+            const item = boardData[currentTab][currentLang].find(i => i.id === id);
+            if (item) {
+                document.getElementById('view-title').textContent = item.title;
+                document.getElementById('view-category').textContent = item.category;
+                document.getElementById('view-date').textContent = item.date;
+                document.getElementById('view-content').textContent = item.content;
+                document.getElementById('viewModal').classList.add('active');
+            }
+        }
+        function closeViewModal() { document.getElementById('viewModal').classList.remove('active'); }
+
+        function updateAdminUI() {
+            const statusEl = document.getElementById('adminStatus');
+            const btnEl = document.getElementById('adminLoginBtn');
+            if (isAdmin) { statusEl.textContent = '관리자 모드'; btnEl.style.background = '#ef4444'; btnEl.innerHTML = '<span data-lang="ko" class="active">로그아웃</span><span data-lang="en">Logout</span><span data-lang="ja">ログアウト</span>'; setLanguage(currentLang); }
+            else { statusEl.textContent = ''; btnEl.style.background = ''; btnEl.innerHTML = '<span data-lang="ko" class="active">관리자</span><span data-lang="en">Admin</span><span data-lang="ja">管理者</span>'; setLanguage(currentLang); }
+        }
+        function toggleAdminLogin() { if (isAdmin) { isAdmin = false; updateAdminUI(); renderBoard(); alert('로그아웃 되었습니다.'); } else { document.getElementById('adminModal').classList.add('active'); } }
+        function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); document.getElementById('admin-password').value = ''; }
+        function adminLogin() { if (document.getElementById('admin-password').value === ADMIN_PASSWORD) { isAdmin = true; closeAdminModal(); updateAdminUI(); renderBoard(); alert('관리자로 로그인되었습니다.'); } else { alert('비밀번호가 올바르지 않습니다.'); } }
+        function openEditModal(id) {
+            const item = boardData[currentTab][currentLang].find(i => i.id === id);
+            if (item) { document.getElementById('edit-id').value = id; document.getElementById('edit-category').value = item.category; document.getElementById('edit-title').value = item.title; document.getElementById('edit-content').value = item.content; document.getElementById('editModal').classList.add('active'); }
+        }
+        function closeEditModal() { document.getElementById('editModal').classList.remove('active'); }
+        function updatePost() {
+            const id = parseInt(document.getElementById('edit-id').value);
+            const category = document.getElementById('edit-category').value.trim();
+            const title = document.getElementById('edit-title').value.trim();
+            const content = document.getElementById('edit-content').value.trim();
+            if (!title || !content) { alert('제목과 내용을 입력해주세요.'); return; }
+            ['ko', 'en', 'ja'].forEach(lang => { const item = boardData[currentTab][lang].find(i => i.id === id); if (item) { item.category = category; item.title = title; item.content = content; } });
+            saveBoardData(boardData);
+            closeEditModal();
+            renderBoard();
+            alert('수정되었습니다.');
+        }
+        function deletePost(id) { if (confirm('정말 삭제하시겠습니까?')) { ['ko', 'en', 'ja'].forEach(lang => { boardData[currentTab][lang] = boardData[currentTab][lang].filter(i => i.id !== id); }); saveBoardData(boardData); renderBoard(); alert('삭제되었습니다.'); } }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        setLanguage('ko');
+        renderProducts();
+    </script>
+</body>
+</html>
