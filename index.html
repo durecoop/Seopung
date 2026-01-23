@@ -846,28 +846,23 @@
 
         function renderBoard() {
             const boardList = document.getElementById('board-list');
-            const items = boardData[currentTab][currentLang];
+            const items = boardData[currentTab][currentLang] || [];
             const start = (currentPage - 1) * itemsPerPage;
             const paginatedItems = items.slice(start, start + itemsPerPage);
 
-            const adminButtons = isAdmin ? `
-                <div class="board-item-actions">
-                    <button class="board-action-btn edit" onclick="event.stopPropagation(); openEditModal(\${item.id})">✏️</button>
-                    <button class="board-action-btn delete" onclick="event.stopPropagation(); deletePost(\${item.id})">🗑️</button>
+            boardList.innerHTML = paginatedItems.map((item, index) => {
+                const adminHtml = isAdmin ? `<div class="board-item-actions" onclick="event.stopPropagation();">
+                    <button class="board-action-btn edit" onclick="openEditModal(${item.id})">✏️</button>
+                    <button class="board-action-btn delete" onclick="deletePost(${item.id})">🗑️</button>
                 </div>` : '';
-
-            boardList.innerHTML = paginatedItems.map((item, index) => `
-                <div class="board-item" onclick="viewPost(${item.id})">
+                return `<div class="board-item" onclick="viewPost(${item.id})">
                     <div class="board-item-number">${String(start + index + 1).padStart(2, '0')}</div>
                     <div class="board-item-title">${item.title}</div>
                     <div class="board-item-category">${item.category}</div>
                     <div class="board-item-date">${item.date}</div>
-                    ${isAdmin ? `<div class="board-item-actions">
-                        <button class="board-action-btn edit" onclick="event.stopPropagation(); openEditModal(${item.id})">✏️</button>
-                        <button class="board-action-btn delete" onclick="event.stopPropagation(); deletePost(${item.id})">🗑️</button>
-                    </div>` : ''}
-                </div>
-            `).join('');
+                    ${adminHtml}
+                </div>`;
+            }).join('');
 
             const totalPages = Math.ceil(items.length / itemsPerPage);
             document.getElementById('board-pagination').innerHTML = Array.from({length: totalPages}, (_, i) => 
@@ -1034,14 +1029,20 @@
         function deletePost(id) {
             const confirmMsg = { ko: '정말 삭제하시겠습니까?', en: 'Are you sure you want to delete?', ja: '本当に削除しますか？' };
             if (confirm(confirmMsg[currentLang])) {
-                ['ko', 'en', 'ja'].forEach(lang => {
-                    const idx = boardData[currentTab][lang].findIndex(i => i.id === id);
-                    if (idx !== -1) boardData[currentTab][lang].splice(idx, 1);
-                });
-                saveBoardData(boardData);
-                renderBoard();
-                const msg = { ko: '삭제되었습니다.', en: 'Deleted successfully.', ja: '削除されました。' };
-                alert(msg[currentLang]);
+                try {
+                    ['ko', 'en', 'ja'].forEach(lang => {
+                        if (boardData[currentTab] && boardData[currentTab][lang]) {
+                            boardData[currentTab][lang] = boardData[currentTab][lang].filter(i => i.id !== id);
+                        }
+                    });
+                    saveBoardData(boardData);
+                    renderBoard();
+                    const msg = { ko: '삭제되었습니다.', en: 'Deleted successfully.', ja: '削除されました。' };
+                    alert(msg[currentLang]);
+                } catch(e) {
+                    console.error('Delete error:', e);
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
             }
         }
 
