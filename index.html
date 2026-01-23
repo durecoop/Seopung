@@ -5,994 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>영어조합법인 서풍 | Seopung Fishery Cooperative</title>
     <meta name="description" content="여수의 신선함을 식탁으로 - 15년 노하우의 프리미엄 수산물 가공 전문 기업">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-deep: #0a2342;
-            --primary-ocean: #126e82;
-            --accent-gold: #d4a574;
-            --accent-coral: #e07a5f;
-            --light-sand: #f8f5f0;
+            --primary-deep: #0a1628;
+            --primary-ocean: #0f4c75;
+            --primary-blue: #1b6ca8;
+            --accent-gold: #c9a962;
+            --accent-gold-light: #dfc78a;
+            --accent-coral: #d4645c;
+            --light-sand: #faf9f7;
+            --light-cream: #f5f3ef;
             --light-mist: #e8f0f2;
             --text-dark: #1a1a2e;
             --text-muted: #5a6a7a;
             --white: #ffffff;
-            --shadow-soft: 0 4px 20px rgba(10, 35, 66, 0.08);
-            --shadow-medium: 0 8px 40px rgba(10, 35, 66, 0.12);
+            --shadow-soft: 0 4px 30px rgba(10, 22, 40, 0.08);
+            --shadow-medium: 0 10px 50px rgba(10, 22, 40, 0.12);
+            --shadow-strong: 0 20px 60px rgba(10, 22, 40, 0.18);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: var(--light-sand);
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: var(--light-sand); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
+        
         /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(10, 35, 66, 0.05);
-            transition: var(--transition);
-        }
-
-        .nav.scrolled {
-            box-shadow: var(--shadow-soft);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 20px;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-main {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--primary-deep);
-            letter-spacing: -0.5px;
-        }
-
-        .logo-sub {
-            font-size: 11px;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            position: relative;
-            padding: 8px 0;
-            transition: var(--transition);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .lang-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: var(--light-mist);
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .lang-toggle:hover {
-            background: var(--primary-ocean);
-            color: var(--white);
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 4px 12px;
-            border-radius: 20px;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .lang-btn.active {
-            background: var(--primary-deep);
-            color: var(--white);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-ocean) 50%, #1a8a9e 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .hero-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: var(--light-sand);
-            clip-path: ellipse(80% 100% at 50% 100%);
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-text {
-            color: var(--white);
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 30px;
-            font-size: 13px;
-            margin-bottom: 24px;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(40px, 5vw, 64px);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-
-        .hero-title-accent {
-            color: var(--accent-gold);
-        }
-
-        .hero-desc {
-            font-size: 18px;
-            line-height: 1.8;
-            opacity: 0.9;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-            opacity: 0;
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--accent-gold);
-        }
-
-        .hero-stat-label {
-            font-size: 13px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
-
-        .hero-visual {
-            position: relative;
-            animation: fadeInRight 1s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero-card {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: var(--shadow-medium);
-            transform: rotate(3deg);
-        }
-
-        .hero-card-inner {
-            background: linear-gradient(135deg, var(--light-mist), var(--light-sand));
-            border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-        }
-
-        .hero-card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep));
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-        }
-
-        .hero-card-title {
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--primary-deep);
-            margin-bottom: 8px;
-        }
-
-        .hero-card-text {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .certification-badges {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-            justify-content: center;
-        }
-
-        .cert-badge {
-            padding: 8px 16px;
-            background: var(--primary-deep);
-            color: var(--white);
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px) rotate(3deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) rotate(3deg);
-            }
-        }
-
-        /* Section Styles */
-        section {
-            padding: 120px 40px;
-        }
-
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--light-mist);
-            color: var(--primary-ocean);
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 4vw, 48px);
-            font-weight: 600;
-            color: var(--primary-deep);
-            margin-bottom: 16px;
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 17px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        #about {
-            background: var(--white);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            color: var(--primary-deep);
-            margin-bottom: 24px;
-        }
-
-        .about-content p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .about-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .about-feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--light-mist);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .about-feature-text h4 {
-            font-weight: 600;
-            font-size: 15px;
-            color: var(--primary-deep);
-            margin-bottom: 4px;
-        }
-
-        .about-feature-text p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-image-main {
-            width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep));
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 80px;
-        }
-
-        .about-image-floating {
-            position: absolute;
-            bottom: -30px;
-            right: -30px;
-            background: var(--white);
-            padding: 24px 32px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-medium);
-        }
-
-        .about-image-floating-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 600;
-            color: var(--accent-gold);
-        }
-
-        .about-image-floating-text {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* Products Section */
-        #products {
-            background: var(--light-sand);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .product-image {
-            height: 240px;
-            background: linear-gradient(135deg, var(--light-mist), var(--primary-ocean));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            position: relative;
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            padding: 6px 14px;
-            background: var(--accent-coral);
-            color: var(--white);
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .product-content {
-            padding: 28px;
-        }
-
-        .product-category {
-            font-size: 12px;
-            color: var(--primary-ocean);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .product-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-deep);
-            margin-bottom: 12px;
-        }
-
-        .product-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .product-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .product-feature {
-            padding: 6px 12px;
-            background: var(--light-mist);
-            border-radius: 6px;
-            font-size: 12px;
-            color: var(--primary-ocean);
-        }
-
-        /* Board Section */
-        #board {
-            background: var(--white);
-        }
-
-        .board-container {
-            background: var(--light-sand);
-            border-radius: 24px;
-            padding: 48px;
-        }
-
-        .board-tabs {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 32px;
-            border-bottom: 2px solid var(--light-mist);
-            padding-bottom: 16px;
-        }
-
-        .board-tab {
-            padding: 12px 24px;
-            background: none;
-            border: none;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 8px;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .board-tab.active {
-            background: var(--primary-deep);
-            color: var(--white);
-        }
-
-        .board-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .board-item {
-            display: grid;
-            grid-template-columns: auto 1fr auto auto;
-            gap: 20px;
-            align-items: center;
-            padding: 20px 24px;
-            background: var(--white);
-            border-radius: 12px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .board-item:hover {
-            transform: translateX(8px);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .board-item-number {
-            width: 40px;
-            height: 40px;
-            background: var(--light-mist);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--primary-ocean);
-            font-size: 14px;
-        }
-
-        .board-item-title {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .board-item-category {
-            padding: 6px 12px;
-            background: var(--light-mist);
-            border-radius: 6px;
-            font-size: 12px;
-            color: var(--primary-ocean);
-        }
-
-        .board-item-date {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .board-pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 32px;
-        }
-
-        .board-page {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: var(--white);
-            border-radius: 10px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .board-page.active {
-            background: var(--primary-deep);
-            color: var(--white);
-        }
-
-        /* Contact Section */
-        #contact {
-            background: linear-gradient(135deg, var(--primary-deep), var(--primary-ocean));
-            color: var(--white);
-        }
-
-        #contact .section-tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--white);
-        }
-
-        #contact .section-title {
-            color: var(--white);
-        }
-
-        #contact .section-desc {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 32px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .contact-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .contact-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin: 0 auto 20px;
-        }
-
-        .contact-label {
-            font-size: 13px;
-            opacity: 0.8;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .contact-value {
-            font-size: 16px;
-            font-weight: 500;
-        }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(10, 22, 40, 0.05); transition: var(--transition); }
+        .nav.scrolled { box-shadow: var(--shadow-soft); }
+        .nav-container { max-width: 1600px; margin: 0 auto; padding: 0 60px; display: flex; align-items: center; justify-content: space-between; height: 90px; }
+        .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+        .logo-icon { width: 56px; height: 56px; background: linear-gradient(145deg, var(--primary-ocean), var(--primary-deep)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 24px; box-shadow: 0 4px 15px rgba(15, 76, 117, 0.3); }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main { font-weight: 700; font-size: 20px; color: var(--primary-deep); letter-spacing: -0.5px; }
+        .logo-sub { font-size: 11px; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+        .nav-links { display: flex; align-items: center; gap: 48px; }
+        .nav-link { text-decoration: none; color: var(--text-dark); font-size: 15px; font-weight: 500; position: relative; padding: 8px 0; transition: var(--transition); }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light)); transition: var(--transition); }
+        .nav-link:hover { color: var(--primary-ocean); }
+        .nav-link:hover::after { width: 100%; }
+        .lang-toggle { display: flex; gap: 4px; padding: 6px 8px; background: var(--light-cream); border-radius: 30px; }
+        .lang-btn { background: none; border: none; font-size: 13px; font-weight: 600; cursor: pointer; padding: 8px 16px; border-radius: 24px; transition: var(--transition); font-family: inherit; color: var(--text-muted); }
+        .lang-btn.active { background: var(--primary-deep); color: var(--white); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 28px; cursor: pointer; padding: 8px; color: var(--primary-deep); }
+        .mobile-menu { display: none; position: fixed; top: 90px; left: 0; right: 0; background: var(--white); padding: 24px; box-shadow: var(--shadow-medium); z-index: 999; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 16px 0; text-decoration: none; color: var(--text-dark); font-size: 16px; font-weight: 500; border-bottom: 1px solid var(--light-cream); }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: var(--primary-deep); }
+        .hero-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .hero-video { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(15, 76, 117, 0.75) 50%, rgba(10, 22, 40, 0.9) 100%); }
+        .hero-wave { position: absolute; bottom: 0; left: 0; right: 0; height: 180px; background: var(--light-sand); clip-path: ellipse(85% 100% at 50% 100%); }
+        .hero-content { max-width: 1600px; margin: 0 auto; padding: 140px 60px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: center; position: relative; z-index: 1; }
+        .hero-text { color: var(--white); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: rgba(201, 169, 98, 0.2); border: 1px solid rgba(201, 169, 98, 0.3); border-radius: 50px; font-size: 13px; margin-bottom: 32px; backdrop-filter: blur(10px); animation: fadeInUp 0.8s ease forwards; color: var(--accent-gold-light); font-weight: 500; }
+        .hero-badge-dot { width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
+        .hero-title { font-family: 'Playfair Display', 'Nanum Myeongjo', serif; font-size: clamp(44px, 5.5vw, 72px); font-weight: 600; line-height: 1.15; margin-bottom: 28px; animation: fadeInUp 0.8s ease 0.2s forwards; opacity: 0; }
+        .hero-title-accent { color: var(--accent-gold); }
+        .hero-desc { font-size: 18px; line-height: 1.9; opacity: 0.9; margin-bottom: 48px; animation: fadeInUp 0.8s ease 0.4s forwards; opacity: 0; max-width: 540px; font-weight: 300; }
+        .hero-stats { display: flex; gap: 56px; animation: fadeInUp 0.8s ease 0.6s forwards; opacity: 0; }
+        .hero-stat { text-align: left; position: relative; padding-left: 20px; }
+        .hero-stat::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; background: linear-gradient(180deg, var(--accent-gold), transparent); border-radius: 2px; }
+        .hero-stat-number { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 600; color: var(--accent-gold); line-height: 1; }
+        .hero-stat-label { font-size: 14px; opacity: 0.7; margin-top: 8px; }
+        .hero-visual { position: relative; animation: fadeInRight 1s ease 0.4s forwards; opacity: 0; }
+        .hero-image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .hero-image-card { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-strong); position: relative; }
+        .hero-image-card:first-child { grid-row: span 2; }
+        .hero-image-card img { width: 100%; height: 100%; object-fit: cover; transition: all 0.6s ease; }
+        .hero-image-card:hover img { transform: scale(1.05); }
+        .hero-image-label { position: absolute; bottom: 16px; left: 16px; background: rgba(10, 22, 40, 0.85); backdrop-filter: blur(10px); padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; color: var(--white); }
+        .certification-floating { position: absolute; top: -20px; right: -20px; background: var(--white); padding: 20px 28px; border-radius: 16px; box-shadow: var(--shadow-medium); z-index: 10; }
+        .certification-floating-title { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .certification-badges { display: flex; gap: 10px; }
+        .cert-badge { padding: 8px 16px; background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep)); color: var(--white); border-radius: 8px; font-size: 12px; font-weight: 600; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* Sections */
+        section { padding: 140px 60px; }
+        .section-container { max-width: 1600px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .section-tag { display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, rgba(201, 169, 98, 0.1), rgba(201, 169, 98, 0.05)); color: var(--accent-gold); border: 1px solid rgba(201, 169, 98, 0.2); border-radius: 50px; font-size: 12px; font-weight: 600; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+        .section-title { font-family: 'Playfair Display', 'Nanum Myeongjo', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 600; color: var(--primary-deep); margin-bottom: 20px; line-height: 1.2; }
+        .section-desc { color: var(--text-muted); font-size: 18px; max-width: 650px; margin: 0 auto; line-height: 1.8; }
+
+        /* About */
+        #about { background: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+        .about-content h3 { font-family: 'Nanum Myeongjo', serif; font-size: 28px; color: var(--primary-deep); margin-bottom: 32px; line-height: 1.5; position: relative; padding-left: 24px; }
+        .about-content h3::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; background: linear-gradient(180deg, var(--accent-gold), var(--primary-ocean)); border-radius: 2px; }
+        .about-content p { color: var(--text-muted); margin-bottom: 24px; font-size: 16px; line-height: 1.9; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+        .about-feature { display: flex; align-items: flex-start; gap: 18px; padding: 24px; background: var(--light-cream); border-radius: 16px; transition: var(--transition); }
+        .about-feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+        .about-feature-icon { width: 54px; height: 54px; background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .about-feature-text h4 { font-weight: 700; font-size: 16px; color: var(--primary-deep); margin-bottom: 6px; }
+        .about-feature-text p { font-size: 14px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+        .about-image { position: relative; }
+        .about-image-main { width: 100%; height: 600px; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-strong); }
+        .about-image-main img { width: 100%; height: 100%; object-fit: cover; }
+        .about-image-floating { position: absolute; bottom: -40px; right: -40px; background: var(--white); padding: 32px 40px; border-radius: 20px; box-shadow: var(--shadow-medium); text-align: center; }
+        .about-image-floating-number { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 600; color: var(--accent-gold); line-height: 1; }
+        .about-image-floating-text { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
+
+        /* Gallery */
+        #gallery { background: var(--light-cream); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .gallery-item { border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; box-shadow: var(--shadow-soft); height: 280px; }
+        .gallery-item.large { grid-column: span 2; grid-row: span 2; height: auto; }
+        .gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; transition: all 0.6s ease; }
+        .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.08); }
+        .gallery-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, transparent 50%, rgba(10, 22, 40, 0.8) 100%); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 24px; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-caption { color: var(--white); font-size: 16px; font-weight: 500; }
+
+        /* Products */
+        #products { background: var(--light-sand); }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .product-card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-soft); transition: var(--transition); }
+        .product-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-strong); }
+        .product-image { height: 280px; position: relative; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: all 0.6s ease; }
+        .product-card:hover .product-image img { transform: scale(1.1); }
+        .product-badge { position: absolute; top: 20px; left: 20px; padding: 8px 18px; background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light)); color: var(--primary-deep); border-radius: 30px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .product-content { padding: 36px; }
+        .product-category { font-size: 12px; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .product-title { font-size: 22px; font-weight: 700; color: var(--primary-deep); margin-bottom: 16px; line-height: 1.3; }
+        .product-desc { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.7; }
+        .product-features { display: flex; flex-wrap: wrap; gap: 10px; }
+        .product-feature { padding: 8px 16px; background: var(--light-cream); border-radius: 8px; font-size: 13px; color: var(--primary-ocean); font-weight: 500; }
+
+        /* Board */
+        #board { background: var(--white); }
+        .board-container { background: var(--light-cream); border-radius: 32px; padding: 60px; }
+        .board-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .board-tabs { display: flex; gap: 12px; }
+        .board-tab { padding: 14px 28px; background: none; border: 2px solid transparent; font-size: 15px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 12px; transition: var(--transition); font-family: inherit; }
+        .board-tab:hover { color: var(--primary-ocean); background: rgba(15, 76, 117, 0.05); }
+        .board-tab.active { background: var(--primary-deep); color: var(--white); border-color: var(--primary-deep); }
+        .board-write-btn { padding: 14px 32px; background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light)); border: none; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--primary-deep); cursor: pointer; transition: var(--transition); font-family: inherit; display: flex; align-items: center; gap: 8px; }
+        .board-write-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4); }
+        .board-list { display: flex; flex-direction: column; gap: 16px; }
+        .board-item { display: grid; grid-template-columns: 60px 1fr auto auto; gap: 24px; align-items: center; padding: 24px 32px; background: var(--white); border-radius: 16px; transition: var(--transition); cursor: pointer; }
+        .board-item:hover { transform: translateX(8px); box-shadow: var(--shadow-soft); }
+        .board-item-number { width: 48px; height: 48px; background: linear-gradient(135deg, var(--light-mist), var(--light-cream)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary-ocean); font-size: 15px; }
+        .board-item-title { font-weight: 500; color: var(--text-dark); font-size: 16px; }
+        .board-item-category { padding: 8px 16px; background: var(--light-mist); border-radius: 8px; font-size: 13px; color: var(--primary-ocean); font-weight: 500; }
+        .board-item-date { color: var(--text-muted); font-size: 14px; }
+        .board-pagination { display: flex; justify-content: center; gap: 10px; margin-top: 40px; }
+        .board-page { width: 44px; height: 44px; border: none; background: var(--white); border-radius: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: inherit; color: var(--text-muted); }
+        .board-page:hover { background: var(--light-mist); }
+        .board-page.active { background: var(--primary-deep); color: var(--white); }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10, 22, 40, 0.6); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 40px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--white); border-radius: 32px; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-strong); animation: modalSlideIn 0.4s ease; }
+        @keyframes modalSlideIn { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal-header { padding: 36px 40px; border-bottom: 1px solid var(--light-cream); display: flex; justify-content: space-between; align-items: center; }
+        .modal-title { font-size: 24px; font-weight: 700; color: var(--primary-deep); }
+        .modal-close { width: 44px; height: 44px; border: none; background: var(--light-cream); border-radius: 12px; font-size: 24px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+        .modal-close:hover { background: var(--accent-coral); color: var(--white); }
+        .modal-body { padding: 40px; }
+        .form-group { margin-bottom: 28px; }
+        .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--primary-deep); margin-bottom: 10px; }
+        .form-input, .form-select, .form-textarea { width: 100%; padding: 16px 20px; border: 2px solid var(--light-cream); border-radius: 12px; font-size: 16px; font-family: inherit; transition: var(--transition); background: var(--white); }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--primary-ocean); box-shadow: 0 0 0 4px rgba(15, 76, 117, 0.1); }
+        .form-textarea { min-height: 200px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .modal-footer { padding: 24px 40px 40px; display: flex; gap: 16px; justify-content: flex-end; }
+        .btn { padding: 16px 32px; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: inherit; }
+        .btn-secondary { background: var(--light-cream); color: var(--text-muted); }
+        .btn-secondary:hover { background: var(--light-mist); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-ocean), var(--primary-deep)); color: var(--white); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(15, 76, 117, 0.3); }
+        .view-modal-meta { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .view-modal-category { padding: 8px 16px; background: var(--light-mist); border-radius: 8px; font-size: 13px; color: var(--primary-ocean); font-weight: 500; }
+        .view-modal-date { color: var(--text-muted); font-size: 14px; display: flex; align-items: center; }
+        .view-modal-body { font-size: 16px; line-height: 1.9; color: var(--text-dark); white-space: pre-wrap; }
+
+        /* Contact */
+        #contact { background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-ocean) 100%); color: var(--white); position: relative; overflow: hidden; }
+        #contact .section-tag { background: rgba(201, 169, 98, 0.2); border-color: rgba(201, 169, 98, 0.3); color: var(--accent-gold-light); }
+        #contact .section-title { color: var(--white); }
+        #contact .section-desc { color: rgba(255, 255, 255, 0.8); }
+        .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; z-index: 1; }
+        .contact-card { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 40px; text-align: center; transition: var(--transition); }
+        .contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-8px); border-color: rgba(201, 169, 98, 0.3); }
+        .contact-icon { width: 72px; height: 72px; background: linear-gradient(135deg, rgba(201, 169, 98, 0.2), rgba(201, 169, 98, 0.1)); border: 1px solid rgba(201, 169, 98, 0.3); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; }
+        .contact-label { font-size: 12px; opacity: 0.7; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+        .contact-value { font-size: 17px; font-weight: 600; line-height: 1.5; }
 
         /* Footer */
-        .footer {
-            background: var(--primary-deep);
-            color: var(--white);
-            padding: 80px 40px 40px;
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            padding-bottom: 60px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-brand h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .footer-links h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-gold);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 40px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .footer-legal {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-legal a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-legal a:hover {
-            color: var(--white);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-        }
+        .footer { background: var(--primary-deep); color: var(--white); padding: 100px 60px 50px; }
+        .footer-container { max-width: 1600px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 80px; padding-bottom: 80px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-brand h3 { font-size: 28px; font-weight: 700; margin-bottom: 20px; }
+        .footer-brand p { color: rgba(255, 255, 255, 0.7); font-size: 15px; line-height: 1.8; }
+        .footer-links h4 { font-size: 13px; font-weight: 700; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 16px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 15px; transition: var(--transition); }
+        .footer-links a:hover { color: var(--accent-gold); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 50px; font-size: 14px; color: rgba(255, 255, 255, 0.5); }
+        .footer-legal { display: flex; gap: 32px; }
+        .footer-legal a { color: rgba(255, 255, 255, 0.5); text-decoration: none; transition: var(--transition); }
+        .footer-legal a:hover { color: var(--white); }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-visual {
-                display: none;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .contact-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-            }
+        @media (max-width: 1200px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 60px; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { display: none; }
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; }
         }
-
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-container {
-                padding: 0 20px;
-            }
-
-            section {
-                padding: 80px 20px;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .board-item {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .board-item-number {
-                display: none;
-            }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { padding: 0 24px; height: 80px; }
+            section { padding: 80px 24px; }
+            .hero-content { padding: 120px 24px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item.large { grid-column: span 1; grid-row: span 1; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; gap: 48px; }
+            .footer-bottom { flex-direction: column; gap: 24px; text-align: center; }
+            .board-container { padding: 32px 24px; }
+            .board-header { flex-direction: column; gap: 20px; }
+            .board-tabs { width: 100%; overflow-x: auto; }
+            .board-item { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+            .board-item-number { display: none; }
+            .modal { border-radius: 24px 24px 0 0; max-height: 100vh; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-image-floating { right: 0; bottom: -30px; }
         }
 
-        /* Hidden class for language switching */
-        [data-lang] {
-            display: none;
-        }
-
-        [data-lang="ko"].active,
-        [data-lang="en"].active {
-            display: inline;
-        }
-
-        .block[data-lang] {
-            display: none;
-        }
-
-        .block[data-lang="ko"].active,
-        .block[data-lang="en"].active {
-            display: block;
-        }
-
-        .flex[data-lang] {
-            display: none;
-        }
-
-        .flex[data-lang="ko"].active,
-        .flex[data-lang="en"].active {
-            display: flex;
-        }
-
-        .grid[data-lang] {
-            display: none;
-        }
-
-        .grid[data-lang="ko"].active,
-        .grid[data-lang="en"].active {
-            display: grid;
-        }
+        /* Language Toggle */
+        [data-lang] { display: none; }
+        [data-lang="ko"].active, [data-lang="en"].active { display: inline; }
+        .block[data-lang] { display: none; }
+        .block[data-lang="ko"].active, .block[data-lang="en"].active { display: block; }
+        .flex[data-lang] { display: none; }
+        .flex[data-lang="ko"].active, .flex[data-lang="en"].active { display: flex; }
+        .grid[data-lang] { display: none; }
+        .grid[data-lang="ko"].active, .grid[data-lang="en"].active { display: grid; }
+        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -1007,110 +275,87 @@
                     <span class="logo-sub">Since 2011</span>
                 </div>
             </a>
-            
             <div class="nav-links">
-                <a href="#about" class="nav-link">
-                    <span data-lang="ko" class="active">회사소개</span>
-                    <span data-lang="en">About</span>
-                </a>
-                <a href="#products" class="nav-link">
-                    <span data-lang="ko" class="active">제품</span>
-                    <span data-lang="en">Products</span>
-                </a>
-                <a href="#board" class="nav-link">
-                    <span data-lang="ko" class="active">게시판</span>
-                    <span data-lang="en">Board</span>
-                </a>
-                <a href="#contact" class="nav-link">
-                    <span data-lang="ko" class="active">연락처</span>
-                    <span data-lang="en">Contact</span>
-                </a>
-                
+                <a href="#about" class="nav-link"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a>
+                <a href="#gallery" class="nav-link"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span></a>
+                <a href="#products" class="nav-link"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a>
+                <a href="#board" class="nav-link"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a>
+                <a href="#contact" class="nav-link"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a>
                 <div class="lang-toggle">
                     <button class="lang-btn active" data-lang-btn="ko">KO</button>
                     <button class="lang-btn" data-lang-btn="en">EN</button>
                 </div>
             </div>
-
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="closeMobileMenu()"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a>
+        <a href="#gallery" onclick="closeMobileMenu()"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span></a>
+        <a href="#products" onclick="closeMobileMenu()"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a>
+        <a href="#board" onclick="closeMobileMenu()"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a>
+        <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103609555.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="hero-wave"></div>
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-badge">
                     <span class="hero-badge-dot"></span>
-                    <span data-lang="ko" class="active">HACCP 인증 업소</span>
-                    <span data-lang="en">HACCP Certified</span>
+                    <span data-lang="ko" class="active">HACCP 인증 전문 업소</span>
+                    <span data-lang="en">HACCP Certified Facility</span>
                 </div>
-                
                 <h1 class="hero-title">
-                    <span data-lang="ko" class="active">
-                        여수의 <span class="hero-title-accent">신선함</span>을<br>식탁으로
-                    </span>
-                    <span data-lang="en">
-                        <span class="hero-title-accent">Fresh</span> from Yeosu<br>to Your Table
-                    </span>
+                    <span data-lang="ko" class="active">여수 청정 해역의<br><span class="hero-title-accent">신선함</span>을 담다</span>
+                    <span data-lang="en"><span class="hero-title-accent">Premium</span> Seafood<br>from Yeosu Waters</span>
                 </h1>
-                
                 <p class="hero-desc">
-                    <span data-lang="ko" class="active">
-                        2011년 설립 이래, 영어조합법인 서풍은 남해안 청정 해역의 최상급 수산물을 
-                        HACCP 인증 시설에서 정성껏 가공하여 전국의 식탁에 전달하고 있습니다.
-                    </span>
-                    <span data-lang="en">
-                        Since 2011, Seopung Fishery Cooperative has been delivering premium seafood 
-                        from the pristine waters of the South Sea, processed with care in our HACCP-certified facility.
-                    </span>
+                    <span data-lang="ko" class="active">2011년 설립 이래, 남해안 청정 해역의 최상급 수산물을 HACCP 인증 시설에서 정성껏 가공하여 전국의 학교와 식탁에 전달하고 있습니다.</span>
+                    <span data-lang="en">Since 2011, we've been delivering the finest seafood from the pristine South Sea waters, processed with care in our HACCP-certified facility.</span>
                 </p>
-                
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <div class="hero-stat-number">15+</div>
-                        <div class="hero-stat-label">
-                            <span data-lang="ko" class="active">년의 노하우</span>
-                            <span data-lang="en">Years Experience</span>
-                        </div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">년의 노하우</span><span data-lang="en">Years Experience</span></div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">356</div>
-                        <div class="hero-stat-label">
-                            <span data-lang="ko" class="active">억원 매출</span>
-                            <span data-lang="en">Billion KRW Revenue</span>
-                        </div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">억원 매출</span><span data-lang="en">Billion KRW</span></div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">29</div>
-                        <div class="hero-stat-label">
-                            <span data-lang="ko" class="active">명의 전문 인력</span>
-                            <span data-lang="en">Expert Staff</span>
-                        </div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">명의 전문 인력</span><span data-lang="en">Expert Staff</span></div>
                     </div>
                 </div>
             </div>
-            
             <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="hero-card-inner">
-                        <div class="hero-card-icon">🌊</div>
-                        <div class="hero-card-title">
-                            <span data-lang="ko" class="active">바다소풍</span>
-                            <span data-lang="en">Bada Sopung</span>
-                        </div>
-                        <div class="hero-card-text">
-                            <span data-lang="ko" class="active">프리미엄 전복 브랜드</span>
-                            <span data-lang="en">Premium Abalone Brand</span>
-                        </div>
-                        <div class="certification-badges">
-                            <span class="cert-badge">HACCP</span>
-                            <span class="cert-badge">
-                                <span data-lang="ko" class="active">학교급식 납품</span>
-                                <span data-lang="en">School Supply</span>
-                            </span>
-                        </div>
+                <div class="hero-image-grid">
+                    <div class="hero-image-card" style="height: 400px;">
+                        <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365.jpg" alt="서풍 공장 전경">
+                        <span class="hero-image-label"><span data-lang="ko" class="active">🏭 HACCP 인증 공장</span><span data-lang="en">🏭 HACCP Facility</span></span>
+                    </div>
+                    <div class="hero-image-card" style="height: 190px;">
+                        <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="고등어 가공">
+                        <span class="hero-image-label"><span data-lang="ko" class="active">🐟 신선 가공</span><span data-lang="en">🐟 Fresh Processing</span></span>
+                    </div>
+                    <div class="hero-image-card" style="height: 190px;">
+                        <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg" alt="참돔">
+                        <span class="hero-image-label"><span data-lang="ko" class="active">🎣 프리미엄 수산물</span><span data-lang="en">🎣 Premium Seafood</span></span>
+                    </div>
+                </div>
+                <div class="certification-floating">
+                    <div class="certification-floating-title">Certified</div>
+                    <div class="certification-badges">
+                        <span class="cert-badge">HACCP</span>
+                        <span class="cert-badge"><span data-lang="ko" class="active">학교급식</span><span data-lang="en">School Supply</span></span>
                     </div>
                 </div>
             </div>
@@ -1122,122 +367,58 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">About Us</span>
-                <h2 class="section-title">
-                    <span data-lang="ko" class="active">회사 소개</span>
-                    <span data-lang="en">About Seopung</span>
-                </h2>
-                <p class="section-desc">
-                    <span data-lang="ko" class="active">
-                        자연의 신선함을 담아 고객에게 최고의 수산물을 제공합니다
-                    </span>
-                    <span data-lang="en">
-                        Delivering nature's freshness with the finest seafood to our customers
-                    </span>
-                </p>
+                <h2 class="section-title"><span data-lang="ko" class="active">회사 소개</span><span data-lang="en">About Seopung</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">자연의 신선함을 담아 고객에게 최고의 수산물을 제공합니다</span><span data-lang="en">Delivering nature's freshness with the finest seafood to our customers</span></p>
             </div>
-
             <div class="about-grid">
-                <div class="about-content">
-                    <h3>
-                        <span data-lang="ko" class="active">"성공은 방향이고, 행복은 과정이다"</span>
-                        <span data-lang="en">"Success is Direction, Happiness is the Journey"</span>
-                    </h3>
-                    <p data-lang="ko" class="active">
-                        영어조합법인 서풍은 전라남도 여수시 화양면에 위치한 수산물 가공 전문 기업입니다. 
-                        남해안의 청정 해역과 인접한 최적의 입지에서, 어업인들의 협동을 기반으로 
-                        고품질 가공 수산물을 생산하고 있습니다.
-                    </p>
-                    <p data-lang="en" class="active">
-                        Seopung Fishery Cooperative is a seafood processing specialist located in Hwayang-myeon, 
-                        Yeosu-si, Jeollanam-do. Situated near the pristine waters of the South Sea, 
-                        we produce high-quality processed seafood based on fishermen's cooperation.
-                    </p>
-                    <p data-lang="ko" class="active">
-                        2023년 기준 매출액 356억 원, 영업이익 22억 원을 달성하며 
-                        10년간 매출 규모를 약 7배 이상 성장시켰습니다. 
-                        여수양지초등학교, 안심초등학교 등 다수의 교육 기관에 
-                        수산물을 납품하고 있습니다.
-                    </p>
-                    <p data-lang="en" class="active">
-                        As of 2023, we achieved revenue of 35.6 billion KRW and operating profit of 2.2 billion KRW, 
-                        growing our sales volume by more than 7 times over 10 years. 
-                        We supply seafood to numerous educational institutions including 
-                        Yeosu Yangji Elementary School.
-                    </p>
-
+                <div class="about-content animate-on-scroll">
+                    <h3><span data-lang="ko" class="active">"성공은 방향이고,<br>행복은 과정이다"</span><span data-lang="en">"Success is Direction,<br>Happiness is the Journey"</span></h3>
+                    <p data-lang="ko" class="active block">영어조합법인 서풍은 전라남도 여수시 화양면에 위치한 수산물 가공 전문 기업입니다. 남해안의 청정 해역과 인접한 최적의 입지에서, 어업인들의 협동을 기반으로 고품질 가공 수산물을 생산하고 있습니다.</p>
+                    <p data-lang="en" class="active block">Seopung Fishery Cooperative is a seafood processing specialist located in Hwayang-myeon, Yeosu-si, Jeollanam-do. Situated near the pristine waters of the South Sea, we produce high-quality processed seafood based on fishermen's cooperation.</p>
+                    <p data-lang="ko" class="active block">2023년 기준 매출액 356억 원, 영업이익 22억 원을 달성하며 10년간 매출 규모를 약 7배 이상 성장시켰습니다.</p>
+                    <p data-lang="en" class="active block">As of 2023, we achieved revenue of 35.6 billion KRW and operating profit of 2.2 billion KRW, growing our sales volume by more than 7 times over 10 years.</p>
                     <div class="about-features grid" data-lang="ko">
-                        <div class="about-feature">
-                            <div class="about-feature-icon">🏭</div>
-                            <div class="about-feature-text">
-                                <h4>HACCP 인증 시설</h4>
-                                <p>여수시 지정 식품안전관리인증 전용 업소</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">❄️</div>
-                            <div class="about-feature-text">
-                                <h4>IQF 급속 냉동</h4>
-                                <p>개별 급속 냉동으로 최상의 선도 유지</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">🏫</div>
-                            <div class="about-feature-text">
-                                <h4>학교 급식 납품</h4>
-                                <p>교육 기관이 신뢰하는 품질</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">📈</div>
-                            <div class="about-feature-text">
-                                <h4>지속적 성장</h4>
-                                <p>10년간 7배 이상 매출 성장</p>
-                            </div>
-                        </div>
+                        <div class="about-feature"><div class="about-feature-icon">🏭</div><div class="about-feature-text"><h4>HACCP 인증 시설</h4><p>여수시 지정 식품안전관리인증 전용 업소</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">❄️</div><div class="about-feature-text"><h4>IQF 급속 냉동</h4><p>개별 급속 냉동으로 최상의 선도 유지</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">🏫</div><div class="about-feature-text"><h4>학교 급식 납품</h4><p>교육 기관이 신뢰하는 품질</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">📈</div><div class="about-feature-text"><h4>지속적 성장</h4><p>10년간 7배 이상 매출 성장</p></div></div>
                     </div>
-
                     <div class="about-features grid" data-lang="en">
-                        <div class="about-feature">
-                            <div class="about-feature-icon">🏭</div>
-                            <div class="about-feature-text">
-                                <h4>HACCP Certified</h4>
-                                <p>Yeosu-designated food safety certified facility</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">❄️</div>
-                            <div class="about-feature-text">
-                                <h4>IQF Technology</h4>
-                                <p>Individual quick freezing for optimal freshness</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">🏫</div>
-                            <div class="about-feature-text">
-                                <h4>School Supply</h4>
-                                <p>Quality trusted by educational institutions</p>
-                            </div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">📈</div>
-                            <div class="about-feature-text">
-                                <h4>Continuous Growth</h4>
-                                <p>7x revenue growth over 10 years</p>
-                            </div>
-                        </div>
+                        <div class="about-feature"><div class="about-feature-icon">🏭</div><div class="about-feature-text"><h4>HACCP Certified</h4><p>Yeosu-designated food safety certified facility</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">❄️</div><div class="about-feature-text"><h4>IQF Technology</h4><p>Individual quick freezing for optimal freshness</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">🏫</div><div class="about-feature-text"><h4>School Supply</h4><p>Quality trusted by educational institutions</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">📈</div><div class="about-feature-text"><h4>Continuous Growth</h4><p>7x revenue growth over 10 years</p></div></div>
                     </div>
                 </div>
-
-                <div class="about-image">
-                    <div class="about-image-main">🐟</div>
+                <div class="about-image animate-on-scroll">
+                    <div class="about-image-main"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365_01.jpg" alt="서풍 공장"></div>
                     <div class="about-image-floating">
                         <div class="about-image-floating-number">2011</div>
-                        <div class="about-image-floating-text">
-                            <span data-lang="ko" class="active">설립년도</span>
-                            <span data-lang="en">Founded</span>
-                        </div>
+                        <div class="about-image-floating-text"><span data-lang="ko" class="active">설립년도</span><span data-lang="en">Founded</span></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Gallery</span>
+                <h2 class="section-title"><span data-lang="ko" class="active">시설 & 가공 현장</span><span data-lang="en">Facility & Processing</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 이루어지는 전문적인 수산물 가공 현장</span><span data-lang="en">Professional seafood processing in our HACCP-certified facility</span></p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item large animate-on-scroll">
+                    <video autoplay muted loop playsinline><source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610660.mp4" type="video/mp4"></video>
+                    <div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">수산물 가공 영상</span><span data-lang="en">Seafood Processing</span></span></div>
+                </div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="고등어 필렛"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">고등어 필렛 가공</span><span data-lang="en">Mackerel Fillet</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_02.jpg" alt="가공 시설"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 시설</span><span data-lang="en">Processing Facility</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_03.jpg" alt="품질 관리"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">품질 관리</span><span data-lang="en">Quality Control</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_04.jpg" alt="신선 수산물"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">신선 수산물</span><span data-lang="en">Fresh Seafood</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_16.jpg" alt="가공 라인"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 라인</span><span data-lang="en">Processing Line</span></span></div></div>
             </div>
         </div>
     </section>
@@ -1247,139 +428,35 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Products</span>
-                <h2 class="section-title">
-                    <span data-lang="ko" class="active">주력 제품</span>
-                    <span data-lang="en">Our Products</span>
-                </h2>
-                <p class="section-desc">
-                    <span data-lang="ko" class="active">
-                        HACCP 인증 시설에서 정성껏 가공한 프리미엄 수산물
-                    </span>
-                    <span data-lang="en">
-                        Premium seafood carefully processed in our HACCP-certified facility
-                    </span>
-                </p>
+                <h2 class="section-title"><span data-lang="ko" class="active">주력 제품</span><span data-lang="en">Our Products</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 정성껏 가공한 프리미엄 수산물</span><span data-lang="en">Premium seafood carefully processed in our HACCP-certified facility</span></p>
             </div>
-
-            <div class="products-grid" data-lang="ko">
-                <div class="product-card">
-                    <div class="product-image">
-                        🐟
-                        <span class="product-badge">베스트셀러</span>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">냉동 가공</div>
-                        <h3 class="product-title">노르웨이 간고등어살 1.3kg</h3>
-                        <p class="product-desc">
-                            노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 
-                            별도 손질 없이 즉시 조리 가능합니다.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">노르웨이산</span>
-                            <span class="product-feature">뼈 제거</span>
-                            <span class="product-feature">대용량</span>
-                        </div>
-                    </div>
+            <div class="products-grid grid" data-lang="ko">
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="노르웨이 간고등어"><span class="product-badge">베스트셀러</span></div>
+                    <div class="product-content"><div class="product-category">냉동 가공</div><h3 class="product-title">노르웨이 간고등어살 1.3kg</h3><p class="product-desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p><div class="product-features"><span class="product-feature">노르웨이산</span><span class="product-feature">뼈 제거</span><span class="product-feature">대용량</span></div></div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        🦑
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">냉동 가공</div>
-                        <h3 class="product-title">손질 오징어 1kg</h3>
-                        <p class="product-desc">
-                            태평양산 원양 오징어를 선상 급속 냉동. 
-                            IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">IQF 냉동</span>
-                            <span class="product-feature">껍질 포함</span>
-                            <span class="product-feature">타우린 보존</span>
-                        </div>
-                    </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="손질 오징어"></div>
+                    <div class="product-content"><div class="product-category">냉동 가공</div><h3 class="product-title">손질 오징어 1kg</h3><p class="product-desc">태평양산 원양 오징어를 선상 급속 냉동. IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.</p><div class="product-features"><span class="product-feature">IQF 냉동</span><span class="product-feature">껍질 포함</span><span class="product-feature">타우린 보존</span></div></div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        🐚
-                        <span class="product-badge">프리미엄</span>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">바다소풍</div>
-                        <h3 class="product-title">참전복 1.4kg (8~10미)</h3>
-                        <p class="product-desc">
-                            여수 청정 해역의 프리미엄 참전복. 
-                            고급 선물용과 보양식에 적합한 특대 사이즈입니다.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">여수산</span>
-                            <span class="product-feature">선물용</span>
-                            <span class="product-feature">특대</span>
-                        </div>
-                    </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg" alt="참전복"><span class="product-badge">프리미엄</span></div>
+                    <div class="product-content"><div class="product-category">바다소풍</div><h3 class="product-title">참전복 1.4kg (8~10미)</h3><p class="product-desc">여수 청정 해역의 프리미엄 참전복. 고급 선물용과 보양식에 적합한 특대 사이즈입니다.</p><div class="product-features"><span class="product-feature">여수산</span><span class="product-feature">선물용</span><span class="product-feature">특대</span></div></div>
                 </div>
             </div>
-
-            <div class="products-grid" data-lang="en">
-                <div class="product-card">
-                    <div class="product-image">
-                        🐟
-                        <span class="product-badge">Best Seller</span>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">Frozen</div>
-                        <h3 class="product-title">Norwegian Mackerel Fillet 1.3kg</h3>
-                        <p class="product-desc">
-                            Norwegian mackerel with bones and organs removed. 
-                            Ready to cook without additional preparation.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">Norwegian</span>
-                            <span class="product-feature">Boneless</span>
-                            <span class="product-feature">Bulk</span>
-                        </div>
-                    </div>
+            <div class="products-grid grid" data-lang="en">
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="Norwegian Mackerel"><span class="product-badge">Best Seller</span></div>
+                    <div class="product-content"><div class="product-category">Frozen</div><h3 class="product-title">Norwegian Mackerel Fillet 1.3kg</h3><p class="product-desc">Norwegian mackerel with bones and organs removed. Ready to cook without additional preparation.</p><div class="product-features"><span class="product-feature">Norwegian</span><span class="product-feature">Boneless</span><span class="product-feature">Bulk</span></div></div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        🦑
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">Frozen</div>
-                        <h3 class="product-title">Cleaned Squid 1kg</h3>
-                        <p class="product-desc">
-                            Pacific squid flash-frozen at sea. 
-                            IQF processed for individual portioning convenience.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">IQF</span>
-                            <span class="product-feature">Skin-on</span>
-                            <span class="product-feature">Taurine Rich</span>
-                        </div>
-                    </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="Cleaned Squid"></div>
+                    <div class="product-content"><div class="product-category">Frozen</div><h3 class="product-title">Cleaned Squid 1kg</h3><p class="product-desc">Pacific squid flash-frozen at sea. IQF processed for individual portioning convenience.</p><div class="product-features"><span class="product-feature">IQF</span><span class="product-feature">Skin-on</span><span class="product-feature">Taurine Rich</span></div></div>
                 </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        🐚
-                        <span class="product-badge">Premium</span>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">Bada Sopung</div>
-                        <h3 class="product-title">Abalone 1.4kg (8-10pcs)</h3>
-                        <p class="product-desc">
-                            Premium abalone from Yeosu's pristine waters. 
-                            Extra-large size perfect for gifts and health cuisine.
-                        </p>
-                        <div class="product-features">
-                            <span class="product-feature">Yeosu Origin</span>
-                            <span class="product-feature">Gift Box</span>
-                            <span class="product-feature">XL Size</span>
-                        </div>
-                    </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg" alt="Abalone"><span class="product-badge">Premium</span></div>
+                    <div class="product-content"><div class="product-category">Bada Sopung</div><h3 class="product-title">Abalone 1.4kg (8-10pcs)</h3><p class="product-desc">Premium abalone from Yeosu's pristine waters. Extra-large size perfect for gifts and health cuisine.</p><div class="product-features"><span class="product-feature">Yeosu Origin</span><span class="product-feature">Gift Box</span><span class="product-feature">XL Size</span></div></div>
                 </div>
             </div>
         </div>
@@ -1390,45 +467,20 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Board</span>
-                <h2 class="section-title">
-                    <span data-lang="ko" class="active">게시판</span>
-                    <span data-lang="en">Notice Board</span>
-                </h2>
-                <p class="section-desc">
-                    <span data-lang="ko" class="active">
-                        서풍의 최신 소식과 공지사항을 확인하세요
-                    </span>
-                    <span data-lang="en">
-                        Check out the latest news and announcements from Seopung
-                    </span>
-                </p>
+                <h2 class="section-title"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Notice Board</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">서풍의 최신 소식과 공지사항을 확인하세요</span><span data-lang="en">Check out the latest news and announcements from Seopung</span></p>
             </div>
-
-            <div class="board-container">
-                <div class="board-tabs">
-                    <button class="board-tab active" data-tab="notice">
-                        <span data-lang="ko" class="active">공지사항</span>
-                        <span data-lang="en">Notice</span>
-                    </button>
-                    <button class="board-tab" data-tab="news">
-                        <span data-lang="ko" class="active">뉴스</span>
-                        <span data-lang="en">News</span>
-                    </button>
-                    <button class="board-tab" data-tab="qna">
-                        <span data-lang="ko" class="active">Q&A</span>
-                        <span data-lang="en">Q&A</span>
-                    </button>
+            <div class="board-container animate-on-scroll">
+                <div class="board-header">
+                    <div class="board-tabs">
+                        <button class="board-tab active" data-tab="notice"><span data-lang="ko" class="active">공지사항</span><span data-lang="en">Notice</span></button>
+                        <button class="board-tab" data-tab="news"><span data-lang="ko" class="active">뉴스</span><span data-lang="en">News</span></button>
+                        <button class="board-tab" data-tab="qna"><span data-lang="ko" class="active">Q&A</span><span data-lang="en">Q&A</span></button>
+                    </div>
+                    <button class="board-write-btn" onclick="openWriteModal()"><span>✏️</span><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write</span></button>
                 </div>
-
-                <div class="board-list" id="board-list">
-                    <!-- Board items will be populated by JavaScript -->
-                </div>
-
-                <div class="board-pagination">
-                    <button class="board-page active">1</button>
-                    <button class="board-page">2</button>
-                    <button class="board-page">3</button>
-                </div>
+                <div class="board-list" id="board-list"></div>
+                <div class="board-pagination" id="board-pagination"></div>
             </div>
         </div>
     </section>
@@ -1438,62 +490,14 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Contact</span>
-                <h2 class="section-title">
-                    <span data-lang="ko" class="active">연락처</span>
-                    <span data-lang="en">Contact Us</span>
-                </h2>
-                <p class="section-desc">
-                    <span data-lang="ko" class="active">
-                        제품 문의 및 대량 주문 상담을 환영합니다
-                    </span>
-                    <span data-lang="en">
-                        We welcome product inquiries and bulk order consultations
-                    </span>
-                </p>
+                <h2 class="section-title"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact Us</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">언제든지 문의해 주세요. 친절히 안내해 드리겠습니다.</span><span data-lang="en">Feel free to contact us. We'll be happy to assist you.</span></p>
             </div>
-
             <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-label">
-                        <span data-lang="ko" class="active">전화</span>
-                        <span data-lang="en">Phone</span>
-                    </div>
-                    <div class="contact-value">061-681-5171</div>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">📠</div>
-                    <div class="contact-label">
-                        <span data-lang="ko" class="active">팩스</span>
-                        <span data-lang="en">Fax</span>
-                    </div>
-                    <div class="contact-value">061-681-5173</div>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-label">
-                        <span data-lang="ko" class="active">주소</span>
-                        <span data-lang="en">Address</span>
-                    </div>
-                    <div class="contact-value">
-                        <span data-lang="ko" class="active">전라남도 여수시 화양면 석교로 121</span>
-                        <span data-lang="en">121 Seokgyo-ro, Hwayang-myeon, Yeosu-si</span>
-                    </div>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-icon">🕐</div>
-                    <div class="contact-label">
-                        <span data-lang="ko" class="active">운영시간</span>
-                        <span data-lang="en">Hours</span>
-                    </div>
-                    <div class="contact-value">
-                        <span data-lang="ko" class="active">평일 09:00 - 18:00</span>
-                        <span data-lang="en">Mon-Fri 09:00 - 18:00</span>
-                    </div>
-                </div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📍</div><div class="contact-label"><span data-lang="ko" class="active">주소</span><span data-lang="en">Address</span></div><div class="contact-value"><span data-lang="ko" class="active">전라남도 여수시<br>화양면 석교로 121</span><span data-lang="en">121 Seokgyo-ro,<br>Hwayang-myeon, Yeosu-si</span></div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📞</div><div class="contact-label"><span data-lang="ko" class="active">전화</span><span data-lang="en">Phone</span></div><div class="contact-value">061-681-5171</div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📠</div><div class="contact-label"><span data-lang="ko" class="active">팩스</span><span data-lang="en">Fax</span></div><div class="contact-value">061-681-5173</div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">🕐</div><div class="contact-label"><span data-lang="ko" class="active">운영시간</span><span data-lang="en">Hours</span></div><div class="contact-value"><span data-lang="ko" class="active">월-금 09:00 - 18:00</span><span data-lang="en">Mon-Fri 09:00 - 18:00</span></div></div>
             </div>
         </div>
     </section>
@@ -1503,264 +507,270 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <h3>
-                        <span data-lang="ko" class="active">영어조합법인 서풍</span>
-                        <span data-lang="en">Seopung Fishery Cooperative</span>
-                    </h3>
-                    <p data-lang="ko" class="active">
-                        자연의 신선함을 담아 고객에게 최고의 수산물을 제공합니다.<br>
-                        여수의 맛, 서풍이 전합니다.
-                    </p>
-                    <p data-lang="en" class="active">
-                        Delivering nature's freshness with the finest seafood.<br>
-                        The taste of Yeosu, delivered by Seopung.
-                    </p>
+                    <h3><span data-lang="ko" class="active">영어조합법인 서풍</span><span data-lang="en">Seopung Fishery</span></h3>
+                    <p data-lang="ko" class="active block">전라남도 여수시 화양면 석교로 121에서 2011년부터 최상급 수산물을 가공해 온 HACCP 인증 전문 기업입니다.</p>
+                    <p data-lang="en" class="active block">A HACCP-certified seafood processing specialist based in Yeosu, South Korea since 2011.</p>
                 </div>
-
                 <div class="footer-links">
-                    <h4>
-                        <span data-lang="ko" class="active">바로가기</span>
-                        <span data-lang="en">Quick Links</span>
-                    </h4>
+                    <h4><span data-lang="ko" class="active">바로가기</span><span data-lang="en">Quick Links</span></h4>
                     <ul>
-                        <li><a href="#about">
-                            <span data-lang="ko" class="active">회사소개</span>
-                            <span data-lang="en">About</span>
-                        </a></li>
-                        <li><a href="#products">
-                            <span data-lang="ko" class="active">제품</span>
-                            <span data-lang="en">Products</span>
-                        </a></li>
-                        <li><a href="#board">
-                            <span data-lang="ko" class="active">게시판</span>
-                            <span data-lang="en">Board</span>
-                        </a></li>
-                        <li><a href="#contact">
-                            <span data-lang="ko" class="active">연락처</span>
-                            <span data-lang="en">Contact</span>
-                        </a></li>
+                        <li><a href="#about"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a></li>
+                        <li><a href="#board"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a></li>
+                        <li><a href="#contact"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a></li>
                     </ul>
                 </div>
-
                 <div class="footer-links">
-                    <h4>
-                        <span data-lang="ko" class="active">제품</span>
-                        <span data-lang="en">Products</span>
-                    </h4>
+                    <h4><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></h4>
                     <ul>
-                        <li><a href="#products">
-                            <span data-lang="ko" class="active">노르웨이 간고등어</span>
-                            <span data-lang="en">Norwegian Mackerel</span>
-                        </a></li>
-                        <li><a href="#products">
-                            <span data-lang="ko" class="active">손질 오징어</span>
-                            <span data-lang="en">Cleaned Squid</span>
-                        </a></li>
-                        <li><a href="#products">
-                            <span data-lang="ko" class="active">바다소풍 전복</span>
-                            <span data-lang="en">Bada Sopung Abalone</span>
-                        </a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">노르웨이 간고등어</span><span data-lang="en">Norwegian Mackerel</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">손질 오징어</span><span data-lang="en">Cleaned Squid</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">바다소풍 전복</span><span data-lang="en">Bada Sopung Abalone</span></a></li>
                     </ul>
                 </div>
-
                 <div class="footer-links">
-                    <h4>
-                        <span data-lang="ko" class="active">인증</span>
-                        <span data-lang="en">Certifications</span>
-                    </h4>
+                    <h4><span data-lang="ko" class="active">인증</span><span data-lang="en">Certifications</span></h4>
                     <ul>
                         <li><a href="#">HACCP</a></li>
-                        <li><a href="#">
-                            <span data-lang="ko" class="active">학교급식 납품업체</span>
-                            <span data-lang="en">School Supply Certified</span>
-                        </a></li>
+                        <li><a href="#"><span data-lang="ko" class="active">학교급식 납품업체</span><span data-lang="en">School Supply Certified</span></a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <div>
-                    <span data-lang="ko" class="active">
-                        © 2024 영어조합법인 서풍. All rights reserved. | 사업자등록번호: 417-81-41979 | 대표: 서순심 | 통신판매업: 2011-전남여수-0128
-                    </span>
-                    <span data-lang="en" class="active">
-                        © 2024 Seopung Fishery Cooperative. All rights reserved. | Business No: 417-81-41979 | CEO: Seo Soon-sim
-                    </span>
+                    <span data-lang="ko" class="active">© 2024 영어조합법인 서풍. All rights reserved. | 사업자등록번호: 417-81-41979 | 대표: 서순심</span>
+                    <span data-lang="en">© 2024 Seopung Fishery Cooperative. All rights reserved. | Business No: 417-81-41979</span>
                 </div>
                 <div class="footer-legal">
-                    <a href="#">
-                        <span data-lang="ko" class="active">개인정보처리방침</span>
-                        <span data-lang="en">Privacy Policy</span>
-                    </a>
-                    <a href="#">
-                        <span data-lang="ko" class="active">이용약관</span>
-                        <span data-lang="en">Terms of Service</span>
-                    </a>
+                    <a href="#"><span data-lang="ko" class="active">개인정보처리방침</span><span data-lang="en">Privacy Policy</span></a>
+                    <a href="#"><span data-lang="ko" class="active">이용약관</span><span data-lang="en">Terms of Service</span></a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Write Modal -->
+    <div class="modal-overlay" id="writeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title"><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write Post</span></h3>
+                <button class="modal-close" onclick="closeWriteModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><span data-lang="ko" class="active">게시판 선택</span><span data-lang="en">Board Type</span></label>
+                        <select class="form-select" id="write-board">
+                            <option value="notice" data-lang="ko" class="active">공지사항</option>
+                            <option value="news" data-lang="ko" class="active">뉴스</option>
+                            <option value="qna" data-lang="ko" class="active">Q&A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><span data-lang="ko" class="active">카테고리</span><span data-lang="en">Category</span></label>
+                        <input type="text" class="form-input" id="write-category" placeholder="카테고리 입력">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">제목</span><span data-lang="en">Title</span></label>
+                    <input type="text" class="form-input" id="write-title" placeholder="제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span data-lang="ko" class="active">내용</span><span data-lang="en">Content</span></label>
+                    <textarea class="form-textarea" id="write-content" placeholder="내용을 입력하세요"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeWriteModal()"><span data-lang="ko" class="active">취소</span><span data-lang="en">Cancel</span></button>
+                <button class="btn btn-primary" onclick="submitPost()"><span data-lang="ko" class="active">등록</span><span data-lang="en">Submit</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Modal -->
+    <div class="modal-overlay" id="viewModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="view-title"></h3>
+                <button class="modal-close" onclick="closeViewModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="view-modal-meta">
+                    <span class="view-modal-category" id="view-category"></span>
+                    <span class="view-modal-date" id="view-date"></span>
+                </div>
+                <div class="view-modal-body" id="view-content"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeViewModal()"><span data-lang="ko" class="active">닫기</span><span data-lang="en">Close</span></button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Language Toggle
         let currentLang = 'ko';
-
         function setLanguage(lang) {
             currentLang = lang;
-            
-            // Update language buttons
-            document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.langBtn === lang);
-            });
-            
-            // Update all language elements
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.classList.toggle('active', el.dataset.lang === lang);
-            });
-
-            // Update HTML lang attribute
+            document.querySelectorAll('[data-lang-btn]').forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
+            document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
             document.documentElement.lang = lang;
+            renderBoard();
         }
+        document.querySelectorAll('[data-lang-btn]').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
 
-        // Language button click handlers
-        document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                setLanguage(btn.dataset.langBtn);
-            });
-        });
-
-        // Initialize language
-        setLanguage('ko');
-
-        // Navigation scroll effect
+        // Navigation
         const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
-        // Board Data
-        const boardData = {
-            notice: {
-                ko: [
-                    { id: 1, title: '2024년 설 연휴 배송 안내', category: '배송', date: '2024.01.15' },
-                    { id: 2, title: 'HACCP 재인증 완료 안내', category: '인증', date: '2024.01.10' },
-                    { id: 3, title: '홈페이지 리뉴얼 오픈 안내', category: '공지', date: '2024.01.05' },
-                    { id: 4, title: '바다소풍 전복 신규 라인업 출시', category: '제품', date: '2024.01.02' },
-                    { id: 5, title: '2024년 신년 인사', category: '공지', date: '2024.01.01' },
-                ],
-                en: [
-                    { id: 1, title: 'Lunar New Year Shipping Notice 2024', category: 'Shipping', date: '2024.01.15' },
-                    { id: 2, title: 'HACCP Recertification Complete', category: 'Cert', date: '2024.01.10' },
-                    { id: 3, title: 'Website Renewal Launch', category: 'Notice', date: '2024.01.05' },
-                    { id: 4, title: 'New Bada Sopung Abalone Lineup', category: 'Product', date: '2024.01.02' },
-                    { id: 5, title: 'New Year Greetings 2024', category: 'Notice', date: '2024.01.01' },
-                ]
-            },
-            news: {
-                ko: [
-                    { id: 1, title: '서풍, 2023년 매출 356억 달성', category: '실적', date: '2024.01.12' },
-                    { id: 2, title: '여수시 우수기업 표창 수상', category: '수상', date: '2024.01.08' },
-                    { id: 3, title: '노르웨이 수산물 박람회 참가', category: '행사', date: '2023.12.20' },
-                    { id: 4, title: '학교급식 납품 실적 1위 달성', category: '실적', date: '2023.12.15' },
-                    { id: 5, title: '친환경 포장재 도입 추진', category: 'ESG', date: '2023.12.10' },
-                ],
-                en: [
-                    { id: 1, title: 'Seopung Achieves 35.6B KRW Revenue in 2023', category: 'Results', date: '2024.01.12' },
-                    { id: 2, title: 'Yeosu Outstanding Enterprise Award', category: 'Award', date: '2024.01.08' },
-                    { id: 3, title: 'Norway Seafood Expo Participation', category: 'Event', date: '2023.12.20' },
-                    { id: 4, title: '#1 School Meal Supply Achievement', category: 'Results', date: '2023.12.15' },
-                    { id: 5, title: 'Eco-friendly Packaging Initiative', category: 'ESG', date: '2023.12.10' },
-                ]
-            },
-            qna: {
-                ko: [
-                    { id: 1, title: '대량 주문 시 할인이 가능한가요?', category: '주문', date: '2024.01.14' },
-                    { id: 2, title: '해외 배송 가능 여부 문의', category: '배송', date: '2024.01.11' },
-                    { id: 3, title: '전복 크기별 추천 용도', category: '제품', date: '2024.01.09' },
-                    { id: 4, title: '냉동 수산물 보관 방법', category: '보관', date: '2024.01.06' },
-                    { id: 5, title: 'OEM/ODM 생산 가능 여부', category: '제휴', date: '2024.01.03' },
-                ],
-                en: [
-                    { id: 1, title: 'Bulk order discount available?', category: 'Order', date: '2024.01.14' },
-                    { id: 2, title: 'International shipping inquiry', category: 'Shipping', date: '2024.01.11' },
-                    { id: 3, title: 'Recommended uses by abalone size', category: 'Product', date: '2024.01.09' },
-                    { id: 4, title: 'Frozen seafood storage tips', category: 'Storage', date: '2024.01.06' },
-                    { id: 5, title: 'OEM/ODM production inquiry', category: 'Partner', date: '2024.01.03' },
-                ]
-            }
+        // Mobile Menu
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('active'); }
+
+        // Board Data with localStorage
+        const defaultBoardData = {
+            notice: { ko: [
+                { id: 1, title: '2024년 설 연휴 배송 안내', category: '배송', date: '2024.01.15', content: '2024년 설 연휴 기간 동안 배송이 지연될 수 있습니다.\n\n설 연휴: 2월 9일(금) ~ 2월 12일(월)\n\n연휴 전 마지막 배송: 2월 8일(목) 출고 건까지\n연휴 후 배송 재개: 2월 13일(화)부터\n\n미리 주문해 주시면 연휴 전에 신선한 수산물을 받아보실 수 있습니다.' },
+                { id: 2, title: 'HACCP 재인증 완료 안내', category: '인증', date: '2024.01.10', content: '영어조합법인 서풍은 2024년 HACCP(식품안전관리인증) 재인증을 성공적으로 완료하였습니다.\n\n인증 범위: 냉동수산식품(어류, 연체류)\n인증 유효기간: 2024년 1월 ~ 2027년 1월\n\n앞으로도 안전하고 신선한 수산물 제공을 위해 최선을 다하겠습니다.' },
+                { id: 3, title: '홈페이지 리뉴얼 오픈 안내', category: '공지', date: '2024.01.05', content: '영어조합법인 서풍 공식 홈페이지가 새롭게 리뉴얼되었습니다.\n\n주요 변경사항:\n- 모바일 최적화 디자인\n- 게시판 글쓰기 기능 추가\n- 제품 갤러리 확대\n\n더 나은 서비스로 찾아뵙겠습니다.' },
+                { id: 4, title: '바다소풍 전복 신규 라인업 출시', category: '제품', date: '2024.01.02', content: '바다소풍 브랜드의 신규 전복 제품 라인업을 소개합니다.\n\n1. 프리미엄 특대 전복 (8~10미/1.4kg)\n2. 선물용 전복 세트 (12~14미/1.4kg)\n3. 가정용 중 전복 (16~18미/1.4kg)\n\n모든 제품은 여수 청정 해역에서 양식된 최상급 전복입니다.' }
+            ], en: [
+                { id: 1, title: 'Lunar New Year Shipping Notice 2024', category: 'Shipping', date: '2024.01.15', content: 'Shipping may be delayed during the Lunar New Year holiday period.\n\nHoliday Period: Feb 9-12\nLast Shipment: Orders processed by Feb 8\nShipment Resume: Feb 13' },
+                { id: 2, title: 'HACCP Recertification Complete', category: 'Cert', date: '2024.01.10', content: 'Seopung Fishery has successfully completed HACCP recertification for 2024.\n\nScope: Frozen seafood (fish, mollusks)\nValidity: Jan 2024 - Jan 2027' },
+                { id: 3, title: 'Website Renewal Launch', category: 'Notice', date: '2024.01.05', content: 'Our official website has been renewed with mobile-optimized design, new board writing features, and expanded product gallery.' },
+                { id: 4, title: 'New Bada Sopung Abalone Lineup', category: 'Product', date: '2024.01.02', content: 'Introducing new Bada Sopung abalone product lineup featuring premium extra-large, gift set, and home-use sizes.' }
+            ]},
+            news: { ko: [
+                { id: 1, title: '서풍, 2023년 매출 356억 달성', category: '실적', date: '2024.01.12', content: '영어조합법인 서풍이 2023년 매출 356억 원을 달성하며 역대 최고 실적을 기록했습니다.\n\n영업이익: 22억 원\n전년 대비 성장률: 15%\n\n2013년 대비 약 7배 이상의 성장을 이루어냈습니다.' },
+                { id: 2, title: '여수시 우수기업 표창 수상', category: '수상', date: '2024.01.08', content: '영어조합법인 서풍이 여수시 우수기업 표창을 수상하였습니다.\n\n수상 이유: 지역 경제 발전 기여, 일자리 창출, 품질 경영 우수' },
+                { id: 3, title: '노르웨이 수산물 박람회 참가', category: '행사', date: '2023.12.20', content: '서풍이 노르웨이 베르겐에서 열린 국제 수산물 박람회에 참가하였습니다.\n\n노르웨이산 고등어 공급업체와 장기 계약을 체결하여 안정적인 원료 확보에 성공했습니다.' }
+            ], en: [
+                { id: 1, title: 'Seopung Achieves 35.6B KRW Revenue in 2023', category: 'Results', date: '2024.01.12', content: 'Seopung Fishery achieved record-breaking revenue of 35.6 billion KRW in 2023, with operating profit of 2.2 billion KRW.' },
+                { id: 2, title: 'Yeosu Outstanding Enterprise Award', category: 'Award', date: '2024.01.08', content: 'Seopung received the Outstanding Enterprise Award from Yeosu City for contribution to local economy and job creation.' },
+                { id: 3, title: 'Norway Seafood Expo Participation', category: 'Event', date: '2023.12.20', content: 'Seopung participated in the International Seafood Expo in Bergen, Norway, securing long-term supply contracts.' }
+            ]},
+            qna: { ko: [
+                { id: 1, title: '대량 주문 시 할인이 가능한가요?', category: '주문', date: '2024.01.14', content: '네, 대량 주문 시 수량에 따라 할인이 가능합니다.\n\n- 100만 원 이상: 5% 할인\n- 300만 원 이상: 8% 할인\n- 500만 원 이상: 별도 협의\n\n자세한 내용은 061-681-5171로 문의 주세요.' },
+                { id: 2, title: '해외 배송 가능 여부 문의', category: '배송', date: '2024.01.11', content: '현재 해외 배송은 지원하지 않습니다.\n\n국내 배송만 가능하며, 전국 택배 및 새벽 배송 서비스를 제공하고 있습니다.' },
+                { id: 3, title: '전복 크기별 추천 용도', category: '제품', date: '2024.01.09', content: '전복 크기별 추천 용도입니다.\n\n- 특대 (8~10미): 선물용, 고급 요리\n- 대 (12~14미): 선물용, 찜 요리\n- 중 (16~18미): 가정용, 죽, 버터구이\n- 소 (20미 이상): 가정용, 죽' }
+            ], en: [
+                { id: 1, title: 'Bulk order discount available?', category: 'Order', date: '2024.01.14', content: 'Yes, bulk order discounts are available based on quantity. Please contact us at 061-681-5171 for details.' },
+                { id: 2, title: 'International shipping inquiry', category: 'Shipping', date: '2024.01.11', content: 'Currently, we only support domestic shipping within South Korea.' },
+                { id: 3, title: 'Recommended uses by abalone size', category: 'Product', date: '2024.01.09', content: 'XL (8-10pcs): Gifts, premium dishes\nL (12-14pcs): Gifts, steamed dishes\nM (16-18pcs): Home use, porridge, butter grilling' }
+            ]}
         };
 
+        function getBoardData() {
+            const saved = localStorage.getItem('seopungBoardData');
+            return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultBoardData));
+        }
+        function saveBoardData(data) { localStorage.setItem('seopungBoardData', JSON.stringify(data)); }
+
+        let boardData = getBoardData();
         let currentTab = 'notice';
+        let currentPage = 1;
+        const itemsPerPage = 5;
 
         function renderBoard() {
             const boardList = document.getElementById('board-list');
             const items = boardData[currentTab][currentLang];
+            const start = (currentPage - 1) * itemsPerPage;
+            const paginatedItems = items.slice(start, start + itemsPerPage);
             
-            boardList.innerHTML = items.map((item, index) => `
-                <div class="board-item">
-                    <div class="board-item-number">${String(item.id).padStart(2, '0')}</div>
+            boardList.innerHTML = paginatedItems.map((item, index) => `
+                <div class="board-item" onclick="viewPost(${item.id})">
+                    <div class="board-item-number">${String(start + index + 1).padStart(2, '0')}</div>
                     <div class="board-item-title">${item.title}</div>
                     <div class="board-item-category">${item.category}</div>
                     <div class="board-item-date">${item.date}</div>
                 </div>
             `).join('');
+
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            document.getElementById('board-pagination').innerHTML = Array.from({length: totalPages}, (_, i) => 
+                `<button class="board-page ${i + 1 === currentPage ? 'active' : ''}" onclick="goToPage(${i + 1})">${i + 1}</button>`
+            ).join('');
         }
 
-        // Board tab click handlers
+        function goToPage(page) { currentPage = page; renderBoard(); }
+
         document.querySelectorAll('.board-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.board-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 currentTab = tab.dataset.tab;
+                currentPage = 1;
                 renderBoard();
             });
         });
 
-        // Update board when language changes
-        const originalSetLanguage = setLanguage;
-        setLanguage = function(lang) {
-            originalSetLanguage(lang);
+        // Write Modal
+        function openWriteModal() { document.getElementById('writeModal').classList.add('active'); }
+        function closeWriteModal() { 
+            document.getElementById('writeModal').classList.remove('active'); 
+            document.getElementById('write-title').value = '';
+            document.getElementById('write-content').value = '';
+            document.getElementById('write-category').value = '';
+        }
+
+        function submitPost() {
+            const board = document.getElementById('write-board').value;
+            const title = document.getElementById('write-title').value.trim();
+            const content = document.getElementById('write-content').value.trim();
+            const category = document.getElementById('write-category').value.trim() || (currentLang === 'ko' ? '일반' : 'General');
+
+            if (!title || !content) {
+                alert(currentLang === 'ko' ? '제목과 내용을 입력해주세요.' : 'Please enter title and content.');
+                return;
+            }
+
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+            const newId = Math.max(...boardData[board].ko.map(i => i.id), 0) + 1;
+
+            const newPost = { id: newId, title, category, date: dateStr, content };
+            boardData[board].ko.unshift(newPost);
+            boardData[board].en.unshift(newPost);
+            saveBoardData(boardData);
+
+            currentTab = board;
+            currentPage = 1;
+            document.querySelectorAll('.board-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === board));
             renderBoard();
-        };
+            closeWriteModal();
+            alert(currentLang === 'ko' ? '글이 등록되었습니다.' : 'Post submitted successfully.');
+        }
 
-        // Initial render
-        renderBoard();
+        // View Modal
+        function viewPost(id) {
+            const item = boardData[currentTab][currentLang].find(i => i.id === id);
+            if (item) {
+                document.getElementById('view-title').textContent = item.title;
+                document.getElementById('view-category').textContent = item.category;
+                document.getElementById('view-date').textContent = item.date;
+                document.getElementById('view-content').textContent = item.content;
+                document.getElementById('viewModal').classList.add('active');
+            }
+        }
+        function closeViewModal() { document.getElementById('viewModal').classList.remove('active'); }
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Scroll Animation
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.product-card, .contact-card, .about-feature').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        // Initialize
+        setLanguage('ko');
     </script>
 </body>
 </html>
