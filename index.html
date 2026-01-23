@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영어조합법인 서풍 | Seopung Fishery Cooperative</title>
-    <meta name="description" content="여수의 신선함을 식탁으로 - 15년 노하우의 프리미엄 수산물 가공 전문 기업">
+    <title>영어조합법인 서풍 | Seopung Fishery Cooperative | 西風水産</title>
+    <meta name="description" content="신뢰로써 공존하는 기업 - 여수의 신선함을 식탁으로, 15년 노하우의 프리미엄 수산물 가공 전문 기업">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-deep: #0a1628;
@@ -46,7 +46,7 @@
         .nav-link:hover { color: var(--primary-ocean); }
         .nav-link:hover::after { width: 100%; }
         .lang-toggle { display: flex; gap: 4px; padding: 6px 8px; background: var(--light-cream); border-radius: 30px; }
-        .lang-btn { background: none; border: none; font-size: 13px; font-weight: 600; cursor: pointer; padding: 8px 16px; border-radius: 24px; transition: var(--transition); font-family: inherit; color: var(--text-muted); }
+        .lang-btn { background: none; border: none; font-size: 12px; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 24px; transition: var(--transition); font-family: inherit; color: var(--text-muted); }
         .lang-btn.active { background: var(--primary-deep); color: var(--white); }
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 28px; cursor: pointer; padding: 8px; color: var(--primary-deep); }
         .mobile-menu { display: none; position: fixed; top: 90px; left: 0; right: 0; background: var(--white); padding: 24px; box-shadow: var(--shadow-medium); z-index: 999; }
@@ -252,13 +252,13 @@
 
         /* Language Toggle */
         [data-lang] { display: none; }
-        [data-lang="ko"].active, [data-lang="en"].active { display: inline; }
+        [data-lang="ko"].active, [data-lang="en"].active, [data-lang="ja"].active { display: inline; }
         .block[data-lang] { display: none; }
-        .block[data-lang="ko"].active, .block[data-lang="en"].active { display: block; }
+        .block[data-lang="ko"].active, .block[data-lang="en"].active, .block[data-lang="ja"].active { display: block; }
         .flex[data-lang] { display: none; }
-        .flex[data-lang="ko"].active, .flex[data-lang="en"].active { display: flex; }
+        .flex[data-lang="ko"].active, .flex[data-lang="en"].active, .flex[data-lang="ja"].active { display: flex; }
         .grid[data-lang] { display: none; }
-        .grid[data-lang="ko"].active, .grid[data-lang="en"].active { display: grid; }
+        .grid[data-lang="ko"].active, .grid[data-lang="en"].active, .grid[data-lang="ja"].active { display: grid; }
         .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
     </style>
@@ -268,33 +268,35 @@
     <nav class="nav" id="nav">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon">🐟</div>
+                <div class="logo-icon"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Refined%20Original%20Logo.png" alt="서풍 로고" style="width:100%;height:100%;object-fit:contain;"></div>
                 <div class="logo-text">
                     <span class="logo-main" data-lang="ko" class="active">영어조합법인 서풍</span>
                     <span class="logo-main" data-lang="en">Seopung Fishery</span>
-                    <span class="logo-sub">Since 2011</span>
+                    <span class="logo-main" data-lang="ja">西風水産</span>
+                    <span class="logo-sub">신뢰로써 공존하는 기업</span>
                 </div>
             </a>
             <div class="nav-links">
-                <a href="#about" class="nav-link"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a>
-                <a href="#gallery" class="nav-link"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span></a>
-                <a href="#products" class="nav-link"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a>
-                <a href="#board" class="nav-link"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a>
-                <a href="#contact" class="nav-link"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a>
+                <a href="#about" class="nav-link"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span><span data-lang="ja">会社紹介</span></a>
+                <a href="#gallery" class="nav-link"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span><span data-lang="ja">ギャラリー</span></a>
+                <a href="#products" class="nav-link"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a>
+                <a href="#board" class="nav-link"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></a>
+                <a href="#contact" class="nav-link"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">お問い合わせ</span></a>
                 <div class="lang-toggle">
                     <button class="lang-btn active" data-lang-btn="ko">KO</button>
                     <button class="lang-btn" data-lang-btn="en">EN</button>
+                    <button class="lang-btn" data-lang-btn="ja">JA</button>
                 </div>
             </div>
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#about" onclick="closeMobileMenu()"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a>
-        <a href="#gallery" onclick="closeMobileMenu()"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span></a>
-        <a href="#products" onclick="closeMobileMenu()"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a>
-        <a href="#board" onclick="closeMobileMenu()"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a>
-        <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a>
+        <a href="#about" onclick="closeMobileMenu()"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span><span data-lang="ja">会社紹介</span></a>
+        <a href="#gallery" onclick="closeMobileMenu()"><span data-lang="ko" class="active">갤러리</span><span data-lang="en">Gallery</span><span data-lang="ja">ギャラリー</span></a>
+        <a href="#products" onclick="closeMobileMenu()"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a>
+        <a href="#board" onclick="closeMobileMenu()"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></a>
+        <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">お問い合わせ</span></a>
     </div>
 
     <!-- Hero Section -->
@@ -310,29 +312,32 @@
             <div class="hero-text">
                 <div class="hero-badge">
                     <span class="hero-badge-dot"></span>
-                    <span data-lang="ko" class="active">HACCP 인증 전문 업소</span>
-                    <span data-lang="en">HACCP Certified Facility</span>
+                    <span data-lang="ko" class="active">신뢰로써 공존하는 기업</span>
+                    <span data-lang="en">A Company Coexisting Through Trust</span>
+                    <span data-lang="ja">信頼で共存する企業</span>
                 </div>
                 <h1 class="hero-title">
                     <span data-lang="ko" class="active">여수 청정 해역의<br><span class="hero-title-accent">신선함</span>을 담다</span>
                     <span data-lang="en"><span class="hero-title-accent">Premium</span> Seafood<br>from Yeosu Waters</span>
+                    <span data-lang="ja">麗水の<span class="hero-title-accent">新鮮さ</span>を<br>お届けします</span>
                 </h1>
                 <p class="hero-desc">
                     <span data-lang="ko" class="active">2011년 설립 이래, 남해안 청정 해역의 최상급 수산물을 HACCP 인증 시설에서 정성껏 가공하여 전국의 학교와 식탁에 전달하고 있습니다.</span>
                     <span data-lang="en">Since 2011, we've been delivering the finest seafood from the pristine South Sea waters, processed with care in our HACCP-certified facility.</span>
+                    <span data-lang="ja">2011年の設立以来、南海岸の清浄海域から最高級の水産物をHACCP認証施設で丁寧に加工し、全国の学校や食卓にお届けしています。</span>
                 </p>
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <div class="hero-stat-number">15+</div>
-                        <div class="hero-stat-label"><span data-lang="ko" class="active">년의 노하우</span><span data-lang="en">Years Experience</span></div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">년의 노하우</span><span data-lang="en">Years Experience</span><span data-lang="ja">年のノウハウ</span></div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">356</div>
-                        <div class="hero-stat-label"><span data-lang="ko" class="active">억원 매출</span><span data-lang="en">Billion KRW</span></div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">억원 매출</span><span data-lang="en">Billion KRW</span><span data-lang="ja">億ウォン売上</span></div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">29</div>
-                        <div class="hero-stat-label"><span data-lang="ko" class="active">명의 전문 인력</span><span data-lang="en">Expert Staff</span></div>
+                        <div class="hero-stat-label"><span data-lang="ko" class="active">명의 전문 인력</span><span data-lang="en">Expert Staff</span><span data-lang="ja">名の専門スタッフ</span></div>
                     </div>
                 </div>
             </div>
@@ -340,22 +345,22 @@
                 <div class="hero-image-grid">
                     <div class="hero-image-card" style="height: 400px;">
                         <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365.jpg" alt="서풍 공장 전경">
-                        <span class="hero-image-label"><span data-lang="ko" class="active">🏭 HACCP 인증 공장</span><span data-lang="en">🏭 HACCP Facility</span></span>
+                        <span class="hero-image-label"><span data-lang="ko" class="active">🏭 HACCP 인증 공장</span><span data-lang="en">🏭 HACCP Facility</span><span data-lang="ja">🏭 HACCP認証工場</span></span>
                     </div>
                     <div class="hero-image-card" style="height: 190px;">
                         <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="고등어 가공">
-                        <span class="hero-image-label"><span data-lang="ko" class="active">🐟 신선 가공</span><span data-lang="en">🐟 Fresh Processing</span></span>
+                        <span class="hero-image-label"><span data-lang="ko" class="active">🐟 신선 가공</span><span data-lang="en">🐟 Fresh Processing</span><span data-lang="ja">🐟 新鮮加工</span></span>
                     </div>
                     <div class="hero-image-card" style="height: 190px;">
-                        <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg" alt="참돔">
-                        <span class="hero-image-label"><span data-lang="ko" class="active">🎣 프리미엄 수산물</span><span data-lang="en">🎣 Premium Seafood</span></span>
+                        <img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Trusted%20Representative%20Update.png" alt="대표이사">
+                        <span class="hero-image-label"><span data-lang="ko" class="active">👤 대표이사</span><span data-lang="en">👤 CEO</span><span data-lang="ja">👤 代表取締役</span></span>
                     </div>
                 </div>
                 <div class="certification-floating">
                     <div class="certification-floating-title">Certified</div>
                     <div class="certification-badges">
                         <span class="cert-badge">HACCP</span>
-                        <span class="cert-badge"><span data-lang="ko" class="active">학교급식</span><span data-lang="en">School Supply</span></span>
+                        <span class="cert-badge"><span data-lang="ko" class="active">학교급식</span><span data-lang="en">School Supply</span><span data-lang="ja">学校給食</span></span>
                     </div>
                 </div>
             </div>
@@ -367,16 +372,18 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">About Us</span>
-                <h2 class="section-title"><span data-lang="ko" class="active">회사 소개</span><span data-lang="en">About Seopung</span></h2>
-                <p class="section-desc"><span data-lang="ko" class="active">자연의 신선함을 담아 고객에게 최고의 수산물을 제공합니다</span><span data-lang="en">Delivering nature's freshness with the finest seafood to our customers</span></p>
+                <h2 class="section-title"><span data-lang="ko" class="active">회사 소개</span><span data-lang="en">About Seopung</span><span data-lang="ja">会社紹介</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">신뢰로써 공존하는 기업, 고객에게 최고의 수산물을 제공합니다</span><span data-lang="en">A company coexisting through trust, delivering the finest seafood</span><span data-lang="ja">信頼で共存する企業、お客様に最高の水産物をお届けします</span></p>
             </div>
             <div class="about-grid">
                 <div class="about-content animate-on-scroll">
-                    <h3><span data-lang="ko" class="active">"성공은 방향이고,<br>행복은 과정이다"</span><span data-lang="en">"Success is Direction,<br>Happiness is the Journey"</span></h3>
+                    <h3><span data-lang="ko" class="active">"성공은 방향이고,<br>행복은 과정이다"</span><span data-lang="en">"Success is Direction,<br>Happiness is the Journey"</span><span data-lang="ja">"成功は方向であり、<br>幸せは過程である"</span></h3>
                     <p data-lang="ko" class="active block">영어조합법인 서풍은 전라남도 여수시 화양면에 위치한 수산물 가공 전문 기업입니다. 남해안의 청정 해역과 인접한 최적의 입지에서, 어업인들의 협동을 기반으로 고품질 가공 수산물을 생산하고 있습니다.</p>
                     <p data-lang="en" class="active block">Seopung Fishery Cooperative is a seafood processing specialist located in Hwayang-myeon, Yeosu-si, Jeollanam-do. Situated near the pristine waters of the South Sea, we produce high-quality processed seafood based on fishermen's cooperation.</p>
+                    <p data-lang="ja" class="active block">西風水産は、全羅南道麗水市華陽面に位置する水産物加工専門企業です。南海岸の清浄海域に隣接した最適の立地で、漁業者の協同を基盤に高品質の加工水産物を生産しています。</p>
                     <p data-lang="ko" class="active block">2023년 기준 매출액 356억 원, 영업이익 22억 원을 달성하며 10년간 매출 규모를 약 7배 이상 성장시켰습니다.</p>
                     <p data-lang="en" class="active block">As of 2023, we achieved revenue of 35.6 billion KRW and operating profit of 2.2 billion KRW, growing our sales volume by more than 7 times over 10 years.</p>
+                    <p data-lang="ja" class="active block">2023年基準で売上高356億ウォン、営業利益22億ウォンを達成し、10年間で売上規模を約7倍以上成長させました。</p>
                     <div class="about-features grid" data-lang="ko">
                         <div class="about-feature"><div class="about-feature-icon">🏭</div><div class="about-feature-text"><h4>HACCP 인증 시설</h4><p>여수시 지정 식품안전관리인증 전용 업소</p></div></div>
                         <div class="about-feature"><div class="about-feature-icon">❄️</div><div class="about-feature-text"><h4>IQF 급속 냉동</h4><p>개별 급속 냉동으로 최상의 선도 유지</p></div></div>
@@ -389,12 +396,18 @@
                         <div class="about-feature"><div class="about-feature-icon">🏫</div><div class="about-feature-text"><h4>School Supply</h4><p>Quality trusted by educational institutions</p></div></div>
                         <div class="about-feature"><div class="about-feature-icon">📈</div><div class="about-feature-text"><h4>Continuous Growth</h4><p>7x revenue growth over 10 years</p></div></div>
                     </div>
+                    <div class="about-features grid" data-lang="ja">
+                        <div class="about-feature"><div class="about-feature-icon">🏭</div><div class="about-feature-text"><h4>HACCP認証施設</h4><p>麗水市指定食品安全管理認証専用事業所</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">❄️</div><div class="about-feature-text"><h4>IQF急速冷凍</h4><p>個別急速冷凍で最高の鮮度維持</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">🏫</div><div class="about-feature-text"><h4>学校給食納品</h4><p>教育機関が信頼する品質</p></div></div>
+                        <div class="about-feature"><div class="about-feature-icon">📈</div><div class="about-feature-text"><h4>持続的成長</h4><p>10年間で7倍以上の売上成長</p></div></div>
+                    </div>
                 </div>
                 <div class="about-image animate-on-scroll">
-                    <div class="about-image-main"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610365_01.jpg" alt="서풍 공장"></div>
+                    <div class="about-image-main"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/Trusted%20Representative%20Update.png" alt="대표이사"></div>
                     <div class="about-image-floating">
                         <div class="about-image-floating-number">2011</div>
-                        <div class="about-image-floating-text"><span data-lang="ko" class="active">설립년도</span><span data-lang="en">Founded</span></div>
+                        <div class="about-image-floating-text"><span data-lang="ko" class="active">설립년도</span><span data-lang="en">Founded</span><span data-lang="ja">設立年度</span></div>
                     </div>
                 </div>
             </div>
@@ -406,19 +419,19 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Gallery</span>
-                <h2 class="section-title"><span data-lang="ko" class="active">시설 & 가공 현장</span><span data-lang="en">Facility & Processing</span></h2>
-                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 이루어지는 전문적인 수산물 가공 현장</span><span data-lang="en">Professional seafood processing in our HACCP-certified facility</span></p>
+                <h2 class="section-title"><span data-lang="ko" class="active">시설 & 가공 현장</span><span data-lang="en">Facility & Processing</span><span data-lang="ja">施設＆加工現場</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 이루어지는 전문적인 수산물 가공 현장</span><span data-lang="en">Professional seafood processing in our HACCP-certified facility</span><span data-lang="ja">HACCP認証施設で行われる専門的な水産物加工現場</span></p>
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item large animate-on-scroll">
                     <video autoplay muted loop playsinline><source src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103610660.mp4" type="video/mp4"></video>
-                    <div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">수산물 가공 영상</span><span data-lang="en">Seafood Processing</span></span></div>
+                    <div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">수산물 가공 영상</span><span data-lang="en">Seafood Processing</span><span data-lang="ja">水産物加工映像</span></span></div>
                 </div>
-                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="고등어 필렛"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">고등어 필렛 가공</span><span data-lang="en">Mackerel Fillet</span></span></div></div>
-                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_02.jpg" alt="가공 시설"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 시설</span><span data-lang="en">Processing Facility</span></span></div></div>
-                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_03.jpg" alt="품질 관리"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">품질 관리</span><span data-lang="en">Quality Control</span></span></div></div>
-                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_04.jpg" alt="신선 수산물"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">신선 수산물</span><span data-lang="en">Fresh Seafood</span></span></div></div>
-                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_16.jpg" alt="가공 라인"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 라인</span><span data-lang="en">Processing Line</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="고등어 필렛"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">고등어 필렛 가공</span><span data-lang="en">Mackerel Fillet</span><span data-lang="ja">サバフィレ加工</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_02.jpg" alt="가공 시설"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 시설</span><span data-lang="en">Processing Facility</span><span data-lang="ja">加工施設</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_03.jpg" alt="품질 관리"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">품질 관리</span><span data-lang="en">Quality Control</span><span data-lang="ja">品質管理</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_04.jpg" alt="신선 수산물"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">신선 수산물</span><span data-lang="en">Fresh Seafood</span><span data-lang="ja">新鮮水産物</span></span></div></div>
+                <div class="gallery-item animate-on-scroll"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_16.jpg" alt="가공 라인"><div class="gallery-overlay"><span class="gallery-caption"><span data-lang="ko" class="active">가공 라인</span><span data-lang="en">Processing Line</span><span data-lang="ja">加工ライン</span></span></div></div>
             </div>
         </div>
     </section>
@@ -428,8 +441,8 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Products</span>
-                <h2 class="section-title"><span data-lang="ko" class="active">주력 제품</span><span data-lang="en">Our Products</span></h2>
-                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 정성껏 가공한 프리미엄 수산물</span><span data-lang="en">Premium seafood carefully processed in our HACCP-certified facility</span></p>
+                <h2 class="section-title"><span data-lang="ko" class="active">주력 제품</span><span data-lang="en">Our Products</span><span data-lang="ja">主力製品</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">HACCP 인증 시설에서 정성껏 가공한 프리미엄 수산물</span><span data-lang="en">Premium seafood carefully processed in our HACCP-certified facility</span><span data-lang="ja">HACCP認証施設で丁寧に加工したプレミアム水産物</span></p>
             </div>
             <div class="products-grid grid" data-lang="ko">
                 <div class="product-card animate-on-scroll">
@@ -459,6 +472,20 @@
                     <div class="product-content"><div class="product-category">Bada Sopung</div><h3 class="product-title">Abalone 1.4kg (8-10pcs)</h3><p class="product-desc">Premium abalone from Yeosu's pristine waters. Extra-large size perfect for gifts and health cuisine.</p><div class="product-features"><span class="product-feature">Yeosu Origin</span><span class="product-feature">Gift Box</span><span class="product-feature">XL Size</span></div></div>
                 </div>
             </div>
+            <div class="products-grid grid" data-lang="ja">
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878.jpg" alt="ノルウェーサバ"><span class="product-badge">ベストセラー</span></div>
+                    <div class="product-content"><div class="product-category">冷凍加工</div><h3 class="product-title">ノルウェー塩サバフィレ 1.3kg</h3><p class="product-desc">ノルウェー産サバの骨と内臓を除去しフィレ状に加工。そのまま調理可能です。</p><div class="product-features"><span class="product-feature">ノルウェー産</span><span class="product-feature">骨なし</span><span class="product-feature">大容量</span></div></div>
+                </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_01.jpg" alt="下処理イカ"></div>
+                    <div class="product-content"><div class="product-category">冷凍加工</div><h3 class="product-title">下処理イカ 1kg</h3><p class="product-desc">太平洋産遠洋イカを船上で急速冷凍。IQF方式で個別包装、必要な分だけ使用可能です。</p><div class="product-features"><span class="product-feature">IQF冷凍</span><span class="product-feature">皮付き</span><span class="product-feature">タウリン保存</span></div></div>
+                </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image"><img src="https://raw.githubusercontent.com/durecoop/Seopung/main/KakaoTalk_20250626_103619878_10.jpg" alt="アワビ"><span class="product-badge">プレミアム</span></div>
+                    <div class="product-content"><div class="product-category">海の遠足</div><h3 class="product-title">アワビ 1.4kg (8~10個)</h3><p class="product-desc">麗水清浄海域のプレミアムアワビ。贈答用や滋養強壮食に最適な特大サイズです。</p><div class="product-features"><span class="product-feature">麗水産</span><span class="product-feature">贈答用</span><span class="product-feature">特大</span></div></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -467,17 +494,17 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Board</span>
-                <h2 class="section-title"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Notice Board</span></h2>
-                <p class="section-desc"><span data-lang="ko" class="active">서풍의 최신 소식과 공지사항을 확인하세요</span><span data-lang="en">Check out the latest news and announcements from Seopung</span></p>
+                <h2 class="section-title"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Notice Board</span><span data-lang="ja">掲示板</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">서풍의 최신 소식과 공지사항을 확인하세요</span><span data-lang="en">Check out the latest news and announcements from Seopung</span><span data-lang="ja">西風の最新ニュースとお知らせをご確認ください</span></p>
             </div>
             <div class="board-container animate-on-scroll">
                 <div class="board-header">
                     <div class="board-tabs">
-                        <button class="board-tab active" data-tab="notice"><span data-lang="ko" class="active">공지사항</span><span data-lang="en">Notice</span></button>
-                        <button class="board-tab" data-tab="news"><span data-lang="ko" class="active">뉴스</span><span data-lang="en">News</span></button>
-                        <button class="board-tab" data-tab="qna"><span data-lang="ko" class="active">Q&A</span><span data-lang="en">Q&A</span></button>
+                        <button class="board-tab active" data-tab="notice"><span data-lang="ko" class="active">공지사항</span><span data-lang="en">Notice</span><span data-lang="ja">お知らせ</span></button>
+                        <button class="board-tab" data-tab="news"><span data-lang="ko" class="active">뉴스</span><span data-lang="en">News</span><span data-lang="ja">ニュース</span></button>
+                        <button class="board-tab" data-tab="qna"><span data-lang="ko" class="active">Q&A</span><span data-lang="en">Q&A</span><span data-lang="ja">Q&A</span></button>
                     </div>
-                    <button class="board-write-btn" onclick="openWriteModal()"><span>✏️</span><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write</span></button>
+                    <button class="board-write-btn" onclick="openWriteModal()"><span>✏️</span><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write</span><span data-lang="ja">投稿</span></button>
                 </div>
                 <div class="board-list" id="board-list"></div>
                 <div class="board-pagination" id="board-pagination"></div>
@@ -490,14 +517,14 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-tag">Contact</span>
-                <h2 class="section-title"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact Us</span></h2>
-                <p class="section-desc"><span data-lang="ko" class="active">언제든지 문의해 주세요. 친절히 안내해 드리겠습니다.</span><span data-lang="en">Feel free to contact us. We'll be happy to assist you.</span></p>
+                <h2 class="section-title"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact Us</span><span data-lang="ja">お問い合わせ</span></h2>
+                <p class="section-desc"><span data-lang="ko" class="active">언제든지 문의해 주세요. 친절히 안내해 드리겠습니다.</span><span data-lang="en">Feel free to contact us. We'll be happy to assist you.</span><span data-lang="ja">いつでもお問い合わせください。丁寧にご案内いたします。</span></p>
             </div>
             <div class="contact-grid">
-                <div class="contact-card animate-on-scroll"><div class="contact-icon">📍</div><div class="contact-label"><span data-lang="ko" class="active">주소</span><span data-lang="en">Address</span></div><div class="contact-value"><span data-lang="ko" class="active">전라남도 여수시<br>화양면 석교로 121</span><span data-lang="en">121 Seokgyo-ro,<br>Hwayang-myeon, Yeosu-si</span></div></div>
-                <div class="contact-card animate-on-scroll"><div class="contact-icon">📞</div><div class="contact-label"><span data-lang="ko" class="active">전화</span><span data-lang="en">Phone</span></div><div class="contact-value">061-681-5171</div></div>
-                <div class="contact-card animate-on-scroll"><div class="contact-icon">📠</div><div class="contact-label"><span data-lang="ko" class="active">팩스</span><span data-lang="en">Fax</span></div><div class="contact-value">061-681-5173</div></div>
-                <div class="contact-card animate-on-scroll"><div class="contact-icon">🕐</div><div class="contact-label"><span data-lang="ko" class="active">운영시간</span><span data-lang="en">Hours</span></div><div class="contact-value"><span data-lang="ko" class="active">월-금 09:00 - 18:00</span><span data-lang="en">Mon-Fri 09:00 - 18:00</span></div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📍</div><div class="contact-label"><span data-lang="ko" class="active">주소</span><span data-lang="en">Address</span><span data-lang="ja">住所</span></div><div class="contact-value"><span data-lang="ko" class="active">전라남도 여수시<br>화양면 석교로 121</span><span data-lang="en">121 Seokgyo-ro,<br>Hwayang-myeon, Yeosu-si</span><span data-lang="ja">全羅南道麗水市<br>華陽面石橋路121</span></div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📞</div><div class="contact-label"><span data-lang="ko" class="active">전화</span><span data-lang="en">Phone</span><span data-lang="ja">電話</span></div><div class="contact-value">061-681-5171</div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">📠</div><div class="contact-label"><span data-lang="ko" class="active">팩스</span><span data-lang="en">Fax</span><span data-lang="ja">ファックス</span></div><div class="contact-value">061-681-5173</div></div>
+                <div class="contact-card animate-on-scroll"><div class="contact-icon">🕐</div><div class="contact-label"><span data-lang="ko" class="active">운영시간</span><span data-lang="en">Hours</span><span data-lang="ja">営業時間</span></div><div class="contact-value"><span data-lang="ko" class="active">월-금 09:00 - 18:00</span><span data-lang="en">Mon-Fri 09:00 - 18:00</span><span data-lang="ja">月-金 09:00 - 18:00</span></div></div>
             </div>
         </div>
     </section>
@@ -507,32 +534,33 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <h3><span data-lang="ko" class="active">영어조합법인 서풍</span><span data-lang="en">Seopung Fishery</span></h3>
-                    <p data-lang="ko" class="active block">전라남도 여수시 화양면 석교로 121에서 2011년부터 최상급 수산물을 가공해 온 HACCP 인증 전문 기업입니다.</p>
-                    <p data-lang="en" class="active block">A HACCP-certified seafood processing specialist based in Yeosu, South Korea since 2011.</p>
+                    <h3><span data-lang="ko" class="active">영어조합법인 서풍</span><span data-lang="en">Seopung Fishery</span><span data-lang="ja">西風水産</span></h3>
+                    <p data-lang="ko" class="active block">신뢰로써 공존하는 기업. 전라남도 여수시 화양면 석교로 121에서 2011년부터 최상급 수산물을 가공해 온 HACCP 인증 전문 기업입니다.</p>
+                    <p data-lang="en" class="active block">A company coexisting through trust. A HACCP-certified seafood processing specialist based in Yeosu, South Korea since 2011.</p>
+                    <p data-lang="ja" class="active block">信頼で共存する企業。2011年から全羅南道麗水市で最高級水産物を加工してきたHACCP認証専門企業です。</p>
                 </div>
                 <div class="footer-links">
-                    <h4><span data-lang="ko" class="active">바로가기</span><span data-lang="en">Quick Links</span></h4>
+                    <h4><span data-lang="ko" class="active">바로가기</span><span data-lang="en">Quick Links</span><span data-lang="ja">クイックリンク</span></h4>
                     <ul>
-                        <li><a href="#about"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span></a></li>
-                        <li><a href="#products"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></a></li>
-                        <li><a href="#board"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span></a></li>
-                        <li><a href="#contact"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span></a></li>
+                        <li><a href="#about"><span data-lang="ko" class="active">회사소개</span><span data-lang="en">About</span><span data-lang="ja">会社紹介</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></a></li>
+                        <li><a href="#board"><span data-lang="ko" class="active">게시판</span><span data-lang="en">Board</span><span data-lang="ja">掲示板</span></a></li>
+                        <li><a href="#contact"><span data-lang="ko" class="active">연락처</span><span data-lang="en">Contact</span><span data-lang="ja">お問い合わせ</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span></h4>
+                    <h4><span data-lang="ko" class="active">제품</span><span data-lang="en">Products</span><span data-lang="ja">製品</span></h4>
                     <ul>
-                        <li><a href="#products"><span data-lang="ko" class="active">노르웨이 간고등어</span><span data-lang="en">Norwegian Mackerel</span></a></li>
-                        <li><a href="#products"><span data-lang="ko" class="active">손질 오징어</span><span data-lang="en">Cleaned Squid</span></a></li>
-                        <li><a href="#products"><span data-lang="ko" class="active">바다소풍 전복</span><span data-lang="en">Bada Sopung Abalone</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">노르웨이 간고등어</span><span data-lang="en">Norwegian Mackerel</span><span data-lang="ja">ノルウェーサバ</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">손질 오징어</span><span data-lang="en">Cleaned Squid</span><span data-lang="ja">下処理イカ</span></a></li>
+                        <li><a href="#products"><span data-lang="ko" class="active">바다소풍 전복</span><span data-lang="en">Bada Sopung Abalone</span><span data-lang="ja">海の遠足アワビ</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4><span data-lang="ko" class="active">인증</span><span data-lang="en">Certifications</span></h4>
+                    <h4><span data-lang="ko" class="active">인증</span><span data-lang="en">Certifications</span><span data-lang="ja">認証</span></h4>
                     <ul>
                         <li><a href="#">HACCP</a></li>
-                        <li><a href="#"><span data-lang="ko" class="active">학교급식 납품업체</span><span data-lang="en">School Supply Certified</span></a></li>
+                        <li><a href="#"><span data-lang="ko" class="active">학교급식 납품업체</span><span data-lang="en">School Supply Certified</span><span data-lang="ja">学校給食納品業者</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -540,10 +568,11 @@
                 <div>
                     <span data-lang="ko" class="active">© 2024 영어조합법인 서풍. All rights reserved. | 사업자등록번호: 417-81-41979 | 대표: 서순심</span>
                     <span data-lang="en">© 2024 Seopung Fishery Cooperative. All rights reserved. | Business No: 417-81-41979</span>
+                    <span data-lang="ja">© 2024 西風水産. All rights reserved. | 事業者登録番号: 417-81-41979</span>
                 </div>
                 <div class="footer-legal">
-                    <a href="#"><span data-lang="ko" class="active">개인정보처리방침</span><span data-lang="en">Privacy Policy</span></a>
-                    <a href="#"><span data-lang="ko" class="active">이용약관</span><span data-lang="en">Terms of Service</span></a>
+                    <a href="#"><span data-lang="ko" class="active">개인정보처리방침</span><span data-lang="en">Privacy Policy</span><span data-lang="ja">プライバシーポリシー</span></a>
+                    <a href="#"><span data-lang="ko" class="active">이용약관</span><span data-lang="en">Terms of Service</span><span data-lang="ja">利用規約</span></a>
                 </div>
             </div>
         </div>
@@ -553,36 +582,36 @@
     <div class="modal-overlay" id="writeModal">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title"><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write Post</span></h3>
+                <h3 class="modal-title"><span data-lang="ko" class="active">글쓰기</span><span data-lang="en">Write Post</span><span data-lang="ja">投稿作成</span></h3>
                 <button class="modal-close" onclick="closeWriteModal()">×</button>
             </div>
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label"><span data-lang="ko" class="active">게시판 선택</span><span data-lang="en">Board Type</span></label>
+                        <label class="form-label"><span data-lang="ko" class="active">게시판 선택</span><span data-lang="en">Board Type</span><span data-lang="ja">掲示板選択</span></label>
                         <select class="form-select" id="write-board">
-                            <option value="notice" data-lang="ko" class="active">공지사항</option>
-                            <option value="news" data-lang="ko" class="active">뉴스</option>
-                            <option value="qna" data-lang="ko" class="active">Q&A</option>
+                            <option value="notice">공지사항 / Notice / お知らせ</option>
+                            <option value="news">뉴스 / News / ニュース</option>
+                            <option value="qna">Q&A</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label"><span data-lang="ko" class="active">카테고리</span><span data-lang="en">Category</span></label>
+                        <label class="form-label"><span data-lang="ko" class="active">카테고리</span><span data-lang="en">Category</span><span data-lang="ja">カテゴリー</span></label>
                         <input type="text" class="form-input" id="write-category" placeholder="카테고리 입력">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label"><span data-lang="ko" class="active">제목</span><span data-lang="en">Title</span></label>
+                    <label class="form-label"><span data-lang="ko" class="active">제목</span><span data-lang="en">Title</span><span data-lang="ja">タイトル</span></label>
                     <input type="text" class="form-input" id="write-title" placeholder="제목을 입력하세요">
                 </div>
                 <div class="form-group">
-                    <label class="form-label"><span data-lang="ko" class="active">내용</span><span data-lang="en">Content</span></label>
+                    <label class="form-label"><span data-lang="ko" class="active">내용</span><span data-lang="en">Content</span><span data-lang="ja">内容</span></label>
                     <textarea class="form-textarea" id="write-content" placeholder="내용을 입력하세요"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeWriteModal()"><span data-lang="ko" class="active">취소</span><span data-lang="en">Cancel</span></button>
-                <button class="btn btn-primary" onclick="submitPost()"><span data-lang="ko" class="active">등록</span><span data-lang="en">Submit</span></button>
+                <button class="btn btn-secondary" onclick="closeWriteModal()"><span data-lang="ko" class="active">취소</span><span data-lang="en">Cancel</span><span data-lang="ja">キャンセル</span></button>
+                <button class="btn btn-primary" onclick="submitPost()"><span data-lang="ko" class="active">등록</span><span data-lang="en">Submit</span><span data-lang="ja">登録</span></button>
             </div>
         </div>
     </div>
@@ -602,7 +631,7 @@
                 <div class="view-modal-body" id="view-content"></div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeViewModal()"><span data-lang="ko" class="active">닫기</span><span data-lang="en">Close</span></button>
+                <button class="btn btn-secondary" onclick="closeViewModal()"><span data-lang="ko" class="active">닫기</span><span data-lang="en">Close</span><span data-lang="ja">閉じる</span></button>
             </div>
         </div>
     </div>
@@ -639,6 +668,11 @@
                 { id: 2, title: 'HACCP Recertification Complete', category: 'Cert', date: '2024.01.10', content: 'Seopung Fishery has successfully completed HACCP recertification for 2024.\n\nScope: Frozen seafood (fish, mollusks)\nValidity: Jan 2024 - Jan 2027' },
                 { id: 3, title: 'Website Renewal Launch', category: 'Notice', date: '2024.01.05', content: 'Our official website has been renewed with mobile-optimized design, new board writing features, and expanded product gallery.' },
                 { id: 4, title: 'New Bada Sopung Abalone Lineup', category: 'Product', date: '2024.01.02', content: 'Introducing new Bada Sopung abalone product lineup featuring premium extra-large, gift set, and home-use sizes.' }
+            ], ja: [
+                { id: 1, title: '2024年旧正月配送のご案内', category: '配送', date: '2024.01.15', content: '旧正月の連休期間中は配送が遅れる場合があります。\n\n連休期間：2月9日（金）～2月12日（月）\n最終配送：2月8日（木）出荷分まで\n配送再開：2月13日（火）から' },
+                { id: 2, title: 'HACCP再認証完了のお知らせ', category: '認証', date: '2024.01.10', content: '西風水産は2024年HACCP再認証を成功裏に完了しました。\n\n認証範囲：冷凍水産食品（魚類、軟体類）\n認証有効期間：2024年1月～2027年1月' },
+                { id: 3, title: 'ホームページリニューアルのお知らせ', category: 'お知らせ', date: '2024.01.05', content: '西風水産公式ホームページがリニューアルしました。モバイル最適化デザイン、掲示板投稿機能追加、製品ギャラリー拡大。' },
+                { id: 4, title: '海の遠足アワビ新ラインナップ発売', category: '製品', date: '2024.01.02', content: '海の遠足ブランドの新しいアワビ製品ラインナップをご紹介します。プレミアム特大、ギフトセット、家庭用サイズ。' }
             ]},
             news: { ko: [
                 { id: 1, title: '서풍, 2023년 매출 356억 달성', category: '실적', date: '2024.01.12', content: '영어조합법인 서풍이 2023년 매출 356억 원을 달성하며 역대 최고 실적을 기록했습니다.\n\n영업이익: 22억 원\n전년 대비 성장률: 15%\n\n2013년 대비 약 7배 이상의 성장을 이루어냈습니다.' },
@@ -648,6 +682,10 @@
                 { id: 1, title: 'Seopung Achieves 35.6B KRW Revenue in 2023', category: 'Results', date: '2024.01.12', content: 'Seopung Fishery achieved record-breaking revenue of 35.6 billion KRW in 2023, with operating profit of 2.2 billion KRW.' },
                 { id: 2, title: 'Yeosu Outstanding Enterprise Award', category: 'Award', date: '2024.01.08', content: 'Seopung received the Outstanding Enterprise Award from Yeosu City for contribution to local economy and job creation.' },
                 { id: 3, title: 'Norway Seafood Expo Participation', category: 'Event', date: '2023.12.20', content: 'Seopung participated in the International Seafood Expo in Bergen, Norway, securing long-term supply contracts.' }
+            ], ja: [
+                { id: 1, title: '西風、2023年売上356億ウォン達成', category: '実績', date: '2024.01.12', content: '西風水産が2023年売上356億ウォンを達成し、過去最高の実績を記録しました。営業利益22億ウォン、前年比成長率15%。' },
+                { id: 2, title: '麗水市優秀企業表彰受賞', category: '受賞', date: '2024.01.08', content: '西風水産が麗水市優秀企業表彰を受賞しました。地域経済発展への貢献、雇用創出、品質経営優秀。' },
+                { id: 3, title: 'ノルウェー水産博覧会参加', category: 'イベント', date: '2023.12.20', content: '西風がノルウェー・ベルゲンで開催された国際水産博覧会に参加し、長期供給契約を締結しました。' }
             ]},
             qna: { ko: [
                 { id: 1, title: '대량 주문 시 할인이 가능한가요?', category: '주문', date: '2024.01.14', content: '네, 대량 주문 시 수량에 따라 할인이 가능합니다.\n\n- 100만 원 이상: 5% 할인\n- 300만 원 이상: 8% 할인\n- 500만 원 이상: 별도 협의\n\n자세한 내용은 061-681-5171로 문의 주세요.' },
@@ -657,6 +695,10 @@
                 { id: 1, title: 'Bulk order discount available?', category: 'Order', date: '2024.01.14', content: 'Yes, bulk order discounts are available based on quantity. Please contact us at 061-681-5171 for details.' },
                 { id: 2, title: 'International shipping inquiry', category: 'Shipping', date: '2024.01.11', content: 'Currently, we only support domestic shipping within South Korea.' },
                 { id: 3, title: 'Recommended uses by abalone size', category: 'Product', date: '2024.01.09', content: 'XL (8-10pcs): Gifts, premium dishes\nL (12-14pcs): Gifts, steamed dishes\nM (16-18pcs): Home use, porridge, butter grilling' }
+            ], ja: [
+                { id: 1, title: '大量注文時の割引は可能ですか？', category: '注文', date: '2024.01.14', content: 'はい、大量注文時は数量に応じて割引が可能です。詳細は061-681-5171までお問い合わせください。' },
+                { id: 2, title: '海外配送は可能ですか？', category: '配送', date: '2024.01.11', content: '現在、海外配送には対応しておりません。韓国国内配送のみ可能です。' },
+                { id: 3, title: 'アワビのサイズ別おすすめ用途', category: '製品', date: '2024.01.09', content: '特大（8~10個）：贈答用、高級料理\n大（12~14個）：贈答用、蒸し料理\n中（16~18個）：家庭用、お粥、バター焼き' }
             ]}
         };
 
