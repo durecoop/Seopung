@@ -103,17 +103,23 @@
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
-            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 4px 20px rgba(0,119,182,0.4);
+            box-shadow: 0 6px 25px rgba(0,119,182,0.25);
             position: relative;
             overflow: hidden;
+            background: white;
+            padding: 6px;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .logo-icon::before {
@@ -123,7 +129,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
             animation: logoShine 3s ease-in-out infinite;
         }
 
@@ -302,7 +308,7 @@
 
         .vision-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: flex-start;
         }
@@ -759,7 +765,9 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">🐟</div>
+                <div class="logo-icon">
+                    <img src="Refined Original Logo.png" alt="서풍 로고">
+                </div>
                 <div class="logo-text">
                     <span class="logo-main">서풍</span>
                     <span class="logo-sub">SEOPOONG</span>
@@ -794,7 +802,14 @@
     <section class="vision-section">
         <div class="section-container">
             <div class="vision-grid">
-                <div class="vision-content animate-on-scroll">
+                <div class="vision-image animate-on-scroll">
+                    <img src="facility1.jpg" alt="서풍 가공시설 전경">
+                    <div class="vision-badge">
+                        <div class="vision-badge-number">2011</div>
+                        <div class="vision-badge-text">설립년도</div>
+                    </div>
+                </div>
+                <div class="vision-content animate-on-scroll delay-2">
                     <blockquote>
                         "성공은 <span>방향</span>이고,<br>
                         행복은 <span>과정</span>이다"
@@ -809,13 +824,6 @@
                         10년간 매출 규모를 <strong>약 7배 이상 성장</strong>시켰습니다.
                         여수양지초등학교, 안심초등학교 등 다수의 교육 기관에 수산물을 납품하고 있습니다.
                     </p>
-                </div>
-                <div class="vision-image animate-on-scroll delay-2">
-                    <img src="facility1.jpg" alt="서풍 가공시설 전경">
-                    <div class="vision-badge">
-                        <div class="vision-badge-number">2011</div>
-                        <div class="vision-badge-text">설립년도</div>
-                    </div>
                 </div>
             </div>
         </div>
