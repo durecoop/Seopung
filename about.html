@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사소개 | 서풍 - 신뢰로써 공존하는 수산물 전문기업</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0077B6;
+            --primary-light: #00B4D8;
+            --primary-dark: #023E8A;
+            --accent: #48CAE4;
+            --accent-gold: #F4A261;
+            --accent-coral: #E76F51;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--white);
+            color: var(--gray-700);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,119,182,0.1);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-sub { font-size: 0.7rem; color: var(--gray-500); letter-spacing: 2px; }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); background: rgba(0,119,182,0.08); }
+        .nav-links a.active {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)) !important;
+            color: white !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 28px;
+            height: 3px;
+            background: var(--gray-700);
+            border-radius: 3px;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 2rem 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        section { padding: 7rem 2rem; }
+        .section-container { max-width: 1400px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .section-title .emphasis {
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title .emphasis::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(0,180,216,0.2);
+            z-index: -1;
+        }
+
+        .section-desc {
+            font-size: 1.2rem;
+            color: var(--gray-500);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .section-desc strong { color: var(--primary); font-weight: 600; }
+
+        /* Vision Section */
+        .vision-section { background: var(--gray-50); }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .vision-content blockquote {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .vision-content blockquote span {
+            color: var(--primary);
+        }
+
+        .vision-content p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        .vision-content p strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .vision-image {
+            position: relative;
+        }
+
+        .vision-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .vision-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(244,162,97,0.3);
+        }
+
+        .vision-badge-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .vision-badge-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* History Section */
+        .history-section { background: white; }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 400px;
+            margin-right: 2rem;
+            position: relative;
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 0;
+            margin-left: 2rem;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,119,182,0.15);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 50%;
+            right: -58px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -58px;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-desc {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+        }
+
+        .values-section .section-tag {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .values-section .section-title {
+            color: white;
+        }
+
+        .values-section .section-desc {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .values-section .section-desc strong {
+            color: var(--accent-gold);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section { background: var(--gray-50); }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: flex;
+            transition: all 0.4s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,119,182,0.15);
+        }
+
+        .team-image {
+            width: 200px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-content {
+            padding: 2.5rem;
+            flex: 1;
+        }
+
+        .team-role {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(0,119,182,0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-quote {
+            font-size: 1rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .team-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Certifications Section */
+        .cert-section { background: white; }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--gray-50);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .cert-card:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,119,182,0.15);
+        }
+
+        .cert-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,119,182,0.3);
+        }
+
+        .cert-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 0.8rem;
+        }
+
+        .cert-card p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-container { max-width: 1400px; margin: 0 auto; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand h3 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 1rem; }
+        .footer-brand p { line-height: 1.8; margin-bottom: 1.5rem; }
+
+        .footer-links h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: var(--gray-400); text-decoration: none; transition: all 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .vision-grid, .team-grid { grid-template-columns: 1fr; }
+            .values-grid, .cert-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: flex; }
+
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+
+            .values-grid, .cert-grid { grid-template-columns: 1fr; }
+
+            .timeline::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .timeline-content, .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .timeline-dot, .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+
+            .team-card { flex-direction: column; }
+            .team-image { width: 100%; height: 200px; }
+
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🐟</div>
+                <div class="logo-text">
+                    <span class="logo-main">서풍</span>
+                    <span class="logo-sub">SEOPOONG</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html" class="active">회사소개</a></li>
+                <li><a href="process.html">가공 프로세스</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="gallery.html">갤러리</a></li>
+                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <span class="page-header-tag">✨ ABOUT US</span>
+            <h1>신뢰로써 공존하는 기업<br>서풍</h1>
+            <p>50년 전통의 수산 전문 기업, 2대째 이어지는 품질과 신뢰의 이야기</p>
+        </div>
+    </header>
+
+    <!-- Vision Section -->
+    <section class="vision-section">
+        <div class="section-container">
+            <div class="vision-grid">
+                <div class="vision-content animate-on-scroll">
+                    <blockquote>
+                        "성공은 <span>방향</span>이고,<br>
+                        행복은 <span>과정</span>이다"
+                    </blockquote>
+                    <p>
+                        영어조합법인 서풍은 <strong>전라남도 여수시 화양면</strong>에 위치한 수산물 가공 전문 기업입니다.
+                        남해안의 청정 해역과 인접한 최적의 입지에서, 어업인들의 협동을 기반으로
+                        고품질 가공 수산물을 생산하고 있습니다.
+                    </p>
+                    <p>
+                        <strong>2023년 기준 매출액 356억 원, 영업이익 22억 원</strong>을 달성하며
+                        10년간 매출 규모를 <strong>약 7배 이상 성장</strong>시켰습니다.
+                        여수양지초등학교, 안심초등학교 등 다수의 교육 기관에 수산물을 납품하고 있습니다.
+                    </p>
+                </div>
+                <div class="vision-image animate-on-scroll delay-2">
+                    <img src="seo2.jpg" alt="서풍 회사 소개">
+                    <div class="vision-badge">
+                        <div class="vision-badge-number">2011</div>
+                        <div class="vision-badge-text">설립년도</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">📅 HISTORY</span>
+                <h2 class="section-title">서풍의 <span class="emphasis">발자취</span></h2>
+                <p class="section-desc">
+                    2011년 설립 이래, <strong>끊임없는 성장</strong>을 거듭해온 서풍의 역사
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-year">2011</span>
+                        <h3 class="timeline-title">영어조합법인 서풍 설립</h3>
+                        <p class="timeline-desc">전남 여수시 화양면에서 수산물 가공 전문 기업으로 첫 출발</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-year">2015</span>
+                        <h3 class="timeline-title">HACCP 인증 획득</h3>
+                        <p class="timeline-desc">식품안전관리인증 획득으로 품질 관리 체계 강화</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-year">2018</span>
+                        <h3 class="timeline-title">학교급식 납품 시작</h3>
+                        <p class="timeline-desc">여수 지역 초등학교를 시작으로 학교급식 납품 확대</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-year">2020</span>
+                        <h3 class="timeline-title">바다소풍 브랜드 런칭</h3>
+                        <p class="timeline-desc">프리미엄 전복 브랜드 '바다소풍' 출시</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-content">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-year">2023</span>
+                        <h3 class="timeline-title">매출 356억 달성</h3>
+                        <p class="timeline-desc">10년간 7배 이상 성장, 29명의 전문 인력 보유</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">💎 CORE VALUES</span>
+                <h2 class="section-title">서풍의 <span class="emphasis">핵심 가치</span></h2>
+                <p class="section-desc">
+                    <strong>품질, 신뢰, 혁신, 상생</strong> - 서풍이 지켜온 4가지 약속
+                </p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll delay-1">
+                    <div class="value-icon">🏆</div>
+                    <h3>최고의 품질</h3>
+                    <p>매일 새벽 직접 선별한 최상급 수산물만을 취급합니다. 타협 없는 품질이 서풍의 자부심입니다.</p>
+                </div>
+
+                <div class="value-card animate-on-scroll delay-2">
+                    <div class="value-icon">🤝</div>
+                    <h3>신뢰의 약속</h3>
+                    <p>50년간 쌓아온 신뢰는 거짓 없는 품질에서 시작됩니다. 고객과의 약속을 반드시 지킵니다.</p>
+                </div>
+
+                <div class="value-card animate-on-scroll delay-3">
+                    <div class="value-icon">💡</div>
+                    <h3>끊임없는 혁신</h3>
+                    <p>전통의 노하우에 최신 기술을 접목합니다. HACCP 인증 시설에서 미래를 준비합니다.</p>
+                </div>
+
+                <div class="value-card animate-on-scroll delay-4">
+                    <div class="value-icon">🌱</div>
+                    <h3>함께하는 상생</h3>
+                    <p>어업인, 직원, 고객 모두가 함께 성장하는 상생의 가치를 추구합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">👥 LEADERSHIP</span>
+                <h2 class="section-title">서풍을 이끄는 <span class="emphasis">사람들</span></h2>
+                <p class="section-desc">
+                    <strong>2대째 이어지는</strong> 수산 전문가 가족의 이야기
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card animate-on-scroll delay-1">
+                    <div class="team-image">
+                        <img src="KakaoTalk_20250626_103619878.jpg" alt="대표이사">
+                    </div>
+                    <div class="team-content">
+                        <span class="team-role">대표이사</span>
+                        <h3 class="team-name">서순심</h3>
+                        <p class="team-quote">
+                            40년간 여수 바다와 함께해온 경험을 바탕으로, 가장 신선하고 안전한 수산물을 여러분께 전달하겠습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate-on-scroll delay-2">
+                    <div class="team-image">
+                        <img src="KakaoTalk_20250626_103619878_01.jpg" alt="전무이사">
+                    </div>
+                    <div class="team-content">
+                        <span class="team-role">전무이사 (2대째)</span>
+                        <h3 class="team-name">서OO</h3>
+                        <p class="team-quote">
+                            아버지의 안목에 현대적 기술을 더해, 전통과 혁신이 조화로운 서풍을 만들어가고 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="cert-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">✓ CERTIFICATIONS</span>
+                <h2 class="section-title">인증 및 <span class="emphasis">수상</span></h2>
+                <p class="section-desc">
+                    <strong>공인된 품질</strong>과 <strong>검증된 신뢰</strong>의 증거
+                </p>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card animate-on-scroll delay-1">
+                    <div class="cert-icon">🏅</div>
+                    <h3>HACCP 인증</h3>
+                    <p>식품안전관리인증기준 적합 업소로, 철저한 위생관리 시스템을 갖추고 있습니다.</p>
+                </div>
+
+                <div class="cert-card animate-on-scroll delay-2">
+                    <div class="cert-icon">🏫</div>
+                    <h3>학교급식 납품업체</h3>
+                    <p>여수 지역 다수 초등학교에 안전한 수산물을 공급하는 신뢰받는 납품업체입니다.</p>
+                </div>
+
+                <div class="cert-card animate-on-scroll delay-3">
+                    <div class="cert-icon">🎖</div>
+                    <h3>여수시 우수기업</h3>
+                    <p>지역 경제 발전에 기여한 공로로 여수시 우수기업으로 선정되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🐟 서풍</h3>
+                    <p>신뢰로써 공존하는 기업<br>50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로 가장 신선하고 안전한 수산물을 공급합니다.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="about.html">→ 회사소개</a></li>
+                        <li><a href="process.html">→ 가공 프로세스</a></li>
+                        <li><a href="products.html">→ 제품</a></li>
+                        <li><a href="gallery.html">→ 갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>제품</h4>
+                    <ul>
+                        <li><a href="products.html">→ 냉동 수산물</a></li>
+                        <li><a href="products.html">→ 손질 수산물</a></li>
+                        <li><a href="products.html">→ 바다소풍</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">📞 061-681-5171</a></li>
+                        <li><a href="#">📠 061-681-5173</a></li>
+                        <li><a href="contact.html">📍 전남 여수시 화양면 석교로 121</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

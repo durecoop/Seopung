@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가공 프로세스 | 서풍 - 입항부터 포장까지</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0077B6;
+            --primary-light: #00B4D8;
+            --primary-dark: #023E8A;
+            --accent: #48CAE4;
+            --accent-gold: #F4A261;
+            --accent-coral: #E76F51;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--white);
+            color: var(--gray-700);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,119,182,0.1);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-sub { font-size: 0.7rem; color: var(--gray-500); letter-spacing: 2px; }
+
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); background: rgba(0,119,182,0.08); }
+        .nav-links a.active {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)) !important;
+            color: white !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+        .mobile-menu-btn span {
+            width: 28px;
+            height: 3px;
+            background: var(--gray-700);
+            border-radius: 3px;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 2rem 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        section { padding: 7rem 2rem; }
+        .section-container { max-width: 1400px; margin: 0 auto; }
+
+        .section-header { text-align: center; margin-bottom: 4rem; }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title .emphasis {
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title .emphasis::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(0,180,216,0.2);
+            z-index: -1;
+        }
+
+        .section-desc {
+            font-size: 1.2rem;
+            color: var(--gray-500);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-desc strong { color: var(--primary); }
+
+        /* Process Flow */
+        .process-overview {
+            background: var(--gray-50);
+        }
+
+        .process-image-wrapper {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .process-image-wrapper img {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        /* Process Steps */
+        .process-steps { background: white; }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: var(--gray-50);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .step-card:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,119,182,0.15);
+        }
+
+        .step-card:hover::before { transform: scaleX(1); }
+
+        .step-number {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gray-200);
+            line-height: 1;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,119,182,0.3);
+            transition: transform 0.4s;
+        }
+
+        .step-card:hover .step-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: var(--gray-500);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card p strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .step-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .step-feature {
+            padding: 6px 14px;
+            background: rgba(0,119,182,0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Facilities */
+        .facilities-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+        }
+
+        .facilities-section .section-tag { background: rgba(255,255,255,0.2); }
+        .facilities-section .section-title { color: white; }
+        .facilities-section .section-desc { color: rgba(255,255,255,0.8); }
+        .facilities-section .section-desc strong { color: var(--accent-gold); }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .facility-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .facility-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-10px);
+        }
+
+        .facility-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .facility-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .facility-card p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Quality Promise */
+        .quality-section { background: var(--gray-50); }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .quality-content h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .quality-content h3 span { color: var(--primary); }
+
+        .quality-list {
+            list-style: none;
+        }
+
+        .quality-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .quality-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,119,182,0.15);
+        }
+
+        .quality-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .quality-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .quality-text p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+        }
+
+        .quality-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        /* Video Section */
+        .video-section { background: white; }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .video-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-card-content {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .video-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-card p {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-container { max-width: 1400px; margin: 0 auto; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand h3 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 1rem; }
+        .footer-brand p { line-height: 1.8; }
+        .footer-links h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: var(--gray-400); text-decoration: none; transition: all 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .steps-grid { grid-template-columns: 1fr; }
+            .facilities-grid { grid-template-columns: repeat(2, 1fr); }
+            .quality-grid { grid-template-columns: 1fr; }
+            .video-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px; left: 0; right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: flex; }
+
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .facilities-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🐟</div>
+                <div class="logo-text">
+                    <span class="logo-main">서풍</span>
+                    <span class="logo-sub">SEOPOONG</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="process.html" class="active">가공 프로세스</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="gallery.html">갤러리</a></li>
+                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <span class="page-header-tag">⚙️ PROCESS</span>
+            <h1>입항부터 포장까지</h1>
+            <p>최상의 선도를 위한 수매-가공 일원화 시스템</p>
+        </div>
+    </header>
+
+    <!-- Process Overview -->
+    <section class="process-overview">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">📋 OVERVIEW</span>
+                <h2 class="section-title">가공 <span class="emphasis">프로세스</span> 전체 흐름</h2>
+                <p class="section-desc">
+                    <strong>어선 입항</strong>부터 <strong>최종 포장</strong>까지,<br>
+                    철저한 품질 관리로 신선함을 지킵니다.
+                </p>
+            </div>
+
+            <div class="process-image-wrapper animate-on-scroll">
+                <img src="seo4.jpg" alt="서풍 가공 프로세스">
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="process-steps">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">🔄 6 STEPS</span>
+                <h2 class="section-title">6단계 <span class="emphasis">품질 관리</span> 시스템</h2>
+                <p class="section-desc">
+                    각 단계마다 <strong>전문가의 손길</strong>로 철저하게 관리합니다.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card animate-on-scroll delay-1">
+                    <span class="step-number">01</span>
+                    <div class="step-icon">🚢</div>
+                    <h3>어선 입항</h3>
+                    <p>
+                        <strong>매일 새벽 4시</strong>, 여수 청정 해역에서 갓 잡아올린 수산물이 입항합니다.
+                        신선한 상태 그대로 빠르게 경매장으로 이동합니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">새벽 입항</span>
+                        <span class="step-feature">청정 해역</span>
+                    </div>
+                </div>
+
+                <div class="step-card animate-on-scroll delay-2">
+                    <span class="step-number">02</span>
+                    <div class="step-icon">🏷</div>
+                    <h3>경매 & 선별</h3>
+                    <p>
+                        <strong>50년 경력의 베테랑</strong>이 직접 경매에 참여합니다.
+                        눈으로 보고, 손으로 만지며 <strong>최상급만</strong> 선별합니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">직접 선별</span>
+                        <span class="step-feature">전문가 눈</span>
+                    </div>
+                </div>
+
+                <div class="step-card animate-on-scroll delay-3">
+                    <span class="step-number">03</span>
+                    <div class="step-icon">🔪</div>
+                    <h3>전처리 가공</h3>
+                    <p>
+                        <strong>HACCP 인증 시설</strong>에서 세척, 손질, 절단 등
+                        전처리 과정을 거칩니다. 철저한 위생 관리 하에 진행됩니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">HACCP 시설</span>
+                        <span class="step-feature">위생 관리</span>
+                    </div>
+                </div>
+
+                <div class="step-card animate-on-scroll delay-1">
+                    <span class="step-number">04</span>
+                    <div class="step-icon">📦</div>
+                    <h3>진공 포장</h3>
+                    <p>
+                        <strong>최신 진공 포장기</strong>로 산소를 차단하여
+                        신선도를 극대화합니다. 개별 포장으로 편의성도 높였습니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">진공 포장</span>
+                        <span class="step-feature">개별 포장</span>
+                    </div>
+                </div>
+
+                <div class="step-card animate-on-scroll delay-2">
+                    <span class="step-number">05</span>
+                    <div class="step-icon">❄️</div>
+                    <h3>급속 냉동</h3>
+                    <p>
+                        <strong>-40°C 급속 냉동</strong>으로 세포 손상을 최소화합니다.
+                        IQF 방식으로 개별 급속 냉동하여 최상의 품질을 유지합니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">-40°C</span>
+                        <span class="step-feature">IQF 방식</span>
+                    </div>
+                </div>
+
+                <div class="step-card animate-on-scroll delay-3">
+                    <span class="step-number">06</span>
+                    <div class="step-icon">🚚</div>
+                    <h3>냉동 보관 & 출고</h3>
+                    <p>
+                        <strong>-18°C 이하 냉동 창고</strong>에서 보관하며,
+                        철저한 콜드체인 시스템으로 고객에게 배송됩니다.
+                    </p>
+                    <div class="step-features">
+                        <span class="step-feature">냉동 창고</span>
+                        <span class="step-feature">콜드체인</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities -->
+    <section class="facilities-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">🏭 FACILITIES</span>
+                <h2 class="section-title">최신 <span class="emphasis">설비</span> 소개</h2>
+                <p class="section-desc">
+                    <strong>신선도와 안전성</strong>을 높이는 첨단 장비 운영
+                </p>
+            </div>
+
+            <div class="facilities-grid">
+                <div class="facility-card animate-on-scroll delay-1">
+                    <div class="facility-icon">🔬</div>
+                    <h3>어류 스캔 절단기</h3>
+                    <p>정밀한 스캔으로 최적의 절단 포인트를 찾아 균일한 품질을 보장합니다.</p>
+                </div>
+
+                <div class="facility-card animate-on-scroll delay-2">
+                    <div class="facility-icon">🦑</div>
+                    <h3>머젤맥 어류절단기</h3>
+                    <p>다양한 어종에 맞는 최적의 절단으로 상품 가치를 높입니다.</p>
+                </div>
+
+                <div class="facility-card animate-on-scroll delay-3">
+                    <div class="facility-icon">🦪</div>
+                    <h3>오징어 황복기</h3>
+                    <p>오징어 손질 전용 장비로 빠르고 위생적인 가공이 가능합니다.</p>
+                </div>
+
+                <div class="facility-card animate-on-scroll delay-1">
+                    <div class="facility-icon">📦</div>
+                    <h3>최신형 진공포장기</h3>
+                    <p>산소를 완벽히 차단하여 최대 24개월 신선도를 유지합니다.</p>
+                </div>
+
+                <div class="facility-card animate-on-scroll delay-2">
+                    <div class="facility-icon">❄️</div>
+                    <h3>터널 프리저</h3>
+                    <p>-40°C 급속 냉동으로 세포 손상 없이 신선함을 그대로 보존합니다.</p>
+                </div>
+
+                <div class="facility-card animate-on-scroll delay-3">
+                    <div class="facility-icon">⚙️</div>
+                    <h3>로타리 포장기계</h3>
+                    <p>대용량 자동 포장으로 효율적이고 균일한 포장이 가능합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Promise -->
+    <section class="quality-section">
+        <div class="section-container">
+            <div class="quality-grid">
+                <div class="quality-content animate-on-scroll">
+                    <h3>수산물을 읽는 <span>온도</span>까지<br>생각합니다</h3>
+
+                    <ul class="quality-list">
+                        <li class="quality-item">
+                            <div class="quality-icon">🎨</div>
+                            <div class="quality-text">
+                                <h4>세포가 다치지 않아 '색감'이 살아있습니다</h4>
+                                <p>급속 냉동으로 세포막 손상 없이 본연의 선명한 색감을 유지합니다.</p>
+                            </div>
+                        </li>
+                        <li class="quality-item">
+                            <div class="quality-icon">💧</div>
+                            <div class="quality-text">
+                                <h4>맛있는 '육즙'을 꽉 가두었습니다</h4>
+                                <p>해동 시 드립 현상이 거의 없어 본연의 풍미를 그대로 즐길 수 있습니다.</p>
+                            </div>
+                        </li>
+                        <li class="quality-item">
+                            <div class="quality-icon">🛡</div>
+                            <div class="quality-text">
+                                <h4>가장 위생적이고 '안전'합니다</h4>
+                                <p>가장 신선할 때 동결하여 미생물 번식을 원천 차단합니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="quality-image animate-on-scroll delay-2">
+                    <img src="S1.gif" alt="서풍 제품 특장점">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">🎬 VIDEO</span>
+                <h2 class="section-title">현장 <span class="emphasis">영상</span></h2>
+                <p class="section-desc">
+                    서풍의 <strong>가공 현장</strong>을 직접 확인하세요.
+                </p>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-card animate-on-scroll delay-1">
+                    <video controls poster="KakaoTalk_20250626_103619878_02.jpg">
+                        <source src="KakaoTalk_20250626_103609555.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-content">
+                        <h3>수산물 가공 현장</h3>
+                        <p>철저한 위생 관리 하에 진행되는 가공 과정</p>
+                    </div>
+                </div>
+
+                <div class="video-card animate-on-scroll delay-2">
+                    <video controls poster="KakaoTalk_20250626_103619878_04.jpg">
+                        <source src="KakaoTalk_20250626_103610660.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-content">
+                        <h3>품질 검수 현장</h3>
+                        <p>전문가의 꼼꼼한 품질 검수 과정</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🐟 서풍</h3>
+                    <p>신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="about.html">→ 회사소개</a></li>
+                        <li><a href="process.html">→ 가공 프로세스</a></li>
+                        <li><a href="products.html">→ 제품</a></li>
+                        <li><a href="gallery.html">→ 갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>제품</h4>
+                    <ul>
+                        <li><a href="products.html">→ 냉동 수산물</a></li>
+                        <li><a href="products.html">→ 손질 수산물</a></li>
+                        <li><a href="products.html">→ 바다소풍</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">📞 061-681-5171</a></li>
+                        <li><a href="#">📠 061-681-5173</a></li>
+                        <li><a href="contact.html">📍 전남 여수시 화양면</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

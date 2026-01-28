@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>서풍 | 신뢰로써 공존하는 수산물 전문기업</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0077B6;
             --primary-light: #00B4D8;
             --primary-dark: #023E8A;
             --accent: #48CAE4;
+            --accent-gold: #F4A261;
+            --accent-coral: #E76F51;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -22,10 +24,6 @@
             --gray-700: #334155;
             --gray-800: #1E293B;
             --gray-900: #0F172A;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
         * {
@@ -43,7 +41,92 @@
             background: var(--white);
             color: var(--gray-700);
             line-height: 1.7;
+            overflow-x: hidden;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes slideInFromBottom {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
 
         /* Navigation */
         nav {
@@ -53,13 +136,14 @@
             right: 0;
             z-index: 1000;
             background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,119,182,0.1);
+            transition: all 0.4s ease;
         }
 
         nav.scrolled {
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.98);
         }
 
         .nav-container {
@@ -69,26 +153,56 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s;
         }
 
-        .logo span {
-            color: var(--gray-800);
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 0.5rem;
             list-style: none;
         }
 
@@ -97,185 +211,426 @@
             color: var(--gray-600);
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
             position: relative;
         }
 
         .nav-links a:hover {
             color: var(--primary);
+            background: rgba(0,119,182,0.08);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
+        .nav-links a.active {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)) !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(244,162,97,0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244,162,97,0.4) !important;
         }
 
         .mobile-menu-btn {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
             background: none;
             border: none;
-            padding: 5px;
+            padding: 10px;
         }
 
         .mobile-menu-btn span {
-            width: 25px;
-            height: 2px;
+            width: 28px;
+            height: 3px;
             background: var(--gray-700);
+            border-radius: 3px;
             transition: all 0.3s;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--gray-100) 100%);
+            position: relative;
             display: flex;
             align-items: center;
-            padding-top: 70px;
-            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0f2d4a 100%);
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(2,62,138,0.7) 0%, rgba(0,119,182,0.5) 50%, rgba(0,180,216,0.3) 100%);
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .particle {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(ellipse, rgba(0,180,216,0.08) 0%, transparent 70%);
-            pointer-events: none;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 120px 2rem 4rem;
+            position: relative;
+            z-index: 2;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
+        .hero-content {
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-badge-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-title {
+            font-size: 4rem;
             font-weight: 900;
-            color: var(--gray-900);
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
         }
 
-        .hero-content h1 .highlight {
-            color: var(--primary);
+        .hero-title .highlight {
             position: relative;
+            display: inline-block;
         }
 
-        .hero-content h1 .highlight::after {
+        .hero-title .highlight::after {
             content: '';
             position: absolute;
             bottom: 5px;
             left: 0;
             width: 100%;
-            height: 12px;
-            background: rgba(72,202,228,0.3);
+            height: 20px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+            opacity: 0.5;
             z-index: -1;
+            transform: skewX(-5deg);
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--gray-500);
-            margin-bottom: 2rem;
-            max-width: 500px;
+        .hero-title .gradient-text {
+            background: linear-gradient(90deg, var(--accent), var(--accent-gold), var(--accent-coral));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 3s ease infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-subtitle strong {
+            color: var(--accent-gold);
+            font-weight: 700;
         }
 
         .hero-stats {
             display: flex;
             gap: 3rem;
-            margin-top: 3rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
         }
 
-        .stat-item {
+        .hero-stat {
             text-align: center;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
+        .hero-stat-number {
+            font-size: 3rem;
             font-weight: 900;
-            color: var(--primary);
+            background: linear-gradient(180deg, white, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray-500);
-            margin-top: 0.3rem;
+        .hero-stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
         }
 
-        .hero-image {
-            position: relative;
+        .hero-stat-bar {
+            width: 60px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            margin: 0.8rem auto 0;
+            overflow: hidden;
         }
 
-        .hero-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow-xl);
+        .hero-stat-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+            border-radius: 2px;
+            animation: shimmer 2s infinite;
         }
 
-        .cta-buttons {
+        .hero-buttons {
             display: flex;
             gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+            opacity: 0;
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
+            border: none;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
             color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+            box-shadow: 0 4px 20px rgba(244,162,97,0.4);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,119,182,0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(244,162,97,0.5);
         }
 
         .btn-secondary {
-            background: white;
-            color: var(--gray-700);
-            border: 2px solid var(--gray-200);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-3px);
         }
 
-        /* Section Common */
-        section {
-            padding: 6rem 2rem;
+        .btn svg {
+            transition: transform 0.3s;
+        }
+
+        .btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            display: block;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .hero-image-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--accent-gold);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-floating-card.card-1 {
+            top: 10%;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .hero-floating-card.card-2 {
+            bottom: 20%;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .floating-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .floating-card-title {
+            font-weight: 700;
+            color: var(--gray-800);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .floating-card-text {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            opacity: 0.7;
+            animation: fadeInUp 1s ease 1.2s forwards;
+            opacity: 0;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .scroll-mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 10px;
+            background: white;
+            border-radius: 3px;
+            animation: slideInFromBottom 1.5s ease infinite;
+        }
+
+        /* Why Section */
+        .why-section {
+            padding: 8rem 2rem;
+            background: var(--gray-50);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(0,180,216,0.05) 0%, transparent 70%);
         }
 
         .section-container {
@@ -285,122 +640,57 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-tag {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--gray-100);
-            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--gray-900);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-title .emphasis {
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title .emphasis::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(0,180,216,0.2);
+            z-index: -1;
         }
 
         .section-desc {
-            font-size: 1.1rem;
-            color: var(--gray-500);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--gray-50);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .about-content h3 {
-            font-size: 2rem;
-            color: var(--gray-900);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content p {
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin-top: 2rem;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
             font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .feature-text strong {
-            display: block;
-            color: var(--gray-800);
-            margin-bottom: 0.3rem;
-        }
-
-        .feature-text span {
-            font-size: 0.9rem;
             color: var(--gray-500);
-        }
-
-        /* Process Section */
-        .process {
-            background: white;
-        }
-
-        .process-image {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .process-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Why Different Section */
-        .why-different {
-            background: linear-gradient(180deg, var(--gray-50) 0%, white 100%);
+        .section-desc strong {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .why-grid {
@@ -411,208 +701,308 @@
 
         .why-card {
             background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid var(--gray-100);
         }
 
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
         .why-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,119,182,0.15);
+        }
+
+        .why-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .why-card-number {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gray-100);
+            line-height: 1;
         }
 
         .why-card-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 15px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: white;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,119,182,0.3);
+            transition: transform 0.4s;
         }
 
-        .why-card h4 {
-            font-size: 1.3rem;
+        .why-card:hover .why-card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .why-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--gray-900);
             margin-bottom: 1rem;
         }
 
         .why-card p {
             color: var(--gray-500);
+            line-height: 1.8;
             font-size: 0.95rem;
         }
 
-        /* Products Section */
-        .products {
-            background: white;
+        .why-card-highlight {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0,180,216,0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
-        .product-features {
+        /* Products Preview */
+        .products-preview {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, white 0%, var(--gray-50) 100%);
+        }
+
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
         }
 
-        .product-feature {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            background: var(--gray-50);
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .product-feature:hover {
+        .product-card {
             background: white;
-            box-shadow: var(--shadow-lg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .product-feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent), var(--primary-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-card-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
             color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(244,162,97,0.3);
         }
 
-        .product-feature h4 {
-            font-size: 1.2rem;
+        .product-card-content {
+            padding: 2rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0,119,182,0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 800;
             color: var(--gray-900);
             margin-bottom: 0.8rem;
         }
 
-        .product-feature p {
+        .product-desc {
             color: var(--gray-500);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
-        .product-image {
-            margin-top: 4rem;
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .product-image img {
-            width: 100%;
-            max-width: 600px;
-            display: block;
-            margin: 0 auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
+        .product-feature {
+            padding: 6px 12px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            font-weight: 500;
         }
 
-        /* Gallery Section */
-        .gallery {
-            background: var(--gray-900);
-            color: white;
-        }
-
-        .gallery .section-tag {
-            background: rgba(255,255,255,0.1);
-            color: var(--accent);
-        }
-
-        .gallery .section-title {
-            color: white;
-        }
-
-        .gallery .section-desc {
-            color: var(--gray-400);
-        }
-
-        .gallery-hero {
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
             position: relative;
-            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 2rem;
         }
 
-        .gallery-hero img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-
-        .gallery-hero-overlay {
+        .stats-section::before {
+            content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            padding: 3rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .gallery-hero-overlay h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .gallery-hero-overlay p {
-            color: var(--gray-300);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
-        }
-
-        .contact-grid {
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
+        .stat-card {
             text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
+            color: white;
         }
 
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gray-100);
-            border-radius: 50%;
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .contact-card h4 {
-            font-size: 1rem;
-            color: var(--gray-900);
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
             margin-bottom: 0.5rem;
         }
 
-        .contact-card p {
-            color: var(--gray-500);
-            font-size: 0.9rem;
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: var(--gray-900);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(0,119,182,0.3) 0%, transparent 70%);
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-title .gradient {
+            background: linear-gradient(90deg, var(--accent), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-desc {
+            font-size: 1.2rem;
+            color: var(--gray-400);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
         }
 
         /* Footer */
         footer {
             background: var(--gray-900);
             color: var(--gray-400);
-            padding: 4rem 2rem 2rem;
+            padding: 5rem 2rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .footer-container {
@@ -620,29 +1010,55 @@
             margin: 0 auto;
         }
 
-        .footer-top {
+        .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--gray-800);
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-brand h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: white;
             margin-bottom: 1rem;
         }
 
         .footer-brand p {
-            font-size: 0.9rem;
             line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
 
         .footer-links h4 {
             color: white;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
 
         .footer-links ul {
@@ -650,36 +1066,29 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer-links a {
             color: var(--gray-400);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .footer-links a:hover {
             color: var(--accent);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
             padding-top: 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
@@ -689,39 +1098,31 @@
                 text-align: center;
             }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                margin: 0 auto 2rem;
-            }
-
-            .cta-buttons {
-                justify-content: center;
+            .hero-title {
+                font-size: 3rem;
             }
 
             .hero-stats {
                 justify-content: center;
             }
 
-            .about-grid {
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .why-grid, .products-grid {
                 grid-template-columns: 1fr;
             }
 
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .product-features {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .footer-top {
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -730,14 +1131,13 @@
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 70px;
+                top: 80px;
                 left: 0;
                 right: 0;
                 background: white;
                 flex-direction: column;
                 padding: 2rem;
-                gap: 1.5rem;
-                box-shadow: var(--shadow-lg);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             }
 
             .nav-links.active {
@@ -748,8 +1148,8 @@
                 display: flex;
             }
 
-            .hero-content h1 {
-                font-size: 2rem;
+            .hero-title {
+                font-size: 2.2rem;
             }
 
             .hero-stats {
@@ -757,21 +1157,39 @@
                 gap: 1.5rem;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            .hero-buttons {
+                flex-direction: column;
             }
 
-            .contact-grid {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-            .footer-top {
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
 
-            .gallery-hero img {
-                height: 300px;
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
         }
     </style>
@@ -780,21 +1198,20 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
-                    <path d="M10 16C10 12 13 10 16 10C19 10 22 12 22 16C22 20 19 22 16 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="16" cy="16" r="3" fill="currentColor"/>
-                </svg>
-                <span>서풍</span>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🐟</div>
+                <div class="logo-text">
+                    <span class="logo-main">서풍</span>
+                    <span class="logo-sub">SEOPOONG</span>
+                </div>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about">회사소개</a></li>
-                <li><a href="#process">가공 프로세스</a></li>
-                <li><a href="#why">서풍의 차별점</a></li>
-                <li><a href="#products">제품 특장점</a></li>
-                <li><a href="#gallery">갤러리</a></li>
-                <li><a href="#contact">연락처</a></li>
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="process.html">가공 프로세스</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="gallery.html">갤러리</a></li>
+                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
             </ul>
             <button class="mobile-menu-btn" onclick="toggleMenu()">
                 <span></span>
@@ -806,208 +1223,271 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <video class="hero-bg-video" autoplay muted loop playsinline>
+            <source src="KakaoTalk_20250626_103609555.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-particles">
+            <div class="particle" style="top: 20%; left: 10%;"></div>
+            <div class="particle" style="top: 60%; left: 20%;"></div>
+            <div class="particle" style="top: 30%; left: 80%;"></div>
+            <div class="particle" style="top: 70%; left: 70%;"></div>
+            <div class="particle" style="top: 40%; left: 50%;"></div>
+        </div>
+
         <div class="hero-container">
-            <div class="hero-content fade-in">
-                <h1>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    HACCP 인증 | 50년 전통
+                </div>
+
+                <h1 class="hero-title">
                     <span class="highlight">신뢰</span>로써<br>
-                    공존하는 기업
+                    <span class="gradient-text">공존</span>하는 기업
                 </h1>
-                <p>
-                    50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로
-                    조합원 여러분께 가장 신선하고 안전한 수산물을 공급하겠습니다.
+
+                <p class="hero-subtitle">
+                    <strong>50년 경력의 베테랑</strong>이 가진 '선별의 눈'과<br>
+                    최신 HACCP 인증 시설로<br>
+                    <strong>가장 신선하고 안전한 수산물</strong>을 공급합니다.
                 </p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="50">0</div>
+                        <div class="hero-stat-label">년 수산 외길</div>
+                        <div class="hero-stat-bar"><div class="hero-stat-bar-fill" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="356">0</div>
+                        <div class="hero-stat-label">억원 매출</div>
+                        <div class="hero-stat-bar"><div class="hero-stat-bar-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number" data-count="29">0</div>
+                        <div class="hero-stat-label">명 전문 인력</div>
+                        <div class="hero-stat-bar"><div class="hero-stat-bar-fill" style="width: 70%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="contact.html" class="btn btn-primary">
                         문의하기
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#about" class="btn btn-secondary">자세히 보기</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">년 수산 외길</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">2대째</div>
-                        <div class="stat-label">가업 계승</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">HACCP</div>
-                        <div class="stat-label">인증 기업</div>
-                    </div>
+                    <a href="about.html" class="btn btn-secondary">
+                        자세히 보기
+                    </a>
                 </div>
             </div>
-            <div class="hero-image fade-in">
-                <img src="seo5.gif" alt="서풍 회사 소개">
-            </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <div class="about-grid">
-                <div class="about-image fade-in">
-                    <img src="seo2.jpg" alt="서풍 회사 소개">
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="seo5.gif" alt="서풍">
+                    <div class="hero-image-overlay">
+                        <span class="hero-image-badge">
+                            ✓ 2대째 가업 계승
+                        </span>
+                    </div>
                 </div>
-                <div class="about-content fade-in">
-                    <span class="section-tag">ABOUT US</span>
-                    <h3>수산물 전문기업 서풍이<br>왜 다를까요?</h3>
-                    <p>
-                        여수 수협 출신의 40년간 경력의 현장에서 여수 바다의 수산물을 이끄는
-                        수산물 전문기업 '서풍'입니다.
-                    </p>
-                    <ul class="feature-list">
-                        <li>
-                            <div class="feature-icon">👁</div>
-                            <div class="feature-text">
-                                <strong>매일 새벽, 직접 보고 고르는 '선별의 눈'</strong>
-                                <span>서풍은 위탁 수매를 하지 않습니다. 매일 새벽 판매현장에서 직접 눈으로 보고, 만져보고 확인한 최상의 품질만 매입합니다.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="feature-icon">🏆</div>
-                            <div class="feature-text">
-                                <strong>2대째 이어지는 50년 수산 외길</strong>
-                                <span>"아버지의 안목에 기술을 더해, 바로 먹어도 신뢰합니다."</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="feature-icon">✓</div>
-                            <div class="feature-text">
-                                <strong>최고의 품질을 위한 최신 설비와 인증</strong>
-                                <span>수산물취급업체로서 HACCP인증을 받은 현대적인 시설에서 가공되고 검수되어 엄선됩니다.</span>
-                            </div>
-                        </li>
-                    </ul>
+
+                <div class="hero-floating-card card-1">
+                    <div class="floating-card-icon">👁</div>
+                    <div class="floating-card-title">선별의 눈</div>
+                    <div class="floating-card-text">매일 새벽 직접 선별</div>
+                </div>
+
+                <div class="hero-floating-card card-2">
+                    <div class="floating-card-icon">❄️</div>
+                    <div class="floating-card-title">콜드체인</div>
+                    <div class="floating-card-text">신선도 100% 유지</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Process Section -->
-    <section class="process" id="process">
-        <div class="section-container">
-            <div class="section-header fade-in">
-                <span class="section-tag">PROCESS</span>
-                <h2 class="section-title">입항부터 포장까지</h2>
-                <p class="section-desc">최상의 선도를 위한 수매-가공 일원화</p>
-            </div>
-            <div class="process-image fade-in">
-                <img src="seo4.jpg" alt="서풍 가공 프로세스">
-            </div>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-mouse"></div>
         </div>
     </section>
 
-    <!-- Why Different Section -->
-    <section class="why-different" id="why">
+    <!-- Why Section -->
+    <section class="why-section">
         <div class="section-container">
-            <div class="section-header fade-in">
-                <span class="section-tag">WHY SEOPOONG</span>
-                <h2 class="section-title">서풍의 차별점</h2>
-                <p class="section-desc">50년 노하우로 만들어가는 신뢰의 품질</p>
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">
+                    ✨ WHY SEOPOONG
+                </span>
+                <h2 class="section-title">
+                    수산물 전문기업 서풍이<br>
+                    <span class="emphasis">왜 다를까요?</span>
+                </h2>
+                <p class="section-desc">
+                    <strong>40년간</strong> 여수 수협 현장에서 쌓아온 노하우로<br>
+                    여수 바다의 수산물을 이끄는 <strong>진짜 전문가</strong>입니다.
+                </p>
             </div>
+
             <div class="why-grid">
-                <div class="why-card fade-in">
+                <div class="why-card animate-on-scroll delay-1">
+                    <span class="why-card-number">01</span>
                     <div class="why-card-icon">👁</div>
-                    <h4>선별의 눈</h4>
-                    <p>매일 새벽 직접 경매 현장에서 최상의 수산물만 선별합니다. 50년 경력의 베테랑이 직접 품질을 확인합니다.</p>
+                    <h3>매일 새벽, 직접 보고 고르는<br>'선별의 눈'</h3>
+                    <p>서풍은 <strong>위탁 수매를 하지 않습니다.</strong> 매일 새벽 판매현장에서 직접 눈으로 보고, 만져보고 확인한 최상의 품질만 매입합니다.</p>
+                    <span class="why-card-highlight">직접 선별 시스템</span>
                 </div>
-                <div class="why-card fade-in">
-                    <div class="why-card-icon">🏭</div>
-                    <h4>최신 가공 시설</h4>
-                    <p>HACCP 인증을 받은 최신 가공 시설에서 위생적이고 안전하게 가공됩니다.</p>
+
+                <div class="why-card animate-on-scroll delay-2">
+                    <span class="why-card-number">02</span>
+                    <div class="why-card-icon">🏆</div>
+                    <h3>2대째 이어지는<br>50년 수산 외길</h3>
+                    <p>"아버지의 안목에 기술을 더해, <strong>바로 먹어도 신뢰합니다.</strong>" 대를 이어 축적된 노하우가 품질의 차이를 만듭니다.</p>
+                    <span class="why-card-highlight">가업 계승 2대째</span>
                 </div>
-                <div class="why-card fade-in">
-                    <div class="why-card-icon">❄️</div>
-                    <h4>콜드체인 시스템</h4>
-                    <p>수매부터 배송까지 철저한 콜드체인으로 신선도를 유지합니다.</p>
+
+                <div class="why-card animate-on-scroll delay-3">
+                    <span class="why-card-number">03</span>
+                    <div class="why-card-icon">✓</div>
+                    <h3>최고의 품질을 위한<br>최신 설비와 인증</h3>
+                    <p><strong>HACCP 인증</strong>을 받은 현대적인 시설에서 가공되고 검수되어 엄선됩니다. 수산물을 읽는 온도까지 생각합니다.</p>
+                    <span class="why-card-highlight">HACCP 인증 시설</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
+    <!-- Products Preview -->
+    <section class="products-preview">
         <div class="section-container">
-            <div class="section-header fade-in">
-                <span class="section-tag">PRODUCTS</span>
-                <h2 class="section-title">제품 특장점</h2>
-                <p class="section-desc">수산물을 읽는 온도까지 생각합니다</p>
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">
+                    🐟 PRODUCTS
+                </span>
+                <h2 class="section-title">
+                    <span class="emphasis">프리미엄</span> 수산물
+                </h2>
+                <p class="section-desc">
+                    HACCP 인증 시설에서 정성껏 가공한<br>
+                    <strong>최상급 수산물</strong>을 만나보세요.
+                </p>
             </div>
-            <div class="product-features">
-                <div class="product-feature fade-in">
-                    <div class="product-feature-icon">🎨</div>
-                    <h4>세포가 다치지 않아<br>'색감'이 살아있습니다</h4>
-                    <p>세포막이 손상되지 않아 해동 후에도 본연 질감 선명색깔이 살아 활균현금하고 촉감합니다.</p>
+
+            <div class="products-grid">
+                <div class="product-card animate-on-scroll delay-1">
+                    <div class="product-card-image">
+                        <img src="KakaoTalk_20250626_103619878_03.jpg" alt="노르웨이 간고등어">
+                        <span class="product-badge">베스트셀러</span>
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category">냉동 가공</span>
+                        <h3 class="product-title">노르웨이 간고등어살 1.3kg</h3>
+                        <p class="product-desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p>
+                        <div class="product-features">
+                            <span class="product-feature">노르웨이산</span>
+                            <span class="product-feature">뼈 제거</span>
+                            <span class="product-feature">대용량</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-feature fade-in">
-                    <div class="product-feature-icon">💧</div>
-                    <h4>맛있는 '육즙'을<br>꽉 가두었습니다</h4>
-                    <p>해동 시 드립(Drip, 육즙 손실) 현상이 거의 없습니다. 생선 본연의 고소한 풍미와 촉촉함을 그대로 즐기실 수 있습니다.</p>
+
+                <div class="product-card animate-on-scroll delay-2">
+                    <div class="product-card-image">
+                        <img src="KakaoTalk_20250626_103619878_07.jpg" alt="손질 오징어">
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category">냉동 가공</span>
+                        <h3 class="product-title">손질 오징어 1kg</h3>
+                        <p class="product-desc">태평양산 원양 오징어를 선상 급속 냉동. IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
+                        <div class="product-features">
+                            <span class="product-feature">IQF 냉동</span>
+                            <span class="product-feature">껍질 포함</span>
+                            <span class="product-feature">타우린 보존</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-feature fade-in">
-                    <div class="product-feature-icon">🛡</div>
-                    <h4>가장 위생적이고<br>'안전'합니다</h4>
-                    <p>급속 직후 가장 신선할 때 동결하기 때문에 미생물 번식을 원천 차단. 사계절 내내 안심하고 드실 수 있는 최상의 선도를 유지합니다.</p>
+
+                <div class="product-card animate-on-scroll delay-3">
+                    <div class="product-card-image">
+                        <img src="KakaoTalk_20250626_103619878_09.jpg" alt="참전복">
+                        <span class="product-badge">프리미엄</span>
+                    </div>
+                    <div class="product-card-content">
+                        <span class="product-category">바다소풍</span>
+                        <h3 class="product-title">참전복 1.4kg (8~10미)</h3>
+                        <p class="product-desc">여수 청정 해역의 프리미엄 참전복. 고급 선물용과 보양식에 적합한 특대 사이즈입니다.</p>
+                        <div class="product-features">
+                            <span class="product-feature">여수산</span>
+                            <span class="product-feature">선물용</span>
+                            <span class="product-feature">특대</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product-image fade-in">
-                <img src="S1.gif" alt="서풍 제품 특장점">
+
+            <div style="text-align: center; margin-top: 3rem;" class="animate-on-scroll">
+                <a href="products.html" class="btn btn-primary">
+                    전체 제품 보기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="section-container">
-            <div class="section-header fade-in">
-                <span class="section-tag">GALLERY</span>
-                <h2 class="section-title">신뢰의 서풍</h2>
-                <p class="section-desc">현장에서 직접 확인하는 품질</p>
-            </div>
-            <div class="gallery-hero fade-in">
-                <img src="S2.gif" alt="서풍 현장">
-                <div class="gallery-hero-overlay">
-                    <h3>신뢰의 서풍</h3>
-                    <p>50년 전통의 수산물 전문 기업</p>
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll delay-1">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">년의 노하우</div>
+                </div>
+                <div class="stat-card animate-on-scroll delay-2">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number" data-count="356">0</div>
+                    <div class="stat-label">억원 매출</div>
+                </div>
+                <div class="stat-card animate-on-scroll delay-3">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-count="29">0</div>
+                    <div class="stat-label">명 전문 인력</div>
+                </div>
+                <div class="stat-card animate-on-scroll delay-4">
+                    <div class="stat-icon">🏫</div>
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">+ 학교 급식 납품</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <div class="section-header fade-in">
-                <span class="section-tag">CONTACT</span>
-                <h2 class="section-title">연락처</h2>
-                <p class="section-desc">언제든 문의해 주세요</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-card fade-in">
-                    <div class="contact-icon">📍</div>
-                    <h4>주소</h4>
-                    <p>전라남도 여수시<br>화양면 석교로 121</p>
-                </div>
-                <div class="contact-card fade-in">
-                    <div class="contact-icon">📞</div>
-                    <h4>전화</h4>
-                    <p>061-681-5171</p>
-                </div>
-                <div class="contact-card fade-in">
-                    <div class="contact-icon">📠</div>
-                    <h4>팩스</h4>
-                    <p>061-681-5173</p>
-                </div>
-                <div class="contact-card fade-in">
-                    <div class="contact-icon">🕐</div>
-                    <h4>운영시간</h4>
-                    <p>평일 09:00 - 18:00<br>토/일/공휴일 휴무</p>
-                </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container animate-on-scroll">
+            <h2 class="cta-title">
+                <span class="gradient">신선한 수산물</span>이<br>
+                필요하신가요?
+            </h2>
+            <p class="cta-desc">
+                대량 주문, 학교 급식, OEM/ODM 등<br>
+                어떤 문의든 환영합니다. 지금 바로 연락주세요!
+            </p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">
+                    문의하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="tel:061-681-5171" class="btn btn-secondary">
+                    📞 061-681-5171
+                </a>
             </div>
         </div>
     </section>
@@ -1015,49 +1495,66 @@
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <div class="footer-top">
+            <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>서풍</h3>
+                    <h3>🐟 서풍</h3>
                     <p>
                         신뢰로써 공존하는 기업<br>
                         50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
                         가장 신선하고 안전한 수산물을 공급합니다.
                     </p>
+                    <div class="footer-social">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">📺</a>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h4>바로가기</h4>
                     <ul>
-                        <li><a href="#about">회사소개</a></li>
-                        <li><a href="#process">가공 프로세스</a></li>
-                        <li><a href="#why">서풍의 차별점</a></li>
-                        <li><a href="#products">제품 특장점</a></li>
+                        <li><a href="about.html">→ 회사소개</a></li>
+                        <li><a href="process.html">→ 가공 프로세스</a></li>
+                        <li><a href="products.html">→ 제품</a></li>
+                        <li><a href="gallery.html">→ 갤러리</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>제품</h4>
                     <ul>
-                        <li><a href="#">냉동 수산물</a></li>
-                        <li><a href="#">손질 수산물</a></li>
-                        <li><a href="#">바다소풍</a></li>
+                        <li><a href="products.html">→ 냉동 수산물</a></li>
+                        <li><a href="products.html">→ 손질 수산물</a></li>
+                        <li><a href="products.html">→ 바다소풍</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>고객지원</h4>
+                    <h4>연락처</h4>
                     <ul>
-                        <li><a href="#contact">연락처</a></li>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="tel:061-681-5171">📞 061-681-5171</a></li>
+                        <li><a href="#">📠 061-681-5173</a></li>
+                        <li><a href="contact.html">📍 전남 여수시 화양면 석교로 121</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 영어조합법인 서풍. All rights reserved. | 사업자등록번호: 417-81-41979 | 대표: 서순심</p>
+                <p>© 2024 영어조합법인 서풍. All rights reserved. | 사업자등록번호: 417-81-41979 | 대표: 서순심</p>
+                <p>평일 09:00 - 18:00 | 토/일/공휴일 휴무</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Scroll animation
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1067,40 +1564,41 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+
+                    // Counter animation
+                    const counters = entry.target.querySelectorAll('[data-count]');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.dataset.count);
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+
+                        const updateCounter = () => {
+                            current += step;
+                            if (current < target) {
+                                counter.textContent = Math.floor(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        updateCounter();
+                    });
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.getElementById('navLinks').classList.remove('active');
                 }
             });

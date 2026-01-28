@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연락처 | 서풍 - 문의하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0077B6;
+            --primary-light: #00B4D8;
+            --primary-dark: #023E8A;
+            --accent: #48CAE4;
+            --accent-gold: #F4A261;
+            --accent-coral: #E76F51;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--white);
+            color: var(--gray-700);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,119,182,0.1);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-main {
+            font-size: 1.4rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .logo-sub { font-size: 0.7rem; color: var(--gray-500); letter-spacing: 2px; }
+
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--gray-600);
+            font-weight: 500; font-size: 0.95rem;
+            padding: 0.7rem 1.2rem; border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); background: rgba(0,119,182,0.08); }
+        .nav-links a.active {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+        .nav-cta { background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)) !important; color: white !important; }
+
+        .mobile-menu-btn {
+            display: none; flex-direction: column; gap: 6px;
+            cursor: pointer; background: none; border: none; padding: 10px;
+        }
+        .mobile-menu-btn span { width: 28px; height: 3px; background: var(--gray-700); border-radius: 3px; }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 2rem 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            position: relative; overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-header-content {
+            max-width: 1400px; margin: 0 auto;
+            position: relative; z-index: 1;
+            text-align: center; color: white;
+        }
+        .page-header-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; font-size: 0.9rem; margin-bottom: 1.5rem;
+        }
+        .page-header h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; }
+        .page-header p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* Section */
+        section { padding: 7rem 2rem; }
+        .section-container { max-width: 1400px; margin: 0 auto; }
+
+        /* Contact Info */
+        .contact-info { background: var(--gray-50); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            border: 1px solid var(--gray-100);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,119,182,0.15);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,119,182,0.3);
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-card p {
+            color: var(--gray-500);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form & Map */
+        .contact-main { background: white; }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form-wrapper {
+            background: var(--gray-50);
+            border-radius: 24px;
+            padding: 3rem;
+        }
+
+        .contact-form-wrapper h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form-wrapper > p {
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0,119,182,0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            font-family: inherit;
+            box-shadow: 0 4px 20px rgba(0,119,182,0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,119,182,0.4);
+        }
+
+        /* Map */
+        .map-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 500px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Company Info */
+        .company-info {
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
+            color: white;
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .company-content h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-content h2 span {
+            color: var(--accent-gold);
+        }
+
+        .company-content p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            line-height: 1.9;
+        }
+
+        .company-details {
+            list-style: none;
+        }
+
+        .company-detail {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .company-detail:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        .company-detail-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .company-detail-text h4 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .company-detail-text p {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        .company-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        /* FAQ */
+        .faq-section { background: var(--gray-50); }
+
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-50);
+        }
+
+        .faq-question span {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            padding: 0 2rem 1.5rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+        }
+
+        /* Section Header */
+        .section-header { text-align: center; margin-bottom: 4rem; }
+
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+        }
+
+        .section-title {
+            font-size: 2.8rem; font-weight: 900;
+            color: var(--gray-900); margin-bottom: 1.5rem;
+        }
+        .section-title .emphasis { position: relative; color: var(--primary); }
+        .section-title .emphasis::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 12px;
+            background: rgba(0,180,216,0.2); z-index: -1;
+        }
+
+        .section-desc {
+            font-size: 1.2rem; color: var(--gray-500);
+            max-width: 700px; margin: 0 auto;
+        }
+        .section-desc strong { color: var(--primary); }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 5rem 2rem 2rem;
+        }
+        .footer-container { max-width: 1400px; margin: 0 auto; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-brand h3 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 1rem; }
+        .footer-brand p { line-height: 1.8; }
+        .footer-links h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: var(--gray-400); text-decoration: none; transition: all 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-main-grid { grid-template-columns: 1fr; }
+            .company-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: absolute;
+                top: 80px; left: 0; right: 0;
+                background: white; flex-direction: column; padding: 2rem;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: flex; }
+
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .company-content h2 { font-size: 1.8rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🐟</div>
+                <div class="logo-text">
+                    <span class="logo-main">서풍</span>
+                    <span class="logo-sub">SEOPOONG</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="process.html">가공 프로세스</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="gallery.html">갤러리</a></li>
+                <li><a href="contact.html" class="active nav-cta">문의하기</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <span class="page-header-tag">📞 CONTACT</span>
+            <h1>문의하기</h1>
+            <p>언제든 연락주세요. 친절하게 안내해드립니다.</p>
+        </div>
+    </header>
+
+    <!-- Contact Info -->
+    <section class="contact-info">
+        <div class="section-container">
+            <div class="contact-grid">
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon">📍</div>
+                    <h3>주소</h3>
+                    <p>전라남도 여수시<br>화양면 석교로 121</p>
+                </div>
+
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon">📞</div>
+                    <h3>전화</h3>
+                    <p><a href="tel:061-681-5171">061-681-5171</a></p>
+                </div>
+
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon">📠</div>
+                    <h3>팩스</h3>
+                    <p>061-681-5173</p>
+                </div>
+
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon">🕐</div>
+                    <h3>운영시간</h3>
+                    <p>평일 09:00 - 18:00<br>토/일/공휴일 휴무</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Map -->
+    <section class="contact-main">
+        <div class="section-container">
+            <div class="contact-main-grid">
+                <div class="contact-form-wrapper animate-on-scroll">
+                    <h2>문의 보내기</h2>
+                    <p>제품 문의, 대량 주문, OEM/ODM 등 어떤 문의든 환영합니다.</p>
+
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">이름 *</label>
+                                <input type="text" id="name" name="name" required placeholder="홍길동">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">회사/단체명</label>
+                                <input type="text" id="company" name="company" placeholder="선택 사항">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">연락처 *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">이메일</label>
+                                <input type="email" id="email" name="email" placeholder="example@email.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inquiry">문의 유형 *</label>
+                            <select id="inquiry" name="inquiry" required>
+                                <option value="">선택해주세요</option>
+                                <option value="product">제품 문의</option>
+                                <option value="bulk">대량 주문</option>
+                                <option value="school">학교급식 납품</option>
+                                <option value="oem">OEM/ODM</option>
+                                <option value="partnership">제휴 문의</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">문의 내용 *</label>
+                            <textarea id="message" name="message" required placeholder="문의 내용을 상세히 작성해주세요."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">문의 보내기 →</button>
+                    </form>
+                </div>
+
+                <div class="map-wrapper animate-on-scroll">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13068.12!2d127.65!3d34.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDQ1JzAwLjAiTiAxMjfCsDM5JzAwLjAiRQ!5e0!3m2!1sko!2skr!4v1600000000000!5m2!1sko!2skr" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info -->
+    <section class="company-info">
+        <div class="section-container">
+            <div class="company-grid">
+                <div class="company-content animate-on-scroll">
+                    <h2>영어조합법인 <span>서풍</span></h2>
+                    <p>
+                        2011년 설립 이래, 전라남도 여수시 화양면에서
+                        청정 해역의 프리미엄 수산물을 가공하여
+                        전국에 공급하고 있습니다.
+                    </p>
+
+                    <ul class="company-details">
+                        <li class="company-detail">
+                            <div class="company-detail-icon">🏢</div>
+                            <div class="company-detail-text">
+                                <h4>법인명</h4>
+                                <p>영어조합법인 서풍</p>
+                            </div>
+                        </li>
+                        <li class="company-detail">
+                            <div class="company-detail-icon">👤</div>
+                            <div class="company-detail-text">
+                                <h4>대표자</h4>
+                                <p>서순심</p>
+                            </div>
+                        </li>
+                        <li class="company-detail">
+                            <div class="company-detail-icon">📋</div>
+                            <div class="company-detail-text">
+                                <h4>사업자등록번호</h4>
+                                <p>417-81-41979</p>
+                            </div>
+                        </li>
+                        <li class="company-detail">
+                            <div class="company-detail-icon">📅</div>
+                            <div class="company-detail-text">
+                                <h4>설립일</h4>
+                                <p>2011년 5월 2일</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="company-image animate-on-scroll">
+                    <img src="seo5.gif" alt="서풍 회사">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">❓ FAQ</span>
+                <h2 class="section-title">자주 묻는 <span class="emphasis">질문</span></h2>
+                <p class="section-desc">
+                    궁금하신 점을 확인해보세요.
+                </p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        대량 주문 시 할인이 가능한가요?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, 대량 주문 시 수량에 따라 할인이 적용됩니다. 구체적인 수량과 제품을 알려주시면 견적을 안내해드리겠습니다. 전화 또는 문의 양식을 통해 연락주세요.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        학교급식 납품이 가능한가요?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, 현재 여수 지역 다수의 초등학교에 수산물을 납품하고 있습니다. HACCP 인증 시설에서 생산하여 안전하고 신선한 제품을 공급합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        OEM/ODM 생산이 가능한가요?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, OEM/ODM 생산이 가능합니다. 원하시는 제품 사양과 포장 형태를 알려주시면 맞춤 생산해드립니다. 자세한 상담은 전화로 문의해주세요.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        배송은 어떻게 진행되나요?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>냉동 상태를 유지하는 콜드체인 시스템으로 전국 배송합니다. 배송 지역과 수량에 따라 배송비가 달라질 수 있으며, 자세한 내용은 주문 시 안내해드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        제품 유통기한은 어떻게 되나요?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>급속 냉동 제품의 경우 -18°C 이하 보관 시 제조일로부터 12~24개월까지 유통이 가능합니다. 제품별 유통기한은 포장에 표시되어 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🐟 서풍</h3>
+                    <p>신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>바로가기</h4>
+                    <ul>
+                        <li><a href="about.html">→ 회사소개</a></li>
+                        <li><a href="process.html">→ 가공 프로세스</a></li>
+                        <li><a href="products.html">→ 제품</a></li>
+                        <li><a href="gallery.html">→ 갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>제품</h4>
+                    <ul>
+                        <li><a href="products.html">→ 냉동 수산물</a></li>
+                        <li><a href="products.html">→ 손질 수산물</a></li>
+                        <li><a href="products.html">→ 바다소풍</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">📞 061-681-5171</a></li>
+                        <li><a href="#">📠 061-681-5173</a></li>
+                        <li><a href="#">📍 전남 여수시 화양면</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // FAQ
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Form submit
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
