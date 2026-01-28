@@ -105,13 +105,31 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+            font-size: 22px;
+            box-shadow: 0 4px 20px rgba(0,119,182,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+
+        @keyframes logoShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
         }
 
         .logo-text { display: flex; flex-direction: column; }
@@ -284,9 +302,9 @@
 
         .vision-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 4rem;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .vision-content blockquote {
@@ -318,12 +336,17 @@
 
         .vision-image {
             position: relative;
+            display: flex;
+            align-items: flex-start;
         }
 
         .vision-image img {
             width: 100%;
+            max-height: 400px;
+            object-fit: cover;
             border-radius: 24px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            filter: brightness(1.05) contrast(1.05) saturate(1.1);
         }
 
         .vision-badge {
@@ -551,6 +574,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: brightness(1.02) contrast(1.05) saturate(1.1);
         }
 
         .team-content {
@@ -787,7 +811,7 @@
                     </p>
                 </div>
                 <div class="vision-image animate-on-scroll delay-2">
-                    <img src="seo2.jpg" alt="서풍 회사 소개">
+                    <img src="facility1.jpg" alt="서풍 가공시설 전경">
                     <div class="vision-badge">
                         <div class="vision-badge-number">2011</div>
                         <div class="vision-badge-text">설립년도</div>
@@ -910,7 +934,7 @@
             <div class="team-grid">
                 <div class="team-card animate-on-scroll delay-1">
                     <div class="team-image">
-                        <img src="KakaoTalk_20250626_103619878.jpg" alt="대표이사">
+                        <img src="ceo2.jpg" alt="대표이사">
                     </div>
                     <div class="team-content">
                         <span class="team-role">대표이사</span>
@@ -923,7 +947,7 @@
 
                 <div class="team-card animate-on-scroll delay-2">
                     <div class="team-image">
-                        <img src="KakaoTalk_20250626_103619878_01.jpg" alt="전무이사">
+                        <img src="ceo1.jpg" alt="전무이사">
                     </div>
                     <div class="team-content">
                         <span class="team-role">전무이사 (2대째)</span>

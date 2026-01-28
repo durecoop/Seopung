@@ -171,13 +171,31 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+            font-size: 22px;
+            box-shadow: 0 4px 20px rgba(0,119,182,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+
+        @keyframes logoShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
         }
 
         .logo-text {
@@ -820,7 +838,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s;
+            transition: transform 0.6s, filter 0.4s;
+            filter: brightness(1.02) contrast(1.05) saturate(1.1);
+        }
+
+        .product-card:hover .product-card-image img {
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
         }
 
         .product-card:hover .product-card-image img {
@@ -1379,7 +1402,7 @@
             <div class="products-grid">
                 <div class="product-card animate-on-scroll delay-1">
                     <div class="product-card-image">
-                        <img src="KakaoTalk_20250626_103619878_03.jpg" alt="노르웨이 간고등어">
+                        <img src="fish1.jpg" alt="노르웨이 간고등어">
                         <span class="product-badge">베스트셀러</span>
                     </div>
                     <div class="product-card-content">
@@ -1396,33 +1419,33 @@
 
                 <div class="product-card animate-on-scroll delay-2">
                     <div class="product-card-image">
-                        <img src="KakaoTalk_20250626_103619878_07.jpg" alt="손질 오징어">
+                        <img src="product1.jpg" alt="손질 생선">
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">손질 오징어 1kg</h3>
-                        <p class="product-desc">태평양산 원양 오징어를 선상 급속 냉동. IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
+                        <h3 class="product-title">손질 생선 포장</h3>
+                        <p class="product-desc">위생적인 진공포장으로 신선함을 오래 유지. 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
                         <div class="product-features">
-                            <span class="product-feature">IQF 냉동</span>
-                            <span class="product-feature">껍질 포함</span>
-                            <span class="product-feature">타우린 보존</span>
+                            <span class="product-feature">진공포장</span>
+                            <span class="product-feature">개별포장</span>
+                            <span class="product-feature">급속냉동</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-card animate-on-scroll delay-3">
                     <div class="product-card-image">
-                        <img src="KakaoTalk_20250626_103619878_09.jpg" alt="참전복">
+                        <img src="fish2.jpg" alt="참돔">
                         <span class="product-badge">프리미엄</span>
                     </div>
                     <div class="product-card-content">
-                        <span class="product-category">바다소풍</span>
-                        <h3 class="product-title">참전복 1.4kg (8~10미)</h3>
-                        <p class="product-desc">여수 청정 해역의 프리미엄 참전복. 고급 선물용과 보양식에 적합한 특대 사이즈입니다.</p>
+                        <span class="product-category">신선 수산</span>
+                        <h3 class="product-title">신선 참돔</h3>
+                        <p class="product-desc">여수 청정 해역의 프리미엄 참돔. 고급 횟감과 요리에 적합한 최상급 품질입니다.</p>
                         <div class="product-features">
                             <span class="product-feature">여수산</span>
-                            <span class="product-feature">선물용</span>
-                            <span class="product-feature">특대</span>
+                            <span class="product-feature">횟감용</span>
+                            <span class="product-feature">최상급</span>
                         </div>
                     </div>
                 </div>
