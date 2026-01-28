@@ -7,38 +7,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0077B6;
-            --primary-light: #00B4D8;
-            --primary-dark: #023E8A;
-            --accent: #48CAE4;
-            --accent-gold: #F4A261;
-            --accent-coral: #E76F51;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-400: #94A3B8;
-            --gray-500: #64748B;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
+            --primary: #005aab;
+            --primary-dark: #004080;
+            --primary-light: #0077cc;
+            --text-dark: #212121;
+            --text-gray: #555555;
+            --text-light: #888888;
+            --border-color: #e5e5e5;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --accent: #f4a261;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: var(--white);
-            color: var(--gray-700);
-            line-height: 1.7;
-            overflow-x: hidden;
+            background: var(--bg-white);
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 15px;
         }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        a:hover { color: var(--primary); }
 
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
@@ -50,462 +47,336 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,119,182,0.1);
-            transition: all 0.4s ease;
+            background: rgba(255,255,255,0.98);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
-        nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        nav.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 70px;
         }
 
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon {
-            width: 140px; height: 45px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,119,182,0.15);
-            position: relative; overflow: hidden;
-            background: white; padding: 8px 12px;
-        }
-        .logo-icon img {
-            width: 100%; height: 100%; object-fit: contain;
-        }
-        .logo-icon::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: logoShine 3s ease-in-out infinite;
-        }
-        @keyframes logoShine {
-            0%, 100% { transform: translateX(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) rotate(45deg); }
-        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { height: 40px; }
+        .logo-icon img { height: 100%; width: auto; }
         .logo-text { display: flex; flex-direction: column; }
-        .logo-main {
-            font-size: 1.4rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .logo-sub { font-size: 0.7rem; color: var(--gray-500); letter-spacing: 2px; }
+        .logo-main { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+        .logo-sub { font-size: 0.7rem; color: var(--text-light); letter-spacing: 2px; }
 
-        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links { display: flex; gap: 0; list-style: none; }
         .nav-links a {
-            text-decoration: none; color: var(--gray-600);
-            font-weight: 500; font-size: 0.95rem;
-            padding: 0.7rem 1.2rem; border-radius: 50px;
+            display: block;
+            padding: 25px 20px;
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
             transition: all 0.3s;
         }
-        .nav-links a:hover { color: var(--primary); background: rgba(0,119,182,0.08); }
-        .nav-links a.active {
-            color: var(--white);
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
-        .nav-cta { background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)) !important; color: white !important; }
+        .nav-links .nav-cta {
+            margin-left: 15px;
+            padding: 10px 25px;
+            background: var(--primary);
+            color: white !important;
+            border-radius: 3px;
+            border-bottom: none !important;
+        }
+        .nav-links .nav-cta:hover { background: var(--primary-dark); }
 
         .mobile-menu-btn {
-            display: none; flex-direction: column; gap: 6px;
-            cursor: pointer; background: none; border: none; padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
         }
-        .mobile-menu-btn span { width: 28px; height: 3px; background: var(--gray-700); border-radius: 3px; }
+        .mobile-menu-btn span { width: 24px; height: 2px; background: var(--text-dark); }
 
         /* Page Header */
         .page-header {
-            padding: 180px 2rem 100px;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
-            position: relative; overflow: hidden;
-        }
-        .page-header::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            padding: 150px 20px 80px;
+            background: var(--primary);
+            text-align: center;
         }
         .page-header-content {
-            max-width: 1400px; margin: 0 auto;
-            position: relative; z-index: 1;
-            text-align: center; color: white;
+            max-width: 1280px;
+            margin: 0 auto;
+            color: white;
         }
         .page-header-tag {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50px; font-size: 0.9rem; margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
-        .page-header h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; }
-        .page-header p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .page-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 15px; }
+        .page-header p { font-size: 1.1rem; opacity: 0.9; }
 
         /* Section */
-        section { padding: 7rem 2rem; }
-        .section-container { max-width: 1400px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-
+        .section { padding: 100px 20px; }
+        .section-container { max-width: 1280px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
         .section-tag {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 8px 20px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white; border-radius: 50px;
-            font-size: 0.85rem; font-weight: 600;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
-
         .section-title {
-            font-size: 2.8rem; font-weight: 900;
-            color: var(--gray-900); margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
         }
-        .section-title .emphasis { position: relative; color: var(--primary); }
-        .section-title .emphasis::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 100%; height: 12px;
-            background: rgba(0,180,216,0.2); z-index: -1;
-        }
-
+        .section-title .emphasis { color: var(--primary); }
         .section-desc {
-            font-size: 1.2rem; color: var(--gray-500);
-            max-width: 700px; margin: 0 auto;
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .section-desc strong { color: var(--primary); }
 
         /* Product Tabs */
         .product-tabs {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
+            gap: 10px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
-
         .product-tab {
-            padding: 1rem 2rem;
-            background: var(--gray-100);
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-600);
+            padding: 12px 25px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-gray);
             cursor: pointer;
             transition: all 0.3s;
             font-family: inherit;
         }
-
-        .product-tab:hover {
-            background: var(--gray-200);
-        }
-
+        .product-tab:hover { border-color: var(--primary); color: var(--primary); }
         .product-tab.active {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--primary);
+            border-color: var(--primary);
             color: white;
-            box-shadow: 0 4px 15px rgba(0,119,182,0.3);
         }
 
         /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 25px;
         }
-
         .product-card {
             background: white;
-            border-radius: 24px;
+            border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--gray-100);
+            transition: all 0.3s;
         }
-
         .product-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,119,182,0.2);
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(0,90,171,0.1);
         }
-
         .product-card-image {
-            height: 280px;
+            height: 220px;
             position: relative;
             overflow: hidden;
         }
-
         .product-card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s;
+            transition: transform 0.5s;
         }
-
         .product-card:hover .product-card-image img {
-            transform: scale(1.15);
+            transform: scale(1.05);
         }
-
         .product-badge {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            background: var(--primary);
             color: white;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(244,162,97,0.3);
-        }
-
-        .product-badge.new {
-            background: linear-gradient(135deg, #10B981, #059669);
-        }
-
-        .product-badge.premium {
-            background: linear-gradient(135deg, #8B5CF6, #6366F1);
-        }
-
-        .product-card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .product-card:hover .product-card-overlay {
-            opacity: 1;
-        }
-
-        .product-card-overlay span {
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .product-card-content {
-            padding: 2rem;
-        }
-
-        .product-category {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(0,119,182,0.1);
-            color: var(--primary);
-            border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
+        .product-badge.new { background: #10B981; }
+        .product-badge.premium { background: #8B5CF6; }
 
+        .product-card-content { padding: 25px; }
+        .product-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--bg-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
         .product-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
         }
-
         .product-desc {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
-
-        .product-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 1.5rem;
-        }
-
+        .product-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
         .product-feature {
-            padding: 6px 12px;
-            background: var(--gray-50);
-            border-radius: 8px;
+            padding: 4px 10px;
+            background: var(--bg-light);
             font-size: 0.8rem;
-            color: var(--gray-600);
-            font-weight: 500;
+            color: var(--text-gray);
         }
-
         .product-price {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--gray-100);
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
         }
-
-        .product-price-label {
-            font-size: 0.85rem;
-            color: var(--gray-500);
-        }
-
-        .product-price-value {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
+        .product-price-label { font-size: 0.85rem; color: var(--text-light); }
+        .product-price-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
 
         /* Feature Highlight */
         .feature-highlight {
-            background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
+            background: var(--text-dark);
             color: white;
         }
-
         .feature-highlight .section-tag { background: rgba(255,255,255,0.2); }
         .feature-highlight .section-title { color: white; }
         .feature-highlight .section-desc { color: rgba(255,255,255,0.7); }
-        .feature-highlight .section-desc strong { color: var(--accent-gold); }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 25px;
         }
-
         .feature-card {
             background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 2.5rem;
+            padding: 35px 25px;
             text-align: center;
-            transition: all 0.4s;
+            transition: all 0.3s;
         }
-
         .feature-card:hover {
             background: rgba(255,255,255,0.1);
-            transform: translateY(-10px);
-            border-color: var(--accent);
+            transform: translateY(-5px);
         }
-
         .feature-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--accent), var(--primary-light));
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 3rem;
-            margin: 0 auto 2rem;
-            box-shadow: 0 15px 40px rgba(72,202,228,0.3);
+            margin-bottom: 20px;
         }
-
         .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
-
         .feature-card p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             opacity: 0.8;
-            line-height: 1.8;
         }
 
-        /* Product Image */
-        .product-showcase {
-            background: var(--gray-50);
-        }
-
+        /* Product Showcase */
+        .product-showcase { background: var(--bg-light); }
         .showcase-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 60px;
             align-items: center;
         }
-
         .showcase-image img {
             width: 100%;
-            border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
         }
-
         .showcase-content h3 {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--gray-900);
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 30px;
         }
-
         .showcase-content h3 span { color: var(--primary); }
-
-        .showcase-list {
-            list-style: none;
-        }
-
+        .showcase-list { list-style: none; }
         .showcase-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
             transition: all 0.3s;
         }
-
-        .showcase-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0,119,182,0.15);
-        }
-
+        .showcase-item:hover { border-color: var(--primary); }
         .showcase-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 14px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
         }
-
         .showcase-text h4 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
         }
-
         .showcase-text p {
-            color: var(--gray-500);
+            color: var(--text-gray);
             font-size: 0.9rem;
         }
 
         /* Footer */
         footer {
-            background: var(--gray-900);
-            color: var(--gray-400);
-            padding: 5rem 2rem 2rem;
+            background: #1a1a1a;
+            color: rgba(255,255,255,0.6);
+            padding: 60px 20px 30px;
         }
-        .footer-container { max-width: 1400px; margin: 0 auto; }
+        .footer-container { max-width: 1280px; margin: 0 auto; }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            padding-bottom: 4rem;
+            gap: 50px;
+            padding-bottom: 40px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .footer-brand h3 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 1rem; }
-        .footer-brand p { line-height: 1.8; }
-        .footer-links h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-brand h3 { font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 20px; }
+        .footer-brand p { line-height: 1.8; font-size: 0.9rem; }
+        .footer-links h4 { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
         .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { color: var(--gray-400); text-decoration: none; transition: all 0.3s; }
-        .footer-links a:hover { color: var(--accent); }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
         .footer-bottom {
-            padding-top: 2rem;
+            padding-top: 30px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Responsive */
@@ -514,29 +385,33 @@
             .feature-grid { grid-template-columns: 1fr; }
             .showcase-wrapper { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
-            .page-header h1 { font-size: 2.5rem; }
         }
 
         @media (max-width: 768px) {
-            .nav-container { height: 70px; padding: 0 1rem; }
-            .logo-icon { width: 100px; height: 35px; padding: 5px 8px; }
+            .nav-container { height: 60px; }
             .logo-text { display: none; }
             .nav-links {
-                display: none; position: absolute;
-                top: 70px; left: 0; right: 0;
-                background: white; flex-direction: column; padding: 1.5rem; gap: 0.5rem;
+                display: none;
+                position: absolute;
+                top: 60px; left: 0; right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
             }
-            .nav-links a { padding: 1rem 1.5rem; font-size: 1rem; text-align: center; border-radius: 12px; }
+            .nav-links a { padding: 15px 20px; border-bottom: none; }
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: flex; }
 
-            .page-header h1 { font-size: 2rem; }
-            .section-title { font-size: 2rem; }
+            .page-header { padding: 120px 20px 60px; }
+            .page-header h1 { font-size: 1.8rem; }
+            .section { padding: 60px 20px; }
+            .section-title { font-size: 1.6rem; }
             .products-grid { grid-template-columns: 1fr; }
-            .product-tabs { gap: 0.5rem; }
-            .product-tab { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+            .product-tabs { gap: 5px; }
+            .product-tab { padding: 10px 15px; font-size: 0.85rem; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
@@ -568,21 +443,19 @@
     <!-- Page Header -->
     <header class="page-header">
         <div class="page-header-content">
-            <span class="page-header-tag">🐟 PRODUCTS</span>
+            <span class="page-header-tag">PRODUCTS</span>
             <h1>프리미엄 수산물</h1>
             <p>HACCP 인증 시설에서 정성껏 가공한 최상급 수산물</p>
         </div>
     </header>
 
     <!-- Products Section -->
-    <section class="products-section">
+    <section class="section products-section">
         <div class="section-container">
             <div class="section-header animate-on-scroll">
-                <span class="section-tag">🏷 CATALOG</span>
+                <span class="section-tag">CATALOG</span>
                 <h2 class="section-title">제품 <span class="emphasis">카탈로그</span></h2>
-                <p class="section-desc">
-                    <strong>50년 노하우</strong>로 엄선한 프리미엄 수산물을 만나보세요.
-                </p>
+                <p class="section-desc">50년 노하우로 엄선한 프리미엄 수산물을 만나보세요.</p>
             </div>
 
             <div class="product-tabs animate-on-scroll">
@@ -593,14 +466,10 @@
             </div>
 
             <div class="products-grid" id="productsGrid">
-                <!-- Product 1 -->
                 <div class="product-card animate-on-scroll delay-1" data-category="frozen">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_03.jpg" alt="노르웨이 간고등어">
                         <span class="product-badge">베스트셀러</span>
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">냉동 가공</span>
@@ -610,7 +479,6 @@
                             <span class="product-feature">노르웨이산</span>
                             <span class="product-feature">뼈 제거</span>
                             <span class="product-feature">대용량</span>
-                            <span class="product-feature">간편 조리</span>
                         </div>
                         <div class="product-price">
                             <span class="product-price-label">문의</span>
@@ -619,13 +487,9 @@
                     </div>
                 </div>
 
-                <!-- Product 2 -->
                 <div class="product-card animate-on-scroll delay-2" data-category="frozen">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_07.jpg" alt="손질 오징어">
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">냉동 가공</span>
@@ -643,14 +507,10 @@
                     </div>
                 </div>
 
-                <!-- Product 3 -->
                 <div class="product-card animate-on-scroll delay-3" data-category="premium">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_09.jpg" alt="참전복">
                         <span class="product-badge premium">프리미엄</span>
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">바다소풍</span>
@@ -668,14 +528,10 @@
                     </div>
                 </div>
 
-                <!-- Product 4 -->
                 <div class="product-card animate-on-scroll delay-1" data-category="fresh">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_05.jpg" alt="손질 갈치">
                         <span class="product-badge new">NEW</span>
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">손질 수산물</span>
@@ -693,13 +549,9 @@
                     </div>
                 </div>
 
-                <!-- Product 5 -->
                 <div class="product-card animate-on-scroll delay-2" data-category="frozen">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_10.jpg" alt="냉동 새우">
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">냉동 가공</span>
@@ -717,14 +569,10 @@
                     </div>
                 </div>
 
-                <!-- Product 6 -->
                 <div class="product-card animate-on-scroll delay-3" data-category="premium">
                     <div class="product-card-image">
                         <img src="KakaoTalk_20250626_103619878_12.jpg" alt="활전복">
                         <span class="product-badge premium">프리미엄</span>
-                        <div class="product-card-overlay">
-                            <span>클릭하여 자세히 보기</span>
-                        </div>
                     </div>
                     <div class="product-card-content">
                         <span class="product-category">바다소풍</span>
@@ -746,14 +594,12 @@
     </section>
 
     <!-- Feature Highlight -->
-    <section class="feature-highlight">
+    <section class="section feature-highlight">
         <div class="section-container">
             <div class="section-header animate-on-scroll">
-                <span class="section-tag">✨ QUALITY</span>
-                <h2 class="section-title">서풍 제품의 <span class="emphasis">특장점</span></h2>
-                <p class="section-desc">
-                    <strong>수산물을 읽는 온도</strong>까지 생각합니다.
-                </p>
+                <span class="section-tag">QUALITY</span>
+                <h2 class="section-title">서풍 제품의 특장점</h2>
+                <p class="section-desc">수산물을 읽는 온도까지 생각합니다.</p>
             </div>
 
             <div class="feature-grid">
@@ -779,7 +625,7 @@
     </section>
 
     <!-- Product Showcase -->
-    <section class="product-showcase">
+    <section class="section product-showcase">
         <div class="section-container">
             <div class="showcase-wrapper">
                 <div class="showcase-image animate-on-scroll">
@@ -827,32 +673,32 @@
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>🐟 서풍</h3>
+                    <h3>서풍</h3>
                     <p>신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
                 </div>
                 <div class="footer-links">
                     <h4>바로가기</h4>
                     <ul>
-                        <li><a href="about.html">→ 회사소개</a></li>
-                        <li><a href="process.html">→ 가공 프로세스</a></li>
-                        <li><a href="products.html">→ 제품</a></li>
-                        <li><a href="gallery.html">→ 갤러리</a></li>
+                        <li><a href="about.html">회사소개</a></li>
+                        <li><a href="process.html">가공 프로세스</a></li>
+                        <li><a href="products.html">제품</a></li>
+                        <li><a href="gallery.html">갤러리</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>제품</h4>
                     <ul>
-                        <li><a href="#">→ 냉동 수산물</a></li>
-                        <li><a href="#">→ 손질 수산물</a></li>
-                        <li><a href="#">→ 바다소풍</a></li>
+                        <li><a href="products.html">냉동 수산물</a></li>
+                        <li><a href="products.html">손질 수산물</a></li>
+                        <li><a href="products.html">바다소풍</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>연락처</h4>
                     <ul>
-                        <li><a href="tel:061-681-5171">📞 061-681-5171</a></li>
-                        <li><a href="#">📠 061-681-5173</a></li>
-                        <li><a href="contact.html">📍 전남 여수시 화양면</a></li>
+                        <li><a href="tel:061-681-5171">061-681-5171</a></li>
+                        <li>FAX 061-681-5173</li>
+                        <li><a href="contact.html">전남 여수시 화양면 석교로 121</a></li>
                     </ul>
                 </div>
             </div>
@@ -894,16 +740,8 @@
                 products.forEach(product => {
                     if (category === 'all' || product.dataset.category === category) {
                         product.style.display = 'block';
-                        setTimeout(() => {
-                            product.style.opacity = '1';
-                            product.style.transform = 'translateY(0)';
-                        }, 50);
                     } else {
-                        product.style.opacity = '0';
-                        product.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            product.style.display = 'none';
-                        }, 300);
+                        product.style.display = 'none';
                     }
                 });
             });
