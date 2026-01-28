@@ -378,6 +378,29 @@
             opacity: 0.9;
         }
 
+        /* Infographic Section */
+        .infographic-section {
+            background: linear-gradient(180deg, var(--gray-50) 0%, white 100%);
+            padding: 5rem 2rem;
+        }
+
+        .infographic-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            background: white;
+        }
+
+        .infographic-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
         /* History Section */
         .history-section { background: white; }
 
@@ -832,6 +855,22 @@
                         <div class="vision-badge-text">설립년도</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Infographic Section -->
+    <section class="infographic-section">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">📋 서풍 소개</span>
+                <h2 class="section-title">수산물 전문기업 <span class="emphasis">서풍</span></h2>
+                <p class="section-desc">
+                    서풍이 <strong>왜 다른지</strong> 자세히 알아보세요
+                </p>
+            </div>
+            <div class="infographic-wrapper animate-on-scroll">
+                <img src="seo2.jpg" alt="서풍 회사 소개 인포그래픽" class="infographic-image">
             </div>
         </div>
     </section>
