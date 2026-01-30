@@ -4,1300 +4,357 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>서풍 | 신뢰로써 공존하는 수산물 전문기업</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #005aab;
-            --primary-dark: #004080;
-            --primary-light: #0077cc;
-            --text-dark: #212121;
-            --text-gray: #555555;
-            --text-light: #888888;
-            --border-color: #e5e5e5;
-            --bg-light: #f8f8f8;
-            --bg-white: #ffffff;
-            --accent: #f4a261;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: var(--bg-white);
-            color: var(--text-gray);
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: var(--primary);
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            height: 40px;
-        }
-
-        .logo-icon img {
-            height: 100%;
-            width: auto;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-main {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            letter-spacing: -0.5px;
-        }
-
-        .logo-sub {
-            font-size: 0.7rem;
-            color: var(--text-light);
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0;
-            list-style: none;
-        }
-
-        .nav-links li {
-            position: relative;
-        }
-
-        .nav-links a {
-            display: block;
-            padding: 25px 20px;
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .nav-links .nav-cta {
-            margin-left: 15px;
-            padding: 10px 25px;
-            background: var(--primary);
-            color: white !important;
-            border-radius: 3px;
-            border-bottom: none !important;
-        }
-
-        .nav-links .nav-cta:hover {
-            background: var(--primary-dark);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-
-        .mobile-menu-btn span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-dark);
-            transition: all 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: #1a1a1a;
-        }
-
-        .hero-bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .hero-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 100px 20px;
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-content {
-            color: white;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        .hero-title {
-            font-size: 3.2rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 25px;
-            letter-spacing: -1px;
-        }
-
-        .hero-title .highlight {
-            color: var(--accent);
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            opacity: 0.9;
-            margin-bottom: 35px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-            padding: 25px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-stat {
-            text-align: left;
-        }
-
-        .hero-stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            line-height: 1;
-        }
-
-        .hero-stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 8px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 15px 35px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            color: white;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            color: white;
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-image-wrapper img {
-            width: 100%;
-            display: block;
-        }
-
-        .hero-floating-card {
-            position: absolute;
-            background: white;
-            padding: 20px 25px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-floating-card.card-1 {
-            top: 20px;
-            right: -20px;
-        }
-
-        .hero-floating-card.card-2 {
-            bottom: 40px;
-            left: -20px;
-        }
-
-        .floating-card-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .floating-card-title {
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-
-        .floating-card-text {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-
-        /* Section Common */
-        .section {
-            padding: 100px 20px;
-        }
-
-        .section-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-title .emphasis {
-            color: var(--primary);
-        }
-
-        .section-desc {
-            font-size: 1.05rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Why Section */
-        .why-section {
-            background: var(--bg-light);
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .why-card {
-            background: white;
-            padding: 40px 30px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .why-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 90, 171, 0.1);
-        }
-
-        .why-card-number {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--bg-light);
-        }
-
-        .why-card-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-        }
-
-        .why-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .why-card p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        .why-card-highlight {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 5px 12px;
-            background: var(--bg-light);
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Products Section */
-        .products-section {
-            background: white;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .product-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .product-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-card-image {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover .product-card-image img {
-            transform: scale(1.05);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 5px 12px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .product-card-content {
-            padding: 25px;
-        }
-
-        .product-category {
-            display: inline-block;
-            padding: 3px 10px;
-            background: var(--bg-light);
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .product-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .product-desc {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-
-        .product-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .product-feature {
-            padding: 4px 10px;
-            background: var(--bg-light);
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-
-        .view-more-btn {
-            display: block;
-            width: fit-content;
-            margin: 50px auto 0;
-            padding: 15px 40px;
-            background: white;
-            border: 1px solid var(--text-dark);
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .view-more-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 20px;
-            background: var(--primary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
-
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 20px;
-            background: var(--text-dark);
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .cta-title .highlight {
-            color: var(--accent);
-        }
-
-        .cta-desc {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        /* Footer */
-        footer {
-            background: #1a1a1a;
-            color: rgba(255, 255, 255, 0.6);
-            padding: 60px 20px 30px;
-        }
-
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-brand h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            line-height: 1.8;
-            font-size: 0.9rem;
-        }
-
-        .footer-links h4 {
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-stat {
-                text-align: center;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-visual {
-                display: none;
-            }
-
-            .why-grid,
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                height: 60px;
-            }
-
-            .logo-text {
-                display: none;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                border-bottom: 1px solid var(--border-color);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links a {
-                padding: 15px 20px;
-                border-bottom: none;
-            }
-
-            .nav-links a.active,
-            .nav-links a:hover {
-                background: var(--bg-light);
-                border-bottom: none;
-            }
-
-            .nav-links .nav-cta {
-                margin: 10px 0 0 0;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .section {
-                padding: 60px 20px;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-title {
-                font-size: 1.8rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
-
-        /* Animation */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
-    </style>
+    <meta name="description" content="영어조합법인 서풍 - 여수수협 중매인 49호, 연간 300억원 원료 비축, HACCP·ASC·MSC 인증 수산물 전문기업">
+
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
-    <!-- Language Selector -->
-    <div id="langSelector" style="position: fixed; top: 80px; right: 20px; z-index: 999; display: flex; gap: 5px; background: white; padding: 8px; border: 1px solid #e5e5e5; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <button onclick="changeLang('ko')" class="lang-btn active" style="padding: 6px 12px; background: #005aab; color: white; border: 1px solid #005aab; font-size: 0.8rem; font-weight: 500; cursor: pointer;">한국어</button>
-        <button onclick="changeLang('zh')" class="lang-btn" style="padding: 6px 12px; background: #f8f8f8; border: 1px solid #e5e5e5; font-size: 0.8rem; font-weight: 500; cursor: pointer;">中文</button>
-        <button onclick="changeLang('ms')" class="lang-btn" style="padding: 6px 12px; background: #f8f8f8; border: 1px solid #e5e5e5; font-size: 0.8rem; font-weight: 500; cursor: pointer;">Melayu</button>
-    </div>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">
+                <div class="logo__icon">
                     <img src="logo_transparent.png" alt="서풍 로고">
                 </div>
-                <div class="logo-text">
-                    <span class="logo-main">서풍</span>
-                    <span class="logo-sub">SEOPOONG</span>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
                 </div>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active">홈</a></li>
-                <li><a href="about.html">회사소개</a></li>
-                <li><a href="process.html">가공 프로세스</a></li>
-                <li><a href="products.html">제품</a></li>
-                <li><a href="gallery.html">갤러리</a></li>
-                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
-            </ul>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="index.html" class="nav__link nav__link--active">홈</a></li>
+                    <li><a href="about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="products.html" class="nav__link">제품</a></li>
+                    <li><a href="gallery.html" class="nav__link">갤러리</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <video class="hero-bg-video" autoplay muted loop playsinline>
+        <video class="hero__video" autoplay muted loop playsinline>
             <source src="KakaoTalk_20250626_103609555.mp4" type="video/mp4">
         </video>
-        <div class="hero-overlay"></div>
+        <img class="hero__image" src="facility1.jpg" alt="서풍 시설">
+        <div class="hero__overlay"></div>
 
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">여수수협 중매인 49호 | HACCP | ASC/MSC | 수출의 탑 2회</div>
+        <div class="hero__container">
+            <div class="hero__content">
+                <span class="hero__badge">여수수협 중매인 49호 | HACCP | ASC/MSC | 수출의 탑 2회</span>
 
-                <h1 class="hero-title">
-                    <span class="highlight">지속적인 재투자</span>로<br>
+                <h1 class="hero__title">
+                    <span class="hero__title--accent">지속적인 재투자</span>로<br>
                     고객 신뢰를 지킵니다
                 </h1>
 
-                <p class="hero-subtitle">
+                <p class="hero__subtitle">
                     단기 수익보다 생산설비 고도화, 품질관리 강화, 신기술 도입으로<br>
                     제품 경쟁력을 확보하고 고객 신뢰를 유지하는 것이<br>
                     서풍의 핵심 가치입니다.
                 </p>
 
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" data-count="300">0</div>
-                        <div class="hero-stat-label">억+ 연간 원료 비축</div>
+                <div class="hero__stats">
+                    <div class="hero__stat">
+                        <div class="hero__stat-number" data-count="300">0</div>
+                        <div class="hero__stat-label">억+ 연간 원료 비축</div>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" data-count="100">0</div>
-                        <div class="hero-stat-label">억 연간 수출</div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-number" data-count="100">0</div>
+                        <div class="hero__stat-label">억 연간 수출</div>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" data-count="2">0</div>
-                        <div class="hero-stat-label">회 수출의 탑</div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-number" data-count="356">0</div>
+                        <div class="hero__stat-label">억 2023 매출</div>
                     </div>
                 </div>
 
-                <div class="hero-buttons">
-                    <a href="contact.html" class="btn btn-primary">
+                <div class="hero__buttons">
+                    <a href="contact.html" class="btn btn--primary btn--block-mobile">
                         문의하기
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="about.html" class="btn btn-outline">자세히 보기</a>
+                    <a href="about.html" class="btn btn--outline btn--block-mobile">자세히 보기</a>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="hero-image-wrapper">
-                    <img src="seo5.gif" alt="서풍">
-                </div>
-
-                <div class="hero-floating-card card-1">
-                    <div class="floating-card-icon">🏆</div>
-                    <div class="floating-card-title">수출의 탑 2회</div>
-                    <div class="floating-card-text">중국, 말레이시아 등<br>연간 100억원 수출</div>
-                </div>
-
-                <div class="hero-floating-card card-2">
-                    <div class="floating-card-icon">🌿</div>
-                    <div class="floating-card-title">ASC · MSC 인증</div>
-                    <div class="floating-card-text">지속 가능 수산물<br>국제 인증 획득</div>
-                </div>
+            <div class="hero__visual">
+                <img src="seo5.gif" alt="서풍 제품" style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
             </div>
         </div>
     </section>
 
     <!-- Core Value Banner -->
-    <section style="background: linear-gradient(135deg, #004080, #005aab); padding: 50px 20px; text-align: center; color: white;">
-        <p style="max-width: 1000px; margin: 0 auto; font-size: 1.3rem; line-height: 1.9; font-weight: 500;">
-            "단기 수익에 집중하기보다는 <span style="color: #f4a261; font-weight: 700;">지속적인 재투자</span>를 통한<br>
-            생산설비 고도화, 품질관리 강화, 신기술 도입으로<br>
-            <span style="color: #f4a261; font-weight: 700;">제품 경쟁력 확보</span>와 <span style="color: #f4a261; font-weight: 700;">고객 신뢰 유지</span>가 서풍의 핵심 가치입니다"
-        </p>
+    <section class="section--bg-navy" style="padding: 3rem 1.25rem; text-align: center;">
+        <div class="container">
+            <p style="font-size: 1.25rem; line-height: 2; font-weight: 500;">
+                "단기 수익에 집중하기보다는 <span style="color: var(--accent); font-weight: 700;">지속적인 재투자</span>를 통한<br>
+                생산설비 고도화, 품질관리 강화, 신기술 도입으로<br>
+                <span style="color: var(--accent); font-weight: 700;">제품 경쟁력 확보</span>와 <span style="color: var(--accent); font-weight: 700;">고객 신뢰 유지</span>가 서풍의 핵심 가치입니다"
+            </p>
+        </div>
     </section>
 
-    <!-- Strength Section -->
-    <section class="section why-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">CORE STRENGTH</span>
-                <h2 class="section-title">
-                    서풍의 <span class="emphasis">6대 핵심 경쟁력</span>
+    <!-- Strengths Section -->
+    <section class="section section--bg-light">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">CORE STRENGTH</span>
+                <h2 class="section__title">
+                    서풍의 <span class="section__title--accent">6대 핵심 경쟁력</span>
                 </h2>
-                <p class="section-desc">
-                    지속적인 투자와 혁신으로 만들어낸 차별화된 경쟁력
-                </p>
+                <p class="section__desc">지속적인 투자와 혁신으로 만들어낸 차별화된 경쟁력</p>
             </div>
 
-            <div class="why-grid">
-                <div class="why-card animate-on-scroll delay-1">
-                    <span class="why-card-number">01</span>
-                    <div class="why-card-icon">🏪</div>
-                    <h3>여수수협 중매인 49호<br>연간 300억+ 원료 비축</h3>
-                    <p>여수수협 공인 중매인으로서 안정적인 원료 수급 능력. 연간 300억원 이상의 원료 비축으로 대규모 수요에 안정적 대응</p>
-                    <span class="why-card-highlight">안정적 공급망</span>
+            <div class="grid grid--3">
+                <div class="card strength-card animate-on-scroll animate-delay-1">
+                    <span class="strength-card__number">01</span>
+                    <div class="strength-card__icon">🏪</div>
+                    <h3 class="strength-card__title">여수수협 중매인 49호<br>연간 300억+ 원료 비축</h3>
+                    <p class="strength-card__desc">여수수협 공인 중매인으로서 안정적인 원료 수급 능력. 연간 300억원 이상의 원료 비축으로 대규모 수요에 안정적 대응</p>
+                    <span class="strength-card__tag">안정적 공급망</span>
                 </div>
 
-                <div class="why-card animate-on-scroll delay-2">
-                    <span class="why-card-number">02</span>
-                    <div class="why-card-icon">⚙️</div>
-                    <h3>급속동결 자동화 포장<br>고도화 생산 인프라</h3>
-                    <p>IQF 급속동결 설비, 자동화 포장 라인 등 최첨단 생산 인프라 구축으로 품질과 효율성을 동시에 확보</p>
-                    <span class="why-card-highlight">첨단 설비</span>
+                <div class="card strength-card animate-on-scroll animate-delay-2">
+                    <span class="strength-card__number">02</span>
+                    <div class="strength-card__icon">⚙️</div>
+                    <h3 class="strength-card__title">급속동결 자동화 포장<br>고도화 생산 인프라</h3>
+                    <p class="strength-card__desc">IQF 급속동결 설비, 자동화 포장 라인 등 최첨단 생산 인프라 구축으로 품질과 효율성을 동시에 확보</p>
+                    <span class="strength-card__tag">첨단 설비</span>
                 </div>
 
-                <div class="why-card animate-on-scroll delay-3">
-                    <span class="why-card-number">03</span>
-                    <div class="why-card-icon">🏢</div>
-                    <h3>PB 전문 업체<br>대형 유통사 파트너십</h3>
-                    <p>풀무원, CJ, 쿠팡, 올가, 초록마을 등 국내 주요 유통사의 PB 제품을 생산하는 신뢰받는 파트너</p>
-                    <span class="why-card-highlight">대형 유통사 협력</span>
+                <div class="card strength-card animate-on-scroll animate-delay-3">
+                    <span class="strength-card__number">03</span>
+                    <div class="strength-card__icon">🏢</div>
+                    <h3 class="strength-card__title">PB 전문 업체<br>대형 유통사 파트너십</h3>
+                    <p class="strength-card__desc">풀무원, CJ, 쿠팡, 올가, 초록마을 등 국내 주요 유통사의 PB 제품을 생산하는 신뢰받는 파트너</p>
+                    <span class="strength-card__tag">대형 유통사 협력</span>
                 </div>
 
-                <div class="why-card animate-on-scroll delay-1">
-                    <span class="why-card-number">04</span>
-                    <div class="why-card-icon">🌿</div>
-                    <h3>ASC · MSC 지속 가능<br>수산물 인증 운영</h3>
-                    <p>국제 인정 ASC(양식), MSC(자연산) 지속 가능 수산물 인증으로 환경 보호와 지속 가능한 수산업에 기여</p>
-                    <span class="why-card-highlight">친환경 인증</span>
+                <div class="card strength-card animate-on-scroll animate-delay-1">
+                    <span class="strength-card__number">04</span>
+                    <div class="strength-card__icon">🌿</div>
+                    <h3 class="strength-card__title">ASC · MSC 지속 가능<br>수산물 인증 운영</h3>
+                    <p class="strength-card__desc">국제 인정 ASC(양식), MSC(자연산) 지속 가능 수산물 인증으로 환경 보호와 지속 가능한 수산업에 기여</p>
+                    <span class="strength-card__tag">친환경 인증</span>
                 </div>
 
-                <div class="why-card animate-on-scroll delay-2">
-                    <span class="why-card-number">05</span>
-                    <div class="why-card-icon">📋</div>
-                    <h3>전품목 수산물 이력제<br>품질인증 수산물 운영</h3>
-                    <p>전 제품에 수산물 이력제 적용, 품질인증 수산물 운영으로 원산지부터 소비자까지 완벽한 추적 시스템</p>
-                    <span class="why-card-highlight">투명한 이력 관리</span>
+                <div class="card strength-card animate-on-scroll animate-delay-2">
+                    <span class="strength-card__number">05</span>
+                    <div class="strength-card__icon">📋</div>
+                    <h3 class="strength-card__title">전품목 수산물 이력제<br>품질인증 수산물 운영</h3>
+                    <p class="strength-card__desc">전 제품에 수산물 이력제 적용, 품질인증 수산물 운영으로 원산지부터 소비자까지 완벽한 추적 시스템</p>
+                    <span class="strength-card__tag">투명한 이력 관리</span>
                 </div>
 
-                <div class="why-card animate-on-scroll delay-3">
-                    <span class="why-card-number">06</span>
-                    <div class="why-card-icon">🌏</div>
-                    <h3>글로벌 수출 경쟁력<br>연간 100억원 수출</h3>
-                    <p>중국, 말레이시아 등 해외 시장에 연간 100억원 수출. 수출의 탑 2회 수상으로 검증된 글로벌 경쟁력</p>
-                    <span class="why-card-highlight">수출의 탑 2회</span>
+                <div class="card strength-card animate-on-scroll animate-delay-3">
+                    <span class="strength-card__number">06</span>
+                    <div class="strength-card__icon">🌏</div>
+                    <h3 class="strength-card__title">글로벌 수출 경쟁력<br>연간 100억원 수출</h3>
+                    <p class="strength-card__desc">중국, 말레이시아 등 해외 시장에 연간 100억원 수출. 수출의 탑 2회 수상으로 검증된 글로벌 경쟁력</p>
+                    <span class="strength-card__tag">수출의 탑 2회</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Partner Section -->
-    <section style="background: white; padding: 60px 20px;">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll" style="margin-bottom: 40px;">
-                <span class="section-tag">PARTNERS</span>
-                <h2 class="section-title">PB <span class="emphasis">파트너사</span></h2>
-                <p class="section-desc">국내 대표 유통사들이 선택한 믿을 수 있는 파트너</p>
+    <!-- Partners Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">PARTNERS</span>
+                <h2 class="section__title">PB <span class="section__title--accent">파트너사</span></h2>
+                <p class="section__desc">국내 대표 유통사들이 선택한 믿을 수 있는 파트너</p>
             </div>
-            <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;" class="animate-on-scroll">
-                <span style="font-size: 1.1rem; font-weight: 700; color: #555; padding: 15px 25px; background: #f8f8f8; border: 1px solid #e5e5e5;">풀무원</span>
-                <span style="font-size: 1.1rem; font-weight: 700; color: #555; padding: 15px 25px; background: #f8f8f8; border: 1px solid #e5e5e5;">CJ</span>
-                <span style="font-size: 1.1rem; font-weight: 700; color: #555; padding: 15px 25px; background: #f8f8f8; border: 1px solid #e5e5e5;">쿠팡</span>
-                <span style="font-size: 1.1rem; font-weight: 700; color: #555; padding: 15px 25px; background: #f8f8f8; border: 1px solid #e5e5e5;">올가</span>
-                <span style="font-size: 1.1rem; font-weight: 700; color: #555; padding: 15px 25px; background: #f8f8f8; border: 1px solid #e5e5e5;">초록마을</span>
+
+            <div class="partners animate-on-scroll">
+                <span class="partners__item">풀무원</span>
+                <span class="partners__item">CJ</span>
+                <span class="partners__item">쿠팡</span>
+                <span class="partners__item">올가</span>
+                <span class="partners__item">초록마을</span>
             </div>
         </div>
     </section>
 
-    <!-- Certifications -->
-    <section style="background: #212121; padding: 50px 20px;">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; max-width: 1280px; margin: 0 auto;">
-            <div style="text-align: center; color: white; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" class="animate-on-scroll delay-1">
-                <div style="font-size: 2rem; margin-bottom: 10px;">🏅</div>
-                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 5px;">HACCP 인증</h4>
-                <p style="font-size: 0.85rem; opacity: 0.7;">식품안전관리인증</p>
+    <!-- Certifications Section -->
+    <section class="certs">
+        <div class="certs__grid">
+            <div class="certs__item animate-on-scroll animate-delay-1">
+                <div class="certs__icon">🏅</div>
+                <h4 class="certs__title">HACCP 인증</h4>
+                <p class="certs__desc">식품안전관리인증</p>
             </div>
-            <div style="text-align: center; color: white; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" class="animate-on-scroll delay-2">
-                <div style="font-size: 2rem; margin-bottom: 10px;">🌿</div>
-                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 5px;">ASC 인증</h4>
-                <p style="font-size: 0.85rem; opacity: 0.7;">지속가능 양식 수산물</p>
+            <div class="certs__item animate-on-scroll animate-delay-2">
+                <div class="certs__icon">🌿</div>
+                <h4 class="certs__title">ASC 인증</h4>
+                <p class="certs__desc">지속가능 양식 수산물</p>
             </div>
-            <div style="text-align: center; color: white; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" class="animate-on-scroll delay-3">
-                <div style="font-size: 2rem; margin-bottom: 10px;">🐟</div>
-                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 5px;">MSC 인증</h4>
-                <p style="font-size: 0.85rem; opacity: 0.7;">지속가능 자연산 수산물</p>
+            <div class="certs__item animate-on-scroll animate-delay-3">
+                <div class="certs__icon">🐟</div>
+                <h4 class="certs__title">MSC 인증</h4>
+                <p class="certs__desc">지속가능 자연산 수산물</p>
             </div>
-            <div style="text-align: center; color: white; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);" class="animate-on-scroll delay-4">
-                <div style="font-size: 2rem; margin-bottom: 10px;">📋</div>
-                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 5px;">수산물 이력제</h4>
-                <p style="font-size: 0.85rem; opacity: 0.7;">전품목 이력 추적</p>
+            <div class="certs__item animate-on-scroll animate-delay-4">
+                <div class="certs__icon">📋</div>
+                <h4 class="certs__title">수산물 이력제</h4>
+                <p class="certs__desc">전품목 이력 추적</p>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section class="section products-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">PRODUCTS</span>
-                <h2 class="section-title">
-                    <span class="emphasis">프리미엄</span> 수산물
-                </h2>
-                <p class="section-desc">
-                    HACCP 인증 시설에서 정성껏 가공한<br>
-                    최상급 수산물을 만나보세요.
-                </p>
+    <section class="section">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">PRODUCTS</span>
+                <h2 class="section__title"><span class="section__title--accent">프리미엄</span> 수산물</h2>
+                <p class="section__desc">HACCP 인증 시설에서 정성껏 가공한 최상급 수산물을 만나보세요.</p>
             </div>
 
-            <div class="products-grid">
-                <div class="product-card animate-on-scroll delay-1">
-                    <div class="product-card-image">
+            <div class="grid grid--3">
+                <div class="card product-card animate-on-scroll animate-delay-1">
+                    <div class="product-card__image">
                         <img src="fish1.jpg" alt="노르웨이 간고등어">
-                        <span class="product-badge">베스트셀러</span>
+                        <span class="product-card__badge">베스트셀러</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">노르웨이 간고등어살 1.3kg</h3>
-                        <p class="product-desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">노르웨이산</span>
-                            <span class="product-feature">뼈 제거</span>
-                            <span class="product-feature">대용량</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">냉동 가공</span>
+                        <h3 class="product-card__title">노르웨이 간고등어살 1.3kg</h3>
+                        <p class="product-card__desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">노르웨이산</span>
+                            <span class="product-card__feature">뼈 제거</span>
+                            <span class="product-card__feature">대용량</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-2">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-2">
+                    <div class="product-card__image">
                         <img src="product1.jpg" alt="손질 생선">
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">손질 생선 포장</h3>
-                        <p class="product-desc">위생적인 진공포장으로 신선함을 오래 유지. 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">진공포장</span>
-                            <span class="product-feature">개별포장</span>
-                            <span class="product-feature">급속냉동</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">냉동 가공</span>
+                        <h3 class="product-card__title">손질 생선 포장</h3>
+                        <p class="product-card__desc">위생적인 진공포장으로 신선함을 오래 유지. 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">진공포장</span>
+                            <span class="product-card__feature">개별포장</span>
+                            <span class="product-card__feature">급속냉동</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-3">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-3">
+                    <div class="product-card__image">
                         <img src="fish2.jpg" alt="참돔">
-                        <span class="product-badge">프리미엄</span>
+                        <span class="product-card__badge product-card__badge--premium">프리미엄</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">신선 수산</span>
-                        <h3 class="product-title">신선 참돔</h3>
-                        <p class="product-desc">여수 청정 해역의 프리미엄 참돔. 고급 횟감과 요리에 적합한 최상급 품질입니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">여수산</span>
-                            <span class="product-feature">횟감용</span>
-                            <span class="product-feature">최상급</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">신선 수산</span>
+                        <h3 class="product-card__title">신선 참돔</h3>
+                        <p class="product-card__desc">여수 청정 해역의 프리미엄 참돔. 고급 횟감과 요리에 적합한 최상급 품질입니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">여수산</span>
+                            <span class="product-card__feature">횟감용</span>
+                            <span class="product-card__feature">최상급</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <a href="products.html" class="view-more-btn">
-                전체 제품 보기
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-    </section>
-
-    <!-- Global Export Section -->
-    <section style="background: linear-gradient(135deg, #1a365d, #2563eb); color: white; padding: 80px 20px;">
-        <div class="section-container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-                <div class="animate-on-scroll">
-                    <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 20px;">글로벌 시장에서<br><span style="color: #f4a261;">수출 경쟁력</span> 확보</h3>
-                    <p style="font-size: 1rem; line-height: 1.9; opacity: 0.9; margin-bottom: 30px;">
-                        서풍은 중국, 말레이시아 등 해외 시장에 연간 100억원 규모의 수출을 진행하고 있습니다.
-                        뛰어난 품질과 경쟁력을 인정받아 수출의 탑을 2회 수상하였습니다.
-                    </p>
-                    <div style="display: flex; gap: 30px;">
-                        <div style="text-align: center; padding: 20px 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
-                            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;" data-count="100" class="stat-number">0</div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">억원 연간 수출</div>
-                        </div>
-                        <div style="text-align: center; padding: 20px 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
-                            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">2</div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">회 수출의 탑 수상</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="animate-on-scroll delay-2" style="position: relative;">
-                    <img src="seo5.gif" alt="글로벌 수출" style="width: 100%; border: 1px solid rgba(255,255,255,0.2);">
-                    <div style="position: absolute; bottom: -15px; right: 15px; background: #d4a437; color: #1a1a1a; padding: 15px 25px; text-align: center;">
-                        <div style="font-size: 0.85rem; font-weight: 600;">수출국</div>
-                        <div style="font-size: 1.1rem; font-weight: 700;">중국 · 말레이시아</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sustainability Section -->
-    <section class="section" style="background: #f8f8f8;">
-        <div class="section-container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-                <div class="animate-on-scroll">
-                    <h3 style="font-size: 1.8rem; font-weight: 700; color: #212121; margin-bottom: 20px;"><span style="color: #10B981;">지속 가능한</span> 수산물 운영</h3>
-                    <p style="font-size: 1rem; color: #555; margin-bottom: 25px; line-height: 1.9;">
-                        서풍은 ASC(양식수산물인증협의회)와 MSC(해양관리협의회) 인증을 통해
-                        지속 가능한 수산물 공급망을 운영하고 있습니다.
-                    </p>
-                    <div style="display: flex; gap: 20px; margin-bottom: 25px;">
-                        <div style="padding: 15px 25px; background: white; border: 2px solid #10B981; text-align: center;">
-                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #10B981; margin-bottom: 5px;">ASC</h4>
-                            <p style="font-size: 0.85rem; color: #555; margin: 0;">책임 있는 양식 수산물</p>
-                        </div>
-                        <div style="padding: 15px 25px; background: white; border: 2px solid #10B981; text-align: center;">
-                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #10B981; margin-bottom: 5px;">MSC</h4>
-                            <p style="font-size: 0.85rem; color: #555; margin: 0;">지속 가능한 어업</p>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.95rem; color: #555; line-height: 1.8;">
-                        지속 가능 수산물 인증은 환경 보호와 자원 관리를 통해 미래 세대도 수산 자원을 누릴 수 있도록 보장합니다.
-                    </p>
-                </div>
-                <div class="animate-on-scroll delay-2" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #e5e5e5;">
-                    <iframe src="https://www.youtube.com/embed/W_hNXCL3_Io" title="MSC 지속가능수산물 - What is the MSC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-                </div>
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="products.html" class="btn btn--dark">
+                    전체 제품 보기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card animate-on-scroll delay-1">
-                <div class="stat-icon">📅</div>
-                <div class="stat-number" data-count="15">0</div>
-                <div class="stat-label">년의 노하우</div>
+    <section class="stats">
+        <div class="stats__grid">
+            <div class="stats__item animate-on-scroll animate-delay-1">
+                <div class="stats__icon">📅</div>
+                <div class="stats__number" data-count="15">0</div>
+                <div class="stats__label">년의 노하우</div>
             </div>
-            <div class="stat-card animate-on-scroll delay-2">
-                <div class="stat-icon">💰</div>
-                <div class="stat-number" data-count="356">0</div>
-                <div class="stat-label">억원 매출</div>
+            <div class="stats__item animate-on-scroll animate-delay-2">
+                <div class="stats__icon">💰</div>
+                <div class="stats__number" data-count="356">0</div>
+                <div class="stats__label">억원 매출</div>
             </div>
-            <div class="stat-card animate-on-scroll delay-3">
-                <div class="stat-icon">👥</div>
-                <div class="stat-number" data-count="29">0</div>
-                <div class="stat-label">명 전문 인력</div>
+            <div class="stats__item animate-on-scroll animate-delay-3">
+                <div class="stats__icon">👥</div>
+                <div class="stats__number" data-count="29">0</div>
+                <div class="stats__label">명 전문 인력</div>
             </div>
-            <div class="stat-card animate-on-scroll delay-4">
-                <div class="stat-icon">🏫</div>
-                <div class="stat-number" data-count="100">0</div>
-                <div class="stat-label">+ 학교 급식 납품</div>
+            <div class="stats__item animate-on-scroll animate-delay-4">
+                <div class="stats__icon">🏫</div>
+                <div class="stats__number" data-count="100">0</div>
+                <div class="stats__label">+ 학교 급식 납품</div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container animate-on-scroll">
-            <h2 class="cta-title">
-                <span class="highlight">신선한 수산물</span>이<br>
+    <section class="cta">
+        <div class="cta__container animate-on-scroll">
+            <h2 class="cta__title">
+                <span class="cta__title--accent">신선한 수산물</span>이<br>
                 필요하신가요?
             </h2>
-            <p class="cta-desc">
+            <p class="cta__desc">
                 대량 주문, 학교 급식, OEM/ODM 등<br>
                 어떤 문의든 환영합니다. 지금 바로 연락주세요!
             </p>
-            <div class="cta-buttons">
-                <a href="contact.html" class="btn btn-primary">
+            <div class="cta__buttons">
+                <a href="contact.html" class="btn btn--primary">
                     문의하기
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="tel:061-681-5171" class="btn btn-outline">
-                    📞 061-681-5171
-                </a>
+                <a href="tel:061-681-5171" class="btn btn--outline">061-681-5171</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>서풍</h3>
-                    <p>
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">
                         신뢰로써 공존하는 기업<br>
                         50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
                         가장 신선하고 안전한 수산물을 공급합니다.
                     </p>
                 </div>
-                <div class="footer-links">
-                    <h4>바로가기</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
                     <ul>
                         <li><a href="about.html">회사소개</a></li>
                         <li><a href="process.html">가공 프로세스</a></li>
@@ -1305,16 +362,16 @@
                         <li><a href="gallery.html">갤러리</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>제품</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">제품</h4>
                     <ul>
                         <li><a href="products.html">냉동 수산물</a></li>
                         <li><a href="products.html">손질 수산물</a></li>
                         <li><a href="products.html">바다소풍</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>연락처</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
                     <ul>
                         <li><a href="tel:061-681-5171">061-681-5171</a></li>
                         <li>FAX 061-681-5173</li>
@@ -1322,112 +379,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
                 <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Counter animation function
-        function animateCounter(counter) {
-            const target = parseInt(counter.dataset.count);
-            const duration = 2000;
-            const step = target / (duration / 16);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += step;
-                if (current < target) {
-                    counter.textContent = Math.floor(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target;
-                }
-            };
-            updateCounter();
-        }
-
-        // Hero stats counter
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.hero-stat-number[data-count]').forEach(counter => {
-                    animateCounter(counter);
-                });
-            }, 500);
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-
-                    const counters = entry.target.querySelectorAll('.stat-number[data-count]');
-                    counters.forEach(counter => {
-                        if (!counter.classList.contains('counted')) {
-                            counter.classList.add('counted');
-                            animateCounter(counter);
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Language change function
-        const translations = {
-            ko: {
-                home: '홈', about: '회사소개', process: '가공 프로세스', products: '제품', gallery: '갤러리', contact: '문의하기'
-            },
-            zh: {
-                home: '首页', about: '公司简介', process: '加工流程', products: '产品', gallery: '图库', contact: '联系我们'
-            },
-            ms: {
-                home: 'Utama', about: 'Tentang', process: 'Proses', products: 'Produk', gallery: 'Galeri', contact: 'Hubungi'
-            }
-        };
-
-        function changeLang(lang) {
-            // Update button styles
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.style.background = '#f8f8f8';
-                btn.style.color = '#212121';
-                btn.style.borderColor = '#e5e5e5';
-            });
-            event.target.style.background = '#005aab';
-            event.target.style.color = 'white';
-            event.target.style.borderColor = '#005aab';
-
-            // Update navigation text
-            const links = document.querySelectorAll('.nav-links a');
-            const keys = ['home', 'about', 'process', 'products', 'gallery', 'contact'];
-            links.forEach((link, i) => {
-                if (translations[lang][keys[i]]) {
-                    link.textContent = translations[lang][keys[i]];
-                }
-            });
-        }
-    </script>
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
 </body>
 </html>

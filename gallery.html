@@ -4,532 +4,429 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>갤러리 | 서풍 - 현장의 모습</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="서풍의 시설, 가공 현장, 제품 사진 및 영상 갤러리">
+
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+
     <style>
-        :root {
-            --primary: #005aab;
-            --primary-dark: #004080;
-            --primary-light: #0077cc;
-            --text-dark: #212121;
-            --text-gray: #555555;
-            --text-light: #888888;
-            --border-color: #e5e5e5;
-            --bg-light: #f8f8f8;
-            --bg-white: #ffffff;
-            --accent: #f4a261;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: var(--bg-white);
-            color: var(--text-gray);
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        a:hover { color: var(--primary); }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,0.98);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        nav.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { height: 40px; }
-        .logo-icon img { height: 100%; width: auto; }
-        .logo-text { display: flex; flex-direction: column; }
-        .logo-main { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
-        .logo-sub { font-size: 0.7rem; color: var(--text-light); letter-spacing: 2px; }
-
-        .nav-links { display: flex; gap: 0; list-style: none; }
-        .nav-links a {
-            display: block;
-            padding: 25px 20px;
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .nav-links .nav-cta {
-            margin-left: 15px;
-            padding: 10px 25px;
-            background: var(--primary);
-            color: white !important;
-            border-radius: 3px;
-            border-bottom: none !important;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-        .mobile-menu-btn span { width: 24px; height: 2px; background: var(--text-dark); }
-
-        /* Page Header */
-        .page-header {
-            padding: 150px 20px 80px;
-            background: var(--primary);
-            text-align: center;
-        }
-        .page-header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            color: white;
-        }
-        .page-header-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(255,255,255,0.2);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-        .page-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 15px; }
-        .page-header p { font-size: 1.1rem; opacity: 0.9; }
-
-        /* Section */
-        .section { padding: 100px 20px; }
-        .section-container { max-width: 1280px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-        }
-        .section-title .emphasis { color: var(--primary); }
-        .section-desc {
-            font-size: 1.05rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* Hero Gallery */
-        .hero-gallery { background: var(--bg-light); }
-        .hero-gallery-wrapper {
+        .hero-gallery {
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-light);
         }
-        .hero-gallery-wrapper img { width: 100%; display: block; }
-        .hero-gallery-overlay {
+
+        .hero-gallery img {
+            width: 100%;
+            display: block;
+        }
+
+        .hero-gallery__overlay {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 40px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--bg-white);
         }
-        .hero-gallery-overlay h2 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
-        .hero-gallery-overlay p { font-size: 1rem; opacity: 0.9; }
+
+        .hero-gallery__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.625rem;
+        }
+
+        .hero-gallery__desc {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
 
         /* Gallery Tabs */
         .gallery-tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
+            gap: 0.625rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
+
         .gallery-tab {
-            padding: 12px 25px;
+            padding: 0.75rem 1.5rem;
             background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
+            border: 1px solid var(--border-light);
+            font-size: 0.9375rem;
             font-weight: 500;
-            color: var(--text-gray);
+            color: var(--text-body);
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
+            transition: all var(--transition-fast);
         }
-        .gallery-tab:hover { border-color: var(--primary); color: var(--primary); }
+
+        .gallery-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
         .gallery-tab.active {
             background: var(--primary);
             border-color: var(--primary);
-            color: white;
+            color: var(--bg-white);
         }
 
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 1rem;
         }
+
         .gallery-item {
             position: relative;
             overflow: hidden;
             cursor: pointer;
             aspect-ratio: 1;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-light);
         }
-        .gallery-item.large {
+
+        .gallery-item--large {
             grid-column: span 2;
             grid-row: span 2;
         }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform var(--transition-slow);
         }
-        .gallery-item:hover img { transform: scale(1.05); }
-        .gallery-overlay {
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item__overlay {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(transparent 50%, rgba(0,0,0,0.8));
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.8));
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity var(--transition-normal);
             display: flex;
             align-items: flex-end;
-            padding: 20px;
+            padding: 1.25rem;
         }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-        .gallery-overlay-content { color: white; }
-        .gallery-overlay h3 { font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
-        .gallery-overlay p { font-size: 0.85rem; opacity: 0.8; }
 
-        /* Video Section */
-        .video-section { background: var(--text-dark); color: white; }
-        .video-section .section-tag { background: rgba(255,255,255,0.2); }
-        .video-section .section-title { color: white; }
-        .video-section .section-desc { color: rgba(255,255,255,0.7); }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+        .gallery-item:hover .gallery-item__overlay {
+            opacity: 1;
         }
+
+        .gallery-item__content {
+            color: var(--bg-white);
+        }
+
+        .gallery-item__title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-item__desc {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Video Cards */
         .video-card {
             overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-normal);
         }
+
         .video-card:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
-        .video-card video { width: 100%; display: block; }
-        .video-card-content { padding: 20px; }
-        .video-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
-        .video-card p { font-size: 0.85rem; opacity: 0.7; }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-card__content {
+            padding: 1.25rem;
+        }
+
+        .video-card__title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .video-card__desc {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
 
         /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.95);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 2.5rem;
         }
-        .lightbox.active { display: flex; }
-        .lightbox img { max-width: 90%; max-height: 90%; }
-        .lightbox-close {
+
+        .lightbox--active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox__close {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
+            top: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            color: white;
+            color: var(--bg-white);
             font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
-
-        /* Footer */
-        footer {
-            background: #1a1a1a;
-            color: rgba(255,255,255,0.6);
-            padding: 60px 20px 30px;
-        }
-        .footer-container { max-width: 1280px; margin: 0 auto; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-brand h3 { font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 20px; }
-        .footer-brand p { line-height: 1.8; font-size: 0.9rem; }
-        .footer-links h4 { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom {
-            padding-top: 30px;
+            transition: all var(--transition-fast);
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Responsive */
+        .lightbox__close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         @media (max-width: 1024px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .video-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-container { height: 60px; }
-            .logo-text { display: none; }
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px; left: 0; right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                border-bottom: 1px solid var(--border-color);
+            .gallery-grid {
+                grid-template-columns: 1fr;
             }
-            .nav-links a { padding: 15px 20px; border-bottom: none; }
-            .nav-links.active { display: flex; }
-            .mobile-menu-btn { display: flex; }
 
-            .page-header { padding: 120px 20px 60px; }
-            .page-header h1 { font-size: 1.8rem; }
-            .section { padding: 60px 20px; }
-            .section-title { font-size: 1.6rem; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-item.large { grid-column: span 1; grid-row: span 1; }
-            .video-grid { grid-template-columns: 1fr; }
-            .hero-gallery-overlay h2 { font-size: 1.5rem; }
-            .hero-gallery-overlay { padding: 25px; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            .gallery-item--large {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .hero-gallery__overlay {
+                padding: 1.5rem;
+            }
+
+            .hero-gallery__title {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
             <a href="index.html" class="logo">
-                <div class="logo-icon"><img src="logo_transparent.png" alt="서풍 로고"></div>
-                <div class="logo-text">
-                    <span class="logo-main">서풍</span>
-                    <span class="logo-sub">SEOPOONG</span>
+                <div class="logo__icon">
+                    <img src="logo_transparent.png" alt="서풍 로고">
+                </div>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
                 </div>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="about.html">회사소개</a></li>
-                <li><a href="process.html">가공 프로세스</a></li>
-                <li><a href="products.html">제품</a></li>
-                <li><a href="gallery.html" class="active">갤러리</a></li>
-                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
-            </ul>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </button>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="index.html" class="nav__link">홈</a></li>
+                    <li><a href="about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="products.html" class="nav__link">제품</a></li>
+                    <li><a href="gallery.html" class="nav__link nav__link--active">갤러리</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Page Header -->
     <header class="page-header">
-        <div class="page-header-content">
-            <span class="page-header-tag">GALLERY</span>
-            <h1>서풍의 현장</h1>
-            <p>신뢰의 품질을 직접 확인하세요</p>
+        <div class="page-header__content">
+            <span class="page-header__tag">GALLERY</span>
+            <h1 class="page-header__title">서풍의 현장</h1>
+            <p class="page-header__desc">신뢰의 품질을 직접 확인하세요</p>
         </div>
     </header>
 
     <!-- Hero Gallery -->
-    <section class="section hero-gallery">
-        <div class="section-container">
-            <div class="hero-gallery-wrapper animate-on-scroll">
+    <section class="section section--bg-light">
+        <div class="container">
+            <div class="hero-gallery animate-on-scroll">
                 <img src="S2.gif" alt="서풍 현장">
-                <div class="hero-gallery-overlay">
-                    <h2>신뢰의 서풍</h2>
-                    <p>50년 전통의 수산물 전문 기업. 매일 새벽 여수 청정 해역의 신선한 수산물을 직접 선별합니다.</p>
+                <div class="hero-gallery__overlay">
+                    <h2 class="hero-gallery__title">신뢰의 서풍</h2>
+                    <p class="hero-gallery__desc">50년 전통의 수산물 전문 기업. 매일 새벽 여수 청정 해역의 신선한 수산물을 직접 선별합니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Photo Gallery -->
-    <section class="section photo-gallery">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">PHOTOS</span>
-                <h2 class="section-title">사진 <span class="emphasis">갤러리</span></h2>
-                <p class="section-desc">현장의 생생한 모습을 담았습니다.</p>
+    <section class="section">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">PHOTOS</span>
+                <h2 class="section__title">사진 <span class="section__title--accent">갤러리</span></h2>
+                <p class="section__desc">현장의 생생한 모습을 담았습니다.</p>
             </div>
 
             <div class="gallery-tabs animate-on-scroll">
-                <button class="gallery-tab active" data-filter="all">전체</button>
-                <button class="gallery-tab" data-filter="facility">시설</button>
-                <button class="gallery-tab" data-filter="process">가공 현장</button>
-                <button class="gallery-tab" data-filter="product">제품</button>
+                <button class="gallery-tab active" data-filter-tab="all">전체</button>
+                <button class="gallery-tab" data-filter-tab="facility">시설</button>
+                <button class="gallery-tab" data-filter-tab="process">가공 현장</button>
+                <button class="gallery-tab" data-filter-tab="product">제품</button>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item large animate-on-scroll" data-filter="facility" onclick="openLightbox(this)">
+                <div class="gallery-item gallery-item--large animate-on-scroll" data-filter="facility" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878.jpg" alt="서풍 시설">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>HACCP 인증 시설</h3>
-                            <p>최신 위생 설비</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">HACCP 인증 시설</h3>
+                            <p class="gallery-item__desc">최신 위생 설비</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="process" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="process" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_01.jpg" alt="가공 현장">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>수산물 가공</h3>
-                            <p>철저한 품질 관리</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">수산물 가공</h3>
+                            <p class="gallery-item__desc">철저한 품질 관리</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="product" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="product" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_02.jpg" alt="제품">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>프리미엄 수산물</h3>
-                            <p>신선한 품질</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">프리미엄 수산물</h3>
+                            <p class="gallery-item__desc">신선한 품질</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="facility" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="facility" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_03.jpg" alt="시설">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>가공 라인</h3>
-                            <p>자동화 시스템</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">가공 라인</h3>
+                            <p class="gallery-item__desc">자동화 시스템</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="process" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="process" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_04.jpg" alt="가공 과정">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>손질 과정</h3>
-                            <p>전문가의 손길</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">손질 과정</h3>
+                            <p class="gallery-item__desc">전문가의 손길</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item large animate-on-scroll" data-filter="product" onclick="openLightbox(this)">
+                <div class="gallery-item gallery-item--large animate-on-scroll" data-filter="product" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_05.jpg" alt="제품">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>완제품</h3>
-                            <p>포장 완료 제품</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">완제품</h3>
+                            <p class="gallery-item__desc">포장 완료 제품</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="facility" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="facility" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_06.jpg" alt="냉동 시설">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>냉동 창고</h3>
-                            <p>-18°C 유지</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">냉동 창고</h3>
+                            <p class="gallery-item__desc">-18°C 유지</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="product" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="product" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_07.jpg" alt="오징어">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>손질 오징어</h3>
-                            <p>IQF 급속 냉동</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">손질 오징어</h3>
+                            <p class="gallery-item__desc">IQF 급속 냉동</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="process" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="process" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_08.jpg" alt="검수">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>품질 검수</h3>
-                            <p>꼼꼼한 확인</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">품질 검수</h3>
+                            <p class="gallery-item__desc">꼼꼼한 확인</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="product" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="product" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_09.jpg" alt="전복">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>바다소풍 전복</h3>
-                            <p>프리미엄 제품</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">바다소풍 전복</h3>
+                            <p class="gallery-item__desc">프리미엄 제품</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="facility" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="facility" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_10.jpg" alt="포장 라인">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>포장 라인</h3>
-                            <p>자동 포장 시스템</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">포장 라인</h3>
+                            <p class="gallery-item__desc">자동 포장 시스템</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="gallery-item animate-on-scroll" data-filter="process" onclick="openLightbox(this)">
+                <div class="gallery-item animate-on-scroll" data-filter="process" data-lightbox>
                     <img src="KakaoTalk_20250626_103619878_11.jpg" alt="작업">
-                    <div class="gallery-overlay">
-                        <div class="gallery-overlay-content">
-                            <h3>가공 작업</h3>
-                            <p>숙련된 기술자</p>
+                    <div class="gallery-item__overlay">
+                        <div class="gallery-item__content">
+                            <h3 class="gallery-item__title">가공 작업</h3>
+                            <p class="gallery-item__desc">숙련된 기술자</p>
                         </div>
                     </div>
                 </div>
@@ -538,22 +435,22 @@
     </section>
 
     <!-- Video Section -->
-    <section class="section video-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">VIDEO</span>
-                <h2 class="section-title">영상 <span class="emphasis">갤러리</span></h2>
-                <p class="section-desc">움직이는 현장의 생동감을 느껴보세요.</p>
+    <section class="section section--bg-dark">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">VIDEO</span>
+                <h2 class="section__title">영상 <span style="color: var(--accent);">갤러리</span></h2>
+                <p class="section__desc">움직이는 현장의 생동감을 느껴보세요.</p>
             </div>
 
-            <div class="video-grid">
+            <div class="grid grid--3">
                 <div class="video-card animate-on-scroll">
                     <video controls poster="KakaoTalk_20250626_103619878.jpg">
                         <source src="KakaoTalk_20250626_103609555.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>수산물 가공 현장</h3>
-                        <p>철저한 위생 관리 하에 진행되는 가공 과정</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">수산물 가공 현장</h3>
+                        <p class="video-card__desc">철저한 위생 관리 하에 진행되는 가공 과정</p>
                     </div>
                 </div>
 
@@ -561,9 +458,9 @@
                     <video controls poster="KakaoTalk_20250626_103619878_02.jpg">
                         <source src="KakaoTalk_20250626_103610660.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>품질 검수</h3>
-                        <p>전문가의 꼼꼼한 품질 확인</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">품질 검수</h3>
+                        <p class="video-card__desc">전문가의 꼼꼼한 품질 확인</p>
                     </div>
                 </div>
 
@@ -571,9 +468,9 @@
                     <video controls poster="KakaoTalk_20250626_103619878_04.jpg">
                         <source src="KakaoTalk_20250626_103621213.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>포장 공정</h3>
-                        <p>신선도를 유지하는 포장 과정</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">포장 공정</h3>
+                        <p class="video-card__desc">신선도를 유지하는 포장 과정</p>
                     </div>
                 </div>
 
@@ -581,9 +478,9 @@
                     <video controls poster="KakaoTalk_20250626_103619878_06.jpg">
                         <source src="KakaoTalk_20250626_103625379.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>냉동 시설</h3>
-                        <p>급속 냉동 시스템 운영</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">냉동 시설</h3>
+                        <p class="video-card__desc">급속 냉동 시스템 운영</p>
                     </div>
                 </div>
 
@@ -591,9 +488,9 @@
                     <video controls poster="KakaoTalk_20250626_103619878_08.jpg">
                         <source src="KakaoTalk_20250626_103626794.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>출고 준비</h3>
-                        <p>배송 전 최종 점검</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">출고 준비</h3>
+                        <p class="video-card__desc">배송 전 최종 점검</p>
                     </div>
                 </div>
 
@@ -601,9 +498,9 @@
                     <video controls poster="KakaoTalk_20250626_103619878_10.jpg">
                         <source src="KakaoTalk_20250626_103633570.mp4" type="video/mp4">
                     </video>
-                    <div class="video-card-content">
-                        <h3>현장 스케치</h3>
-                        <p>서풍의 일상</p>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">현장 스케치</h3>
+                        <p class="video-card__desc">서풍의 일상</p>
                     </div>
                 </div>
             </div>
@@ -612,20 +509,20 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox__close" aria-label="닫기">&times;</button>
         <img src="" alt="" id="lightbox-img">
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>서풍</h3>
-                    <p>신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>바로가기</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
                     <ul>
                         <li><a href="about.html">회사소개</a></li>
                         <li><a href="process.html">가공 프로세스</a></li>
@@ -633,16 +530,16 @@
                         <li><a href="gallery.html">갤러리</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>제품</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">제품</h4>
                     <ul>
                         <li><a href="products.html">냉동 수산물</a></li>
                         <li><a href="products.html">손질 수산물</a></li>
                         <li><a href="products.html">바다소풍</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>연락처</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
                     <ul>
                         <li><a href="tel:061-681-5171">061-681-5171</a></li>
                         <li>FAX 061-681-5173</li>
@@ -650,65 +547,16 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
                 <p>사업자등록번호: 417-81-41979 | 대표: 서순심</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // Gallery filter
-        const tabs = document.querySelectorAll('.gallery-tab');
-        const items = document.querySelectorAll('.gallery-item');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                const filter = tab.dataset.filter;
-
-                items.forEach(item => {
-                    if (filter === 'all' || item.dataset.filter === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Lightbox
-        function openLightbox(el) {
-            const img = el.querySelector('img');
-            document.getElementById('lightbox-img').src = img.src;
-            document.getElementById('lightbox').classList.add('active');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-        }
-
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox') closeLightbox();
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>

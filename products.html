@@ -4,588 +4,302 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제품 | 서풍 - 프리미엄 수산물</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="서풍의 프리미엄 수산물 - HACCP 인증 시설에서 정성껏 가공한 최상급 수산물">
+
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+
     <style>
-        :root {
-            --primary: #005aab;
-            --primary-dark: #004080;
-            --primary-light: #0077cc;
-            --text-dark: #212121;
-            --text-gray: #555555;
-            --text-light: #888888;
-            --border-color: #e5e5e5;
-            --bg-light: #f8f8f8;
-            --bg-white: #ffffff;
-            --accent: #f4a261;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: var(--bg-white);
-            color: var(--text-gray);
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        a:hover { color: var(--primary); }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,0.98);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        nav.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { height: 40px; }
-        .logo-icon img { height: 100%; width: auto; }
-        .logo-text { display: flex; flex-direction: column; }
-        .logo-main { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
-        .logo-sub { font-size: 0.7rem; color: var(--text-light); letter-spacing: 2px; }
-
-        .nav-links { display: flex; gap: 0; list-style: none; }
-        .nav-links a {
-            display: block;
-            padding: 25px 20px;
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .nav-links .nav-cta {
-            margin-left: 15px;
-            padding: 10px 25px;
-            background: var(--primary);
-            color: white !important;
-            border-radius: 3px;
-            border-bottom: none !important;
-        }
-        .nav-links .nav-cta:hover { background: var(--primary-dark); }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-        .mobile-menu-btn span { width: 24px; height: 2px; background: var(--text-dark); }
-
-        /* Page Header */
-        .page-header {
-            padding: 150px 20px 80px;
-            background: var(--primary);
-            text-align: center;
-        }
-        .page-header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            color: white;
-        }
-        .page-header-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(255,255,255,0.2);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-        .page-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 15px; }
-        .page-header p { font-size: 1.1rem; opacity: 0.9; }
-
-        /* Section */
-        .section { padding: 100px 20px; }
-        .section-container { max-width: 1280px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-        }
-        .section-title .emphasis { color: var(--primary); }
-        .section-desc {
-            font-size: 1.05rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* Product Tabs */
         .product-tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
+            gap: 0.625rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
+
         .product-tab {
-            padding: 12px 25px;
+            padding: 0.75rem 1.5rem;
             background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
+            border: 1px solid var(--border-light);
+            font-size: 0.9375rem;
             font-weight: 500;
-            color: var(--text-gray);
+            color: var(--text-body);
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
+            transition: all var(--transition-fast);
         }
-        .product-tab:hover { border-color: var(--primary); color: var(--primary); }
+
+        .product-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
         .product-tab.active {
             background: var(--primary);
             border-color: var(--primary);
-            color: white;
+            color: var(--bg-white);
         }
 
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-        .product-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .product-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 5px 20px rgba(0,90,171,0.1);
-        }
-        .product-card-image {
-            height: 220px;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .product-card:hover .product-card-image img {
-            transform: scale(1.05);
-        }
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 5px 12px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .product-badge.new { background: #10B981; }
-        .product-badge.premium { background: #8B5CF6; }
-
-        .product-card-content { padding: 25px; }
-        .product-category {
-            display: inline-block;
-            padding: 3px 10px;
-            background: var(--bg-light);
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .product-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-        .product-desc {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        .product-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-        .product-feature {
-            padding: 4px 10px;
-            background: var(--bg-light);
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-        .product-price {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-        }
-        .product-price-label { font-size: 0.85rem; color: var(--text-light); }
-        .product-price-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
-
-        /* Feature Highlight */
-        .feature-highlight {
-            background: var(--text-dark);
-            color: white;
-        }
-        .feature-highlight .section-tag { background: rgba(255,255,255,0.2); }
-        .feature-highlight .section-title { color: white; }
-        .feature-highlight .section-desc { color: rgba(255,255,255,0.7); }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
+        /* Feature Cards */
         .feature-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 35px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.25rem 1.5rem;
             text-align: center;
-            transition: all 0.3s;
+            transition: all var(--transition-normal);
         }
+
         .feature-card:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
         }
-        .feature-icon {
+
+        .feature-card__icon {
             font-size: 3rem;
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
-        .feature-card h3 {
-            font-size: 1.2rem;
+
+        .feature-card__title {
+            font-size: 1.125rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
         }
-        .feature-card p {
+
+        .feature-card__desc {
             font-size: 0.95rem;
             opacity: 0.8;
         }
 
-        /* Product Showcase */
-        .product-showcase { background: var(--bg-light); }
-        .showcase-wrapper {
+        /* Showcase */
+        .showcase__grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 4rem;
             align-items: center;
         }
-        .showcase-image img {
+
+        .showcase__image img {
             width: 100%;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-light);
         }
-        .showcase-content h3 {
-            font-size: 1.8rem;
+
+        .showcase__title {
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
-        .showcase-content h3 span { color: var(--primary); }
-        .showcase-list { list-style: none; }
-        .showcase-item {
+
+        .showcase__title span {
+            color: var(--primary);
+        }
+
+        .showcase__item {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: white;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-normal);
         }
-        .showcase-item:hover { border-color: var(--primary); }
-        .showcase-icon {
-            width: 45px;
-            height: 45px;
+
+        .showcase__item:hover {
+            border-color: var(--primary);
+        }
+
+        .showcase__icon {
+            width: 2.75rem;
+            height: 2.75rem;
             background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.125rem;
             flex-shrink: 0;
         }
-        .showcase-text h4 {
+
+        .showcase__item-title {
             font-size: 1rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 5px;
+            margin-bottom: 0.25rem;
         }
-        .showcase-text p {
-            color: var(--text-gray);
+
+        .showcase__item-desc {
+            color: var(--text-body);
             font-size: 0.9rem;
         }
 
-        /* Footer */
-        footer {
-            background: #1a1a1a;
-            color: rgba(255,255,255,0.6);
-            padding: 60px 20px 30px;
-        }
-        .footer-container { max-width: 1280px; margin: 0 auto; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-brand h3 { font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 20px; }
-        .footer-brand p { line-height: 1.8; font-size: 0.9rem; }
-        .footer-links h4 { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom {
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-
-        /* Responsive */
         @media (max-width: 1024px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
-            .feature-grid { grid-template-columns: 1fr; }
-            .showcase-wrapper { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container { height: 60px; }
-            .logo-text { display: none; }
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px; left: 0; right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                border-bottom: 1px solid var(--border-color);
+            .showcase__grid {
+                grid-template-columns: 1fr;
             }
-            .nav-links a { padding: 15px 20px; border-bottom: none; }
-            .nav-links.active { display: flex; }
-            .mobile-menu-btn { display: flex; }
-
-            .page-header { padding: 120px 20px 60px; }
-            .page-header h1 { font-size: 1.8rem; }
-            .section { padding: 60px 20px; }
-            .section-title { font-size: 1.6rem; }
-            .products-grid { grid-template-columns: 1fr; }
-            .product-tabs { gap: 5px; }
-            .product-tab { padding: 10px 15px; font-size: 0.85rem; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
             <a href="index.html" class="logo">
-                <div class="logo-icon"><img src="logo_transparent.png" alt="서풍 로고"></div>
-                <div class="logo-text">
-                    <span class="logo-main">서풍</span>
-                    <span class="logo-sub">SEOPOONG</span>
+                <div class="logo__icon">
+                    <img src="logo_transparent.png" alt="서풍 로고">
+                </div>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
                 </div>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="about.html">회사소개</a></li>
-                <li><a href="process.html">가공 프로세스</a></li>
-                <li><a href="products.html" class="active">제품</a></li>
-                <li><a href="gallery.html">갤러리</a></li>
-                <li><a href="contact.html" class="nav-cta">문의하기</a></li>
-            </ul>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </button>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="index.html" class="nav__link">홈</a></li>
+                    <li><a href="about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="products.html" class="nav__link nav__link--active">제품</a></li>
+                    <li><a href="gallery.html" class="nav__link">갤러리</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Page Header -->
     <header class="page-header">
-        <div class="page-header-content">
-            <span class="page-header-tag">PRODUCTS</span>
-            <h1>프리미엄 수산물</h1>
-            <p>HACCP 인증 시설에서 정성껏 가공한 최상급 수산물</p>
+        <div class="page-header__content">
+            <span class="page-header__tag">PRODUCTS</span>
+            <h1 class="page-header__title">프리미엄 수산물</h1>
+            <p class="page-header__desc">HACCP 인증 시설에서 정성껏 가공한 최상급 수산물</p>
         </div>
     </header>
 
     <!-- Products Section -->
-    <section class="section products-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">CATALOG</span>
-                <h2 class="section-title">제품 <span class="emphasis">카탈로그</span></h2>
-                <p class="section-desc">50년 노하우로 엄선한 프리미엄 수산물을 만나보세요.</p>
+    <section class="section">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">CATALOG</span>
+                <h2 class="section__title">제품 <span class="section__title--accent">카탈로그</span></h2>
+                <p class="section__desc">50년 노하우로 엄선한 프리미엄 수산물을 만나보세요.</p>
             </div>
 
             <div class="product-tabs animate-on-scroll">
-                <button class="product-tab active" data-category="all">전체</button>
-                <button class="product-tab" data-category="frozen">냉동 가공</button>
-                <button class="product-tab" data-category="fresh">손질 수산물</button>
-                <button class="product-tab" data-category="premium">바다소풍</button>
+                <button class="product-tab active" data-tab="all">전체</button>
+                <button class="product-tab" data-tab="frozen">냉동 가공</button>
+                <button class="product-tab" data-tab="fresh">손질 수산물</button>
+                <button class="product-tab" data-tab="premium">바다소풍</button>
             </div>
 
-            <div class="products-grid" id="productsGrid">
-                <div class="product-card animate-on-scroll delay-1" data-category="frozen">
-                    <div class="product-card-image">
+            <div class="grid grid--3" id="productsGrid">
+                <div class="card product-card animate-on-scroll animate-delay-1" data-category="frozen">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_03.jpg" alt="노르웨이 간고등어">
-                        <span class="product-badge">베스트셀러</span>
+                        <span class="product-card__badge">베스트셀러</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">노르웨이 간고등어살 1.3kg</h3>
-                        <p class="product-desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">노르웨이산</span>
-                            <span class="product-feature">뼈 제거</span>
-                            <span class="product-feature">대용량</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">대량 주문 할인</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">냉동 가공</span>
+                        <h3 class="product-card__title">노르웨이 간고등어살 1.3kg</h3>
+                        <p class="product-card__desc">노르웨이산 고등어를 뼈와 내장 제거 후 살 형태로 손질. 별도 손질 없이 즉시 조리 가능합니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">노르웨이산</span>
+                            <span class="product-card__feature">뼈 제거</span>
+                            <span class="product-card__feature">대용량</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-2" data-category="frozen">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-2" data-category="frozen">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_07.jpg" alt="손질 오징어">
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">손질 오징어 1kg</h3>
-                        <p class="product-desc">태평양산 원양 오징어를 선상 급속 냉동. IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">IQF 냉동</span>
-                            <span class="product-feature">껍질 포함</span>
-                            <span class="product-feature">타우린 보존</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">대량 주문 할인</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">냉동 가공</span>
+                        <h3 class="product-card__title">손질 오징어 1kg</h3>
+                        <p class="product-card__desc">태평양산 원양 오징어를 선상 급속 냉동. IQF 방식으로 개별 포장되어 필요한 만큼만 사용 가능합니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">IQF 냉동</span>
+                            <span class="product-card__feature">껍질 포함</span>
+                            <span class="product-card__feature">타우린 보존</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-3" data-category="premium">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-3" data-category="premium">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_09.jpg" alt="참전복">
-                        <span class="product-badge premium">프리미엄</span>
+                        <span class="product-card__badge product-card__badge--premium">프리미엄</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">바다소풍</span>
-                        <h3 class="product-title">참전복 1.4kg (8~10미)</h3>
-                        <p class="product-desc">여수 청정 해역의 프리미엄 참전복. 고급 선물용과 보양식에 적합한 특대 사이즈입니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">여수산</span>
-                            <span class="product-feature">선물용</span>
-                            <span class="product-feature">특대 사이즈</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">프리미엄</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">바다소풍</span>
+                        <h3 class="product-card__title">참전복 1.4kg (8~10미)</h3>
+                        <p class="product-card__desc">여수 청정 해역의 프리미엄 참전복. 고급 선물용과 보양식에 적합한 특대 사이즈입니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">여수산</span>
+                            <span class="product-card__feature">선물용</span>
+                            <span class="product-card__feature">특대 사이즈</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-1" data-category="fresh">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-1" data-category="fresh">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_05.jpg" alt="손질 갈치">
-                        <span class="product-badge new">NEW</span>
+                        <span class="product-card__badge product-card__badge--new">NEW</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">손질 수산물</span>
-                        <h3 class="product-title">국내산 손질 갈치</h3>
-                        <p class="product-desc">제주 근해에서 잡은 싱싱한 갈치를 먹기 좋게 손질. 은빛 윤기가 살아있는 프리미엄 갈치입니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">국내산</span>
-                            <span class="product-feature">손질 완료</span>
-                            <span class="product-feature">급속 냉동</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">대량 주문 할인</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">손질 수산물</span>
+                        <h3 class="product-card__title">국내산 손질 갈치</h3>
+                        <p class="product-card__desc">제주 근해에서 잡은 싱싱한 갈치를 먹기 좋게 손질. 은빛 윤기가 살아있는 프리미엄 갈치입니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">국내산</span>
+                            <span class="product-card__feature">손질 완료</span>
+                            <span class="product-card__feature">급속 냉동</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-2" data-category="frozen">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-2" data-category="frozen">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_10.jpg" alt="냉동 새우">
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">냉동 가공</span>
-                        <h3 class="product-title">흰다리 새우 (대) 1kg</h3>
-                        <p class="product-desc">신선한 흰다리 새우를 급속 냉동. 탱글탱글한 식감과 달콤한 맛이 살아있습니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">탱글탱글</span>
-                            <span class="product-feature">급속 냉동</span>
-                            <span class="product-feature">HACCP</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">대량 주문 할인</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">냉동 가공</span>
+                        <h3 class="product-card__title">흰다리 새우 (대) 1kg</h3>
+                        <p class="product-card__desc">신선한 흰다리 새우를 급속 냉동. 탱글탱글한 식감과 달콤한 맛이 살아있습니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">탱글탱글</span>
+                            <span class="product-card__feature">급속 냉동</span>
+                            <span class="product-card__feature">HACCP</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card animate-on-scroll delay-3" data-category="premium">
-                    <div class="product-card-image">
+                <div class="card product-card animate-on-scroll animate-delay-3" data-category="premium">
+                    <div class="product-card__image">
                         <img src="KakaoTalk_20250626_103619878_12.jpg" alt="활전복">
-                        <span class="product-badge premium">프리미엄</span>
+                        <span class="product-card__badge product-card__badge--premium">프리미엄</span>
                     </div>
-                    <div class="product-card-content">
-                        <span class="product-category">바다소풍</span>
-                        <h3 class="product-title">바다소풍 활전복 세트</h3>
-                        <p class="product-desc">여수 청정해역 완도산 프리미엄 활전복. 선물용 고급 포장으로 제공됩니다.</p>
-                        <div class="product-features">
-                            <span class="product-feature">완도산</span>
-                            <span class="product-feature">활전복</span>
-                            <span class="product-feature">선물 포장</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="product-price-label">문의</span>
-                            <span class="product-price-value">프리미엄</span>
+                    <div class="product-card__content">
+                        <span class="product-card__category">바다소풍</span>
+                        <h3 class="product-card__title">바다소풍 활전복 세트</h3>
+                        <p class="product-card__desc">여수 청정해역 완도산 프리미엄 활전복. 선물용 고급 포장으로 제공됩니다.</p>
+                        <div class="product-card__features">
+                            <span class="product-card__feature">완도산</span>
+                            <span class="product-card__feature">활전복</span>
+                            <span class="product-card__feature">선물 포장</span>
                         </div>
                     </div>
                 </div>
@@ -594,90 +308,92 @@
     </section>
 
     <!-- Feature Highlight -->
-    <section class="section feature-highlight">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">QUALITY</span>
-                <h2 class="section-title">서풍 제품의 특장점</h2>
-                <p class="section-desc">수산물을 읽는 온도까지 생각합니다.</p>
+    <section class="section section--bg-dark">
+        <div class="container">
+            <div class="section__header animate-on-scroll">
+                <span class="section__tag">QUALITY</span>
+                <h2 class="section__title">서풍 제품의 특장점</h2>
+                <p class="section__desc">수산물을 읽는 온도까지 생각합니다.</p>
             </div>
 
-            <div class="feature-grid">
-                <div class="feature-card animate-on-scroll delay-1">
-                    <div class="feature-icon">🎨</div>
-                    <h3>세포가 다치지 않아<br>'색감'이 살아있습니다</h3>
-                    <p>급속 냉동으로 세포막 손상 없이 해동 후에도 본연의 선명한 색깔이 살아 있습니다.</p>
+            <div class="grid grid--3">
+                <div class="feature-card animate-on-scroll animate-delay-1">
+                    <div class="feature-card__icon">🎨</div>
+                    <h3 class="feature-card__title">세포가 다치지 않아<br>'색감'이 살아있습니다</h3>
+                    <p class="feature-card__desc">급속 냉동으로 세포막 손상 없이 해동 후에도 본연의 선명한 색깔이 살아 있습니다.</p>
                 </div>
 
-                <div class="feature-card animate-on-scroll delay-2">
-                    <div class="feature-icon">💧</div>
-                    <h3>맛있는 '육즙'을<br>꽉 가두었습니다</h3>
-                    <p>해동 시 드립(육즙 손실) 현상이 거의 없습니다. 본연의 고소한 풍미를 그대로 즐기세요.</p>
+                <div class="feature-card animate-on-scroll animate-delay-2">
+                    <div class="feature-card__icon">💧</div>
+                    <h3 class="feature-card__title">맛있는 '육즙'을<br>꽉 가두었습니다</h3>
+                    <p class="feature-card__desc">해동 시 드립(육즙 손실) 현상이 거의 없습니다. 본연의 고소한 풍미를 그대로 즐기세요.</p>
                 </div>
 
-                <div class="feature-card animate-on-scroll delay-3">
-                    <div class="feature-icon">🛡</div>
-                    <h3>가장 위생적이고<br>'안전'합니다</h3>
-                    <p>가장 신선할 때 동결하여 미생물 번식을 원천 차단. 사계절 내내 안심하고 드실 수 있습니다.</p>
+                <div class="feature-card animate-on-scroll animate-delay-3">
+                    <div class="feature-card__icon">🛡</div>
+                    <h3 class="feature-card__title">가장 위생적이고<br>'안전'합니다</h3>
+                    <p class="feature-card__desc">가장 신선할 때 동결하여 미생물 번식을 원천 차단. 사계절 내내 안심하고 드실 수 있습니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Product Showcase -->
-    <section class="section product-showcase">
-        <div class="section-container">
-            <div class="showcase-wrapper">
-                <div class="showcase-image animate-on-scroll">
+    <section class="section section--bg-light">
+        <div class="container">
+            <div class="showcase__grid">
+                <div class="showcase__image animate-on-scroll">
                     <img src="S1.gif" alt="서풍 제품">
                 </div>
-                <div class="showcase-content animate-on-scroll delay-2">
-                    <h3>왜 <span>서풍</span> 제품인가요?</h3>
-                    <ul class="showcase-list">
-                        <li class="showcase-item">
-                            <div class="showcase-icon">👁</div>
-                            <div class="showcase-text">
-                                <h4>선별의 눈</h4>
-                                <p>50년 경력 베테랑이 매일 새벽 직접 선별합니다.</p>
-                            </div>
-                        </li>
-                        <li class="showcase-item">
-                            <div class="showcase-icon">🏭</div>
-                            <div class="showcase-text">
-                                <h4>HACCP 인증</h4>
-                                <p>철저한 위생 관리의 현대적 가공 시설입니다.</p>
-                            </div>
-                        </li>
-                        <li class="showcase-item">
-                            <div class="showcase-icon">❄️</div>
-                            <div class="showcase-text">
-                                <h4>콜드체인 시스템</h4>
-                                <p>수매부터 배송까지 신선도 100% 유지합니다.</p>
-                            </div>
-                        </li>
-                        <li class="showcase-item">
-                            <div class="showcase-icon">🏫</div>
-                            <div class="showcase-text">
-                                <h4>학교급식 납품</h4>
-                                <p>교육기관이 신뢰하는 검증된 품질입니다.</p>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="animate-on-scroll animate-delay-2">
+                    <h3 class="showcase__title">왜 <span>서풍</span> 제품인가요?</h3>
+
+                    <div class="showcase__item">
+                        <div class="showcase__icon">👁</div>
+                        <div>
+                            <h4 class="showcase__item-title">선별의 눈</h4>
+                            <p class="showcase__item-desc">50년 경력 베테랑이 매일 새벽 직접 선별합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase__item">
+                        <div class="showcase__icon">🏭</div>
+                        <div>
+                            <h4 class="showcase__item-title">HACCP 인증</h4>
+                            <p class="showcase__item-desc">철저한 위생 관리의 현대적 가공 시설입니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase__item">
+                        <div class="showcase__icon">❄️</div>
+                        <div>
+                            <h4 class="showcase__item-title">콜드체인 시스템</h4>
+                            <p class="showcase__item-desc">수매부터 배송까지 신선도 100% 유지합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase__item">
+                        <div class="showcase__icon">🏫</div>
+                        <div>
+                            <h4 class="showcase__item-title">학교급식 납품</h4>
+                            <p class="showcase__item-desc">교육기관이 신뢰하는 검증된 품질입니다.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>서풍</h3>
-                    <p>신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">신뢰로써 공존하는 기업<br>가장 신선하고 안전한 수산물을 공급합니다.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>바로가기</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
                     <ul>
                         <li><a href="about.html">회사소개</a></li>
                         <li><a href="process.html">가공 프로세스</a></li>
@@ -685,16 +401,16 @@
                         <li><a href="gallery.html">갤러리</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>제품</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">제품</h4>
                     <ul>
                         <li><a href="products.html">냉동 수산물</a></li>
                         <li><a href="products.html">손질 수산물</a></li>
                         <li><a href="products.html">바다소풍</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>연락처</h4>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
                     <ul>
                         <li><a href="tel:061-681-5171">061-681-5171</a></li>
                         <li>FAX 061-681-5173</li>
@@ -702,50 +418,16 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2024 영어조합법인 서풍. All rights reserved.</p>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
                 <p>사업자등록번호: 417-81-41979 | 대표: 서순심</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // Product filtering
-        const tabs = document.querySelectorAll('.product-tab');
-        const products = document.querySelectorAll('.product-card');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                const category = tab.dataset.category;
-
-                products.forEach(product => {
-                    if (category === 'all' || product.dataset.category === category) {
-                        product.style.display = 'block';
-                    } else {
-                        product.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
