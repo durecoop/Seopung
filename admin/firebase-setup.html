@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase 설정 가이드 | 서풍 관리자</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { background: #f8fafc; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card { background: #fff; border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); margin-bottom: 0.5rem; }
+        h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-dark); }
+        h3 { font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { line-height: 1.8; color: var(--text-body); margin-bottom: 1rem; }
+        ol, ul { padding-left: 1.5rem; line-height: 2; color: var(--text-body); }
+        code { background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem; line-height: 1.6; }
+        .highlight { background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; }
+        .success { background: #d1fae5; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #10b981; }
+        a { color: var(--primary); }
+        img { max-width: 100%; border-radius: 0.5rem; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Firebase 설정 가이드</h1>
+            <p>서풍 홈페이지의 문의/견적 기능을 활성화하려면 Firebase 프로젝트를 설정해야 합니다.</p>
+        </div>
+
+        <div class="card">
+            <h2>1단계: Firebase 프로젝트 생성</h2>
+            <ol>
+                <li><a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a>에 접속합니다.</li>
+                <li>Google 계정으로 로그인합니다.</li>
+                <li><strong>"프로젝트 추가"</strong>를 클릭합니다.</li>
+                <li>프로젝트 이름을 입력합니다 (예: <code>seopung-website</code>).</li>
+                <li>Google Analytics는 사용 안함으로 설정해도 됩니다.</li>
+                <li><strong>"프로젝트 만들기"</strong>를 클릭합니다.</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h2>2단계: Firestore 데이터베이스 생성</h2>
+            <ol>
+                <li>프로젝트 대시보드에서 <strong>"빌드" → "Firestore Database"</strong>를 클릭합니다.</li>
+                <li><strong>"데이터베이스 만들기"</strong>를 클릭합니다.</li>
+                <li>위치를 선택합니다 (asia-northeast3 = 서울 추천).</li>
+                <li><strong>"테스트 모드에서 시작"</strong>을 선택합니다.</li>
+                <li><strong>"사용 설정"</strong>을 클릭합니다.</li>
+            </ol>
+
+            <div class="highlight">
+                <strong>보안 규칙 설정 (중요!)</strong><br>
+                Firestore Database → 규칙 탭에서 다음과 같이 설정하세요:
+            </div>
+            <pre>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 문의 및 견적: 누구나 쓰기 가능, 읽기는 인증된 사용자만
+    match /inquiries/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if true;  // 실제 운영 시 인증 추가 권장
+    }
+    match /quotes/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if true;
+    }
+    match /notices/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}</pre>
+        </div>
+
+        <div class="card">
+            <h2>3단계: 웹 앱 추가 및 설정 정보 얻기</h2>
+            <ol>
+                <li>프로젝트 설정 (⚙️ 아이콘) → <strong>"일반"</strong> 탭으로 이동합니다.</li>
+                <li>하단의 <strong>"내 앱"</strong> 섹션에서 <strong>"웹"</strong> (<code>&lt;/&gt;</code>) 아이콘을 클릭합니다.</li>
+                <li>앱 닉네임을 입력합니다 (예: <code>seopung-web</code>).</li>
+                <li><strong>"앱 등록"</strong>을 클릭합니다.</li>
+                <li>표시되는 <code>firebaseConfig</code> 정보를 복사합니다.</li>
+            </ol>
+
+            <h3>설정 정보 예시:</h3>
+            <pre>const firebaseConfig = {
+    apiKey: "AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxx",
+    authDomain: "seopung-website.firebaseapp.com",
+    projectId: "seopung-website",
+    storageBucket: "seopung-website.appspot.com",
+    messagingSenderId: "123456789012",
+    appId: "1:123456789012:web:abcdef123456"
+};</pre>
+        </div>
+
+        <div class="card">
+            <h2>4단계: 홈페이지에 설정 적용</h2>
+            <p>다음 파일들에서 Firebase 설정을 업데이트해야 합니다:</p>
+            <ul>
+                <li><code>board/inquiry.html</code> - 제품 문의 폼</li>
+                <li><code>board/quote.html</code> - 견적 요청 폼</li>
+                <li><code>admin/inquiries.html</code> - 문의 관리</li>
+                <li><code>admin/quotes.html</code> - 견적 관리</li>
+                <li><code>admin/dashboard.html</code> - 대시보드</li>
+            </ul>
+
+            <p>각 파일에서 다음 부분을 찾아 본인의 설정으로 교체하세요:</p>
+            <pre>// Firebase 설정
+const firebaseConfig = {
+    apiKey: "AIzaSyDemo-REPLACE-WITH-YOUR-KEY",  // ← 교체
+    authDomain: "seopung-demo.firebaseapp.com",   // ← 교체
+    projectId: "seopung-demo",                    // ← 교체
+    storageBucket: "seopung-demo.appspot.com",    // ← 교체
+    messagingSenderId: "123456789",               // ← 교체
+    appId: "1:123456789:web:abcdef"               // ← 교체
+};</pre>
+        </div>
+
+        <div class="card">
+            <h2>5단계: 테스트</h2>
+            <ol>
+                <li>홈페이지에서 제품 문의 폼을 제출합니다.</li>
+                <li>Firebase Console → Firestore Database에서 <code>inquiries</code> 컬렉션을 확인합니다.</li>
+                <li>관리자 페이지에서 문의 목록이 표시되는지 확인합니다.</li>
+            </ol>
+
+            <div class="success">
+                <strong>완료!</strong> 이제 홈페이지의 문의와 견적이 Firebase에 저장되고, 관리자 페이지에서 확인할 수 있습니다.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>무료 사용량 (Firebase Spark Plan)</h2>
+            <ul>
+                <li>Firestore: 1GB 저장소, 일 50,000회 읽기, 20,000회 쓰기</li>
+                <li>호스팅: 10GB/월 전송</li>
+                <li>소규모 사이트에 충분한 용량입니다.</li>
+            </ul>
+            <p>자세한 내용: <a href="https://firebase.google.com/pricing" target="_blank">Firebase 가격 정책</a></p>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem;">
+            <a href="dashboard.html" class="btn btn--primary" style="padding: 0.75rem 2rem;">관리자 페이지로 돌아가기</a>
+        </p>
+    </div>
+</body>
+</html>

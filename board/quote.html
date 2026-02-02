@@ -293,10 +293,28 @@
 
     <script src="../js/main.js"></script>
     <script src="../js/navigation.js"></script>
-    <script src="../js/data.js"></script>
-    <script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Firebase 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyDemo-REPLACE-WITH-YOUR-KEY",
+            authDomain: "seopung-demo.firebaseapp.com",
+            projectId: "seopung-demo",
+            storageBucket: "seopung-demo.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+
+        // Firebase 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         // Form Submission
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        document.getElementById('quoteForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             // 체크박스 검증
@@ -305,6 +323,11 @@
                 alert('희망 제품을 1개 이상 선택해 주세요.');
                 return;
             }
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '전송 중...';
+            submitBtn.disabled = true;
 
             // 선택된 제품 배열
             const products = Array.from(productCheckboxes).map(cb => cb.value);
@@ -323,17 +346,28 @@
                 quantity: this.quantity.value,
                 delivery_date: this.delivery_date.value,
                 content: this.memo.value,
-                marketing: this.marketing.checked
+                marketing: this.marketing.checked,
+                createdAt: Timestamp.now(),
+                status: 'pending',
+                read: false
             };
 
-            // 데이터 저장
-            SeopungData.quotes.add(formData);
+            try {
+                // Firebase에 저장
+                await addDoc(collection(db, "quotes"), formData);
 
-            // 성공 메시지
-            alert('견적 요청이 접수되었습니다.\n담당자 검토 후 1~2 영업일 내 연락드리겠습니다.\n\n감사합니다.');
+                // 성공 메시지
+                alert('견적 요청이 접수되었습니다.\n담당자 검토 후 1~2 영업일 내 연락드리겠습니다.\n\n감사합니다.');
 
-            // 폼 초기화
-            this.reset();
+                // 폼 초기화
+                this.reset();
+            } catch (error) {
+                console.error("Error:", error);
+                alert('견적 요청 중 오류가 발생했습니다.\n잠시 후 다시 시도해 주세요.\n\n전화 문의: 061-681-5171');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
 </body>
