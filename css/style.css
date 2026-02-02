@@ -273,18 +273,37 @@ button {
 
 .nav__link {
     display: block;
-    padding: 1.5rem 1.25rem;
+    padding: 1rem 1.25rem;
     font-size: 0.9375rem;
     font-weight: 500;
     color: var(--text-dark);
-    border-bottom: 2px solid transparent;
-    transition: all var(--transition-fast);
+    border-radius: 0.5rem;
+    transition: all 0.25s ease;
+    position: relative;
 }
 
-.nav__link:hover,
+.nav__link:hover {
+    color: var(--primary);
+    background-color: rgba(26, 54, 93, 0.08);
+    transform: translateY(-2px);
+}
+
 .nav__link--active {
     color: var(--primary);
-    border-bottom-color: var(--primary);
+    background-color: rgba(26, 54, 93, 0.1);
+    font-weight: 600;
+}
+
+.nav__link--active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px;
 }
 
 .nav__link--cta {
@@ -293,11 +312,12 @@ button {
     background-color: var(--primary);
     color: var(--bg-white) !important;
     border-radius: var(--radius-sm);
-    border-bottom: none !important;
 }
 
 .nav__link--cta:hover {
     background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
 }
 
 /* Mobile Menu Button */
