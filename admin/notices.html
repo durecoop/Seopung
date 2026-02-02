@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
-
-    <!-- Toast UI Editor -->
-    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 </head>
 <body class="admin-page">
     <!-- Admin Sidebar -->
@@ -100,9 +97,12 @@
             <div class="admin-card" style="margin-bottom: 1.5rem;">
                 <div class="admin-card__content" style="padding: 1rem 1.5rem;">
                     <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-                        <button onclick="openWriteModal()" class="btn btn--primary" style="padding: 0.5rem 1rem;">
-                            + 공지사항 작성
-                        </button>
+                        <a href="notice-write.html" class="btn btn--primary" style="padding: 0.5rem 1rem; text-decoration: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            공지사항 작성
+                        </a>
                         <span style="margin-left: auto; font-size: 0.875rem; color: var(--text-light);">
                             총 <strong id="totalCount">0</strong>건
                         </span>
@@ -122,7 +122,7 @@
                                 <th style="width: 100px;">카테고리</th>
                                 <th style="width: 100px;">등록일</th>
                                 <th style="width: 60px;">조회</th>
-                                <th style="width: 120px;">관리</th>
+                                <th style="width: 140px;">관리</th>
                             </tr>
                         </thead>
                         <tbody id="noticesList">
@@ -133,50 +133,6 @@
             </div>
         </div>
     </main>
-
-    <!-- 작성/수정 모달 -->
-    <div id="writeModal" class="admin-modal" style="display: none;">
-        <div class="admin-modal__content" style="max-width: 900px;">
-            <div class="admin-modal__header">
-                <h3 id="modalTitle">공지사항 작성</h3>
-                <button class="admin-modal__close" onclick="closeWriteModal()">&times;</button>
-            </div>
-            <div class="admin-modal__body">
-                <form id="noticeForm">
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">제목 *</label>
-                        <input type="text" id="noticeTitle" class="form-group__input" placeholder="공지사항 제목" required>
-                    </div>
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <div class="form-group" style="flex: 1;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">카테고리</label>
-                            <select id="noticeCategory" class="admin-select" style="width: 100%;">
-                                <option value="일반공지">일반공지</option>
-                                <option value="휴무안내">휴무안내</option>
-                                <option value="제품안내">제품안내</option>
-                                <option value="이벤트">이벤트</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="flex: 1;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">상단고정</label>
-                            <select id="noticePinned" class="admin-select" style="width: 100%;">
-                                <option value="false">일반</option>
-                                <option value="true">상단고정</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">내용 *</label>
-                        <div id="editor"></div>
-                    </div>
-                </form>
-            </div>
-            <div class="admin-modal__footer">
-                <button class="btn btn--primary" onclick="saveNotice()">저장</button>
-                <button class="btn btn--outline" onclick="closeWriteModal()" style="color: var(--text-body);">취소</button>
-            </div>
-        </div>
-    </div>
 
     <!-- 상세보기 모달 -->
     <div id="detailModal" class="admin-modal" style="display: none;">
@@ -194,9 +150,8 @@
     </div>
 
     <style>
-        .admin-select { padding: 0.5rem 1rem; border: 1px solid var(--border-light); border-radius: 0.375rem; font-size: 0.875rem; background: #fff; }
         .admin-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-        .admin-modal__content { background: #fff; border-radius: 0.75rem; width: 100%; max-height: 95vh; overflow: hidden; display: flex; flex-direction: column; }
+        .admin-modal__content { background: #fff; border-radius: 0.75rem; width: 100%; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
         .admin-modal__header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light); }
         .admin-modal__header h3 { font-size: 1.125rem; font-weight: 600; }
         .admin-modal__close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
@@ -206,23 +161,26 @@
         .admin-table tbody tr:hover { background: var(--bg-light); }
         .pinned-badge { background: #ef4444; color: #fff; padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; }
         .detail-content { background: var(--bg-light); padding: 1.5rem; border-radius: 0.5rem; line-height: 1.8; }
-        .detail-content img { max-width: 100%; height: auto; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1rem 0; }
         .detail-content p { margin-bottom: 1rem; }
+        .detail-content h1, .detail-content h2, .detail-content h3, .detail-content h4 { margin: 1rem 0 0.5rem; }
         .detail-content ul, .detail-content ol { margin-bottom: 1rem; padding-left: 1.5rem; }
-        .detail-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.875rem; color: var(--text-light); }
-
-        /* Toast UI Editor 스타일 조정 */
-        .toastui-editor-defaultUI { border: 1px solid var(--border-light); border-radius: 0.5rem; }
-        .toastui-editor-defaultUI-toolbar { border-radius: 0.5rem 0.5rem 0 0; }
+        .detail-content blockquote { border-left: 4px solid var(--primary); padding-left: 1rem; margin: 1rem 0; color: var(--text-light); }
+        .detail-content pre { background: #1e1e1e; color: #fff; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .detail-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .detail-content th, .detail-content td { border: 1px solid var(--border-light); padding: 0.5rem; }
+        .detail-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.875rem; color: var(--text-light); flex-wrap: wrap; }
+        .category-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 500; }
+        .category-badge--general { background: #e5e7eb; color: #374151; }
+        .category-badge--holiday { background: #fef3c7; color: #92400e; }
+        .category-badge--product { background: #dbeafe; color: #1e40af; }
+        .category-badge--event { background: #fce7f3; color: #9d174d; }
     </style>
-
-    <!-- Toast UI Editor -->
-    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
@@ -238,38 +196,13 @@
 
         let noticesData = [];
         let currentNoticeId = null;
-        let isEditMode = false;
-        let editor = null;
 
-        // Toast UI Editor 초기화
-        function initEditor() {
-            if (editor) {
-                editor.destroy();
-            }
-            editor = new toastui.Editor({
-                el: document.querySelector('#editor'),
-                height: '400px',
-                initialEditType: 'wysiwyg',
-                previewStyle: 'vertical',
-                language: 'ko-KR',
-                placeholder: '공지사항 내용을 입력하세요...',
-                toolbarItems: [
-                    ['heading', 'bold', 'italic', 'strike'],
-                    ['hr', 'quote'],
-                    ['ul', 'ol', 'task'],
-                    ['table', 'link'],
-                    ['code', 'codeblock'],
-                    ['scrollSync']
-                ],
-                hooks: {
-                    addImageBlobHook: (blob, callback) => {
-                        // 이미지 업로드 시 알림
-                        alert('이미지 업로드는 외부 이미지 URL을 사용해주세요.\n\n1. 이미지를 imgbb.com 등에 업로드\n2. 이미지 URL을 복사\n3. 에디터에서 이미지 삽입 → URL 입력');
-                        return false;
-                    }
-                }
-            });
-        }
+        const categoryClassMap = {
+            '일반공지': 'category-badge--general',
+            '휴무안내': 'category-badge--holiday',
+            '제품안내': 'category-badge--product',
+            '이벤트': 'category-badge--event'
+        };
 
         function formatDate(timestamp) {
             if (!timestamp) return '-';
@@ -308,11 +241,11 @@
                     <tr onclick="openDetail('${notice.id}')">
                         <td>${notice.pinned ? '<span class="pinned-badge">공지</span>' : (noticesData.length - idx)}</td>
                         <td><strong>${notice.title || '-'}</strong></td>
-                        <td>${notice.category || '일반공지'}</td>
+                        <td><span class="category-badge ${categoryClassMap[notice.category] || 'category-badge--general'}">${notice.category || '일반공지'}</span></td>
                         <td>${formatDate(notice.createdAt)}</td>
                         <td>${notice.views || 0}</td>
                         <td>
-                            <button class="btn btn--outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; margin-right: 0.25rem;" onclick="event.stopPropagation(); editNotice('${notice.id}')">수정</button>
+                            <a href="notice-write.html?id=${notice.id}" class="btn btn--outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; margin-right: 0.25rem; text-decoration: none;" onclick="event.stopPropagation();">수정</a>
                             <button class="btn btn--outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="event.stopPropagation(); deleteNotice('${notice.id}')">삭제</button>
                         </td>
                     </tr>
@@ -321,84 +254,6 @@
                 console.error("Error loading notices:", error);
                 tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #ef4444;">데이터를 불러올 수 없습니다.</td></tr>';
             }
-        };
-
-        // 작성 모달 열기
-        window.openWriteModal = function() {
-            isEditMode = false;
-            currentNoticeId = null;
-            document.getElementById('modalTitle').textContent = '공지사항 작성';
-            document.getElementById('noticeTitle').value = '';
-            document.getElementById('noticeCategory').value = '일반공지';
-            document.getElementById('noticePinned').value = 'false';
-            document.getElementById('writeModal').style.display = 'flex';
-
-            setTimeout(() => {
-                initEditor();
-                editor.setHTML('');
-            }, 100);
-        };
-
-        window.closeWriteModal = function() {
-            document.getElementById('writeModal').style.display = 'none';
-        };
-
-        // 저장
-        window.saveNotice = async function() {
-            const title = document.getElementById('noticeTitle').value.trim();
-            const content = editor.getHTML();
-            const category = document.getElementById('noticeCategory').value;
-            const pinned = document.getElementById('noticePinned').value === 'true';
-
-            if (!title) {
-                alert('제목을 입력해주세요.');
-                return;
-            }
-
-            if (!content || content === '<p><br></p>') {
-                alert('내용을 입력해주세요.');
-                return;
-            }
-
-            try {
-                if (isEditMode && currentNoticeId) {
-                    await updateDoc(doc(db, "notices", currentNoticeId), {
-                        title, content, category, pinned, updatedAt: Timestamp.now()
-                    });
-                    alert('공지사항이 수정되었습니다.');
-                } else {
-                    await addDoc(collection(db, "notices"), {
-                        title, content, category, pinned,
-                        views: 0,
-                        createdAt: Timestamp.now()
-                    });
-                    alert('공지사항이 등록되었습니다.');
-                }
-                closeWriteModal();
-                loadNotices();
-            } catch (error) {
-                console.error("Error saving notice:", error);
-                alert('저장에 실패했습니다.');
-            }
-        };
-
-        // 수정 모드
-        window.editNotice = function(id) {
-            const notice = noticesData.find(n => n.id === id);
-            if (!notice) return;
-
-            isEditMode = true;
-            currentNoticeId = id;
-            document.getElementById('modalTitle').textContent = '공지사항 수정';
-            document.getElementById('noticeTitle').value = notice.title || '';
-            document.getElementById('noticeCategory').value = notice.category || '일반공지';
-            document.getElementById('noticePinned').value = notice.pinned ? 'true' : 'false';
-            document.getElementById('writeModal').style.display = 'flex';
-
-            setTimeout(() => {
-                initEditor();
-                editor.setHTML(notice.content || '');
-            }, 100);
         };
 
         // 삭제
@@ -421,10 +276,10 @@
             document.getElementById('detailTitle').textContent = notice.title;
             document.getElementById('detailBody').innerHTML = `
                 <div class="detail-meta">
-                    <span>카테고리: ${notice.category || '일반공지'}</span>
+                    <span>카테고리: <span class="category-badge ${categoryClassMap[notice.category] || 'category-badge--general'}">${notice.category || '일반공지'}</span></span>
                     <span>등록일: ${formatDate(notice.createdAt)}</span>
                     <span>조회수: ${notice.views || 0}</span>
-                    ${notice.pinned ? '<span style="color: #ef4444;">상단고정</span>' : ''}
+                    ${notice.pinned ? '<span style="color: #ef4444; font-weight: 500;">상단고정</span>' : ''}
                 </div>
                 <div class="detail-content">${notice.content || ''}</div>
             `;
@@ -436,8 +291,7 @@
         };
 
         window.editCurrentNotice = function() {
-            closeDetailModal();
-            editNotice(currentNoticeId);
+            location.href = `notice-write.html?id=${currentNoticeId}`;
         };
 
         // 로그인 체크
@@ -452,9 +306,6 @@
         };
 
         // 모달 외부 클릭
-        document.getElementById('writeModal').addEventListener('click', function(e) {
-            if (e.target === this) closeWriteModal();
-        });
         document.getElementById('detailModal').addEventListener('click', function(e) {
             if (e.target === this) closeDetailModal();
         });
