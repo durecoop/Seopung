@@ -414,13 +414,17 @@
             }
         };
 
-        // 로그인 체크
-        if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+        // 로그인 체크 (localStorage 또는 sessionStorage)
+        const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true' || sessionStorage.getItem('adminLoggedIn') === 'true';
+        if (!isLoggedIn) {
             window.location.href = 'index.html';
         }
-        document.getElementById('currentUser').textContent = sessionStorage.getItem('adminUser') || '관리자';
+        document.getElementById('currentUser').textContent = localStorage.getItem('adminUser') || sessionStorage.getItem('adminUser') || '관리자';
 
         window.logout = function() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminUser');
+            localStorage.removeItem('loginTime');
             sessionStorage.clear();
             window.location.href = 'index.html';
         };

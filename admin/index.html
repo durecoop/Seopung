@@ -61,18 +61,36 @@
             password: 'seopung2024!'
         };
 
+        // 로그인 상태 확인 함수
+        function isLoggedIn() {
+            return localStorage.getItem('adminLoggedIn') === 'true' ||
+                   sessionStorage.getItem('adminLoggedIn') === 'true';
+        }
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
             const errorEl = document.getElementById('loginError');
 
             if (username === DEMO_CREDENTIALS.username && password === DEMO_CREDENTIALS.password) {
                 // 로그인 성공
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                sessionStorage.setItem('adminUser', username);
-                sessionStorage.setItem('loginTime', new Date().toISOString());
+                const storage = remember ? localStorage : sessionStorage;
+                storage.setItem('adminLoggedIn', 'true');
+                storage.setItem('adminUser', username);
+                storage.setItem('loginTime', new Date().toISOString());
+
+                // 다른 스토리지는 클리어
+                if (remember) {
+                    sessionStorage.removeItem('adminLoggedIn');
+                    sessionStorage.removeItem('adminUser');
+                } else {
+                    localStorage.removeItem('adminLoggedIn');
+                    localStorage.removeItem('adminUser');
+                }
+
                 window.location.href = 'dashboard.html';
             } else {
                 // 로그인 실패
@@ -82,7 +100,7 @@
         });
 
         // 이미 로그인된 경우 대시보드로 이동
-        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        if (isLoggedIn()) {
             window.location.href = 'dashboard.html';
         }
     </script>
