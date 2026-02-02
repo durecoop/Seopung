@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 | 서풍</title>
+    <meta name="description" content="서풍 공지사항 - 회사 소식, 휴무일 안내">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/board.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="../index.html" class="logo">
+                <div class="logo__icon">
+                    <img src="../logo_transparent.png" alt="서풍 로고">
+                </div>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="../index.html" class="nav__link">홈</a></li>
+                    <li><a href="../about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="../process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="../products.html" class="nav__link">제품</a></li>
+                    <li><a href="../gallery.html" class="nav__link">갤러리</a></li>
+                    <li><a href="../board.html" class="nav__link nav__link--active">게시판</a></li>
+                    <li><a href="../contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header__content">
+            <span class="page-header__tag">NOTICE</span>
+            <h1 class="page-header__title">공지사항</h1>
+            <p class="page-header__desc">서풍의 주요 소식과 안내사항을 확인하세요</p>
+        </div>
+    </section>
+
+    <!-- Board List Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Search & Filter -->
+            <div class="board-toolbar">
+                <div class="board-filter">
+                    <button class="board-filter__btn board-filter__btn--active">전체</button>
+                    <button class="board-filter__btn">일반공지</button>
+                    <button class="board-filter__btn">휴무안내</button>
+                    <button class="board-filter__btn">제품안내</button>
+                </div>
+                <div class="board-search">
+                    <select class="board-search__select">
+                        <option>제목+내용</option>
+                        <option>제목</option>
+                        <option>내용</option>
+                    </select>
+                    <input type="text" class="board-search__input" placeholder="검색어를 입력하세요">
+                    <button class="board-search__btn">검색</button>
+                </div>
+            </div>
+
+            <!-- Board List -->
+            <div class="board-list">
+                <div class="board-list__header">
+                    <span>번호</span>
+                    <span>제목</span>
+                    <span>등록일</span>
+                    <span>조회</span>
+                </div>
+
+                <!-- Notice Item (Pinned) -->
+                <div class="board-list__item board-list__item--notice">
+                    <span class="board-list__num"><span class="board-list__num--notice">공지</span></span>
+                    <div class="board-list__title">
+                        <a href="#">2024년 설 연휴 휴무 안내 (2/9~2/12)</a>
+                        <span class="board-list__new">N</span>
+                    </div>
+                    <span class="board-list__date">2024.01.25</span>
+                    <span class="board-list__views">128</span>
+                </div>
+
+                <div class="board-list__item board-list__item--notice">
+                    <span class="board-list__num"><span class="board-list__num--notice">공지</span></span>
+                    <div class="board-list__title">
+                        <a href="#">2024년 신규 제품 라인업 출시 안내</a>
+                    </div>
+                    <span class="board-list__date">2024.01.15</span>
+                    <span class="board-list__views">256</span>
+                </div>
+
+                <!-- Regular Items -->
+                <div class="board-list__item">
+                    <span class="board-list__num">15</span>
+                    <div class="board-list__title">
+                        <a href="#">ASC 지속가능 수산물 인증 갱신 완료</a>
+                        <span class="board-list__file">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <span class="board-list__date">2024.01.10</span>
+                    <span class="board-list__views">89</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">14</span>
+                    <div class="board-list__title">
+                        <a href="#">홈페이지 리뉴얼 오픈 안내</a>
+                    </div>
+                    <span class="board-list__date">2024.01.05</span>
+                    <span class="board-list__views">312</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">13</span>
+                    <div class="board-list__title">
+                        <a href="#">2023년 연말 결산 및 2024년 영업 일정 안내</a>
+                    </div>
+                    <span class="board-list__date">2023.12.28</span>
+                    <span class="board-list__views">198</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">12</span>
+                    <div class="board-list__title">
+                        <a href="#">동절기 배송 안내 (냉동/냉장 제품)</a>
+                    </div>
+                    <span class="board-list__date">2023.12.15</span>
+                    <span class="board-list__views">145</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">11</span>
+                    <div class="board-list__title">
+                        <a href="#">2023 수출의 탑 수상 안내</a>
+                        <span class="board-list__file">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <span class="board-list__date">2023.12.05</span>
+                    <span class="board-list__views">423</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">10</span>
+                    <div class="board-list__title">
+                        <a href="#">신규 생산라인 증설 완료 안내</a>
+                    </div>
+                    <span class="board-list__date">2023.11.20</span>
+                    <span class="board-list__views">267</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">9</span>
+                    <div class="board-list__title">
+                        <a href="#">MSC 지속가능 자연산 수산물 인증 획득</a>
+                    </div>
+                    <span class="board-list__date">2023.10.08</span>
+                    <span class="board-list__views">356</span>
+                </div>
+
+                <div class="board-list__item">
+                    <span class="board-list__num">8</span>
+                    <div class="board-list__title">
+                        <a href="#">추석 연휴 배송 및 휴무 안내</a>
+                    </div>
+                    <span class="board-list__date">2023.09.20</span>
+                    <span class="board-list__views">189</span>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination__btn pagination__btn--disabled">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <button class="pagination__btn pagination__btn--active">1</button>
+                <button class="pagination__btn">2</button>
+                <button class="pagination__btn">3</button>
+                <button class="pagination__btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">
+                        신뢰로써 공존하는 기업<br>
+                        50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
+                        가장 신선하고 안전한 수산물을 공급합니다.
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
+                    <ul>
+                        <li><a href="../about.html">회사소개</a></li>
+                        <li><a href="../process.html">가공 프로세스</a></li>
+                        <li><a href="../products.html">제품</a></li>
+                        <li><a href="../gallery.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">게시판</h4>
+                    <ul>
+                        <li><a href="notice.html">공지사항</a></li>
+                        <li><a href="resources.html">자료실</a></li>
+                        <li><a href="inquiry.html">제품 문의</a></li>
+                        <li><a href="quote.html">견적 요청</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">061-681-5171</a></li>
+                        <li>FAX 061-681-5173</li>
+                        <li><a href="../contact.html">전남 여수시 화양면 석교로 121</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

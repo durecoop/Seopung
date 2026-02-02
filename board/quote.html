@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적 요청 | 서풍</title>
+    <meta name="description" content="서풍 견적 요청 - 대량 주문, OEM/ODM 견적 문의">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/board.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="../index.html" class="logo">
+                <div class="logo__icon">
+                    <img src="../logo_transparent.png" alt="서풍 로고">
+                </div>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="../index.html" class="nav__link">홈</a></li>
+                    <li><a href="../about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="../process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="../products.html" class="nav__link">제품</a></li>
+                    <li><a href="../gallery.html" class="nav__link">갤러리</a></li>
+                    <li><a href="../board.html" class="nav__link nav__link--active">게시판</a></li>
+                    <li><a href="../contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header__content">
+            <span class="page-header__tag">QUOTE REQUEST</span>
+            <h1 class="page-header__title">견적 요청</h1>
+            <p class="page-header__desc">대량 주문, OEM/ODM 등 견적을 요청해 주세요</p>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="section">
+        <div class="container" style="max-width: 900px;">
+            <div class="board-form">
+                <form action="#" method="post" id="quoteForm">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--primary);">
+                        회사 정보
+                    </h3>
+
+                    <!-- 회사 정보 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-group__label">
+                                회사명 <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-group__input" name="company" placeholder="회사명을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group__label">사업자등록번호</label>
+                            <input type="text" class="form-group__input" name="business_no" placeholder="000-00-00000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-group__label">
+                                담당자명 <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-group__input" name="name" placeholder="담당자명을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group__label">부서/직책</label>
+                            <input type="text" class="form-group__input" name="position" placeholder="구매팀 / 팀장">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-group__label">
+                                연락처 <span class="required">*</span>
+                            </label>
+                            <input type="tel" class="form-group__input" name="phone" placeholder="010-0000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group__label">
+                                이메일 <span class="required">*</span>
+                            </label>
+                            <input type="email" class="form-group__input" name="email" placeholder="example@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-group__label">배송지 주소</label>
+                        <input type="text" class="form-group__input" name="address" placeholder="배송 받으실 주소를 입력하세요">
+                    </div>
+
+                    <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-dark); margin: 2.5rem 0 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--primary);">
+                        견적 요청 내용
+                    </h3>
+
+                    <!-- 희망 제품 -->
+                    <div class="form-group">
+                        <label class="form-group__label">
+                            희망 제품 <span class="required">*</span>
+                        </label>
+                        <div class="product-checkbox-grid">
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="mackerel">
+                                <span>노르웨이 간고등어</span>
+                            </label>
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="squid">
+                                <span>손질 오징어</span>
+                            </label>
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="seabream">
+                                <span>냉동 참돔</span>
+                            </label>
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="salmon">
+                                <span>연어 (훈제/생)</span>
+                            </label>
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="flatfish">
+                                <span>광어/우럭</span>
+                            </label>
+                            <label class="product-checkbox">
+                                <input type="checkbox" name="products[]" value="other">
+                                <span>기타 (하단 기재)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 거래 유형 -->
+                    <div class="form-group">
+                        <label class="form-group__label">
+                            거래 유형 <span class="required">*</span>
+                        </label>
+                        <select class="form-group__select" name="trade_type" required>
+                            <option value="">선택해 주세요</option>
+                            <option value="wholesale">도매 (대량 구매)</option>
+                            <option value="retail">소매 (유통)</option>
+                            <option value="school">학교 급식</option>
+                            <option value="oem">OEM/ODM (PB 생산)</option>
+                            <option value="export">수출</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-group__label">
+                                예상 물량 <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-group__input" name="quantity" placeholder="예: 월 500박스, 연간 10톤" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group__label">희망 납품일</label>
+                            <input type="date" class="form-group__input" name="delivery_date">
+                        </div>
+                    </div>
+
+                    <!-- 추가 요청사항 -->
+                    <div class="form-group">
+                        <label class="form-group__label">추가 요청사항</label>
+                        <textarea class="form-group__textarea" name="memo" placeholder="추가 요청사항이나 상세 내용을 입력해 주세요.&#10;&#10;예시:&#10;- 특정 규격이나 포장 요청&#10;- 정기 납품 희망&#10;- PB 브랜드 라벨 부착 요청&#10;- 기타 제품 문의" style="min-height: 150px;"></textarea>
+                    </div>
+
+                    <!-- 첨부파일 -->
+                    <div class="form-group">
+                        <label class="form-group__label">첨부파일</label>
+                        <input type="file" class="form-group__input" name="attachment" accept=".pdf,.doc,.docx,.jpg,.png,.xlsx">
+                        <p class="form-group__help">* 사업자등록증, 제품 규격서, 참고 이미지 등 (최대 10MB)</p>
+                    </div>
+
+                    <!-- 개인정보 수집 동의 -->
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">
+                                <strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.
+                                <a href="#" onclick="alert('수집항목: 회사명, 담당자명, 연락처, 이메일, 주소\n수집목적: 견적 산출 및 거래 상담\n보유기간: 견적 처리 완료 후 1년'); return false;">내용보기</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="marketing" name="marketing">
+                            <label for="marketing">
+                                [선택] 신제품 및 프로모션 정보 수신에 동의합니다.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 제출 버튼 -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn--outline" onclick="history.back()" style="color: var(--text-body); border-color: var(--border-light);">취소</button>
+                        <button type="submit" class="btn btn--primary">견적 요청하기</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 견적 프로세스 안내 -->
+            <div style="margin-top: 2rem; padding: 2rem; background: var(--bg-light); border-radius: var(--radius-lg);">
+                <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-dark);">견적 진행 프로세스</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
+                    <div style="padding: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-weight: 700;">1</div>
+                        <p style="font-size: 0.875rem; font-weight: 600; color: var(--text-dark);">견적 요청</p>
+                        <p style="font-size: 0.8125rem; color: var(--text-light);">폼 작성 및 제출</p>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-weight: 700;">2</div>
+                        <p style="font-size: 0.875rem; font-weight: 600; color: var(--text-dark);">담당자 검토</p>
+                        <p style="font-size: 0.8125rem; color: var(--text-light);">1~2 영업일</p>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-weight: 700;">3</div>
+                        <p style="font-size: 0.875rem; font-weight: 600; color: var(--text-dark);">견적서 발송</p>
+                        <p style="font-size: 0.8125rem; color: var(--text-light);">이메일/팩스</p>
+                    </div>
+                    <div style="padding: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-weight: 700;">4</div>
+                        <p style="font-size: 0.875rem; font-weight: 600; color: var(--text-dark);">계약 체결</p>
+                        <p style="font-size: 0.8125rem; color: var(--text-light);">거래 시작</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">
+                        신뢰로써 공존하는 기업<br>
+                        50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
+                        가장 신선하고 안전한 수산물을 공급합니다.
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
+                    <ul>
+                        <li><a href="../about.html">회사소개</a></li>
+                        <li><a href="../process.html">가공 프로세스</a></li>
+                        <li><a href="../products.html">제품</a></li>
+                        <li><a href="../gallery.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">게시판</h4>
+                    <ul>
+                        <li><a href="notice.html">공지사항</a></li>
+                        <li><a href="resources.html">자료실</a></li>
+                        <li><a href="inquiry.html">제품 문의</a></li>
+                        <li><a href="quote.html">견적 요청</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">061-681-5171</a></li>
+                        <li>FAX 061-681-5173</li>
+                        <li><a href="../contact.html">전남 여수시 화양면 석교로 121</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script>
+        // Form Submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 체크박스 검증
+            const products = document.querySelectorAll('input[name="products[]"]:checked');
+            if (products.length === 0) {
+                alert('희망 제품을 1개 이상 선택해 주세요.');
+                return;
+            }
+
+            alert('견적 요청이 접수되었습니다.\n담당자 검토 후 1~2 영업일 내 연락드리겠습니다.\n\n감사합니다.');
+        });
+    </script>
+</body>
+</html>

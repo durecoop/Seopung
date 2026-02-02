@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 | 서풍</title>
+    <meta name="description" content="서풍 공지사항, 뉴스, 자료실, 문의 게시판">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="index.html" class="logo">
+                <div class="logo__icon">
+                    <img src="logo_transparent.png" alt="서풍 로고">
+                </div>
+                <div class="logo__text">
+                    <span class="logo__main">서풍</span>
+                    <span class="logo__sub">SEOPOONG</span>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <ul class="nav__list" id="navList">
+                    <li><a href="index.html" class="nav__link">홈</a></li>
+                    <li><a href="about.html" class="nav__link">회사소개</a></li>
+                    <li><a href="process.html" class="nav__link">가공 프로세스</a></li>
+                    <li><a href="products.html" class="nav__link">제품</a></li>
+                    <li><a href="gallery.html" class="nav__link">갤러리</a></li>
+                    <li><a href="board.html" class="nav__link nav__link--active">게시판</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                </ul>
+                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header__content">
+            <span class="page-header__tag">BOARD</span>
+            <h1 class="page-header__title">게시판</h1>
+            <p class="page-header__desc">서풍의 소식과 자료를 확인하세요</p>
+        </div>
+    </section>
+
+    <!-- Board Hub Section -->
+    <section class="section">
+        <div class="container">
+            <div class="board-hub">
+                <!-- 공지사항 -->
+                <a href="board/notice.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>공지사항</h3>
+                        <p>회사 공지, 휴무일 안내</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 뉴스/보도자료 -->
+                <a href="board/news.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+                            <path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>뉴스/보도자료</h3>
+                        <p>언론보도, 수상, 인증 소식</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 자료실 -->
+                <a href="board/resources.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>자료실</h3>
+                        <p>카탈로그, 인증서, 품질성적서</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- FAQ -->
+                <a href="board/faq.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>FAQ</h3>
+                        <p>자주 묻는 질문과 답변</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 제품 문의 -->
+                <a href="board/inquiry.html" class="board-hub__card board-hub__card--highlight">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>제품 문의</h3>
+                        <p>제품 정보, 샘플 요청</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 견적 요청 -->
+                <a href="board/quote.html" class="board-hub__card board-hub__card--highlight">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="12" y1="18" x2="12" y2="12"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>견적 요청</h3>
+                        <p>대량 주문, OEM/ODM 견적</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 채용정보 -->
+                <a href="board/careers.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <line x1="19" y1="8" x2="19" y2="14"/>
+                            <line x1="22" y1="11" x2="16" y2="11"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>채용정보</h3>
+                        <p>함께할 인재를 찾습니다</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+
+                <!-- 파트너 후기 -->
+                <a href="board/reviews.html" class="board-hub__card">
+                    <div class="board-hub__icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="board-hub__content">
+                        <h3>파트너 후기</h3>
+                        <p>거래처 추천사</p>
+                    </div>
+                    <span class="board-hub__arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="section section--bg-light">
+        <div class="container">
+            <div class="recent-boards">
+                <!-- 최근 공지사항 -->
+                <div class="recent-board">
+                    <div class="recent-board__header">
+                        <h3>공지사항</h3>
+                        <a href="board/notice.html" class="recent-board__more">더보기 →</a>
+                    </div>
+                    <ul class="recent-board__list">
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__badge">공지</span>
+                                <span class="recent-board__title">2024년 설 연휴 휴무 안내</span>
+                                <span class="recent-board__date">2024.01.25</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__title">신규 제품 라인업 출시 안내</span>
+                                <span class="recent-board__date">2024.01.15</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__title">ASC 인증 갱신 완료</span>
+                                <span class="recent-board__date">2024.01.10</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__title">홈페이지 리뉴얼 오픈</span>
+                                <span class="recent-board__date">2024.01.05</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 최근 뉴스 -->
+                <div class="recent-board">
+                    <div class="recent-board__header">
+                        <h3>뉴스/보도자료</h3>
+                        <a href="board/news.html" class="recent-board__more">더보기 →</a>
+                    </div>
+                    <ul class="recent-board__list">
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__badge recent-board__badge--news">수상</span>
+                                <span class="recent-board__title">2023년 수출의 탑 수상</span>
+                                <span class="recent-board__date">2023.12.20</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__badge recent-board__badge--news">언론</span>
+                                <span class="recent-board__title">[여수시민신문] 서풍, 친환경 수산물 가공 선도</span>
+                                <span class="recent-board__date">2023.11.15</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__title">MSC 지속가능 수산물 인증 획득</span>
+                                <span class="recent-board__date">2023.10.08</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="recent-board__title">2023년 상반기 매출 200억 돌파</span>
+                                <span class="recent-board__date">2023.07.20</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact Banner -->
+    <section class="quick-contact">
+        <div class="container">
+            <div class="quick-contact__content">
+                <div class="quick-contact__text">
+                    <h3>빠른 상담이 필요하신가요?</h3>
+                    <p>전화 또는 이메일로 바로 문의하세요</p>
+                </div>
+                <div class="quick-contact__actions">
+                    <a href="tel:061-681-5171" class="btn btn--primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        061-681-5171
+                    </a>
+                    <a href="board/inquiry.html" class="btn btn--outline">제품 문의하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <h3 class="footer__brand-title">서풍</h3>
+                    <p class="footer__brand-desc">
+                        신뢰로써 공존하는 기업<br>
+                        50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
+                        가장 신선하고 안전한 수산물을 공급합니다.
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">바로가기</h4>
+                    <ul>
+                        <li><a href="about.html">회사소개</a></li>
+                        <li><a href="process.html">가공 프로세스</a></li>
+                        <li><a href="products.html">제품</a></li>
+                        <li><a href="gallery.html">갤러리</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">게시판</h4>
+                    <ul>
+                        <li><a href="board/notice.html">공지사항</a></li>
+                        <li><a href="board/resources.html">자료실</a></li>
+                        <li><a href="board/inquiry.html">제품 문의</a></li>
+                        <li><a href="board/quote.html">견적 요청</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4 class="footer__title">연락처</h4>
+                    <ul>
+                        <li><a href="tel:061-681-5171">061-681-5171</a></li>
+                        <li>FAX 061-681-5173</li>
+                        <li><a href="contact.html">전남 여수시 화양면 석교로 121</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>
