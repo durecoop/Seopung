@@ -33,15 +33,15 @@
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
                 제품 문의
-                <span class="admin-nav__badge">3</span>
+                <span class="admin-nav__badge" id="navInquiryBadge">0</span>
             </a>
             <a href="quotes.html" class="admin-nav__item">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                 </svg>
-                견적 요청
-                <span class="admin-nav__badge">2</span>
+                <span>견적 요청</span>
+                <span class="admin-nav__badge" id="navQuoteBadge">0</span>
             </a>
             <a href="notices.html" class="admin-nav__item">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -120,7 +120,7 @@
                         </svg>
                     </div>
                     <div class="admin-stat-card__content">
-                        <span class="admin-stat-card__number">3</span>
+                        <span class="admin-stat-card__number" id="inquiryCount">0</span>
                         <span class="admin-stat-card__label">신규 제품 문의</span>
                     </div>
                     <a href="inquiries.html" class="admin-stat-card__link">보기 →</a>
@@ -134,7 +134,7 @@
                         </svg>
                     </div>
                     <div class="admin-stat-card__content">
-                        <span class="admin-stat-card__number">2</span>
+                        <span class="admin-stat-card__number" id="quoteCount">0</span>
                         <span class="admin-stat-card__label">신규 견적 요청</span>
                     </div>
                     <a href="quotes.html" class="admin-stat-card__link">보기 →</a>
@@ -186,25 +186,8 @@
                                     <th>상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>한국식품</strong><br><small>김철수</small></td>
-                                    <td>제품문의</td>
-                                    <td>2024.01.28</td>
-                                    <td><span class="admin-badge admin-badge--pending">대기</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>서울급식</strong><br><small>박영희</small></td>
-                                    <td>샘플요청</td>
-                                    <td>2024.01.27</td>
-                                    <td><span class="admin-badge admin-badge--pending">대기</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>대한유통</strong><br><small>이민수</small></td>
-                                    <td>거래조건</td>
-                                    <td>2024.01.26</td>
-                                    <td><span class="admin-badge admin-badge--completed">완료</span></td>
-                                </tr>
+                            <tbody id="inquiriesTableBody">
+                                <!-- 동적으로 생성 -->
                             </tbody>
                         </table>
                     </div>
@@ -225,19 +208,8 @@
                                     <th>상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>쿠팡</strong><br><small>구매팀</small></td>
-                                    <td>간고등어, 오징어</td>
-                                    <td>월 300박스</td>
-                                    <td><span class="admin-badge admin-badge--progress">검토중</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>초록마을</strong><br><small>MD팀</small></td>
-                                    <td>참돔, 광어</td>
-                                    <td>월 100박스</td>
-                                    <td><span class="admin-badge admin-badge--pending">접수</span></td>
-                                </tr>
+                            <tbody id="quotesTableBody">
+                                <!-- 동적으로 생성 -->
                             </tbody>
                         </table>
                     </div>
@@ -286,6 +258,7 @@
         </div>
     </main>
 
+    <script src="../js/data.js"></script>
     <script>
         // 로그인 체크
         if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
@@ -309,6 +282,71 @@
             sessionStorage.removeItem('loginTime');
             window.location.href = 'index.html';
         }
+
+        // 제품 코드 → 이름 변환
+        const productNames = {
+            'mackerel': '간고등어',
+            'squid': '오징어',
+            'seabream': '참돔',
+            'salmon': '연어',
+            'flatfish': '광어/우럭',
+            'other': '기타'
+        };
+
+        // 대시보드 데이터 로드
+        function loadDashboardData() {
+            const inquiries = SeopungData.inquiries.getAll();
+            const quotes = SeopungData.quotes.getAll();
+
+            // 카운트 업데이트
+            const pendingInquiries = inquiries.filter(i => i.status === 'pending').length;
+            const pendingQuotes = quotes.filter(q => q.status === 'pending').length;
+
+            document.getElementById('inquiryCount').textContent = pendingInquiries;
+            document.getElementById('quoteCount').textContent = pendingQuotes;
+            document.getElementById('navInquiryBadge').textContent = SeopungData.inquiries.getUnreadCount();
+            document.getElementById('navQuoteBadge').textContent = SeopungData.quotes.getUnreadCount();
+
+            // 최근 문의 테이블
+            const inquiriesBody = document.getElementById('inquiriesTableBody');
+            const recentInquiries = inquiries.slice(0, 3);
+
+            if (recentInquiries.length === 0) {
+                inquiriesBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-light);">문의 내역이 없습니다.</td></tr>';
+            } else {
+                inquiriesBody.innerHTML = recentInquiries.map(inquiry => `
+                    <tr style="cursor: pointer;" onclick="location.href='inquiries.html'">
+                        <td><strong>${inquiry.company}</strong><br><small>${inquiry.name}</small></td>
+                        <td>${SeopungData.getInquiryTypeText(inquiry.inquiry_type)}</td>
+                        <td>${SeopungData.formatDate(inquiry.date)}</td>
+                        <td><span class="admin-badge ${SeopungData.getStatusClass(inquiry.status)}">${SeopungData.getStatusText(inquiry.status)}</span></td>
+                    </tr>
+                `).join('');
+            }
+
+            // 최근 견적 테이블
+            const quotesBody = document.getElementById('quotesTableBody');
+            const recentQuotes = quotes.slice(0, 3);
+
+            if (recentQuotes.length === 0) {
+                quotesBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-light);">견적 요청 내역이 없습니다.</td></tr>';
+            } else {
+                quotesBody.innerHTML = recentQuotes.map(quote => {
+                    const products = quote.products ? quote.products.slice(0, 2).map(p => productNames[p] || p).join(', ') : '-';
+                    return `
+                        <tr style="cursor: pointer;" onclick="location.href='quotes.html'">
+                            <td><strong>${quote.company}</strong><br><small>${quote.name}</small></td>
+                            <td>${products}${quote.products && quote.products.length > 2 ? '...' : ''}</td>
+                            <td>${quote.quantity || '-'}</td>
+                            <td><span class="admin-badge ${SeopungData.getStatusClass(quote.status)}">${SeopungData.getStatusText(quote.status)}</span></td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        // 초기화
+        loadDashboardData();
     </script>
 </body>
 </html>

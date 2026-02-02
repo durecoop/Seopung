@@ -199,19 +199,41 @@
             </div>
             <div class="footer__bottom">
                 <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
-                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00</p>
+                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00 | <a href="../admin/" style="color: var(--text-muted);">관리자</a></p>
             </div>
         </div>
     </footer>
 
     <script src="../js/main.js"></script>
     <script src="../js/navigation.js"></script>
+    <script src="../js/data.js"></script>
     <script>
         // Form Submission
         document.getElementById('inquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // 폼 데이터 수집
+            const formData = {
+                inquiry_type: this.inquiry_type.value,
+                company: this.company.value,
+                name: this.name.value,
+                phone: this.phone.value,
+                email: this.email.value,
+                title: this.title.value,
+                content: this.content.value
+            };
+
+            // 데이터 저장
+            SeopungData.inquiries.add(formData);
+
+            // 성공 메시지
             alert('문의가 접수되었습니다.\n담당자가 확인 후 연락드리겠습니다.\n\n감사합니다.');
-            // 실제 구현시 폼 데이터를 서버로 전송
+
+            // 폼 초기화
+            this.reset();
+
+            // 게시판 메인으로 이동 (선택사항)
+            // window.location.href = '../board.html';
         });
     </script>
 </body>
