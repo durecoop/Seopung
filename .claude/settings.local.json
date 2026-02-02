@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:keumhofnb.com)",
+      "WebSearch",
+      "Bash(python -m http.server:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n금호통상 스타일로 전체 리디자인 및 6대 핵심 경쟁력 추가\n\n- 금호통상 스타일 적용 \\(파란색 #005aab 기반, 1280px 레이아웃\\)\n- 6대 핵심 경쟁력 섹션 추가 \\(중매인 49호, 자동화 설비, PB업체, ASC/MSC, 이력제, 글로벌 수출\\)\n- 핵심 가치 배너 추가 \\(지속적 재투자로 고객 신뢰 유지\\)\n- 다국어 지원 추가 \\(한국어/중국어/말레이시아어\\)\n- PB 파트너사 섹션 추가 \\(풀무원, CJ, 쿠팡, 올가, 초록마을\\)\n- 글로벌 수출 섹션 추가 \\(연간 100억 수출, 수출의 탑 2회\\)\n- 지속가능 수산물 섹션 및 MSC 영상 추가\n- 인증 배너 추가 \\(HACCP, ASC, MSC, 수산물 이력제\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

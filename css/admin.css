@@ -214,21 +214,34 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1.25rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.7);
     font-size: 0.9375rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     position: relative;
+    border-radius: 0.5rem;
+    margin: 0.25rem 0.5rem;
+    text-decoration: none;
 }
 
 .admin-nav__item:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.15);
     color: #fff;
+    transform: translateX(4px);
+}
+
+.admin-nav__item:hover svg {
+    transform: scale(1.1);
+}
+
+.admin-nav__item svg {
+    transition: transform 0.2s ease;
 }
 
 .admin-nav__item--active {
-    background: rgba(255,255,255,0.15);
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
     color: #fff;
     font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .admin-nav__item--active::before {
@@ -237,8 +250,9 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 3px;
+    width: 4px;
     background: var(--accent);
+    border-radius: 0 4px 4px 0;
 }
 
 .admin-nav__badge {
