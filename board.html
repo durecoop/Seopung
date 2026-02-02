@@ -333,5 +333,56 @@
 
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
+
+    <!-- Firebase SDK for Recent Posts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        function formatDate(timestamp) {
+            if (!timestamp) return '-';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+        }
+
+        async function loadRecentPosts() {
+            try {
+                // 최근 공지사항
+                const noticesQuery = query(collection(db, "notices"), orderBy("createdAt", "desc"), limit(4));
+                const noticesSnap = await getDocs(noticesQuery);
+                const notices = [];
+                noticesSnap.forEach(doc => notices.push({ id: doc.id, ...doc.data() }));
+
+                const noticesList = document.querySelector('.recent-board:first-child .recent-board__list');
+                if (notices.length > 0 && noticesList) {
+                    noticesList.innerHTML = notices.map(n => `
+                        <li>
+                            <a href="board/notice.html">
+                                ${n.pinned ? '<span class="recent-board__badge">공지</span>' : ''}
+                                <span class="recent-board__title">${n.title || '(제목 없음)'}</span>
+                                <span class="recent-board__date">${formatDate(n.createdAt)}</span>
+                            </a>
+                        </li>
+                    `).join('');
+                }
+            } catch (e) {
+                console.log('Recent posts load:', e);
+            }
+        }
+
+        loadRecentPosts();
+    </script>
 </body>
 </html>

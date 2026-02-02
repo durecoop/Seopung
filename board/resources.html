@@ -59,258 +59,22 @@
             <!-- Category Filter -->
             <div class="board-toolbar">
                 <div class="board-filter">
-                    <button class="board-filter__btn board-filter__btn--active">전체</button>
-                    <button class="board-filter__btn">카탈로그</button>
-                    <button class="board-filter__btn">인증서</button>
-                    <button class="board-filter__btn">품질성적서</button>
-                    <button class="board-filter__btn">회사소개서</button>
+                    <button class="board-filter__btn board-filter__btn--active" onclick="filterCategory('all')">전체</button>
+                    <button class="board-filter__btn" onclick="filterCategory('카탈로그')">카탈로그</button>
+                    <button class="board-filter__btn" onclick="filterCategory('인증서')">인증서</button>
+                    <button class="board-filter__btn" onclick="filterCategory('품질성적서')">품질성적서</button>
+                    <button class="board-filter__btn" onclick="filterCategory('회사소개서')">회사소개서</button>
                 </div>
                 <div class="board-search">
-                    <input type="text" class="board-search__input" placeholder="자료명 검색">
-                    <button class="board-search__btn">검색</button>
+                    <input type="text" class="board-search__input" id="searchInput" placeholder="자료명 검색" onkeypress="if(event.key==='Enter') searchResources()">
+                    <button class="board-search__btn" onclick="searchResources()">검색</button>
                 </div>
             </div>
 
             <!-- Resources Grid -->
-            <div class="resources-grid">
-                <!-- 카탈로그 -->
-                <div class="resource-card">
-                    <div class="resource-card__icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category">카탈로그</span>
-                        <h4 class="resource-card__title">2024 제품 카탈로그 (국문)</h4>
-                        <p class="resource-card__desc">냉동 수산물 전 제품 안내</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>12.5 MB</span>
-                            <span>2024.01.15</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-card__icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category">카탈로그</span>
-                        <h4 class="resource-card__title">2024 Product Catalog (English)</h4>
-                        <p class="resource-card__desc">Frozen Seafood Product Guide</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>11.8 MB</span>
-                            <span>2024.01.15</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- 인증서 -->
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--cert">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="7"/>
-                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--cert">인증서</span>
-                        <h4 class="resource-card__title">HACCP 인증서</h4>
-                        <p class="resource-card__desc">식품안전관리인증기준</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>1.2 MB</span>
-                            <span>2023.12.01</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--cert">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="7"/>
-                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--cert">인증서</span>
-                        <h4 class="resource-card__title">ASC 인증서</h4>
-                        <p class="resource-card__desc">지속가능 양식 수산물 인증</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>0.8 MB</span>
-                            <span>2024.01.10</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--cert">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="7"/>
-                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--cert">인증서</span>
-                        <h4 class="resource-card__title">MSC 인증서</h4>
-                        <p class="resource-card__desc">지속가능 자연산 수산물 인증</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>0.9 MB</span>
-                            <span>2023.10.08</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--cert">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="7"/>
-                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--cert">인증서</span>
-                        <h4 class="resource-card__title">사업자등록증</h4>
-                        <p class="resource-card__desc">영어조합법인 서풍</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>0.5 MB</span>
-                            <span>2023.01.01</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- 품질성적서 -->
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--quality">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--quality">품질성적서</span>
-                        <h4 class="resource-card__title">2024년 1월 품질검사 성적서</h4>
-                        <p class="resource-card__desc">냉동 수산물 전 품목</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>2.1 MB</span>
-                            <span>2024.01.20</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- 회사소개서 -->
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--company">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--company">회사소개서</span>
-                        <h4 class="resource-card__title">서풍 회사소개서 (국문)</h4>
-                        <p class="resource-card__desc">회사 현황, 연혁, 시설, 제품 안내</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>8.5 MB</span>
-                            <span>2024.01.01</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-card__icon resource-card__icon--company">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                    </div>
-                    <div class="resource-card__content">
-                        <span class="resource-card__category resource-card__category--company">회사소개서</span>
-                        <h4 class="resource-card__title">Company Profile (English)</h4>
-                        <p class="resource-card__desc">Company Overview & Products</p>
-                        <div class="resource-card__meta">
-                            <span>PDF</span>
-                            <span>7.8 MB</span>
-                            <span>2024.01.01</span>
-                        </div>
-                    </div>
-                    <a href="#" class="resource-card__download" title="다운로드">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </a>
+            <div class="resources-grid" id="resourcesGrid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light);">
+                    로딩 중...
                 </div>
             </div>
 
@@ -409,26 +173,11 @@
             flex-shrink: 0;
         }
 
-        .resource-card__icon--cert {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
+        .resource-card__icon--cert { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .resource-card__icon--quality { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .resource-card__icon--company { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
 
-        .resource-card__icon--quality {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-
-        .resource-card__icon--company {
-            background: rgba(245, 158, 11, 0.1);
-            color: #f59e0b;
-        }
-
-        .resource-card__content {
-            flex: 1;
-            min-width: 0;
-        }
-
+        .resource-card__content { flex: 1; min-width: 0; }
         .resource-card__category {
             display: inline-block;
             padding: 0.1875rem 0.5rem;
@@ -439,18 +188,9 @@
             border-radius: var(--radius-sm);
             margin-bottom: 0.5rem;
         }
-
-        .resource-card__category--cert {
-            background: #10b981;
-        }
-
-        .resource-card__category--quality {
-            background: #8b5cf6;
-        }
-
-        .resource-card__category--company {
-            background: #f59e0b;
-        }
+        .resource-card__category--cert { background: #10b981; }
+        .resource-card__category--quality { background: #8b5cf6; }
+        .resource-card__category--company { background: #f59e0b; }
 
         .resource-card__title {
             font-size: 0.9375rem;
@@ -461,19 +201,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        .resource-card__desc {
-            font-size: 0.8125rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
-
-        .resource-card__meta {
-            display: flex;
-            gap: 0.75rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
+        .resource-card__desc { font-size: 0.8125rem; color: var(--text-light); margin-bottom: 0.75rem; }
+        .resource-card__meta { display: flex; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
 
         .resource-card__download {
             width: 40px;
@@ -487,30 +216,162 @@
             flex-shrink: 0;
             transition: background var(--transition-fast);
         }
+        .resource-card__download:hover { background: var(--primary-dark); }
 
-        .resource-card__download:hover {
-            background: var(--primary-dark);
-        }
-
-        @media (max-width: 1024px) {
-            .resources-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
+        @media (max-width: 1024px) { .resources-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .resource-card {
-                flex-wrap: wrap;
-            }
-
-            .resource-card__download {
-                margin-left: auto;
-            }
+            .resources-grid { grid-template-columns: 1fr; }
+            .resource-card { flex-wrap: wrap; }
+            .resource-card__download { margin-left: auto; }
         }
     </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, increment, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let resourcesData = [];
+        let filteredData = [];
+        let currentCategory = 'all';
+
+        const categoryIconMap = {
+            '카탈로그': '',
+            '인증서': '--cert',
+            '품질성적서': '--quality',
+            '회사소개서': '--company'
+        };
+
+        const categoryClassMap = {
+            '카탈로그': '',
+            '인증서': '--cert',
+            '품질성적서': '--quality',
+            '회사소개서': '--company'
+        };
+
+        function formatDate(timestamp) {
+            if (!timestamp) return '-';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+        }
+
+        async function loadResources() {
+            try {
+                const q = query(collection(db, "resources"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                resourcesData = [];
+                querySnapshot.forEach((doc) => {
+                    resourcesData.push({ id: doc.id, ...doc.data() });
+                });
+
+                filteredData = [...resourcesData];
+                renderResources();
+            } catch (error) {
+                console.error("Error loading resources:", error);
+                document.getElementById('resourcesGrid').innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light);">
+                        자료를 불러올 수 없습니다.
+                    </div>
+                `;
+            }
+        }
+
+        function renderResources() {
+            const container = document.getElementById('resourcesGrid');
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light);">
+                        등록된 자료가 없습니다.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredData.map(resource => {
+                const iconClass = categoryIconMap[resource.category] || '';
+                const categoryClass = categoryClassMap[resource.category] || '';
+
+                return `
+                    <div class="resource-card">
+                        <div class="resource-card__icon resource-card__icon${iconClass}">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <div class="resource-card__content">
+                            <span class="resource-card__category resource-card__category${categoryClass}">${resource.category || '기타'}</span>
+                            <h4 class="resource-card__title">${resource.title || '(제목 없음)'}</h4>
+                            <p class="resource-card__desc">${resource.description || ''}</p>
+                            <div class="resource-card__meta">
+                                <span>${resource.format || 'PDF'}</span>
+                                <span>${resource.size || '-'}</span>
+                                <span>${formatDate(resource.createdAt)}</span>
+                            </div>
+                        </div>
+                        <a href="${resource.url || '#'}" class="resource-card__download" title="다운로드" target="_blank" onclick="trackDownload('${resource.id}')">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.filterCategory = function(category) {
+            currentCategory = category;
+
+            document.querySelectorAll('.board-filter__btn').forEach(btn => btn.classList.remove('board-filter__btn--active'));
+            event.target.classList.add('board-filter__btn--active');
+
+            if (category === 'all') {
+                filteredData = [...resourcesData];
+            } else {
+                filteredData = resourcesData.filter(r => r.category === category);
+            }
+            renderResources();
+        };
+
+        window.searchResources = function() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            if (!keyword) {
+                filteredData = currentCategory === 'all' ? [...resourcesData] : resourcesData.filter(r => r.category === currentCategory);
+            } else {
+                filteredData = resourcesData.filter(r => {
+                    const matchCategory = currentCategory === 'all' || r.category === currentCategory;
+                    const matchKeyword = (r.title && r.title.toLowerCase().includes(keyword)) ||
+                                        (r.description && r.description.toLowerCase().includes(keyword));
+                    return matchCategory && matchKeyword;
+                });
+            }
+            renderResources();
+        };
+
+        window.trackDownload = async function(id) {
+            try {
+                await updateDoc(doc(db, "resources", id), { downloads: increment(1) });
+            } catch (e) { console.error(e); }
+        };
+
+        // 초기 로드
+        loadResources();
+    </script>
 </body>
 </html>

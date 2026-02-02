@@ -59,19 +59,14 @@
             <!-- Search & Filter -->
             <div class="board-toolbar">
                 <div class="board-filter">
-                    <button class="board-filter__btn board-filter__btn--active">전체</button>
-                    <button class="board-filter__btn">일반공지</button>
-                    <button class="board-filter__btn">휴무안내</button>
-                    <button class="board-filter__btn">제품안내</button>
+                    <button class="board-filter__btn board-filter__btn--active" onclick="filterCategory('all')">전체</button>
+                    <button class="board-filter__btn" onclick="filterCategory('일반공지')">일반공지</button>
+                    <button class="board-filter__btn" onclick="filterCategory('휴무안내')">휴무안내</button>
+                    <button class="board-filter__btn" onclick="filterCategory('제품안내')">제품안내</button>
                 </div>
                 <div class="board-search">
-                    <select class="board-search__select">
-                        <option>제목+내용</option>
-                        <option>제목</option>
-                        <option>내용</option>
-                    </select>
-                    <input type="text" class="board-search__input" placeholder="검색어를 입력하세요">
-                    <button class="board-search__btn">검색</button>
+                    <input type="text" class="board-search__input" id="searchInput" placeholder="검색어를 입력하세요" onkeypress="if(event.key==='Enter') searchNotices()">
+                    <button class="board-search__btn" onclick="searchNotices()">검색</button>
                 </div>
             </div>
 
@@ -83,129 +78,36 @@
                     <span>등록일</span>
                     <span>조회</span>
                 </div>
-
-                <!-- Notice Item (Pinned) -->
-                <div class="board-list__item board-list__item--notice">
-                    <span class="board-list__num"><span class="board-list__num--notice">공지</span></span>
-                    <div class="board-list__title">
-                        <a href="#">2024년 설 연휴 휴무 안내 (2/9~2/12)</a>
-                        <span class="board-list__new">N</span>
+                <div id="noticeList">
+                    <div class="board-list__item" style="justify-content: center; color: var(--text-light);">
+                        로딩 중...
                     </div>
-                    <span class="board-list__date">2024.01.25</span>
-                    <span class="board-list__views">128</span>
-                </div>
-
-                <div class="board-list__item board-list__item--notice">
-                    <span class="board-list__num"><span class="board-list__num--notice">공지</span></span>
-                    <div class="board-list__title">
-                        <a href="#">2024년 신규 제품 라인업 출시 안내</a>
-                    </div>
-                    <span class="board-list__date">2024.01.15</span>
-                    <span class="board-list__views">256</span>
-                </div>
-
-                <!-- Regular Items -->
-                <div class="board-list__item">
-                    <span class="board-list__num">15</span>
-                    <div class="board-list__title">
-                        <a href="#">ASC 지속가능 수산물 인증 갱신 완료</a>
-                        <span class="board-list__file">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                            </svg>
-                        </span>
-                    </div>
-                    <span class="board-list__date">2024.01.10</span>
-                    <span class="board-list__views">89</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">14</span>
-                    <div class="board-list__title">
-                        <a href="#">홈페이지 리뉴얼 오픈 안내</a>
-                    </div>
-                    <span class="board-list__date">2024.01.05</span>
-                    <span class="board-list__views">312</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">13</span>
-                    <div class="board-list__title">
-                        <a href="#">2023년 연말 결산 및 2024년 영업 일정 안내</a>
-                    </div>
-                    <span class="board-list__date">2023.12.28</span>
-                    <span class="board-list__views">198</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">12</span>
-                    <div class="board-list__title">
-                        <a href="#">동절기 배송 안내 (냉동/냉장 제품)</a>
-                    </div>
-                    <span class="board-list__date">2023.12.15</span>
-                    <span class="board-list__views">145</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">11</span>
-                    <div class="board-list__title">
-                        <a href="#">2023 수출의 탑 수상 안내</a>
-                        <span class="board-list__file">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                            </svg>
-                        </span>
-                    </div>
-                    <span class="board-list__date">2023.12.05</span>
-                    <span class="board-list__views">423</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">10</span>
-                    <div class="board-list__title">
-                        <a href="#">신규 생산라인 증설 완료 안내</a>
-                    </div>
-                    <span class="board-list__date">2023.11.20</span>
-                    <span class="board-list__views">267</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">9</span>
-                    <div class="board-list__title">
-                        <a href="#">MSC 지속가능 자연산 수산물 인증 획득</a>
-                    </div>
-                    <span class="board-list__date">2023.10.08</span>
-                    <span class="board-list__views">356</span>
-                </div>
-
-                <div class="board-list__item">
-                    <span class="board-list__num">8</span>
-                    <div class="board-list__title">
-                        <a href="#">추석 연휴 배송 및 휴무 안내</a>
-                    </div>
-                    <span class="board-list__date">2023.09.20</span>
-                    <span class="board-list__views">189</span>
                 </div>
             </div>
 
             <!-- Pagination -->
-            <div class="pagination">
-                <button class="pagination__btn pagination__btn--disabled">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"/>
-                    </svg>
-                </button>
-                <button class="pagination__btn pagination__btn--active">1</button>
-                <button class="pagination__btn">2</button>
-                <button class="pagination__btn">3</button>
-                <button class="pagination__btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                </button>
-            </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </section>
+
+    <!-- Notice Detail Modal -->
+    <div id="detailModal" class="notice-modal" style="display: none;">
+        <div class="notice-modal__content">
+            <div class="notice-modal__header">
+                <h3 id="modalTitle">공지사항</h3>
+                <button class="notice-modal__close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="notice-modal__meta">
+                <span id="modalCategory"></span>
+                <span id="modalDate"></span>
+                <span id="modalViews"></span>
+            </div>
+            <div class="notice-modal__body" id="modalBody"></div>
+            <div class="notice-modal__footer">
+                <button class="btn btn--outline" onclick="closeModal()">닫기</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -253,7 +155,216 @@
         </div>
     </footer>
 
+    <style>
+        .notice-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .notice-modal__content { background: #fff; border-radius: 1rem; width: 100%; max-width: 700px; max-height: 80vh; overflow: hidden; display: flex; flex-direction: column; }
+        .notice-modal__header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light); }
+        .notice-modal__header h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-dark); }
+        .notice-modal__close { background: none; border: none; font-size: 1.75rem; cursor: pointer; color: var(--text-light); line-height: 1; }
+        .notice-modal__meta { display: flex; gap: 1rem; padding: 1rem 1.5rem; background: var(--bg-light); font-size: 0.875rem; color: var(--text-light); }
+        .notice-modal__body { padding: 1.5rem; overflow-y: auto; flex: 1; line-height: 1.8; white-space: pre-wrap; }
+        .notice-modal__footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; }
+    </style>
+
     <script src="../js/main.js"></script>
     <script src="../js/navigation.js"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, increment, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let noticesData = [];
+        let filteredData = [];
+        let currentCategory = 'all';
+        let currentPage = 1;
+        const itemsPerPage = 10;
+
+        function formatDate(timestamp) {
+            if (!timestamp) return '-';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+        }
+
+        function isNew(timestamp) {
+            if (!timestamp) return false;
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            const diff = Date.now() - date.getTime();
+            return diff < 7 * 24 * 60 * 60 * 1000; // 7일 이내
+        }
+
+        async function loadNotices() {
+            try {
+                const q = query(collection(db, "notices"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                noticesData = [];
+                querySnapshot.forEach((doc) => {
+                    noticesData.push({ id: doc.id, ...doc.data() });
+                });
+
+                // 고정 공지를 상단으로
+                noticesData.sort((a, b) => {
+                    if (a.pinned && !b.pinned) return -1;
+                    if (!a.pinned && b.pinned) return 1;
+                    return 0;
+                });
+
+                filteredData = [...noticesData];
+                renderNotices();
+            } catch (error) {
+                console.error("Error loading notices:", error);
+                document.getElementById('noticeList').innerHTML = `
+                    <div class="board-list__item" style="justify-content: center; color: var(--text-light);">
+                        공지사항을 불러올 수 없습니다.
+                    </div>
+                `;
+            }
+        }
+
+        function renderNotices() {
+            const container = document.getElementById('noticeList');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = filteredData.slice(start, end);
+
+            if (pageData.length === 0) {
+                container.innerHTML = `
+                    <div class="board-list__item" style="justify-content: center; color: var(--text-light);">
+                        등록된 공지사항이 없습니다.
+                    </div>
+                `;
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = pageData.map((notice, idx) => {
+                const num = notice.pinned ? '<span class="board-list__num--notice">공지</span>' : (filteredData.length - start - idx);
+                const newBadge = isNew(notice.createdAt) ? '<span class="board-list__new">N</span>' : '';
+
+                return `
+                    <div class="board-list__item ${notice.pinned ? 'board-list__item--notice' : ''}" onclick="openNotice('${notice.id}')" style="cursor: pointer;">
+                        <span class="board-list__num">${num}</span>
+                        <div class="board-list__title">
+                            <a href="#">${notice.title || '(제목 없음)'}</a>
+                            ${newBadge}
+                        </div>
+                        <span class="board-list__date">${formatDate(notice.createdAt)}</span>
+                        <span class="board-list__views">${notice.views || 0}</span>
+                    </div>
+                `;
+            }).join('');
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            if (totalPages <= 1) {
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            html += `<button class="pagination__btn ${currentPage === 1 ? 'pagination__btn--disabled' : ''}" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>`;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="pagination__btn ${currentPage === i ? 'pagination__btn--active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+
+            html += `<button class="pagination__btn ${currentPage === totalPages ? 'pagination__btn--disabled' : ''}" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </button>`;
+
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        window.goToPage = function(page) {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderNotices();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.filterCategory = function(category) {
+            currentCategory = category;
+            currentPage = 1;
+
+            document.querySelectorAll('.board-filter__btn').forEach(btn => btn.classList.remove('board-filter__btn--active'));
+            event.target.classList.add('board-filter__btn--active');
+
+            if (category === 'all') {
+                filteredData = [...noticesData];
+            } else {
+                filteredData = noticesData.filter(n => n.category === category);
+            }
+            renderNotices();
+        };
+
+        window.searchNotices = function() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            currentPage = 1;
+
+            if (!keyword) {
+                filteredData = currentCategory === 'all' ? [...noticesData] : noticesData.filter(n => n.category === currentCategory);
+            } else {
+                filteredData = noticesData.filter(n => {
+                    const matchCategory = currentCategory === 'all' || n.category === currentCategory;
+                    const matchKeyword = (n.title && n.title.toLowerCase().includes(keyword)) ||
+                                        (n.content && n.content.toLowerCase().includes(keyword));
+                    return matchCategory && matchKeyword;
+                });
+            }
+            renderNotices();
+        };
+
+        window.openNotice = async function(id) {
+            const notice = noticesData.find(n => n.id === id);
+            if (!notice) return;
+
+            // 조회수 증가
+            try {
+                await updateDoc(doc(db, "notices", id), { views: increment(1) });
+                notice.views = (notice.views || 0) + 1;
+            } catch (e) { console.error(e); }
+
+            document.getElementById('modalTitle').textContent = notice.title || '공지사항';
+            document.getElementById('modalCategory').textContent = notice.category || '일반공지';
+            document.getElementById('modalDate').textContent = formatDate(notice.createdAt);
+            document.getElementById('modalViews').textContent = `조회 ${notice.views || 0}`;
+            document.getElementById('modalBody').textContent = notice.content || '';
+            document.getElementById('detailModal').style.display = 'flex';
+        };
+
+        window.closeModal = function() {
+            document.getElementById('detailModal').style.display = 'none';
+            renderNotices(); // 조회수 반영
+        };
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // 초기 로드
+        loadNotices();
+    </script>
 </body>
 </html>

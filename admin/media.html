@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미디어 관리 | 서풍 관리자</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-page">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar__header">
+            <img src="../logo_transparent.png" alt="서풍" class="admin-sidebar__logo">
+            <span>서풍 관리자</span>
+        </div>
+
+        <nav class="admin-nav">
+            <a href="dashboard.html" class="admin-nav__item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                <span>대시보드</span>
+            </a>
+            <a href="notices.html" class="admin-nav__item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span>공지사항</span>
+            </a>
+            <a href="resources-manage.html" class="admin-nav__item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span>자료실</span>
+            </a>
+            <a href="media.html" class="admin-nav__item admin-nav__item--active">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>미디어</span>
+            </a>
+            <a href="inquiries.html" class="admin-nav__item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>제품 문의</span>
+            </a>
+            <a href="quotes.html" class="admin-nav__item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span>견적 요청</span>
+            </a>
+        </nav>
+
+        <div class="admin-sidebar__footer">
+            <a href="../index.html" class="admin-sidebar__link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                <span>홈페이지 보기</span>
+            </a>
+            <button class="admin-sidebar__logout" onclick="logout()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>로그아웃</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <div class="admin-header__title">
+                <h1>미디어 관리</h1>
+                <p>갤러리 이미지와 영상을 관리하세요</p>
+            </div>
+            <div class="admin-header__user">
+                <span id="currentUser">관리자</span>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- 탭 메뉴 -->
+            <div class="media-tabs">
+                <button class="media-tab media-tab--active" onclick="switchTab('images')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    이미지
+                </button>
+                <button class="media-tab" onclick="switchTab('videos')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                    영상
+                </button>
+            </div>
+
+            <!-- 이미지 관리 -->
+            <div id="imagesSection">
+                <div class="admin-card" style="margin-bottom: 1.5rem;">
+                    <div class="admin-card__content" style="padding: 1rem 1.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <button onclick="openImageModal()" class="btn btn--primary" style="padding: 0.5rem 1rem;">
+                                + 이미지 등록
+                            </button>
+                            <select id="imageCategory" class="admin-select" onchange="loadImages()">
+                                <option value="all">전체</option>
+                                <option value="시설">시설</option>
+                                <option value="제품">제품</option>
+                                <option value="가공">가공</option>
+                                <option value="인증">인증</option>
+                                <option value="기타">기타</option>
+                            </select>
+                            <span style="margin-left: auto; font-size: 0.875rem; color: var(--text-light);">
+                                총 <strong id="imageCount">0</strong>개
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-grid" id="imagesGrid">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light);">로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- 영상 관리 -->
+            <div id="videosSection" style="display: none;">
+                <div class="admin-card" style="margin-bottom: 1.5rem;">
+                    <div class="admin-card__content" style="padding: 1rem 1.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <button onclick="openVideoModal()" class="btn btn--primary" style="padding: 0.5rem 1rem;">
+                                + 영상 등록
+                            </button>
+                            <span style="margin-left: auto; font-size: 0.875rem; color: var(--text-light);">
+                                총 <strong id="videoCount">0</strong>개
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-list" id="videosList">
+                    <div style="text-align: center; padding: 3rem; color: var(--text-light);">로딩 중...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 이미지 등록 모달 -->
+    <div id="imageModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal__content" style="max-width: 500px;">
+            <div class="admin-modal__header">
+                <h3 id="imageModalTitle">이미지 등록</h3>
+                <button class="admin-modal__close" onclick="closeImageModal()">&times;</button>
+            </div>
+            <div class="admin-modal__body">
+                <form id="imageForm">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">제목 *</label>
+                        <input type="text" id="imageTitle" class="form-group__input" placeholder="이미지 제목" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">카테고리</label>
+                        <select id="imageCategorySelect" class="admin-select" style="width: 100%;">
+                            <option value="시설">시설</option>
+                            <option value="제품">제품</option>
+                            <option value="가공">가공</option>
+                            <option value="인증">인증</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">이미지 URL *</label>
+                        <input type="url" id="imageUrl" class="form-group__input" placeholder="https://..." required>
+                        <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">
+                            이미지 호스팅 서비스(imgbb, imgur 등) 또는 Google Drive 공유 링크
+                        </p>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">설명</label>
+                        <textarea id="imageDesc" class="form-group__textarea" placeholder="이미지 설명" style="min-height: 80px;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="admin-modal__footer">
+                <button class="btn btn--primary" onclick="saveImage()">저장</button>
+                <button class="btn btn--outline" onclick="closeImageModal()" style="color: var(--text-body);">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 영상 등록 모달 -->
+    <div id="videoModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal__content" style="max-width: 500px;">
+            <div class="admin-modal__header">
+                <h3 id="videoModalTitle">영상 등록</h3>
+                <button class="admin-modal__close" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <div class="admin-modal__body">
+                <form id="videoForm">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">제목 *</label>
+                        <input type="text" id="videoTitle" class="form-group__input" placeholder="영상 제목" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">YouTube 영상 ID 또는 URL *</label>
+                        <input type="text" id="videoId" class="form-group__input" placeholder="예: dQw4w9WgXcQ 또는 https://www.youtube.com/watch?v=..." required>
+                        <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">
+                            YouTube 영상 URL 또는 영상 ID를 입력하세요
+                        </p>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">설명</label>
+                        <textarea id="videoDesc" class="form-group__textarea" placeholder="영상 설명" style="min-height: 80px;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="admin-modal__footer">
+                <button class="btn btn--primary" onclick="saveVideo()">저장</button>
+                <button class="btn btn--outline" onclick="closeVideoModal()" style="color: var(--text-body);">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이미지 상세 모달 -->
+    <div id="imageDetailModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal__content" style="max-width: 800px;">
+            <div class="admin-modal__header">
+                <h3 id="imageDetailTitle">이미지</h3>
+                <button class="admin-modal__close" onclick="closeImageDetailModal()">&times;</button>
+            </div>
+            <div class="admin-modal__body" style="text-align: center;">
+                <img id="imageDetailImg" src="" alt="" style="max-width: 100%; max-height: 60vh; border-radius: 0.5rem;">
+                <p id="imageDetailDesc" style="margin-top: 1rem; color: var(--text-light);"></p>
+            </div>
+            <div class="admin-modal__footer">
+                <button class="btn btn--primary" onclick="editCurrentImage()">수정</button>
+                <button class="btn btn--outline" style="color: #ef4444;" onclick="deleteCurrentImage()">삭제</button>
+                <button class="btn btn--outline" onclick="closeImageDetailModal()" style="color: var(--text-body);">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .media-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .media-tab { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--bg-light); border: 1px solid var(--border-light); border-radius: 0.5rem; font-size: 0.9375rem; font-weight: 500; color: var(--text-body); cursor: pointer; transition: all 0.2s; }
+        .media-tab:hover { background: #fff; border-color: var(--primary); }
+        .media-tab--active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .media-tab--active svg { stroke: #fff; }
+
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .media-card { background: #fff; border: 1px solid var(--border-light); border-radius: 0.5rem; overflow: hidden; cursor: pointer; transition: all 0.2s; }
+        .media-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .media-card__image { width: 100%; height: 150px; object-fit: cover; background: var(--bg-light); }
+        .media-card__content { padding: 0.75rem; }
+        .media-card__title { font-size: 0.875rem; font-weight: 500; color: var(--text-dark); margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .media-card__category { font-size: 0.75rem; color: var(--text-light); }
+
+        .video-list { display: flex; flex-direction: column; gap: 1rem; }
+        .video-card { display: flex; gap: 1rem; background: #fff; border: 1px solid var(--border-light); border-radius: 0.5rem; padding: 1rem; transition: all 0.2s; }
+        .video-card:hover { border-color: var(--primary); }
+        .video-card__thumb { width: 200px; height: 112px; background: #000; border-radius: 0.375rem; overflow: hidden; flex-shrink: 0; }
+        .video-card__thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .video-card__content { flex: 1; }
+        .video-card__title { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .video-card__desc { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.75rem; }
+        .video-card__actions { display: flex; gap: 0.5rem; }
+
+        .admin-select { padding: 0.5rem 1rem; border: 1px solid var(--border-light); border-radius: 0.375rem; font-size: 0.875rem; background: #fff; }
+        .admin-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .admin-modal__content { background: #fff; border-radius: 0.75rem; width: 90%; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
+        .admin-modal__header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light); }
+        .admin-modal__header h3 { font-size: 1.125rem; font-weight: 600; }
+        .admin-modal__close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+        .admin-modal__body { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .admin-modal__footer { display: flex; gap: 0.75rem; padding: 1rem 1.5rem; border-top: 1px solid var(--border-light); justify-content: flex-end; }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let imagesData = [];
+        let videosData = [];
+        let currentImageId = null;
+        let currentVideoId = null;
+        let isEditMode = false;
+
+        // 탭 전환
+        window.switchTab = function(tab) {
+            document.querySelectorAll('.media-tab').forEach(t => t.classList.remove('media-tab--active'));
+            event.target.closest('.media-tab').classList.add('media-tab--active');
+
+            if (tab === 'images') {
+                document.getElementById('imagesSection').style.display = 'block';
+                document.getElementById('videosSection').style.display = 'none';
+            } else {
+                document.getElementById('imagesSection').style.display = 'none';
+                document.getElementById('videosSection').style.display = 'block';
+            }
+        };
+
+        // YouTube ID 추출
+        function extractYouTubeId(input) {
+            if (input.length === 11) return input;
+            const match = input.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+            return match ? match[1] : input;
+        }
+
+        // 이미지 로드
+        window.loadImages = async function() {
+            const grid = document.getElementById('imagesGrid');
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">로딩 중...</div>';
+
+            try {
+                const categoryFilter = document.getElementById('imageCategory').value;
+                const q = query(collection(db, "images"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                imagesData = [];
+                querySnapshot.forEach((doc) => {
+                    imagesData.push({ id: doc.id, ...doc.data() });
+                });
+
+                let filtered = imagesData;
+                if (categoryFilter !== 'all') {
+                    filtered = filtered.filter(img => img.category === categoryFilter);
+                }
+
+                document.getElementById('imageCount').textContent = filtered.length;
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-light);">등록된 이미지가 없습니다.</div>';
+                    return;
+                }
+
+                grid.innerHTML = filtered.map(img => `
+                    <div class="media-card" onclick="openImageDetail('${img.id}')">
+                        <img src="${img.url}" alt="${img.title}" class="media-card__image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23f1f5f9%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-size=%2214%22>No Image</text></svg>'">
+                        <div class="media-card__content">
+                            <div class="media-card__title">${img.title}</div>
+                            <div class="media-card__category">${img.category || '기타'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Error loading images:", error);
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #ef4444;">이미지를 불러올 수 없습니다.</div>';
+            }
+        };
+
+        // 영상 로드
+        window.loadVideos = async function() {
+            const list = document.getElementById('videosList');
+            list.innerHTML = '<div style="text-align: center; padding: 2rem;">로딩 중...</div>';
+
+            try {
+                const q = query(collection(db, "videos"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                videosData = [];
+                querySnapshot.forEach((doc) => {
+                    videosData.push({ id: doc.id, ...doc.data() });
+                });
+
+                document.getElementById('videoCount').textContent = videosData.length;
+
+                if (videosData.length === 0) {
+                    list.innerHTML = '<div style="text-align: center; padding: 3rem; color: var(--text-light);">등록된 영상이 없습니다.</div>';
+                    return;
+                }
+
+                list.innerHTML = videosData.map(video => `
+                    <div class="video-card">
+                        <div class="video-card__thumb">
+                            <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+                        </div>
+                        <div class="video-card__content">
+                            <div class="video-card__title">${video.title}</div>
+                            <div class="video-card__desc">${video.description || ''}</div>
+                            <div class="video-card__actions">
+                                <a href="https://www.youtube.com/watch?v=${video.videoId}" target="_blank" class="btn btn--outline" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">YouTube에서 보기</a>
+                                <button class="btn btn--outline" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;" onclick="editVideo('${video.id}')">수정</button>
+                                <button class="btn btn--outline" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;" onclick="deleteVideo('${video.id}')">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Error loading videos:", error);
+                list.innerHTML = '<div style="text-align: center; padding: 2rem; color: #ef4444;">영상을 불러올 수 없습니다.</div>';
+            }
+        };
+
+        // 이미지 모달
+        window.openImageModal = function() {
+            isEditMode = false;
+            currentImageId = null;
+            document.getElementById('imageModalTitle').textContent = '이미지 등록';
+            document.getElementById('imageForm').reset();
+            document.getElementById('imageModal').style.display = 'flex';
+        };
+
+        window.closeImageModal = function() {
+            document.getElementById('imageModal').style.display = 'none';
+        };
+
+        window.saveImage = async function() {
+            const title = document.getElementById('imageTitle').value.trim();
+            const category = document.getElementById('imageCategorySelect').value;
+            const url = document.getElementById('imageUrl').value.trim();
+            const description = document.getElementById('imageDesc').value.trim();
+
+            if (!title || !url) {
+                alert('제목과 이미지 URL을 입력해주세요.');
+                return;
+            }
+
+            try {
+                if (isEditMode && currentImageId) {
+                    await updateDoc(doc(db, "images", currentImageId), {
+                        title, category, url, description, updatedAt: Timestamp.now()
+                    });
+                    alert('이미지가 수정되었습니다.');
+                } else {
+                    await addDoc(collection(db, "images"), {
+                        title, category, url, description, createdAt: Timestamp.now()
+                    });
+                    alert('이미지가 등록되었습니다.');
+                }
+                closeImageModal();
+                loadImages();
+            } catch (error) {
+                console.error("Error saving image:", error);
+                alert('저장에 실패했습니다.');
+            }
+        };
+
+        // 이미지 상세
+        window.openImageDetail = function(id) {
+            const img = imagesData.find(i => i.id === id);
+            if (!img) return;
+
+            currentImageId = id;
+            document.getElementById('imageDetailTitle').textContent = img.title;
+            document.getElementById('imageDetailImg').src = img.url;
+            document.getElementById('imageDetailDesc').textContent = img.description || '';
+            document.getElementById('imageDetailModal').style.display = 'flex';
+        };
+
+        window.closeImageDetailModal = function() {
+            document.getElementById('imageDetailModal').style.display = 'none';
+        };
+
+        window.editCurrentImage = function() {
+            const img = imagesData.find(i => i.id === currentImageId);
+            if (!img) return;
+
+            closeImageDetailModal();
+            isEditMode = true;
+            document.getElementById('imageModalTitle').textContent = '이미지 수정';
+            document.getElementById('imageTitle').value = img.title || '';
+            document.getElementById('imageCategorySelect').value = img.category || '기타';
+            document.getElementById('imageUrl').value = img.url || '';
+            document.getElementById('imageDesc').value = img.description || '';
+            document.getElementById('imageModal').style.display = 'flex';
+        };
+
+        window.deleteCurrentImage = async function() {
+            if (!confirm('정말 삭제하시겠습니까?')) return;
+            try {
+                await deleteDoc(doc(db, "images", currentImageId));
+                closeImageDetailModal();
+                loadImages();
+            } catch (error) {
+                alert('삭제에 실패했습니다.');
+            }
+        };
+
+        // 영상 모달
+        window.openVideoModal = function() {
+            isEditMode = false;
+            currentVideoId = null;
+            document.getElementById('videoModalTitle').textContent = '영상 등록';
+            document.getElementById('videoForm').reset();
+            document.getElementById('videoModal').style.display = 'flex';
+        };
+
+        window.closeVideoModal = function() {
+            document.getElementById('videoModal').style.display = 'none';
+        };
+
+        window.saveVideo = async function() {
+            const title = document.getElementById('videoTitle').value.trim();
+            const videoInput = document.getElementById('videoId').value.trim();
+            const description = document.getElementById('videoDesc').value.trim();
+
+            if (!title || !videoInput) {
+                alert('제목과 YouTube 영상 ID를 입력해주세요.');
+                return;
+            }
+
+            const videoId = extractYouTubeId(videoInput);
+
+            try {
+                if (isEditMode && currentVideoId) {
+                    await updateDoc(doc(db, "videos", currentVideoId), {
+                        title, videoId, description, updatedAt: Timestamp.now()
+                    });
+                    alert('영상이 수정되었습니다.');
+                } else {
+                    await addDoc(collection(db, "videos"), {
+                        title, videoId, description, createdAt: Timestamp.now()
+                    });
+                    alert('영상이 등록되었습니다.');
+                }
+                closeVideoModal();
+                loadVideos();
+            } catch (error) {
+                console.error("Error saving video:", error);
+                alert('저장에 실패했습니다.');
+            }
+        };
+
+        window.editVideo = function(id) {
+            const video = videosData.find(v => v.id === id);
+            if (!video) return;
+
+            isEditMode = true;
+            currentVideoId = id;
+            document.getElementById('videoModalTitle').textContent = '영상 수정';
+            document.getElementById('videoTitle').value = video.title || '';
+            document.getElementById('videoId').value = video.videoId || '';
+            document.getElementById('videoDesc').value = video.description || '';
+            document.getElementById('videoModal').style.display = 'flex';
+        };
+
+        window.deleteVideo = async function(id) {
+            if (!confirm('정말 삭제하시겠습니까?')) return;
+            try {
+                await deleteDoc(doc(db, "videos", id));
+                loadVideos();
+            } catch (error) {
+                alert('삭제에 실패했습니다.');
+            }
+        };
+
+        // 로그인 체크
+        if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+        document.getElementById('currentUser').textContent = sessionStorage.getItem('adminUser') || '관리자';
+
+        window.logout = function() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        };
+
+        // 모달 외부 클릭
+        ['imageModal', 'videoModal', 'imageDetailModal'].forEach(id => {
+            document.getElementById(id).addEventListener('click', function(e) {
+                if (e.target === this) this.style.display = 'none';
+            });
+        });
+
+        // 초기 로드
+        loadImages();
+        loadVideos();
+    </script>
+</body>
+</html>
