@@ -365,7 +365,7 @@ button {
 .nav__toggle-bar {
     width: 1.5rem;
     height: 2px;
-    background-color: var(--text-dark);
+    background-color: #ffffff;
     transition: all var(--transition-fast);
 }
 

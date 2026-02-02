@@ -17,14 +17,15 @@
     .nav__list {
         display: none;
         position: absolute;
-        top: 4.375rem;
+        top: 5rem;
         left: 0;
         right: 0;
-        background-color: var(--bg-white);
+        background: linear-gradient(135deg, rgba(26, 54, 93, 0.98) 0%, rgba(15, 38, 68, 0.99) 100%);
+        backdrop-filter: blur(10px);
         flex-direction: column;
-        padding: 1.25rem;
-        border-bottom: 1px solid var(--border-light);
-        box-shadow: var(--shadow-lg);
+        padding: 1rem;
+        border-bottom: none;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     }
 
     .nav__list--open {
@@ -32,19 +33,21 @@
     }
 
     .nav__link {
-        padding: 0.9375rem 1.25rem;
-        border-bottom: none;
+        padding: 1rem 1.25rem;
+        color: rgba(255, 255, 255, 0.9) !important;
+        border-radius: 8px;
     }
 
     .nav__link:hover,
     .nav__link--active {
-        background-color: var(--bg-light);
-        border-bottom: none;
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
     }
 
     .nav__link--cta {
-        margin: 0.625rem 0 0 0;
+        margin: 0.75rem 0 0 0;
         text-align: center;
+        background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%) !important;
     }
 
     /* Header - Mobile */

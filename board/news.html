@@ -59,110 +59,43 @@
             <!-- Category Filter -->
             <div class="board-toolbar">
                 <div class="board-filter">
-                    <button class="board-filter__btn board-filter__btn--active">전체</button>
-                    <button class="board-filter__btn">언론보도</button>
-                    <button class="board-filter__btn">수상</button>
-                    <button class="board-filter__btn">인증</button>
+                    <button class="board-filter__btn board-filter__btn--active" onclick="filterCategory('all')">전체</button>
+                    <button class="board-filter__btn" onclick="filterCategory('언론보도')">언론보도</button>
+                    <button class="board-filter__btn" onclick="filterCategory('수상')">수상</button>
+                    <button class="board-filter__btn" onclick="filterCategory('인증')">인증</button>
+                    <button class="board-filter__btn" onclick="filterCategory('기타')">기타</button>
                 </div>
             </div>
 
             <!-- News Grid -->
-            <div class="news-grid">
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../seo4.jpg" alt="수출의 탑">
-                        <span class="news-card__badge news-card__badge--award">수상</span>
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2023.12.20</span>
-                        <h3 class="news-card__title">2023년 수출의 탑 수상</h3>
-                        <p class="news-card__desc">영어조합법인 서풍이 연간 100억원 수출 달성으로 수출의 탑을 수상했습니다. 이로써 서풍은 2회 연속 수출의 탑을 수상하게 되었습니다.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../facility1.jpg" alt="언론보도">
-                        <span class="news-card__badge news-card__badge--press">언론보도</span>
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2023.11.15</span>
-                        <h3 class="news-card__title">[여수시민신문] 서풍, 친환경 수산물 가공 선도</h3>
-                        <p class="news-card__desc">ASC, MSC 인증을 통한 지속가능한 수산물 가공 사업 확대. 환경을 생각하는 기업으로 성장 중.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../aerial1.jpg" alt="MSC 인증">
-                        <span class="news-card__badge news-card__badge--cert">인증</span>
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2023.10.08</span>
-                        <h3 class="news-card__title">MSC 지속가능 자연산 수산물 인증 획득</h3>
-                        <p class="news-card__desc">글로벌 지속가능 수산물 인증인 MSC 인증을 획득하여 친환경 수산물 가공 역량을 인정받았습니다.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../ceo2.jpg" alt="매출 달성">
-                        <span class="news-card__badge news-card__badge--press">언론보도</span>
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2023.07.20</span>
-                        <h3 class="news-card__title">2023년 상반기 매출 200억 돌파</h3>
-                        <p class="news-card__desc">영어조합법인 서풍이 2023년 상반기 매출 200억원을 돌파하며 10년간 7배 성장을 이어가고 있습니다.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../worker1.jpg" alt="시설 확장">
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2023.05.10</span>
-                        <h3 class="news-card__title">신규 생산라인 증설 완료</h3>
-                        <p class="news-card__desc">증가하는 수요에 대응하기 위해 IQF 급속동결 라인을 추가 증설하고 생산 능력을 30% 확대했습니다.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-card__image">
-                        <img src="../product1.jpg" alt="ASC 인증">
-                        <span class="news-card__badge news-card__badge--cert">인증</span>
-                    </div>
-                    <div class="news-card__content">
-                        <span class="news-card__date">2022.08.15</span>
-                        <h3 class="news-card__title">ASC 지속가능 양식 수산물 인증 획득</h3>
-                        <p class="news-card__desc">환경과 사회에 책임을 다하는 양식 수산물 인증인 ASC 인증을 획득했습니다.</p>
-                        <a href="#" class="news-card__link">자세히 보기 →</a>
-                    </div>
-                </article>
+            <div class="news-grid" id="newsGrid">
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-light);">로딩 중...</div>
             </div>
 
             <!-- Pagination -->
-            <div class="pagination">
-                <button class="pagination__btn pagination__btn--disabled">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"/>
-                    </svg>
-                </button>
-                <button class="pagination__btn pagination__btn--active">1</button>
-                <button class="pagination__btn">2</button>
-                <button class="pagination__btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                </button>
-            </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </section>
+
+    <!-- News Detail Modal -->
+    <div id="detailModal" class="notice-modal" style="display: none;">
+        <div class="notice-modal__content" style="max-width: 800px;">
+            <div class="notice-modal__header">
+                <h3 id="modalTitle">뉴스</h3>
+                <button class="notice-modal__close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="notice-modal__meta">
+                <span id="modalCategory"></span>
+                <span id="modalDate"></span>
+                <span id="modalSource"></span>
+            </div>
+            <div class="notice-modal__body" id="modalBody"></div>
+            <div class="notice-modal__footer">
+                <a href="#" id="modalLink" class="btn btn--primary" target="_blank" style="display: none;">원문 보기</a>
+                <button class="btn btn--outline" onclick="closeModal()">닫기</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -212,6 +145,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-normal);
+            cursor: pointer;
         }
 
         .news-card:hover {
@@ -223,6 +157,7 @@
             position: relative;
             height: 200px;
             overflow: hidden;
+            background: var(--bg-light);
         }
 
         .news-card__image img {
@@ -236,6 +171,17 @@
             transform: scale(1.05);
         }
 
+        .news-card__placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            font-size: 3rem;
+        }
+
         .news-card__badge {
             position: absolute;
             top: 1rem;
@@ -246,18 +192,23 @@
             border-radius: var(--radius-sm);
         }
 
-        .news-card__badge--award {
+        .news-card__badge--수상 {
             background: #f59e0b;
             color: #fff;
         }
 
-        .news-card__badge--press {
+        .news-card__badge--언론보도 {
             background: var(--primary);
             color: #fff;
         }
 
-        .news-card__badge--cert {
+        .news-card__badge--인증 {
             background: #10b981;
+            color: #fff;
+        }
+
+        .news-card__badge--기타 {
+            background: #6b7280;
             color: #fff;
         }
 
@@ -293,15 +244,20 @@
             margin-bottom: 1rem;
         }
 
-        .news-card__link {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--primary);
+        .news-card__source {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
         }
 
-        .news-card__link:hover {
-            text-decoration: underline;
-        }
+        .notice-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .notice-modal__content { background: #fff; border-radius: 1rem; width: 100%; max-height: 80vh; overflow: hidden; display: flex; flex-direction: column; }
+        .notice-modal__header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light); }
+        .notice-modal__header h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-dark); }
+        .notice-modal__close { background: none; border: none; font-size: 1.75rem; cursor: pointer; color: var(--text-light); line-height: 1; }
+        .notice-modal__meta { display: flex; gap: 1rem; padding: 1rem 1.5rem; background: var(--bg-light); font-size: 0.875rem; color: var(--text-light); }
+        .notice-modal__body { padding: 1.5rem; overflow-y: auto; flex: 1; line-height: 1.8; }
+        .notice-modal__body img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1rem 0; }
+        .notice-modal__footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; gap: 0.75rem; }
 
         @media (max-width: 1024px) {
             .news-grid {
@@ -319,5 +275,185 @@
             }
         }
     </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let newsData = [];
+        let filteredData = [];
+        let currentCategory = 'all';
+        let currentPage = 1;
+        const itemsPerPage = 9;
+
+        function formatDate(timestamp) {
+            if (!timestamp) return '-';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+        }
+
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html || '';
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        async function loadNews() {
+            try {
+                const q = query(collection(db, "news"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                newsData = [];
+                querySnapshot.forEach((doc) => {
+                    newsData.push({ id: doc.id, ...doc.data() });
+                });
+                filteredData = [...newsData];
+                renderNews();
+            } catch (error) {
+                console.error("Error loading news:", error);
+                document.getElementById('newsGrid').innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-light);">
+                        뉴스를 불러올 수 없습니다.
+                    </div>
+                `;
+            }
+        }
+
+        function renderNews() {
+            const container = document.getElementById('newsGrid');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = filteredData.slice(start, end);
+
+            if (pageData.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-light);">
+                        등록된 뉴스가 없습니다.
+                    </div>
+                `;
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = pageData.map(news => {
+                const category = news.category || '기타';
+                const desc = stripHtml(news.content).substring(0, 80);
+                const imageHtml = news.thumbnail
+                    ? `<img src="${news.thumbnail}" alt="${news.title}">`
+                    : `<div class="news-card__placeholder">📰</div>`;
+
+                return `
+                    <article class="news-card" onclick="openNews('${news.id}')">
+                        <div class="news-card__image">
+                            ${imageHtml}
+                            <span class="news-card__badge news-card__badge--${category}">${category}</span>
+                        </div>
+                        <div class="news-card__content">
+                            <span class="news-card__date">${formatDate(news.createdAt)}</span>
+                            <h3 class="news-card__title">${news.title || '(제목 없음)'}</h3>
+                            <p class="news-card__desc">${desc}...</p>
+                            ${news.source ? `<span class="news-card__source">출처: ${news.source}</span>` : ''}
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            if (totalPages <= 1) {
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            html += `<button class="pagination__btn ${currentPage === 1 ? 'pagination__btn--disabled' : ''}" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>`;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="pagination__btn ${currentPage === i ? 'pagination__btn--active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+
+            html += `<button class="pagination__btn ${currentPage === totalPages ? 'pagination__btn--disabled' : ''}" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </button>`;
+
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        window.goToPage = function(page) {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderNews();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.filterCategory = function(category) {
+            currentCategory = category;
+            currentPage = 1;
+
+            document.querySelectorAll('.board-filter__btn').forEach(btn => btn.classList.remove('board-filter__btn--active'));
+            event.target.classList.add('board-filter__btn--active');
+
+            if (category === 'all') {
+                filteredData = [...newsData];
+            } else {
+                filteredData = newsData.filter(n => n.category === category);
+            }
+            renderNews();
+        };
+
+        window.openNews = function(id) {
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+
+            document.getElementById('modalTitle').textContent = news.title || '뉴스';
+            document.getElementById('modalCategory').textContent = news.category || '기타';
+            document.getElementById('modalDate').textContent = formatDate(news.createdAt);
+            document.getElementById('modalSource').textContent = news.source ? `출처: ${news.source}` : '';
+            document.getElementById('modalBody').innerHTML = news.content || '';
+
+            const linkBtn = document.getElementById('modalLink');
+            if (news.link) {
+                linkBtn.href = news.link;
+                linkBtn.style.display = 'inline-block';
+            } else {
+                linkBtn.style.display = 'none';
+            }
+
+            document.getElementById('detailModal').style.display = 'flex';
+        };
+
+        window.closeModal = function() {
+            document.getElementById('detailModal').style.display = 'none';
+        };
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // 초기 로드
+        loadNews();
+    </script>
 </body>
 </html>
