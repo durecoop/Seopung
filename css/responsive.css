@@ -20,12 +20,15 @@
         top: 5rem;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, rgba(26, 54, 93, 0.98) 0%, rgba(15, 38, 68, 0.99) 100%);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(180deg, rgba(20, 40, 70, 0.98) 0%, rgba(10, 25, 50, 0.99) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 1rem;
-        border-bottom: none;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .nav__list--open {
@@ -34,20 +37,42 @@
 
     .nav__link {
         padding: 1rem 1.25rem;
-        color: rgba(255, 255, 255, 0.9) !important;
-        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
     }
 
-    .nav__link:hover,
-    .nav__link--active {
-        background: rgba(255, 255, 255, 0.15) !important;
+    .nav__link::after {
+        display: none;
+    }
+
+    .nav__link:hover {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(184, 134, 11, 0.1) 100%) !important;
+        border-color: rgba(212, 175, 55, 0.3);
         color: #ffffff !important;
+        transform: translateX(5px);
+    }
+
+    .nav__link--active {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(184, 134, 11, 0.15) 100%) !important;
+        border-color: rgba(212, 175, 55, 0.4) !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
     }
 
     .nav__link--cta {
-        margin: 0.75rem 0 0 0;
+        margin: 1rem 0 0 0;
         text-align: center;
-        background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%) !important;
+        background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+        color: #1a1a1a !important;
+        border: none !important;
+        box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .nav__link--cta:hover {
+        background: linear-gradient(135deg, #f4e4bc 0%, #d4af37 100%) !important;
+        transform: translateY(-2px) !important;
     }
 
     /* Header - Mobile */

@@ -294,13 +294,29 @@ button {
     padding: 0.75rem 1.25rem;
     font-size: 0.9375rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.75);
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
+    letter-spacing: 0.02em;
 }
 
+/* 하단 골드 라인 효과 */
+.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* 배경 글로우 효과 */
 .nav__link::before {
     content: '';
     position: absolute;
@@ -308,49 +324,93 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     border-radius: 8px;
 }
 
 .nav__link:hover {
     color: #ffffff;
-    transform: translateY(-2px);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.nav__link:hover::after {
+    width: 60%;
 }
 
 .nav__link:hover::before {
     opacity: 1;
 }
 
+/* 클릭(활성) 상태 - 프리미엄 골드 */
 .nav__link--active {
     color: #ffffff;
     font-weight: 600;
-    background: linear-gradient(135deg, rgba(214, 158, 46, 0.9) 0%, rgba(183, 121, 31, 0.9) 100%);
-    box-shadow: 0 4px 15px rgba(214, 158, 46, 0.3);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(184, 134, 11, 0.15) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow:
+        0 4px 20px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.nav__link--active::after {
+    width: 70%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, #f4e4bc, #d4af37, transparent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
 .nav__link--active::before {
-    display: none;
+    opacity: 1;
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
 }
 
+/* CTA 버튼 - 럭셔리 골드 */
 .nav__link--cta {
     margin-left: 1rem;
     padding: 0.75rem 1.75rem;
-    background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
-    color: #ffffff !important;
+    background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #d4af37 100%);
+    background-size: 200% 200%;
+    color: #1a1a1a !important;
     border-radius: 50px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(214, 158, 46, 0.4);
+    border: none;
+    box-shadow:
+        0 4px 15px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    text-shadow: none;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .nav__link--cta:hover {
-    background: linear-gradient(135deg, #ecc94b 0%, #d69e2e 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(214, 158, 46, 0.5);
+    background: linear-gradient(135deg, #f4e4bc 0%, #d4af37 50%, #f4e4bc 100%);
+    background-size: 200% 200%;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 8px 30px rgba(212, 175, 55, 0.5),
+        0 0 40px rgba(212, 175, 55, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    color: #0f0f0f !important;
 }
 
-.nav__link--cta::before {
+.nav__link--cta:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow:
+        0 4px 15px rgba(212, 175, 55, 0.4),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav__link--cta::before,
+.nav__link--cta::after {
     display: none;
 }
 
