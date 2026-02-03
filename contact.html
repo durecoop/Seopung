@@ -578,5 +578,64 @@
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
+            authDomain: "seopung-website.firebaseapp.com",
+            projectId: "seopung-website",
+            storageBucket: "seopung-website.firebasestorage.app",
+            messagingSenderId: "563395096680",
+            appId: "1:563395096680:web:8f363c42f6833f65628bdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 폼 제출 처리
+        const form = document.getElementById('contactForm');
+        const submitBtn = form.querySelector('.btn-submit');
+        const originalBtnText = submitBtn.textContent;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // 버튼 상태 변경
+            submitBtn.disabled = true;
+            submitBtn.textContent = '전송 중...';
+
+            try {
+                // 폼 데이터 수집
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    company: document.getElementById('company').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    inquiryType: document.getElementById('inquiry').value,
+                    message: document.getElementById('message').value.trim(),
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                };
+
+                // Firestore에 저장
+                await addDoc(collection(db, "inquiries"), formData);
+
+                // 성공 메시지
+                alert('문의가 성공적으로 접수되었습니다.\n빠른 시일 내에 연락드리겠습니다.');
+                form.reset();
+
+            } catch (error) {
+                console.error('Error submitting inquiry:', error);
+                alert('문의 접수 중 오류가 발생했습니다.\n전화(061-681-5171)로 문의해 주세요.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
+        });
+    </script>
 </body>
 </html>
