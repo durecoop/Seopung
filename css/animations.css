@@ -7,15 +7,15 @@
    Scroll Fade-In Animations
    ======================================== */
 
+/* 스크롤 애니메이션 - 기본값은 보임 */
 .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* 애니메이션 완료 상태 */
 .animate-on-scroll--visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* Animation Delays */

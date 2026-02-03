@@ -25,6 +25,12 @@
 
         if (!animatedElements.length) return;
 
+        // 먼저 모든 요소를 숨김 상태로 설정
+        animatedElements.forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -34,6 +40,10 @@
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     const el = entry.target;
+
+                    // 인라인 스타일 제거하고 visible 클래스 추가
+                    el.style.opacity = '';
+                    el.style.transform = '';
 
                     // Add visible class based on animation type
                     if (el.classList.contains('animate-on-scroll')) {
@@ -64,6 +74,9 @@
                     if (el.hasAttribute('data-count') && !el.classList.contains('counter--counted')) {
                         animateCounter(el);
                     }
+
+                    // 관찰 중단 (한번만 애니메이션)
+                    observer.unobserve(el);
                 }
             });
         }, observerOptions);
