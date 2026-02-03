@@ -1,0 +1,29 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // 자료실 파일 (PDF, 문서 등) - 최대 50MB
+    match /resources/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 50 * 1024 * 1024;
+    }
+
+    // 이미지 파일 - 최대 10MB
+    match /images/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 10 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // 공지사항 첨부파일 - 최대 20MB
+    match /notices/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 20 * 1024 * 1024;
+    }
+
+    // 기타 모든 파일 - 최대 50MB
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 50 * 1024 * 1024;
+    }
+  }
+}
