@@ -9,6 +9,38 @@
    ======================================== */
 
 @media (max-width: 768px) {
+    /* Mobile Back Button */
+    .mobile-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 12px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        margin-right: 0.75rem;
+    }
+
+    .mobile-back-btn:hover,
+    .mobile-back-btn:active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-back-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Adjust header container with back button */
+    .header__container {
+        gap: 0;
+    }
+
     /* Navigation - Mobile Premium */
     .nav__toggle {
         display: flex;
