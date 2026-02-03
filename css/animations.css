@@ -7,15 +7,11 @@
    Scroll Fade-In Animations
    ======================================== */
 
-/* 스크롤 애니메이션 - 기본값은 보임 */
-.animate-on-scroll {
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* 애니메이션 완료 상태 */
+/* 스크롤 애니메이션 - 항상 보이게 설정 */
+.animate-on-scroll,
 .animate-on-scroll--visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Animation Delays */
@@ -43,45 +39,26 @@
    Fade Variations
    ======================================== */
 
-.animate-fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
+/* 모든 애니메이션 클래스 - 항상 보이게 설정 */
+.animate-fade-up,
 .animate-fade-up--visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.animate-fade-left {
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
+.animate-fade-left,
 .animate-fade-left--visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-.animate-fade-right {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
+.animate-fade-right,
 .animate-fade-right--visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-.animate-scale-in {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
+.animate-scale-in,
 .animate-scale-in--visible {
     opacity: 1;
     transform: scale(1);

@@ -21,68 +21,20 @@
     // ========================================
 
     function initScrollAnimations() {
+        // 모든 애니메이션 요소를 즉시 보이게 설정 (안전장치)
         const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-scale-in');
 
-        if (!animatedElements.length) return;
-
-        // 먼저 모든 요소를 숨김 상태로 설정
+        // 모든 요소를 보이게 만듦
         animatedElements.forEach(function(el) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
+            el.classList.add('animate-on-scroll--visible');
         });
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-
-                    // 인라인 스타일 제거하고 visible 클래스 추가
-                    el.style.opacity = '';
-                    el.style.transform = '';
-
-                    // Add visible class based on animation type
-                    if (el.classList.contains('animate-on-scroll')) {
-                        el.classList.add('animate-on-scroll--visible');
-                    }
-                    if (el.classList.contains('animate-fade-up')) {
-                        el.classList.add('animate-fade-up--visible');
-                    }
-                    if (el.classList.contains('animate-fade-left')) {
-                        el.classList.add('animate-fade-left--visible');
-                    }
-                    if (el.classList.contains('animate-fade-right')) {
-                        el.classList.add('animate-fade-right--visible');
-                    }
-                    if (el.classList.contains('animate-scale-in')) {
-                        el.classList.add('animate-scale-in--visible');
-                    }
-
-                    // Trigger counter animation if element contains counters
-                    const counters = el.querySelectorAll('[data-count]');
-                    counters.forEach(function(counter) {
-                        if (!counter.classList.contains('counter--counted')) {
-                            animateCounter(counter);
-                        }
-                    });
-
-                    // Check if element itself is a counter
-                    if (el.hasAttribute('data-count') && !el.classList.contains('counter--counted')) {
-                        animateCounter(el);
-                    }
-
-                    // 관찰 중단 (한번만 애니메이션)
-                    observer.unobserve(el);
-                }
-            });
-        }, observerOptions);
-
-        animatedElements.forEach(function(el) {
-            observer.observe(el);
+        // 카운터 애니메이션만 처리
+        const counters = document.querySelectorAll('[data-count]');
+        counters.forEach(function(counter) {
+            if (!counter.classList.contains('counter--counted')) {
+                animateCounter(counter);
+            }
         });
     }
 
