@@ -9,35 +9,104 @@
    ======================================== */
 
 @media (max-width: 768px) {
-    /* Navigation - Mobile */
+    /* Navigation - Mobile Premium */
     .nav__toggle {
         display: flex;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .nav__toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav__toggle-bar {
+        width: 20px;
+        height: 2px;
+        background: #fff;
+        transition: all 0.3s ease;
     }
 
     .nav__list {
         display: none;
-        position: absolute;
-        top: 3.75rem;
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(180deg, rgba(26, 54, 93, 0.98) 0%, rgba(15, 38, 68, 0.99) 100%);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
+        bottom: 0;
+        background: linear-gradient(160deg, #0f2644 0%, #1a365d 50%, #234e7a 100%);
         flex-direction: column;
-        padding: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        padding: 100px 30px 40px;
+        z-index: 999;
+        overflow-y: auto;
     }
 
     .nav__list--open {
         display: flex;
+        animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav__list li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        animation: fadeInUp 0.5s ease forwards;
+        opacity: 0;
+    }
+
+    .nav__list li:nth-child(1) { animation-delay: 0.1s; }
+    .nav__list li:nth-child(2) { animation-delay: 0.15s; }
+    .nav__list li:nth-child(3) { animation-delay: 0.2s; }
+    .nav__list li:nth-child(4) { animation-delay: 0.25s; }
+    .nav__list li:nth-child(5) { animation-delay: 0.3s; }
+    .nav__list li:nth-child(6) { animation-delay: 0.35s; }
+    .nav__list li:nth-child(7) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .nav__link {
-        padding: 1rem 1.25rem;
-        color: rgba(255, 255, 255, 0.85) !important;
-        border-radius: 8px;
-        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        padding: 1.25rem 0.5rem;
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 1.125rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .nav__link::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #4fd1c5, #63b3ed);
+        transition: width 0.3s ease;
     }
 
     .nav__link::after {
@@ -45,27 +114,101 @@
     }
 
     .nav__link:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
         color: #ffffff !important;
+        padding-left: 1.5rem;
+        background: transparent !important;
+    }
+
+    .nav__link:hover::before {
+        width: 1rem;
     }
 
     .nav__link--active {
-        background: rgba(255, 255, 255, 0.15) !important;
-        color: #ffffff !important;
-        font-weight: 600;
+        color: #4fd1c5 !important;
+        font-weight: 700;
+        padding-left: 1.5rem;
+        background: transparent !important;
+    }
+
+    .nav__link--active::before {
+        width: 1rem;
+        background: #4fd1c5;
     }
 
     .nav__link--cta {
-        margin: 0.75rem 0 0 0;
+        margin: 1.5rem 0 0 0;
+        padding: 1rem 2rem !important;
         text-align: center;
-        background: #ffffff !important;
-        color: var(--primary) !important;
+        background: linear-gradient(135deg, #4fd1c5 0%, #38b2ac 100%) !important;
+        color: #0f2644 !important;
         border: none !important;
-        font-weight: 600;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 0.03em;
+        box-shadow: 0 4px 20px rgba(79, 209, 197, 0.3);
+    }
+
+    .nav__link--cta::before {
+        display: none;
     }
 
     .nav__link--cta:hover {
-        background: rgba(255, 255, 255, 0.9) !important;
+        padding-left: 2rem !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(79, 209, 197, 0.4);
+    }
+
+    /* Mobile Menu Header Text */
+    .nav__list::before {
+        content: '서풍';
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.02em;
+    }
+
+    .nav__list::after {
+        content: 'SEOPOONG';
+        position: absolute;
+        top: 58px;
+        left: 30px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.2em;
+    }
+
+    /* Header stays on top of mobile menu */
+    .header {
+        z-index: 1001;
+    }
+
+    /* Toggle button when menu is open */
+    .nav__toggle--active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav__toggle--active .nav__toggle-bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav__toggle--active .nav__toggle-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav__toggle--active .nav__toggle-bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Contact info at bottom of mobile menu */
+    .nav__list > li:last-child {
+        margin-top: auto;
+        padding-top: 2rem;
+        border-bottom: none;
     }
 
     /* Header - Mobile */
