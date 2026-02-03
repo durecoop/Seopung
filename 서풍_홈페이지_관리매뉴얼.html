@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서풍 홈페이지 설계 및 관리 매뉴얼</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background: #fff;
+        }
+
+        @media print {
+            body { padding: 15mm; }
+            .page-break { page-break-before: always; }
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a365d;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #1a365d;
+            margin: 40px 0 20px;
+            padding: 10px 15px;
+            background: #f0f4f8;
+            border-left: 4px solid #1a365d;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #2d3748;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        p { margin-bottom: 12px; }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li { margin-bottom: 8px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #1a365d;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background: #f7fafc; }
+
+        .info-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #fffaf0;
+            border: 1px solid #fbd38d;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+
+        .code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .cover {
+            text-align: center;
+            padding: 80px 0;
+            border-bottom: 2px solid #1a365d;
+            margin-bottom: 50px;
+        }
+
+        .cover h1 {
+            font-size: 36px;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .cover p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .toc {
+            background: #f7fafc;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .toc h3 {
+            border: none;
+            margin-top: 0;
+        }
+
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 5px; }
+        .toc a { color: #1a365d; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <h1>서풍 홈페이지<br>설계 및 관리 매뉴얼</h1>
+        <p>영어조합법인 서풍</p>
+        <p>작성일: 2025년 1월</p>
+        <p>버전: 1.0</p>
+    </div>
+
+    <div class="toc">
+        <h3>목차</h3>
+        <ol>
+            <li><a href="#section1">홈페이지 개요</a></li>
+            <li><a href="#section2">사이트 구조</a></li>
+            <li><a href="#section3">관리자 페이지 사용법</a></li>
+            <li><a href="#section4">콘텐츠 관리 방법</a></li>
+            <li><a href="#section5">Firebase 데이터베이스</a></li>
+            <li><a href="#section6">유지보수 및 업데이트</a></li>
+            <li><a href="#section7">권장 촬영 콘텐츠</a></li>
+            <li><a href="#section8">문제 해결 가이드</a></li>
+        </ol>
+    </div>
+
+    <h2 id="section1">1. 홈페이지 개요</h2>
+
+    <h3>1.1 기본 정보</h3>
+    <table>
+        <tr>
+            <th>항목</th>
+            <th>내용</th>
+        </tr>
+        <tr>
+            <td>웹사이트 주소</td>
+            <td>https://durecoop.github.io/Seopung/</td>
+        </tr>
+        <tr>
+            <td>관리자 페이지</td>
+            <td>https://durecoop.github.io/Seopung/admin/</td>
+        </tr>
+        <tr>
+            <td>호스팅</td>
+            <td>GitHub Pages (무료)</td>
+        </tr>
+        <tr>
+            <td>데이터베이스</td>
+            <td>Firebase Firestore</td>
+        </tr>
+        <tr>
+            <td>파일 저장소</td>
+            <td>Firebase Storage</td>
+        </tr>
+    </table>
+
+    <h3>1.2 주요 기능</h3>
+    <ul>
+        <li>회사 소개 및 연혁</li>
+        <li>가공 프로세스 안내</li>
+        <li>제품 카탈로그</li>
+        <li>갤러리 (시설, 제품 사진)</li>
+        <li>게시판 (공지사항, 뉴스, 자료실, FAQ)</li>
+        <li>문의하기 / 견적 요청</li>
+        <li>관리자 페이지 (콘텐츠 관리)</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2 id="section2">2. 사이트 구조</h2>
+
+    <h3>2.1 메뉴 구조</h3>
+    <table>
+        <tr>
+            <th>메뉴</th>
+            <th>파일명</th>
+            <th>설명</th>
+        </tr>
+        <tr>
+            <td>홈</td>
+            <td>index.html</td>
+            <td>메인 페이지, 회사 핵심 정보</td>
+        </tr>
+        <tr>
+            <td>회사소개</td>
+            <td>about.html</td>
+            <td>회사 소개, 연혁, 인증</td>
+        </tr>
+        <tr>
+            <td>가공 프로세스</td>
+            <td>process.html</td>
+            <td>수산물 가공 과정 설명</td>
+        </tr>
+        <tr>
+            <td>제품</td>
+            <td>products.html</td>
+            <td>제품 카탈로그</td>
+        </tr>
+        <tr>
+            <td>갤러리</td>
+            <td>gallery.html</td>
+            <td>시설, 제품 사진</td>
+        </tr>
+        <tr>
+            <td>게시판</td>
+            <td>board.html</td>
+            <td>공지, 뉴스, 자료실 등</td>
+        </tr>
+        <tr>
+            <td>문의하기</td>
+            <td>contact.html</td>
+            <td>문의 폼, 지도, FAQ</td>
+        </tr>
+    </table>
+
+    <h3>2.2 게시판 하위 메뉴</h3>
+    <table>
+        <tr>
+            <th>게시판</th>
+            <th>파일명</th>
+            <th>Firebase 컬렉션</th>
+        </tr>
+        <tr>
+            <td>공지사항</td>
+            <td>board/notice.html</td>
+            <td>notices</td>
+        </tr>
+        <tr>
+            <td>뉴스/보도자료</td>
+            <td>board/news.html</td>
+            <td>news</td>
+        </tr>
+        <tr>
+            <td>자료실</td>
+            <td>board/resources.html</td>
+            <td>resources</td>
+        </tr>
+        <tr>
+            <td>FAQ</td>
+            <td>board/faq.html</td>
+            <td>faq</td>
+        </tr>
+        <tr>
+            <td>채용정보</td>
+            <td>board/careers.html</td>
+            <td>careers</td>
+        </tr>
+        <tr>
+            <td>견적 요청</td>
+            <td>board/quote.html</td>
+            <td>quotes</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2 id="section3">3. 관리자 페이지 사용법</h2>
+
+    <h3>3.1 관리자 페이지 접속</h3>
+    <ol>
+        <li>브라우저에서 <strong>https://durecoop.github.io/Seopung/admin/</strong> 접속</li>
+        <li>로그인 페이지에서 관리자 계정으로 로그인</li>
+        <li>대시보드에서 각 메뉴 선택</li>
+    </ol>
+
+    <h3>3.2 관리자 메뉴 구성</h3>
+    <table>
+        <tr>
+            <th>메뉴</th>
+            <th>파일명</th>
+            <th>기능</th>
+        </tr>
+        <tr>
+            <td>대시보드</td>
+            <td>admin/dashboard.html</td>
+            <td>전체 현황 요약</td>
+        </tr>
+        <tr>
+            <td>공지사항 관리</td>
+            <td>admin/notices.html</td>
+            <td>공지사항 목록/작성/수정/삭제</td>
+        </tr>
+        <tr>
+            <td>뉴스 관리</td>
+            <td>admin/news-manage.html</td>
+            <td>뉴스 목록/작성/수정/삭제</td>
+        </tr>
+        <tr>
+            <td>자료실 관리</td>
+            <td>admin/resources-manage.html</td>
+            <td>자료 업로드/수정/삭제</td>
+        </tr>
+        <tr>
+            <td>제품 관리</td>
+            <td>admin/products-manage.html</td>
+            <td>제품 등록/수정/삭제</td>
+        </tr>
+        <tr>
+            <td>갤러리 관리</td>
+            <td>admin/gallery-manage.html</td>
+            <td>갤러리 이미지 관리</td>
+        </tr>
+        <tr>
+            <td>FAQ 관리</td>
+            <td>admin/faq-manage.html</td>
+            <td>FAQ 등록/수정/삭제</td>
+        </tr>
+        <tr>
+            <td>문의 확인</td>
+            <td>admin/inquiries.html</td>
+            <td>고객 문의 확인/답변</td>
+        </tr>
+        <tr>
+            <td>견적 확인</td>
+            <td>admin/quotes.html</td>
+            <td>견적 요청 확인/처리</td>
+        </tr>
+        <tr>
+            <td>샘플 데이터</td>
+            <td>admin/seed-data.html</td>
+            <td>테스트 데이터 등록</td>
+        </tr>
+    </table>
+
+    <h3>3.3 콘텐츠 등록 방법</h3>
+
+    <h4>공지사항 등록</h4>
+    <ol>
+        <li>관리자 > 공지사항 관리 클릭</li>
+        <li>"새 공지 작성" 버튼 클릭</li>
+        <li>제목, 내용 입력</li>
+        <li>중요 공지 여부 체크</li>
+        <li>"등록" 버튼 클릭</li>
+    </ol>
+
+    <h4>제품 등록</h4>
+    <ol>
+        <li>관리자 > 제품 관리 클릭</li>
+        <li>"제품 추가" 버튼 클릭</li>
+        <li>제품명, 카테고리, 원산지, 규격 입력</li>
+        <li>제품 이미지 업로드</li>
+        <li>"저장" 버튼 클릭</li>
+    </ol>
+
+    <h4>자료실 파일 업로드</h4>
+    <ol>
+        <li>관리자 > 자료실 관리 클릭</li>
+        <li>"자료 등록" 버튼 클릭</li>
+        <li>자료명, 카테고리, 설명 입력</li>
+        <li>파일 드래그 앤 드롭 또는 선택</li>
+        <li>"업로드" 버튼 클릭</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h2 id="section4">4. 콘텐츠 관리 방법</h2>
+
+    <h3>4.1 이미지 권장 사양</h3>
+    <table>
+        <tr>
+            <th>용도</th>
+            <th>권장 크기</th>
+            <th>파일 형식</th>
+            <th>최대 용량</th>
+        </tr>
+        <tr>
+            <td>제품 이미지</td>
+            <td>800 x 800 px</td>
+            <td>JPG, PNG</td>
+            <td>500KB</td>
+        </tr>
+        <tr>
+            <td>갤러리 이미지</td>
+            <td>1200 x 800 px</td>
+            <td>JPG, PNG</td>
+            <td>1MB</td>
+        </tr>
+        <tr>
+            <td>뉴스 썸네일</td>
+            <td>800 x 600 px</td>
+            <td>JPG, PNG</td>
+            <td>300KB</td>
+        </tr>
+        <tr>
+            <td>배너 이미지</td>
+            <td>1920 x 1080 px</td>
+            <td>JPG</td>
+            <td>2MB</td>
+        </tr>
+    </table>
+
+    <h3>4.2 자료실 파일 카테고리</h3>
+    <ul>
+        <li><strong>카탈로그:</strong> 제품 카탈로그, 가격표</li>
+        <li><strong>인증서:</strong> HACCP, ASC, MSC, 사업자등록증 등</li>
+        <li><strong>품질성적서:</strong> 방사능 검사, 중금속 검사, 미생물 검사</li>
+        <li><strong>회사소개서:</strong> 회사 소개 자료</li>
+    </ul>
+
+    <h3>4.3 뉴스 카테고리</h3>
+    <ul>
+        <li><strong>언론보도:</strong> 외부 언론 기사</li>
+        <li><strong>수상:</strong> 수상 소식</li>
+        <li><strong>인증:</strong> 인증 획득 소식</li>
+        <li><strong>기타:</strong> 회사 소식</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2 id="section5">5. Firebase 데이터베이스</h2>
+
+    <h3>5.1 Firebase 콘솔 접속</h3>
+    <ol>
+        <li>https://console.firebase.google.com/ 접속</li>
+        <li>Google 계정으로 로그인</li>
+        <li>"seopung-website" 프로젝트 선택</li>
+    </ol>
+
+    <h3>5.2 데이터베이스 컬렉션</h3>
+    <table>
+        <tr>
+            <th>컬렉션명</th>
+            <th>용도</th>
+            <th>주요 필드</th>
+        </tr>
+        <tr>
+            <td>notices</td>
+            <td>공지사항</td>
+            <td>title, content, important, createdAt</td>
+        </tr>
+        <tr>
+            <td>news</td>
+            <td>뉴스/보도자료</td>
+            <td>title, content, category, thumbnail, source</td>
+        </tr>
+        <tr>
+            <td>resources</td>
+            <td>자료실</td>
+            <td>title, category, url, format, size</td>
+        </tr>
+        <tr>
+            <td>products</td>
+            <td>제품</td>
+            <td>name, category, origin, image, spec</td>
+        </tr>
+        <tr>
+            <td>gallery</td>
+            <td>갤러리</td>
+            <td>title, category, image, description</td>
+        </tr>
+        <tr>
+            <td>faq</td>
+            <td>FAQ</td>
+            <td>question, answer, category, order</td>
+        </tr>
+        <tr>
+            <td>inquiries</td>
+            <td>문의</td>
+            <td>name, phone, email, message, status</td>
+        </tr>
+        <tr>
+            <td>quotes</td>
+            <td>견적요청</td>
+            <td>company, product, quantity, status</td>
+        </tr>
+        <tr>
+            <td>careers</td>
+            <td>채용</td>
+            <td>title, department, type, description</td>
+        </tr>
+    </table>
+
+    <div class="info-box">
+        <strong>참고:</strong> Firebase 무료 티어(Spark Plan)는 일일 읽기 50,000회, 쓰기 20,000회로 제한됩니다.
+        일반적인 기업 홈페이지 운영에는 충분합니다.
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 id="section6">6. 유지보수 및 업데이트</h2>
+
+    <h3>6.1 소스 코드 수정 방법</h3>
+    <ol>
+        <li>GitHub 저장소 접속: https://github.com/durecoop/Seopung</li>
+        <li>수정할 파일 선택</li>
+        <li>연필 아이콘(Edit) 클릭</li>
+        <li>내용 수정 후 "Commit changes" 클릭</li>
+        <li>약 1~2분 후 변경사항 반영</li>
+    </ol>
+
+    <h3>6.2 주요 파일 위치</h3>
+    <table>
+        <tr>
+            <th>파일/폴더</th>
+            <th>설명</th>
+        </tr>
+        <tr>
+            <td>index.html</td>
+            <td>메인 페이지</td>
+        </tr>
+        <tr>
+            <td>css/style.css</td>
+            <td>기본 스타일</td>
+        </tr>
+        <tr>
+            <td>css/responsive.css</td>
+            <td>반응형 스타일</td>
+        </tr>
+        <tr>
+            <td>js/main.js</td>
+            <td>메인 JavaScript</td>
+        </tr>
+        <tr>
+            <td>admin/</td>
+            <td>관리자 페이지 폴더</td>
+        </tr>
+        <tr>
+            <td>board/</td>
+            <td>게시판 페이지 폴더</td>
+        </tr>
+    </table>
+
+    <h3>6.3 정기 점검 사항</h3>
+    <ul>
+        <li><strong>주간:</strong> 문의/견적 요청 확인 및 처리</li>
+        <li><strong>월간:</strong> 뉴스, 공지사항 업데이트</li>
+        <li><strong>분기:</strong> 제품 정보 업데이트, 인증서 갱신 확인</li>
+        <li><strong>연간:</strong> 회사 정보(매출, 연혁 등) 업데이트</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2 id="section7">7. 권장 촬영 콘텐츠</h2>
+
+    <h3>7.1 사진 촬영 권장 목록</h3>
+
+    <h4>시설 사진</h4>
+    <table>
+        <tr>
+            <th>촬영 대상</th>
+            <th>촬영 포인트</th>
+            <th>활용처</th>
+        </tr>
+        <tr>
+            <td>공장 외관</td>
+            <td>정면, 전경, 간판 포함</td>
+            <td>회사소개, 메인</td>
+        </tr>
+        <tr>
+            <td>가공 라인</td>
+            <td>IQF 설비, 포장 라인, 선별 공정</td>
+            <td>가공프로세스</td>
+        </tr>
+        <tr>
+            <td>냉동 창고</td>
+            <td>대형 냉동고 내부, 적재 현황</td>
+            <td>갤러리</td>
+        </tr>
+        <tr>
+            <td>품질 검사실</td>
+            <td>검사 장비, 검사 과정</td>
+            <td>가공프로세스</td>
+        </tr>
+        <tr>
+            <td>위생 시설</td>
+            <td>에어샤워, 손세척 시설, HACCP 표지</td>
+            <td>회사소개</td>
+        </tr>
+        <tr>
+            <td>사무실</td>
+            <td>사무 공간, 회의실</td>
+            <td>채용정보</td>
+        </tr>
+    </table>
+
+    <h4>제품 사진</h4>
+    <table>
+        <tr>
+            <th>촬영 대상</th>
+            <th>촬영 포인트</th>
+            <th>활용처</th>
+        </tr>
+        <tr>
+            <td>개별 제품</td>
+            <td>포장 상태, 흰 배경, 정면</td>
+            <td>제품 카탈로그</td>
+        </tr>
+        <tr>
+            <td>제품 단면</td>
+            <td>살 색깔, 신선도 강조</td>
+            <td>제품 상세</td>
+        </tr>
+        <tr>
+            <td>박스 포장</td>
+            <td>출하 박스, 라벨 포함</td>
+            <td>B2B 제품</td>
+        </tr>
+        <tr>
+            <td>조리 예시</td>
+            <td>구이, 조림, 회 등 완성 요리</td>
+            <td>제품 홍보</td>
+        </tr>
+    </table>
+
+    <h4>작업 현장 사진</h4>
+    <table>
+        <tr>
+            <th>촬영 대상</th>
+            <th>촬영 포인트</th>
+            <th>활용처</th>
+        </tr>
+        <tr>
+            <td>원료 입고</td>
+            <td>신선한 원료, 트럭 하역</td>
+            <td>가공프로세스</td>
+        </tr>
+        <tr>
+            <td>선별 작업</td>
+            <td>숙련된 직원의 선별 장면</td>
+            <td>가공프로세스</td>
+        </tr>
+        <tr>
+            <td>가공 작업</td>
+            <td>손질, 절단, 포장 과정</td>
+            <td>갤러리</td>
+        </tr>
+        <tr>
+            <td>출하 작업</td>
+            <td>완제품 적재, 배송 차량</td>
+            <td>갤러리</td>
+        </tr>
+        <tr>
+            <td>팀 사진</td>
+            <td>직원 단체사진, 작업복 착용</td>
+            <td>회사소개</td>
+        </tr>
+    </table>
+
+    <h3>7.2 영상 촬영 권장 목록</h3>
+    <table>
+        <tr>
+            <th>영상 주제</th>
+            <th>권장 길이</th>
+            <th>촬영 내용</th>
+            <th>활용처</th>
+        </tr>
+        <tr>
+            <td>회사 소개 영상</td>
+            <td>2~3분</td>
+            <td>회사 전경, 시설, 가공 과정, 직원 인터뷰</td>
+            <td>메인 배경, 회사소개</td>
+        </tr>
+        <tr>
+            <td>가공 프로세스</td>
+            <td>1~2분</td>
+            <td>원료 입고 → 선별 → 가공 → 포장 → 출하</td>
+            <td>가공프로세스</td>
+        </tr>
+        <tr>
+            <td>제품별 소개</td>
+            <td>30초~1분</td>
+            <td>제품 특징, 조리 예시</td>
+            <td>제품 상세</td>
+        </tr>
+        <tr>
+            <td>시설 투어</td>
+            <td>2~3분</td>
+            <td>공장 내부 워킹 투어</td>
+            <td>갤러리, B2B 영업</td>
+        </tr>
+        <tr>
+            <td>드론 촬영</td>
+            <td>30초~1분</td>
+            <td>공장 전경, 여수 바다, 항구</td>
+            <td>메인 배경</td>
+        </tr>
+    </table>
+
+    <div class="info-box">
+        <strong>촬영 팁:</strong>
+        <ul>
+            <li>가로 촬영 권장 (16:9 비율)</li>
+            <li>밝은 조명에서 촬영</li>
+            <li>작업복, 위생모 등 착용하여 청결함 강조</li>
+            <li>HACCP, 인증 마크가 보이도록 촬영</li>
+            <li>4K 해상도 권장 (최소 Full HD)</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 id="section8">8. 문제 해결 가이드</h2>
+
+    <h3>8.1 자주 발생하는 문제</h3>
+
+    <table>
+        <tr>
+            <th>문제</th>
+            <th>원인</th>
+            <th>해결 방법</th>
+        </tr>
+        <tr>
+            <td>페이지가 업데이트되지 않음</td>
+            <td>브라우저 캐시</td>
+            <td>Ctrl+Shift+R (강력 새로고침)</td>
+        </tr>
+        <tr>
+            <td>이미지가 안 보임</td>
+            <td>파일 경로 오류</td>
+            <td>파일명 확인, 대소문자 구분</td>
+        </tr>
+        <tr>
+            <td>데이터가 로딩되지 않음</td>
+            <td>Firebase 연결 문제</td>
+            <td>Firebase 콘솔에서 상태 확인</td>
+        </tr>
+        <tr>
+            <td>관리자 로그인 안됨</td>
+            <td>계정 권한 문제</td>
+            <td>Firebase Authentication 확인</td>
+        </tr>
+        <tr>
+            <td>파일 업로드 실패</td>
+            <td>용량 초과 또는 형식 오류</td>
+            <td>파일 크기/형식 확인</td>
+        </tr>
+    </table>
+
+    <h3>8.2 긴급 연락처</h3>
+    <div class="warning-box">
+        <p><strong>기술 지원이 필요한 경우:</strong></p>
+        <p>홈페이지 개발/유지보수 담당자에게 연락하세요.</p>
+        <p>GitHub 저장소: https://github.com/durecoop/Seopung</p>
+    </div>
+
+    <hr style="margin-top: 50px;">
+    <p style="text-align: center; color: #666; font-size: 14px;">
+        본 매뉴얼은 영어조합법인 서풍 홈페이지 관리를 위해 작성되었습니다.<br>
+        문서 버전: 1.0 | 최종 수정일: 2025년 1월
+    </p>
+</body>
+</html>
