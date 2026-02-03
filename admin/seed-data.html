@@ -62,7 +62,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCnMM7eMXjZgjP-dovTJ-cfH7iO5RWQnno",
@@ -90,102 +90,146 @@
             logEl.innerHTML = '';
         }
 
-        // 자료실 샘플 데이터
+        // 컬렉션 데이터 전체 삭제
+        async function clearCollection(collectionName) {
+            log(`${collectionName} 기존 데이터 삭제 중...`);
+            const querySnapshot = await getDocs(collection(db, collectionName));
+            let count = 0;
+            for (const docSnap of querySnapshot.docs) {
+                await deleteDoc(doc(db, collectionName, docSnap.id));
+                count++;
+            }
+            log(`${collectionName} 기존 데이터 ${count}건 삭제 완료`, 'success');
+        }
+
+        // 자료실 샘플 데이터 - 실제 수산업 관련 자료
         const resourcesData = [
             {
-                title: "서풍 제품 카탈로그 2024",
+                title: "2025 서풍 제품 카탈로그",
                 category: "카탈로그",
-                description: "냉동 수산물 전제품 규격 및 가격 안내",
+                description: "냉동 수산물 전제품 규격, 포장단위, 원산지 안내. 고등어, 갈치, 오징어, 새우, 연어 등 전 품목 수록",
                 format: "PDF",
-                size: "15.2MB",
+                size: "18.5MB",
                 url: "#"
             },
             {
-                title: "HACCP 인증서",
+                title: "HACCP 인증서 (2024-2027)",
                 category: "인증서",
-                description: "식품안전관리인증기준 적용업소 인증",
+                description: "식품안전관리인증기준(HACCP) 적용업소 인증서. 인증번호: 제2024-수산가공-0152호",
                 format: "PDF",
                 size: "1.2MB",
                 url: "#"
             },
             {
-                title: "ASC 양식수산물 인증서",
+                title: "사업자등록증",
                 category: "인증서",
-                description: "지속가능 양식 수산물 국제인증",
+                description: "영어조합법인 서풍 사업자등록증 사본",
                 format: "PDF",
-                size: "890KB",
+                size: "320KB",
                 url: "#"
             },
             {
-                title: "MSC 자연산 수산물 인증서",
+                title: "수산물가공업 영업신고증",
                 category: "인증서",
-                description: "지속가능 자연산 수산물 국제인증",
-                format: "PDF",
-                size: "920KB",
-                url: "#"
-            },
-            {
-                title: "간고등어 품질검사 성적서",
-                category: "품질성적서",
-                description: "노르웨이산 간고등어 중금속, 방사능 검사",
+                description: "수산물가공업 영업신고증 (전라남도 여수시)",
                 format: "PDF",
                 size: "450KB",
                 url: "#"
             },
             {
-                title: "손질오징어 품질검사 성적서",
+                title: "MSC 지속가능 수산물 인증서",
+                category: "인증서",
+                description: "Marine Stewardship Council 자연산 수산물 국제인증. CoC 인증번호: MSC-C-12345",
+                format: "PDF",
+                size: "890KB",
+                url: "#"
+            },
+            {
+                title: "ASC 양식수산물 인증서",
+                category: "인증서",
+                description: "Aquaculture Stewardship Council 양식 수산물 국제인증",
+                format: "PDF",
+                size: "920KB",
+                url: "#"
+            },
+            {
+                title: "수출입 실적 증명서",
+                category: "인증서",
+                description: "2024년도 수출입 실적 증명서 (한국무역협회 발급)",
+                format: "PDF",
+                size: "280KB",
+                url: "#"
+            },
+            {
+                title: "노르웨이 고등어 수입신고필증",
                 category: "품질성적서",
-                description: "원양산 오징어 품질 및 안전성 검사",
-                format: "PDF",
-                size: "380KB",
-                url: "#"
-            },
-            {
-                title: "참돔 품질검사 성적서",
-                category: "품질성적서",
-                description: "국내산 참돔 신선도 및 품질 검사",
-                format: "PDF",
-                size: "420KB",
-                url: "#"
-            },
-            {
-                title: "서풍 회사소개서 2024",
-                category: "회사소개서",
-                description: "영어조합법인 서풍 기업 소개",
-                format: "PDF",
-                size: "8.5MB",
-                url: "#"
-            },
-            {
-                title: "수산물 가공 공정 안내서",
-                category: "카탈로그",
-                description: "IQF 급속냉동, 전처리 공정 소개",
-                format: "PDF",
-                size: "5.2MB",
-                url: "#"
-            },
-            {
-                title: "학교급식 납품 성적서",
-                category: "품질성적서",
-                description: "학교급식용 수산물 안전성 검사 성적서",
+                description: "노르웨이산 냉동 고등어 수입신고필증 및 검역증명서",
                 format: "PDF",
                 size: "520KB",
                 url: "#"
             },
             {
-                title: "친환경 패키지 인증서",
-                category: "인증서",
-                description: "친환경 포장재 사용 인증",
+                title: "수산물 방사능 검사성적서",
+                category: "품질성적서",
+                description: "2025년 1분기 수산물 방사능(세슘-137, 요오드-131) 검사 성적서",
                 format: "PDF",
-                size: "680KB",
+                size: "380KB",
                 url: "#"
             },
             {
-                title: "OEM/ODM 제품 안내서",
-                category: "카탈로그",
-                description: "PB 상품 개발 및 위탁 생산 안내",
+                title: "중금속 검사 성적서",
+                category: "품질성적서",
+                description: "수산물 중금속(납, 카드뮴, 수은) 검사 성적서 - 국립수산물품질관리원",
                 format: "PDF",
-                size: "3.8MB",
+                size: "420KB",
+                url: "#"
+            },
+            {
+                title: "미생물 검사 성적서",
+                category: "품질성적서",
+                description: "대장균, 살모넬라, 황색포도상구균 등 미생물 검사 성적서",
+                format: "PDF",
+                size: "350KB",
+                url: "#"
+            },
+            {
+                title: "영양성분 분석표",
+                category: "품질성적서",
+                description: "주요 제품별 영양성분 분석표 (열량, 단백질, 지방, 나트륨 등)",
+                format: "PDF",
+                size: "280KB",
+                url: "#"
+            },
+            {
+                title: "서풍 회사소개서 2025",
+                category: "회사소개서",
+                description: "영어조합법인 서풍 기업 소개, 연혁, 시설현황, 주요 거래처, 인증현황",
+                format: "PDF",
+                size: "12.5MB",
+                url: "#"
+            },
+            {
+                title: "수산물 이력추적 관리 가이드",
+                category: "기타",
+                description: "수산물이력제 운영 안내 및 이력번호 조회 방법 안내",
+                format: "PDF",
+                size: "2.8MB",
+                url: "#"
+            },
+            {
+                title: "냉동수산물 보관·취급 가이드",
+                category: "기타",
+                description: "냉동 수산물의 올바른 보관 온도, 해동 방법, 유통기한 안내",
+                format: "PDF",
+                size: "1.5MB",
+                url: "#"
+            },
+            {
+                title: "B2B 거래 신청서",
+                category: "기타",
+                description: "사업자 거래 신청서 양식 (신규 거래처용)",
+                format: "DOC",
+                size: "85KB",
                 url: "#"
             }
         ];
@@ -197,6 +241,7 @@
                 category: "수상",
                 source: "여수시민신문",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
                 content: `<h3>연간 150억원 수출 달성으로 수출의 탑 3회 연속 수상</h3>
                 <p>영어조합법인 서풍이 2025년 연간 150억원 수출을 달성하며 <strong>수출의 탑</strong>을 3회 연속 수상하는 영예를 안았습니다.</p>
                 <p>서풍은 노르웨이산 간고등어, 국내산 참돔 등 고품질 수산물을 미국, 일본, 동남아시아 등 전 세계 25여 개국에 수출하고 있습니다.</p>
@@ -214,6 +259,7 @@
                 category: "언론보도",
                 source: "해양수산부",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&h=600&fit=crop",
                 content: `<h3>K-수산물 글로벌 인기 급상승</h3>
                 <p>해양수산부는 2025년 수산물 수출이 역대 최고 실적을 기록할 것으로 전망했습니다.</p>
                 <p>특히 냉동 수산물과 가공식품의 수출이 크게 증가하며, 한국 수산물의 위상이 높아지고 있습니다.</p>
@@ -231,6 +277,7 @@
                 category: "인증",
                 source: "수산신문",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
                 content: `<h3>글로벌 친환경 수산물 인증 모두 획득</h3>
                 <p>영어조합법인 서풍이 <strong>MSC(Marine Stewardship Council)</strong>와 <strong>ASC(Aquaculture Stewardship Council)</strong> 이중 인증을 모두 보유한 기업으로 선정되었습니다.</p>
                 <p>국내 수산물 가공업체 중 양대 인증을 모두 보유한 기업은 손에 꼽힙니다.</p>
@@ -247,6 +294,7 @@
                 category: "언론보도",
                 source: "KBS 여수",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop",
                 content: `<h3>여수 청정해역의 수산물 가공 산업 성장</h3>
                 <p>여수시 화양면에 위치한 영어조합법인 서풍이 지난 10년간 매출 7배 성장을 기록하며 지역 수산물 가공 산업을 선도하고 있습니다.</p>
                 <p>서풍은 2015년 50억원이던 매출이 2025년 <strong>400억원</strong>으로 성장했으며, 직원 수도 10명에서 35명으로 증가했습니다.</p>
@@ -263,6 +311,7 @@
                 category: "언론보도",
                 source: "식품저널",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
                 content: `<h3>MZ세대 중심 간편 수산물 수요 폭발</h3>
                 <p>2025년 수산물 소비 트렌드는 '간편함'과 '프리미엄'입니다. 손질된 수산물과 밀키트 형태의 제품이 큰 인기를 끌고 있습니다.</p>
                 <h4>주요 트렌드</h4>
@@ -279,6 +328,7 @@
                 category: "언론보도",
                 source: "이커머스뉴스",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop",
                 content: `<h3>온라인 수산물 시장 공략 강화</h3>
                 <p>영어조합법인 서풍이 쿠팡 로켓프레시 수산물 공급을 대폭 확대합니다.</p>
                 <p>이번 계약으로 서풍은 쿠팡, 마켓컬리, SSG닷컴 등 국내 주요 이커머스 플랫폼에 제품을 공급하게 되었습니다.</p>
@@ -295,6 +345,7 @@
                 category: "언론보도",
                 source: "수산경제신문",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?w=800&h=600&fit=crop",
                 content: `<h3>프리미엄 수입 수산물 인기</h3>
                 <p>2025년 노르웨이산 연어와 고등어 수입량이 역대 최대를 기록했습니다.</p>
                 <p>특히 노르웨이 고등어는 기름기가 풍부하고 비린내가 적어 한국 소비자들에게 큰 인기를 끌고 있습니다.</p>
@@ -312,6 +363,7 @@
                 category: "기타",
                 source: "자사 보도자료",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
                 content: `<h3>AI 기반 스마트 팩토리 도입</h3>
                 <p>영어조합법인 서풍이 AI 기반 스마트 팩토리를 완공하여 생산성을 50% 향상시켰습니다.</p>
                 <h4>스마트 팩토리 특징</h4>
@@ -328,6 +380,7 @@
                 category: "언론보도",
                 source: "교육신문",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=600&fit=crop",
                 content: `<h3>식품안전 기준 강화</h3>
                 <p>교육부와 식약처가 학교급식에 납품되는 수산물에 HACCP 인증을 필수화했습니다.</p>
                 <p>서풍은 이미 HACCP 인증을 취득하여 전남 지역 다수 학교에 안전한 수산물을 공급하고 있습니다.</p>
@@ -344,6 +397,7 @@
                 category: "언론보도",
                 source: "한국무역신문",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=600&fit=crop",
                 content: `<h3>K-수산물 일본 시장 점유율 확대</h3>
                 <p>후쿠시마 오염수 방류 이후 일본 내 한국산 수산물 수요가 급증하고 있습니다.</p>
                 <p>서풍의 대일 수출은 전년 대비 300% 증가했으며, 특히 프리미엄 제품의 인기가 높습니다.</p>
@@ -360,6 +414,7 @@
                 category: "언론보도",
                 source: "해양수산부",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&h=600&fit=crop",
                 content: `<h3>생산부터 유통까지 전 과정 추적</h3>
                 <p>해양수산부가 수산물 이력제를 전면 시행하여 원산지 투명성을 강화합니다.</p>
                 <p>서풍은 2020년부터 자체 이력추적 시스템을 운영하며 업계를 선도하고 있습니다.</p>
@@ -376,6 +431,7 @@
                 category: "기타",
                 source: "자사 보도자료",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&h=600&fit=crop",
                 content: `<h3>ESG 경영 실천, 플라스틱 사용량 70% 감축</h3>
                 <p>영어조합법인 서풍이 친환경 패키징을 전면 도입하여 플라스틱 사용량을 70% 감축했습니다.</p>
                 <h4>친환경 패키징 특징</h4>
@@ -392,6 +448,7 @@
                 category: "언론보도",
                 source: "농수산물유통공사",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&h=600&fit=crop",
                 content: `<h3>제철 수산물 소비 가이드</h3>
                 <p>농수산물유통공사가 발표한 겨울철 인기 수산물 TOP 5입니다.</p>
                 <h4>겨울철 인기 수산물</h4>
@@ -409,6 +466,7 @@
                 category: "언론보도",
                 source: "무역협회",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&h=600&fit=crop",
                 content: `<h3>글로벌 생산 거점 확대</h3>
                 <p>영어조합법인 서풍이 베트남 호치민에 현지 법인을 설립하고 동남아 시장 공략에 나섭니다.</p>
                 <h4>베트남 법인 계획</h4>
@@ -425,6 +483,7 @@
                 category: "언론보도",
                 source: "헬스조선",
                 link: "",
+                thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&h=600&fit=crop",
                 content: `<h3>고등어·삼치·꽁치 소비 증가</h3>
                 <p>오메가3 지방산이 풍부한 등푸른 생선이 건강식품으로 각광받고 있습니다.</p>
                 <h4>등푸른 생선의 효능</h4>
@@ -508,12 +567,16 @@
             }
         ];
 
-        // 자료실 데이터 등록
+        // 자료실 데이터 등록 (기존 삭제 후 등록)
         window.seedResources = async function() {
             clearLog();
             log('자료실 데이터 등록 시작...');
 
             try {
+                // 기존 데이터 삭제
+                await clearCollection('resources');
+
+                // 새 데이터 등록
                 for (const resource of resourcesData) {
                     await addDoc(collection(db, "resources"), {
                         ...resource,
@@ -528,12 +591,16 @@
             }
         };
 
-        // 뉴스 데이터 등록
+        // 뉴스 데이터 등록 (기존 삭제 후 등록)
         window.seedNews = async function() {
             clearLog();
             log('뉴스 데이터 등록 시작...');
 
             try {
+                // 기존 데이터 삭제
+                await clearCollection('news');
+
+                // 새 데이터 등록
                 for (let i = 0; i < newsData.length; i++) {
                     const news = newsData[i];
                     // 날짜를 과거로 설정 (최근 순서대로)
@@ -542,7 +609,6 @@
 
                     await addDoc(collection(db, "news"), {
                         ...news,
-                        thumbnail: "",
                         views: Math.floor(Math.random() * 100) + 10,
                         createdAt: Timestamp.fromDate(date)
                     });
@@ -554,12 +620,16 @@
             }
         };
 
-        // FAQ 데이터 등록
+        // FAQ 데이터 등록 (기존 삭제 후 등록)
         window.seedFaq = async function() {
             clearLog();
             log('FAQ 데이터 등록 시작...');
 
             try {
+                // 기존 데이터 삭제
+                await clearCollection('faq');
+
+                // 새 데이터 등록
                 for (const faq of faqData) {
                     await addDoc(collection(db, "faq"), {
                         ...faq,
@@ -573,12 +643,17 @@
             }
         };
 
-        // 전체 데이터 등록
+        // 전체 데이터 등록 (기존 삭제 후 등록)
         window.seedAll = async function() {
             clearLog();
-            log('전체 데이터 등록 시작...');
+            log('전체 데이터 등록 시작 (기존 데이터 삭제 후 등록)...');
 
             try {
+                // 기존 데이터 삭제
+                await clearCollection('resources');
+                await clearCollection('news');
+                await clearCollection('faq');
+
                 // 자료실
                 log('--- 자료실 등록 중 ---');
                 for (const resource of resourcesData) {
@@ -599,7 +674,6 @@
 
                     await addDoc(collection(db, "news"), {
                         ...news,
-                        thumbnail: "",
                         views: Math.floor(Math.random() * 100) + 10,
                         createdAt: Timestamp.fromDate(date)
                     });
