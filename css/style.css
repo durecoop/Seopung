@@ -280,6 +280,43 @@ button {
     font-weight: 600;
 }
 
+/* Language Switcher */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.lang-switch__btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
+}
+
+.lang-switch__btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.lang-switch__btn--active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: 700;
+}
+
 /* Navigation */
 .nav {
     display: flex;

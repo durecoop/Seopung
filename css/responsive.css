@@ -41,6 +41,19 @@
         gap: 0;
     }
 
+    /* Language Switcher - Mobile */
+    .lang-switch {
+        margin-left: auto;
+        margin-right: 0.5rem;
+        padding: 2px;
+        gap: 1px;
+    }
+
+    .lang-switch__btn {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.65rem;
+    }
+
     /* Navigation - Mobile Premium */
     .nav__toggle {
         display: flex;

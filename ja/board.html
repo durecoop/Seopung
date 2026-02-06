@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 | 서풍</title>
-    <meta name="description" content="서풍 공지사항, 뉴스, 자료실, 문의 게시판">
+    <title>掲示板 | ソプン</title>
+    <meta name="description" content="ソプンお知らせ、ニュース、資料室、お問い合わせ掲示板">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/board.css">
 </head>
 <body>
     <!-- Header -->
@@ -18,34 +18,34 @@
         <div class="header__container">
             <a href="index.html" class="logo">
                 <div class="logo__icon">
-                    <img src="logo_transparent.png" alt="서풍 로고">
+                    <img src="../logo_transparent.png" alt="ソプン ロゴ">
                 </div>
                 <div class="logo__text">
-                    <span class="logo__main">서풍</span>
+                    <span class="logo__main">ソプン</span>
                     <span class="logo__sub">SEOPOONG</span>
                 </div>
             </a>
 
             <nav class="nav">
                 <ul class="nav__list" id="navList">
-                    <li><a href="index.html" class="nav__link">홈</a></li>
-                    <li><a href="about.html" class="nav__link">회사소개</a></li>
-                    <li><a href="process.html" class="nav__link">가공 프로세스</a></li>
-                    <li><a href="products.html" class="nav__link">제품</a></li>
-                    <li><a href="gallery.html" class="nav__link">갤러리</a></li>
-                    <li><a href="board.html" class="nav__link nav__link--active">게시판</a></li>
-                    <li><a href="contact.html" class="nav__link nav__link--cta">문의하기</a></li>
+                    <li><a href="index.html" class="nav__link">ホーム</a></li>
+                    <li><a href="about.html" class="nav__link">会社紹介</a></li>
+                    <li><a href="process.html" class="nav__link">加工プロセス</a></li>
+                    <li><a href="products.html" class="nav__link">製品</a></li>
+                    <li><a href="gallery.html" class="nav__link">ギャラリー</a></li>
+                    <li><a href="board.html" class="nav__link nav__link--active">掲示板</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--cta">お問い合わせ</a></li>
                 </ul>
-                <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기">
+                <button class="nav__toggle" id="navToggle" aria-label="メニューを開く">
                     <span class="nav__toggle-bar"></span>
                     <span class="nav__toggle-bar"></span>
                     <span class="nav__toggle-bar"></span>
                 </button>
             </nav>
             <div class="lang-switch">
-                <a href="board.html" class="lang-switch__btn lang-switch__btn--active">KO</a>
-                <a href="en/board.html" class="lang-switch__btn">EN</a>
-                <a href="ja/board.html" class="lang-switch__btn">JP</a>
+                <a href="../board.html" class="lang-switch__btn">KO</a>
+                <a href="../en/board.html" class="lang-switch__btn">EN</a>
+                <a href="board.html" class="lang-switch__btn lang-switch__btn--active">JP</a>
             </div>
         </div>
     </header>
@@ -54,8 +54,8 @@
     <section class="page-header">
         <div class="page-header__content">
             <span class="page-header__tag">BOARD</span>
-            <h1 class="page-header__title">게시판</h1>
-            <p class="page-header__desc">서풍의 소식과 자료를 확인하세요</p>
+            <h1 class="page-header__title">掲示板</h1>
+            <p class="page-header__desc">ソプンのお知らせと資料をご確認ください</p>
         </div>
     </section>
 
@@ -63,22 +63,22 @@
     <section class="section">
         <div class="container">
             <div class="board-hub">
-                <!-- 공지사항 -->
-                <a href="board/notice.html" class="board-hub__card">
+                <!-- お知らせ -->
+                <a href="../board/notice.html" class="board-hub__card">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/>
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>공지사항</h3>
-                        <p>회사 공지, 휴무일 안내</p>
+                        <h3>お知らせ</h3>
+                        <p>会社のお知らせ、休業日案内</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
-                <!-- 뉴스/보도자료 -->
-                <a href="board/news.html" class="board-hub__card">
+                <!-- ニュース/プレスリリース -->
+                <a href="../board/news.html" class="board-hub__card">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
@@ -86,14 +86,14 @@
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>뉴스/보도자료</h3>
-                        <p>언론보도, 수상, 인증 소식</p>
+                        <h3>ニュース・プレスリリース</h3>
+                        <p>報道、受賞、認証ニュース</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
-                <!-- 자료실 -->
-                <a href="board/resources.html" class="board-hub__card">
+                <!-- 資料室 -->
+                <a href="../board/resources.html" class="board-hub__card">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -104,14 +104,14 @@
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>자료실</h3>
-                        <p>카탈로그, 인증서, 품질성적서</p>
+                        <h3>資料室</h3>
+                        <p>カタログ、認証書、品質成績書</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
                 <!-- FAQ -->
-                <a href="board/faq.html" class="board-hub__card">
+                <a href="../board/faq.html" class="board-hub__card">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"/>
@@ -121,27 +121,27 @@
                     </div>
                     <div class="board-hub__content">
                         <h3>FAQ</h3>
-                        <p>자주 묻는 질문과 답변</p>
+                        <p>よくある質問と回答</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
-                <!-- 문의하기 -->
-                <a href="../contact.html" class="board-hub__card board-hub__card--highlight">
+                <!-- お問い合わせ -->
+                <a href="contact.html" class="board-hub__card board-hub__card--highlight">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>문의하기</h3>
-                        <p>제품 정보, 상담 문의</p>
+                        <h3>お問い合わせ</h3>
+                        <p>製品情報、相談</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
-                <!-- 견적 요청 -->
-                <a href="board/quote.html" class="board-hub__card board-hub__card--highlight">
+                <!-- 見積依頼 -->
+                <a href="../board/quote.html" class="board-hub__card board-hub__card--highlight">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -151,14 +151,14 @@
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>견적 요청</h3>
-                        <p>대량 주문, OEM/ODM 견적</p>
+                        <h3>見積依頼</h3>
+                        <p>大量注文、OEM/ODM見積</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
 
-                <!-- 채용정보 -->
-                <a href="board/careers.html" class="board-hub__card">
+                <!-- 採用情報 -->
+                <a href="../board/careers.html" class="board-hub__card">
                     <div class="board-hub__icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -168,8 +168,8 @@
                         </svg>
                     </div>
                     <div class="board-hub__content">
-                        <h3>채용정보</h3>
-                        <p>함께할 인재를 찾습니다</p>
+                        <h3>採用情報</h3>
+                        <p>一緒に働く人材を募集しています</p>
                     </div>
                     <span class="board-hub__arrow">→</span>
                 </a>
@@ -182,71 +182,71 @@
     <section class="section section--bg-light">
         <div class="container">
             <div class="recent-boards">
-                <!-- 최근 공지사항 -->
+                <!-- 最近のお知らせ -->
                 <div class="recent-board">
                     <div class="recent-board__header">
-                        <h3>공지사항</h3>
-                        <a href="board/notice.html" class="recent-board__more">더보기 →</a>
+                        <h3>お知らせ</h3>
+                        <a href="../board/notice.html" class="recent-board__more">もっと見る →</a>
                     </div>
                     <ul class="recent-board__list">
                         <li>
                             <a href="#">
-                                <span class="recent-board__badge">공지</span>
-                                <span class="recent-board__title">2024년 설 연휴 휴무 안내</span>
+                                <span class="recent-board__badge">公知</span>
+                                <span class="recent-board__title">2024年旧正月連休休業のお知らせ</span>
                                 <span class="recent-board__date">2024.01.25</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__title">신규 제품 라인업 출시 안내</span>
+                                <span class="recent-board__title">新製品ラインナップ発売のお知らせ</span>
                                 <span class="recent-board__date">2024.01.15</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__title">ASC 인증 갱신 완료</span>
+                                <span class="recent-board__title">ASC認証更新完了</span>
                                 <span class="recent-board__date">2024.01.10</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__title">홈페이지 리뉴얼 오픈</span>
+                                <span class="recent-board__title">ホームページリニューアルオープン</span>
                                 <span class="recent-board__date">2024.01.05</span>
                             </a>
                         </li>
                     </ul>
                 </div>
 
-                <!-- 최근 뉴스 -->
+                <!-- 最近のニュース -->
                 <div class="recent-board">
                     <div class="recent-board__header">
-                        <h3>뉴스/보도자료</h3>
-                        <a href="board/news.html" class="recent-board__more">더보기 →</a>
+                        <h3>ニュース・プレスリリース</h3>
+                        <a href="../board/news.html" class="recent-board__more">もっと見る →</a>
                     </div>
                     <ul class="recent-board__list">
                         <li>
                             <a href="#">
-                                <span class="recent-board__badge recent-board__badge--news">수상</span>
-                                <span class="recent-board__title">2023년 수출의 탑 수상</span>
+                                <span class="recent-board__badge recent-board__badge--news">受賞</span>
+                                <span class="recent-board__title">2023年輸出の塔受賞</span>
                                 <span class="recent-board__date">2023.12.20</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__badge recent-board__badge--news">언론</span>
-                                <span class="recent-board__title">[여수시민신문] 서풍, 친환경 수산물 가공 선도</span>
+                                <span class="recent-board__badge recent-board__badge--news">報道</span>
+                                <span class="recent-board__title">[麗水市民新聞] ソプン、環境にやさしい水産物加工をリード</span>
                                 <span class="recent-board__date">2023.11.15</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__title">MSC 지속가능 수산물 인증 획득</span>
+                                <span class="recent-board__title">MSC持続可能水産物認証取得</span>
                                 <span class="recent-board__date">2023.10.08</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="recent-board__title">2023년 상반기 매출 200억 돌파</span>
+                                <span class="recent-board__title">2023年上半期売上200億突破</span>
                                 <span class="recent-board__date">2023.07.20</span>
                             </a>
                         </li>
@@ -261,8 +261,8 @@
         <div class="container">
             <div class="quick-contact__content">
                 <div class="quick-contact__text">
-                    <h3>빠른 상담이 필요하신가요?</h3>
-                    <p>전화 또는 이메일로 바로 문의하세요</p>
+                    <h3>すぐにご相談が必要ですか？</h3>
+                    <p>お電話またはメールでお気軽にお問い合わせください</p>
                 </div>
                 <div class="quick-contact__actions">
                     <a href="tel:061-681-5171" class="btn btn--primary">
@@ -271,7 +271,7 @@
                         </svg>
                         061-681-5171
                     </a>
-                    <a href="contact.html" class="btn btn--outline">문의하기</a>
+                    <a href="contact.html" class="btn btn--outline">お問い合わせ</a>
                 </div>
             </div>
         </div>
@@ -282,49 +282,49 @@
         <div class="footer__container">
             <div class="footer__grid">
                 <div class="footer__brand">
-                    <h3 class="footer__brand-title">서풍</h3>
+                    <h3 class="footer__brand-title">ソプン</h3>
                     <p class="footer__brand-desc">
-                        신뢰로써 공존하는 기업<br>
-                        50년 경력의 베테랑이 가진 '선별의 눈'과 최신 가공 시설로<br>
-                        가장 신선하고 안전한 수산물을 공급합니다.
+                        信頼で共存する企業<br>
+                        50年のキャリアを持つベテランの「選別の目」と最新加工施設で<br>
+                        最も新鮮で安全な水産物をお届けします。
                     </p>
                 </div>
                 <div class="footer__links">
-                    <h4 class="footer__title">바로가기</h4>
+                    <h4 class="footer__title">クイックリンク</h4>
                     <ul>
-                        <li><a href="about.html">회사소개</a></li>
-                        <li><a href="process.html">가공 프로세스</a></li>
-                        <li><a href="products.html">제품</a></li>
-                        <li><a href="gallery.html">갤러리</a></li>
+                        <li><a href="about.html">会社紹介</a></li>
+                        <li><a href="process.html">加工プロセス</a></li>
+                        <li><a href="products.html">製品</a></li>
+                        <li><a href="gallery.html">ギャラリー</a></li>
                     </ul>
                 </div>
                 <div class="footer__links">
-                    <h4 class="footer__title">게시판</h4>
+                    <h4 class="footer__title">掲示板</h4>
                     <ul>
-                        <li><a href="board/notice.html">공지사항</a></li>
-                        <li><a href="board/resources.html">자료실</a></li>
-                        <li><a href="contact.html">문의하기</a></li>
-                        <li><a href="board/quote.html">견적 요청</a></li>
+                        <li><a href="../board/notice.html">お知らせ</a></li>
+                        <li><a href="../board/resources.html">資料室</a></li>
+                        <li><a href="contact.html">お問い合わせ</a></li>
+                        <li><a href="../board/quote.html">見積依頼</a></li>
                     </ul>
                 </div>
                 <div class="footer__links">
-                    <h4 class="footer__title">연락처</h4>
+                    <h4 class="footer__title">連絡先</h4>
                     <ul>
                         <li><a href="tel:061-681-5171">061-681-5171</a></li>
                         <li>FAX 061-681-5173</li>
-                        <li><a href="contact.html">전남 여수시 화양면 석교로 121</a></li>
+                        <li><a href="contact.html">全羅南道麗水市華陽面石橋路121</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer__bottom">
-                <p>&copy; 2024 영어조합법인 서풍. All rights reserved.</p>
-                <p>사업자등록번호: 417-81-41979 | 대표: 서순심 | 평일 09:00 - 18:00 | <a href="admin/" style="color: var(--text-muted);">관리자</a></p>
+                <p>&copy; 2024 漁業組合法人ソプン. All rights reserved.</p>
+                <p>事業者登録番号: 417-81-41979 | 代表: ソ・スンシム | 平日 09:00 - 18:00 | <a href="../admin/" style="color: var(--text-muted);">管理者</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/navigation.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
 
     <!-- Firebase SDK for Recent Posts -->
     <script type="module">
@@ -351,7 +351,6 @@
 
         async function loadRecentPosts() {
             try {
-                // 최근 공지사항
                 const noticesQuery = query(collection(db, "notices"), orderBy("createdAt", "desc"), limit(4));
                 const noticesSnap = await getDocs(noticesQuery);
                 const notices = [];
@@ -361,9 +360,9 @@
                 if (notices.length > 0 && noticesList) {
                     noticesList.innerHTML = notices.map(n => `
                         <li>
-                            <a href="board/notice.html">
-                                ${n.pinned ? '<span class="recent-board__badge">공지</span>' : ''}
-                                <span class="recent-board__title">${n.title || '(제목 없음)'}</span>
+                            <a href="../board/notice.html">
+                                ${n.pinned ? '<span class="recent-board__badge">公知</span>' : ''}
+                                <span class="recent-board__title">${n.title || '(タイトルなし)'}</span>
                                 <span class="recent-board__date">${formatDate(n.createdAt)}</span>
                             </a>
                         </li>
